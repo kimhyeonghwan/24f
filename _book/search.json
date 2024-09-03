@@ -8,5 +8,82 @@
     "crumbs": [
       "Welcome!"
     ]
+  },
+  {
+    "objectID": "시뮬레이션1.html",
+    "href": "시뮬레이션1.html",
+    "title": "시뮬레이션방법론 1주차",
+    "section": "",
+    "text": "블랙숄즈공식 예시\n\\(1.\\;f_t+\\frac{1}{2}\\sigma^2S^2f_{ss}+rSf_s-rf=0\\)\n-&gt; 수치해석적인 방법으로 풀게 됨, FDM(Finite Difference Method)\n\\(2.\\;P(0)=e^{-rT}E^Q[P(T)]\\)\n-&gt; 마팅게일, 몬테카를로 시뮬레이션(Montecarlo simulation, MCS)을 주로 사용함",
+    "crumbs": [
+      "시뮬레이션 방법론('24 가을)",
+      "시뮬레이션방법론 1주차"
+    ]
+  },
+  {
+    "objectID": "시뮬레이션1.html#volume과-적분",
+    "href": "시뮬레이션1.html#volume과-적분",
+    "title": "시뮬레이션방법론 1주차",
+    "section": "Volume과 적분",
+    "text": "Volume과 적분\n\\(x\\sim uniform[0,1]\\;일 때,\\;\\;\\alpha=E[f(x)]=\\int_0^1f(x)dx\\)\n그러나, MCS를 이용하는 경우 임의변수 \\(x_1,x_2,...,x_n\\)을 샘플링하여 \\(\\hat{\\alpha}=\\frac{1}{N}\\sum_i^Nf(x_i)\\)로 산출함\n두 값이 정확히 일치하지는 않지만, 표본이 커질수록 그 오차는 0으로 수렴함(\\(\\alpha\\approx\\hat{\\alpha}\\))\n이는 대수의 법칙과 중심극한정리에 따라 수학적으로 정의할 수 있음\n\n\n\n\n\n\n중심극한정리\n\n\n\n표본평균(\\(\\hat{\\alpha}\\))은 정규분포를 따르므로, \\(\\hat{\\alpha}-\\alpha\\sim N(0,\\frac{\\sigma^2}{N})\\)\n즉, 표본의 크기가 커질수록 두 차이는 0으로 수렴함(probibility convergence)\n오차의 표준편차는 \\(\\frac{\\sigma}{\\sqrt{N}}\\)이므로, 표본의 크기가 100배 증가하면 오차의 표준편차는 10배 감소함\n\n\n이외에도 간단힌 사다리꼴(trapezoidal) 방식을 이용해볼 수 있음.\n\\(3.\\;\\alpha\\approx \\frac{f(0)+f(1)}{2n}+\\frac{1}{n}\\sum_{i=1}^{n-1}f(\\frac{i}{n})\\;\\;(구분구적법의\\;앞뒤\\;평균치)\\)\n이는 매우 간단하고 효율적인 방법이지만, 변수가 늘어날 수록 효율이 급감함.",
+    "crumbs": [
+      "시뮬레이션 방법론('24 가을)",
+      "시뮬레이션방법론 1주차"
+    ]
+  },
+  {
+    "objectID": "수치해석1.html",
+    "href": "수치해석1.html",
+    "title": "수치해석학 1주차",
+    "section": "",
+    "text": "강의 개요 : 금융수치해석의 필요성\n주로 파생상품 평가와 최적화 방법론에 대해서 다룰 예정",
+    "crumbs": [
+      "수치해석학('24 가을)",
+      "수치해석학 1주차"
+    ]
+  },
+  {
+    "objectID": "수치해석1.html#강의-개요-금융수치해석의-필요성",
+    "href": "수치해석1.html#강의-개요-금융수치해석의-필요성",
+    "title": "수치해석학 1주차",
+    "section": "",
+    "text": "파생상품 평가\n\\(ds=rSdt+\\sigma SdW^Q\\)\n기하학적 브라운운동을 따르는 기초자산에 대한 파생상품의 가격 \\(f(t,S)\\)는 아래의 PDE로 표현됨\n\\(f_t+\\frac{1}{2}\\sigma^2S^2f_{ss}+rSf_s-rf=0\\)\n이 블랙숄즈 미분방정식을 컴퓨터로 풀어내는 것이 주요 내용임\n여기에는 반드시 연속적인 수식을 이산화하는 과정이 필요하며, 다양한 수치해석적인 기법이 활용됨\n대표적으로 유한차분법(Finite Difference Method, FDM)이 존재\n\n\n최적화 방법론\n이외의 다양한 최적화방법론은 시간이 여유롭다면 이것저것 다룰 예정\n\nMinimum Variance Portfolio : Single-period에 대해 Sharpe ratio 극대화 등\nStochastic programming : Multi-period에 대해 Minimum var 문제 해결 등\nNon-convex optimization : 미분을 통해 극값을 산출할 수 없는 경우의 최적화\nParameter estimation 또는 Model calibration : \\(min_{\\theta,\\sigma,k}\\sum(model\\;price - market\\;price)^2\\)와 같은 문제 등",
+    "crumbs": [
+      "수치해석학('24 가을)",
+      "수치해석학 1주차"
+    ]
+  },
+  {
+    "objectID": "수치해석1.html#컴퓨터-연산에-대한-이해",
+    "href": "수치해석1.html#컴퓨터-연산에-대한-이해",
+    "title": "수치해석학 1주차",
+    "section": "컴퓨터 연산에 대한 이해",
+    "text": "컴퓨터 연산에 대한 이해\n수치해석기법을 사용할 때 필연적으로 오차(error) 발생\n\nTruncation error : 연속적인 수학적인 모델을 이산화하면서 발생하는 오차(e.g. 미분계수)\nRounding error : 컴퓨터 시스템상 실수(real number)를 정확히 표현할 수 없는 데에서 기인(2진법 vs. 10진법)\n\n\nimport numpy as np\n\na = 0.1\n\nprint(a+a+a==0.3,a+a+a+a==0.4)\n\nFalse True",
+    "crumbs": [
+      "수치해석학('24 가을)",
+      "수치해석학 1주차"
+    ]
+  },
+  {
+    "objectID": "리스크관리1.html",
+    "href": "리스크관리1.html",
+    "title": "금융시장 리스크관리 1주차",
+    "section": "",
+    "text": "Lecture2 : How Traders Manage Their Risks?\nGreeks letters & Scenario analysis",
+    "crumbs": [
+      "금융시장 리스크관리('24 가을)",
+      "금융시장 리스크관리 1주차"
+    ]
+  },
+  {
+    "objectID": "리스크관리1.html#lecture2-how-traders-manage-their-risks",
+    "href": "리스크관리1.html#lecture2-how-traders-manage-their-risks",
+    "title": "금융시장 리스크관리 1주차",
+    "section": "",
+    "text": "Delta hedging (\\(\\Delta=\\frac{\\partial P}{\\partial S}\\))\n가장 기본적인 헷징방법으로, 파생상품과 같은 금융상품으로 구성된 포트폴리오에 대해\n기초자산의 가격변동에 대한 민감도인 델타를 계산하여 이를 0으로 만듦으로써\n기초자산의 가격변화로 인한 포트폴리오의 가치변화를 0으로 만드는 방법.\n포트폴리오의 payoff가 선형이라면, 한번의 헷징만으로 완전헷지(perfect hedge)가 가능\n이를 Hedge and forget이라고 함.\n그러나 비선형이라면, 기초자산의 가격변동에 따라 델타도 변하게 됨.\n\n\n\n\n\n\n델타헷지 예시\n\n\n\n은행이 특정 주식 10만주에 대한 콜옵션을 30만불에 매도할 수 있음.\n블랙숄즈공식에 따른 이 옵션의 가치는 24만불 (\\(S_0=49,K=50,r=0.05,\\sigma=0.2,T=20w\\))\n어떻게 6만불의 차익거래를 실현시킬지?\n\n풋콜페리티 또는 시장에서 동일한 옵션을 24만불에 매수하여 실현\n그러나, 옵션매수가 불가능한 경우 기초자산 주식을 이용한 델타헷징을 반복\n\n즉, 옵션 매도포지션의 델타만큼 주식을 매수하고 매주 리밸런싱\n20주 후 주식 매도수를 반복하여 구축한 델타헷징은 약 26만불의 비용이 발생하였음\n-&gt; 약 4만불의 차익거래를 실현함\n2만불은 어디로 증발함? : 델타헷징에 드는 비용 (거래비용 등)\n헷지를 자주할수록, 거래비용이 적을수록, 기초자산의 가격변동이 작을수록 차익은 6만불로 수렴\n\n\n기초자산을 이용한 델타헷징은 비용이 발생할수밖에 없음.\n콜옵션을 기준으로 할 때, 기초자산의 가격이 상승하면 콜옵션의 머니니스가 증가하면서 델타가 증가함.\n콜옵션 매도를 델타헷징하다보면, 주가 상승 -&gt; 델타 상승 -&gt; 주식 매수\n반대로, 주가 하락 -&gt; 델타 감소 -&gt; 주식 매도\n즉, 주식이 오르면 팔고 내리면 팔아야함 (Sell low, Buy high Strategy)\n\n\n기타 그릭스\nGamma (\\(\\Gamma=\\frac{\\partial\\Delta}{\\partial S}=\\frac{\\partial^2P}{\\partial S^2}\\))\n베가 로 그런거는 대충넘어갔음",
+    "crumbs": [
+      "금융시장 리스크관리('24 가을)",
+      "금융시장 리스크관리 1주차"
+    ]
   }
 ]

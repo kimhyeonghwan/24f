@@ -18,9 +18,38 @@ book:
   chapters:
     - index.qmd
 
+    - part : 머신러닝('24 가을)
+      chapters: 
+        - 머신러닝1.qmd
+
+    - part : 딥러닝('24 가을)
+      chapters: 
+        - 딥러닝1.qmd      
+
     - part : 시뮬레이션 방법론('24 가을)
       chapters: 
-        - simulation1.qmd
+        - 시뮬레이션1.qmd
+
+    - part : 이자율파생상품('24 가을)
+      chapters: 
+        - 이자율1.qmd
+
+    - part : 수치해석학('24 가을)
+      chapters: 
+        - 수치해석1.qmd
+
+    - part : 금융시장 리스크관리('24 가을)
+      chapters: 
+        - 리스크관리1.qmd
+
+    - part : 미시경제학('24 가을)
+      chapters: 
+        - 미시1.qmd
+
+    - part : 글로벌 지속가능회계('24 가을)
+      chapters: 
+        - 글로벌회계1.qmd
+
   downloads: pdf
 
 code-block-bg: true

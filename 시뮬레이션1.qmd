@@ -1,0 +1,35 @@
+# 시뮬레이션방법론 1주차 {.unnumbered}
+
+## 블랙숄즈공식 예시
+
+$1.\;f_t+\frac{1}{2}\sigma^2S^2f_{ss}+rSf_s-rf=0$
+
+-\> 수치해석적인 방법으로 풀게 됨, FDM(Finite Difference Method)
+
+$2.\;P(0)=e^{-rT}E^Q[P(T)]$
+
+-\> 마팅게일, 몬테카를로 시뮬레이션(Montecarlo simulation, MCS)을 주로 사용함
+
+## Volume과 적분
+
+$x\sim uniform[0,1]\;일 때,\;\;\alpha=E[f(x)]=\int_0^1f(x)dx$
+
+그러나, MCS를 이용하는 경우 임의변수 $x_1,x_2,...,x_n$을 샘플링하여 $\hat{\alpha}=\frac{1}{N}\sum_i^Nf(x_i)$로 산출함
+
+두 값이 정확히 일치하지는 않지만, 표본이 커질수록 그 오차는 0으로 수렴함($\alpha\approx\hat{\alpha}$)
+
+이는 **대수의 법칙과 중심극한정리**에 따라 수학적으로 정의할 수 있음
+
+::: {.callout-note title="중심극한정리"}
+표본평균($\hat{\alpha}$)은 정규분포를 따르므로, $\hat{\alpha}-\alpha\sim N(0,\frac{\sigma^2}{N})$
+
+즉, 표본의 크기가 커질수록 두 차이는 0으로 수렴함(probibility convergence)
+
+오차의 표준편차는 $\frac{\sigma}{\sqrt{N}}$이므로, 표본의 크기가 100배 증가하면 오차의 표준편차는 10배 감소함
+:::
+
+이외에도 간단힌 사다리꼴(trapezoidal) 방식을 이용해볼 수 있음.
+
+$3.\;\alpha\approx \frac{f(0)+f(1)}{2n}+\frac{1}{n}\sum_{i=1}^{n-1}f(\frac{i}{n})\;\;(구분구적법의\;앞뒤\;평균치)$
+
+이는 매우 간단하고 효율적인 방법이지만, 변수가 늘어날 수록 효율이 급감함.

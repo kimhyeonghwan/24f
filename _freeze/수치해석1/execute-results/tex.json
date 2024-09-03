@@ -1,0 +1,11 @@
+{
+  "hash": "7f920b3f2c74649812199024e9ff18d1",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "# 수치해석학 1주차 {.unnumbered}\n\n## 강의 개요 : 금융수치해석의 필요성\n\n주로 파생상품 평가와 최적화 방법론에 대해서 다룰 예정\n\n### 파생상품 평가\n\n$ds=rSdt+\\sigma SdW^Q$\n\n기하학적 브라운운동을 따르는 기초자산에 대한 파생상품의 가격 $f(t,S)$는 아래의 PDE로 표현됨\n\n$f_t+\\frac{1}{2}\\sigma^2S^2f_{ss}+rSf_s-rf=0$\n\n이 블랙숄즈 미분방정식을 컴퓨터로 풀어내는 것이 주요 내용임\n\n여기에는 반드시 연속적인 수식을 이산화하는 과정이 필요하며, 다양한 수치해석적인 기법이 활용됨\n\n대표적으로 유한차분법(Finite Difference Method, FDM)이 존재\n\n### 최적화 방법론\n\n이외의 다양한 최적화방법론은 시간이 여유롭다면 이것저것 다룰 예정\n\n- Minimum Variance Portfolio : Single-period에 대해 Sharpe ratio 극대화 등\n- Stochastic programming : Multi-period에 대해 Minimum var 문제 해결 등\n- Non-convex optimization : 미분을 통해 극값을 산출할 수 없는 경우의 최적화\n- Parameter estimation 또는 Model calibration : $min_{\\theta,\\sigma,k}\\sum(model\\;price - market\\;price)^2$와 같은 문제 등\n\n## 컴퓨터 연산에 대한 이해\n\n수치해석기법을 사용할 때 필연적으로 오차(error) 발생\n\n1. Truncation error : 연속적인 수학적인 모델을 이산화하면서 발생하는 오차(e.g. 미분계수)\n\n2. Rounding error : 컴퓨터 시스템상 실수(real number)를 정확히 표현할 수 없는 데에서 기인(2진법 vs. 10진법)\n\n::: {.cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\n\na = 0.1\n\nprint(a+a+a==0.3,a+a+a+a==0.4)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\nFalse True\n```\n:::\n:::\n\n\n",
+    "supporting": [
+      "수치해석1_files/figure-pdf"
+    ],
+    "filters": []
+  }
+}
