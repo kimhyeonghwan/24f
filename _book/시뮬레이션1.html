@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>KAIST MFE, 2024 Fall - 시뮬레이션방법론 1주차</title>
+<title>KAIST MFE, 2024 Fall - 시뮬레이션방법론 Ch1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -144,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./시뮬레이션1.html">시뮬레이션 방법론(’24 가을)</a></li><li class="breadcrumb-item"><a href="./시뮬레이션1.html">시뮬레이션방법론 1주차</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./시뮬레이션1.html">시뮬레이션 방법론(’24 가을)</a></li><li class="breadcrumb-item"><a href="./시뮬레이션1.html">시뮬레이션방법론 Ch1</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -224,7 +224,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./시뮬레이션1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">시뮬레이션방법론 1주차</span></a>
+ <span class="menu-text">시뮬레이션방법론 Ch1</span></a>
   </div>
 </li>
       </ul>
@@ -258,7 +258,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./수치해석1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">수치해석학 1주차</span></a>
+ <span class="menu-text">수치해석학 Ch1</span></a>
   </div>
 </li>
       </ul>
@@ -292,7 +292,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./미시1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">미시경제학 1주차</span></a>
+ <span class="menu-text">미시경제학 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment1</span></a>
   </div>
 </li>
       </ul>
@@ -326,15 +332,30 @@ window.Quarto = {
   <ul>
   <li><a href="#블랙숄즈공식-예시" id="toc-블랙숄즈공식-예시" class="nav-link active" data-scroll-target="#블랙숄즈공식-예시">블랙숄즈공식 예시</a></li>
   <li><a href="#volume과-적분" id="toc-volume과-적분" class="nav-link" data-scroll-target="#volume과-적분">Volume과 적분</a></li>
+  <li><a href="#mcs-기초" id="toc-mcs-기초" class="nav-link" data-scroll-target="#mcs-기초">MCS 기초</a>
+  <ul class="collapse">
+  <li><a href="#확률기대값-및-원주율-계산-예시" id="toc-확률기대값-및-원주율-계산-예시" class="nav-link" data-scroll-target="#확률기대값-및-원주율-계산-예시">확률기대값 및 원주율 계산 예시</a></li>
+  <li><a href="#표본표준편차-계산-numpy는-n으로-나누고-pandas는-n-1로-나누는-것이-기본" id="toc-표본표준편차-계산-numpy는-n으로-나누고-pandas는-n-1로-나누는-것이-기본" class="nav-link" data-scroll-target="#표본표준편차-계산-numpy는-n으로-나누고-pandas는-n-1로-나누는-것이-기본">표본표준편차 계산 : numpy는 n으로 나누고, pandas는 n-1로 나누는 것이 기본</a></li>
+  <li><a href="#표준오차-계산-및-95-신뢰구간-계산" id="toc-표준오차-계산-및-95-신뢰구간-계산" class="nav-link" data-scroll-target="#표준오차-계산-및-95-신뢰구간-계산">표준오차 계산 및 95% 신뢰구간 계산</a></li>
+  </ul></li>
+  <li><a href="#경로의존성-path-dependent" id="toc-경로의존성-path-dependent" class="nav-link" data-scroll-target="#경로의존성-path-dependent">경로의존성 (Path-dependent)</a>
+  <ul class="collapse">
+  <li><a href="#시뮬레이션-예시" id="toc-시뮬레이션-예시" class="nav-link" data-scroll-target="#시뮬레이션-예시">시뮬레이션 예시</a></li>
+  </ul></li>
+  <li><a href="#mcs-추정치-개선-방향" id="toc-mcs-추정치-개선-방향" class="nav-link" data-scroll-target="#mcs-추정치-개선-방향">MCS 추정치 개선 방향</a>
+  <ul class="collapse">
+  <li><a href="#분산감소와-계산시간" id="toc-분산감소와-계산시간" class="nav-link" data-scroll-target="#분산감소와-계산시간">분산감소와 계산시간</a></li>
+  </ul></li>
+  <li><a href="#asian-option-평가-해볼-것" id="toc-asian-option-평가-해볼-것" class="nav-link" data-scroll-target="#asian-option-평가-해볼-것">Asian Option 평가 해볼 것</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./시뮬레이션1.html">시뮬레이션 방법론(’24 가을)</a></li><li class="breadcrumb-item"><a href="./시뮬레이션1.html">시뮬레이션방법론 1주차</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./시뮬레이션1.html">시뮬레이션 방법론(’24 가을)</a></li><li class="breadcrumb-item"><a href="./시뮬레이션1.html">시뮬레이션방법론 Ch1</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">시뮬레이션방법론 1주차</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">시뮬레이션방법론 Ch1</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -351,6 +372,7 @@ window.Quarto = {
 </header>
 
 
+<p>몬테카를로 시뮬레이션 기초</p>
 <section id="블랙숄즈공식-예시" class="level2">
 <h2 class="anchored" data-anchor-id="블랙숄즈공식-예시">블랙숄즈공식 예시</h2>
 <p><span class="math inline">\(1.\;f_t+\frac{1}{2}\sigma^2S^2f_{ss}+rSf_s-rf=0\)</span></p>
@@ -382,6 +404,141 @@ window.Quarto = {
 <p>이외에도 간단힌 사다리꼴(trapezoidal) 방식을 이용해볼 수 있음.</p>
 <p><span class="math inline">\(3.\;\alpha\approx \frac{f(0)+f(1)}{2n}+\frac{1}{n}\sum_{i=1}^{n-1}f(\frac{i}{n})\;\;(구분구적법의\;앞뒤\;평균치)\)</span></p>
 <p>이는 매우 간단하고 효율적인 방법이지만, 변수가 늘어날 수록 효율이 급감함.</p>
+</section>
+<section id="mcs-기초" class="level2">
+<h2 class="anchored" data-anchor-id="mcs-기초">MCS 기초</h2>
+<p>몬테카를로 시뮬레이션을 개념적으로 설명함</p>
+<p>예를 들어, 1X1 사각형에 내접한 원에 대하여, 사각형 안에 임의의 점을 찍을 때 원에 포함될 확률?</p>
+<p>직관적으로 면적을 통해 <span class="math inline">\(\Pi/4\)</span>임을 알 수 있음.</p>
+<p>이를 다변수, 다차원, 복잡한 함수꼴로 확장한다면 면적을 구하는 적분을 통해 구할 수 있음을 의미함.</p>
+<p>근데 그런 복잡한 계산 대신에 랜덤변수를 생성해서 시행횟수를 수없이 시행하고,</p>
+<p>원(면적) 안에 속할 확률을 구한다면? 이게 몬테카를로 시뮬레이션의 기초임.</p>
+<p>수없이 많은 <span class="math inline">\((x,y)\)</span>를 생성하고, 좌표평면의 1X1 사각형에 대해 원안에 속할 확률은 <span class="math inline">\(x^2+y^2&lt;1/4\)</span>임.</p>
+<p>이러한 확률을 구하는 것은 기대값으로 표현할 수 있게 되고, 결국 이 확률은 <span class="math inline">\(\Pi/4\)</span>로 수렴</p>
+<p><span class="math display">\[Pr(x\in B)=E(\int_A 1_B)=\Pi/4\]</span></p>
+<section id="확률기대값-및-원주율-계산-예시" class="level3">
+<h3 class="anchored" data-anchor-id="확률기대값-및-원주율-계산-예시">확률기대값 및 원주율 계산 예시</h3>
+<div id="e9b8a060" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.rand(n) <span class="co"># uniform random number in (0,1)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>x <span class="op">-=</span> <span class="fl">0.5</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.random.rand(n)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>y <span class="op">-=</span> <span class="fl">0.5</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> np.sqrt(x<span class="op">**</span><span class="dv">2</span><span class="op">+</span>y<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> d<span class="op">&lt;</span><span class="fl">0.5</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> i.<span class="bu">sum</span>() <span class="op">/</span> n</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>pi <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> i.<span class="bu">sum</span>() <span class="op">/</span> n</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prob,pi,sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.7773
+3.1092</code></pre>
+</div>
+</div>
+</section>
+<section id="표본표준편차-계산-numpy는-n으로-나누고-pandas는-n-1로-나누는-것이-기본" class="level3">
+<h3 class="anchored" data-anchor-id="표본표준편차-계산-numpy는-n으로-나누고-pandas는-n-1로-나누는-것이-기본">표본표준편차 계산 : numpy는 n으로 나누고, pandas는 n-1로 나누는 것이 기본</h3>
+<div id="292b61f7" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>np_s <span class="op">=</span> i.std()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pd_s <span class="op">=</span> pd.Series(i).std()</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>np_s_df1 <span class="op">=</span> i.std(ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np_s, pd_s, np_s_df1, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.41605854155395006
+0.41607934604137736
+0.41607934604137736</code></pre>
+</div>
+</div>
+</section>
+<section id="표준오차-계산-및-95-신뢰구간-계산" class="level3">
+<h3 class="anchored" data-anchor-id="표준오차-계산-및-95-신뢰구간-계산">표준오차 계산 및 95% 신뢰구간 계산</h3>
+<div id="e2e785ed" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>se <span class="op">=</span> pd_s <span class="op">/</span> np.sqrt(n)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>prob_95lb <span class="op">=</span> prob <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>se</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>prob_95ub <span class="op">=</span> prob <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>se</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>pi_95lb <span class="op">=</span> prob_95lb<span class="op">*</span><span class="dv">4</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>pi_95ub <span class="op">=</span> prob_95ub<span class="op">*</span><span class="dv">4</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(se, pi_95lb, pi_95ub, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>0.004160793460413773
+3.07591365231669
+3.14248634768331</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="경로의존성-path-dependent" class="level2">
+<h2 class="anchored" data-anchor-id="경로의존성-path-dependent">경로의존성 (Path-dependent)</h2>
+<p>일반적인(Plain vanilla) 옵션은 pay-off가 기초자산의 만기시점의 가격 <span class="math inline">\(S(T)\)</span>에 의해서만 결정되므로,</p>
+<p>그 사이의 기초자산의 가격을 생성할 필요는 없음(0~T)</p>
+<p>그러나, 아시안옵션 등은 <span class="math inline">\(S(T)\)</span> 뿐만 아니라 그 과정에 의해서 pay-off가 결정되므로 그 경로를 알아야 함.</p>
+<p>또한, 블랙숄즈의 가정이 성립하지 않는 경우 모델링을 하기 위해서도 그 경로를 알아야 할 필요가 있음.</p>
+<p>이를 <strong>경로의존성</strong>이라고 함.</p>
+<section id="시뮬레이션-예시" class="level3">
+<h3 class="anchored" data-anchor-id="시뮬레이션-예시">시뮬레이션 예시</h3>
+<p>일반적인 주가에 대한 확률과정이 GBM을 따른다면,</p>
+<p><span class="math inline">\(dS(t)=rS(t)dt+\sigma S(t)dW(t)\)</span></p>
+<p>그러나, 변동성이 주가에 따라 변하면 주가의 흐름에 따라 변동성이 바뀌므로 경로의존성이 발생</p>
+<p>즉, <span class="math inline">\(dS(t)=rS(t)dt+\sigma (S(t)) S(t)dW(t)\)</span>를 따르게 되므로</p>
+<p>우리가 앞서 사용한 <span class="math inline">\(S(T)=S(0)e^{(r-\frac{1}{2}\sigma^2)T+\sigma\sqrt{T}Z}\)</span>를 사용할 수 없음.</p>
+<p>따라서, Analytic solution이 없으므로 근사치를 구할 수 밖에 없으며 그 예시로 <strong>이산오일러근사</strong>가 있음</p>
+<p>(0~T) 구간을 m개로 나누고, 각 구간의 길이 <span class="math inline">\(\frac{T}{m}=\Delta t\)</span>라고 하면 기초자산의 경로 <span class="math inline">\(S(t)\)</span>는,</p>
+<p><span class="math display">\[S(t+\Delta t)=S(t)+rS(t)\Delta t+\sigma (S(t)) S(t)\sqrt{\Delta t}Z\]</span></p>
+<p>다만, 이러한 경우에는 그 경로의 길이를 얼마나 짧게 구성하는지에 따라 시뮬레이션 정밀도에 영향을 미침.</p>
+<p>즉, 시뮬레이션 횟수 n과 경로의 길이 m이 모두 정확도를 결정하는 파라미터가 됨.</p>
+</section>
+</section>
+<section id="mcs-추정치-개선-방향" class="level2">
+<h2 class="anchored" data-anchor-id="mcs-추정치-개선-방향">MCS 추정치 개선 방향</h2>
+<p>MCS의 효율성은 아래 3개의 기준에 따라 평가할 수 있습니다.</p>
+<ol type="1">
+<li>계산시간 (Computing time)</li>
+<li>편의 (Bias)</li>
+<li>분산 (Variance)</li>
+</ol>
+<p>여기서, 시뮬레이션의 <span class="math inline">\(Prediction\;error\;=\;Variance\;+\;Bias^2\)</span></p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><span class="math inline">\(Var[\epsilon]=E[\epsilon^2]-(E[\epsilon])^2\)</span></p>
+<p><span class="math inline">\(MSE=E[\epsilon^2)=Var[\epsilon]+(E[\epsilon])^2=Variance+Bias^2\)</span></p>
+</div>
+</div>
+</div>
+<section id="분산감소와-계산시간" class="level3">
+<h3 class="anchored" data-anchor-id="분산감소와-계산시간">분산감소와 계산시간</h3>
+<p>시행횟수가 증가하면 분산은 감소함. (<span class="math inline">\(n\rightarrow\infty,Var[\epsilon]\rightarrow 0\)</span>)</p>
+<p>한번의 시뮬레이션에 정확한방법을 사용할 수록 편의는 감소함(<span class="math inline">\(m\rightarrow\infty,Bias\rightarrow 0\)</span>)</p>
+<p>(정확한방법을 사용할 수록 분산은 증가할 수 있음 (머신러닝 overfitting 같은 문제?))</p>
+<p>(정확한방법을 쓸수록 계산비용이 증가하여 시뮬레이션 횟수가 감소함, 분산이 그래서 증가함)</p>
+<section id="시뮬레이션의-횟수" class="level4">
+<h4 class="anchored" data-anchor-id="시뮬레이션의-횟수">시뮬레이션의 횟수</h4>
+<p>계산 예산에 <span class="math inline">\(s\)</span>이고, 한번의 시뮬레이션의 계산량이 <span class="math inline">\(\tau\)</span>일 때, 가능한 시뮬레이션 횟수는 <span class="math inline">\(s/\tau\)</span>임</p>
+<p>이 때, 추정치의 분포 <span class="math inline">\(\sqrt{\frac{s}{\tau}}[\hat{C}-C]\rightarrow N(0,\sigma_c^2)\)</span></p>
+<p><span class="math inline">\(\Rightarrow [\hat{C}-C]\rightarrow N(0,\sigma_c^2(\frac{\tau}{c}))\)</span> 이므로,</p>
+<p>계산오차는 분산이 <span class="math inline">\(\sigma_c^2(\frac{tau}{c})\)</span>인 정규분포에 수렴함을 의미</p>
+</section>
+<section id="편의" class="level4">
+<h4 class="anchored" data-anchor-id="편의">편의</h4>
+<p>경로의존성이 있는 시뮬레이션 중, 과거 연속적인 수치에 따라 pay-off가 정해진다면,</p>
+<p>이산오일러근사를 사용할 때 편의가 발생함.</p>
+<p><strong>e.g.</strong> 룩백옵션의 경우 시뮬레이션이 항상 실제 pay-off를 과소평가 = (-) bias 존재</p>
+<p>이 때, 이산구간의 간격 m을 작게할 수록 편의는 감소함.</p>
+<p>또는, 기초자산이 비선형구조인 경우 등에도 편의가 발생할 수 있음.</p>
+<p><strong>e.g.</strong> Compound 옵션의 경우 기초자산인 옵션 가격이 비선형이므로,</p>
+<p>Compound 옵션을 Analytic solution을 적용하여 푸는 경우 항상 실제 옵션보다 가격이 높음 = (+) bias 존재</p>
+<p>이 때, <span class="math inline">\(T_1\sim T_2\)</span>의 <span class="math inline">\(n_2\)</span>개의 경로를 추가로 생성하여 경로를 이중으로 구성한다면 bias 제거가 가능함.</p>
+</section>
+</section>
+</section>
+<section id="asian-option-평가-해볼-것" class="level2">
+<h2 class="anchored" data-anchor-id="asian-option-평가-해볼-것">Asian Option 평가 해볼 것</h2>
 
 
 <!-- -->
@@ -861,41 +1018,192 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 시뮬레이션방법론 1주차 {.unnumbered}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 블랙숄즈공식 예시</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>$1.\;f_t+\frac{1}{2}\sigma^2S^2f_{ss}+rSf_s-rf=0$</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>-<span class="sc">\&gt;</span> 수치해석적인 방법으로 풀게 됨, FDM(Finite Difference Method)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>$2.\;P(0)=e^{-rT}E^Q<span class="co">[</span><span class="ot">P(T)</span><span class="co">]</span>$</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>-<span class="sc">\&gt;</span> 마팅게일, 몬테카를로 시뮬레이션(Montecarlo simulation, MCS)을 주로 사용함</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Volume과 적분</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>$x\sim uniform<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>\;일 때,\;\;\alpha=E<span class="co">[</span><span class="ot">f(x)</span><span class="co">]</span>=\int_0^1f(x)dx$</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>그러나, MCS를 이용하는 경우 임의변수 $x_1,x_2,...,x_n$을 샘플링하여 $\hat{\alpha}=\frac{1}{N}\sum_i^Nf(x_i)$로 산출함</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>두 값이 정확히 일치하지는 않지만, 표본이 커질수록 그 오차는 0으로 수렴함($\alpha\approx\hat{\alpha}$)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>이는 **대수의 법칙과 중심극한정리**에 따라 수학적으로 정의할 수 있음</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="중심극한정리"}</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>표본평균($\hat{\alpha}$)은 정규분포를 따르므로, $\hat{\alpha}-\alpha\sim N(0,\frac{\sigma^2}{N})$</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>즉, 표본의 크기가 커질수록 두 차이는 0으로 수렴함(probibility convergence)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>오차의 표준편차는 $\frac{\sigma}{\sqrt{N}}$이므로, 표본의 크기가 100배 증가하면 오차의 표준편차는 10배 감소함</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>이외에도 간단힌 사다리꼴(trapezoidal) 방식을 이용해볼 수 있음.</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>$3.\;\alpha\approx \frac{f(0)+f(1)}{2n}+\frac{1}{n}\sum_{i=1}^{n-1}f(\frac{i}{n})\;\;(구분구적법의\;앞뒤\;평균치)$</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>이는 매우 간단하고 효율적인 방법이지만, 변수가 늘어날 수록 효율이 급감함.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 시뮬레이션방법론 Ch1 {.unnumbered}</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>몬테카를로 시뮬레이션 기초</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## 블랙숄즈공식 예시</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>$1.\;f_t+\frac{1}{2}\sigma^2S^2f_{ss}+rSf_s-rf=0$</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>-<span class="sc">\&gt;</span> 수치해석적인 방법으로 풀게 됨, FDM(Finite Difference Method)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>$2.\;P(0)=e^{-rT}E^Q<span class="co">[</span><span class="ot">P(T)</span><span class="co">]</span>$</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>-<span class="sc">\&gt;</span> 마팅게일, 몬테카를로 시뮬레이션(Montecarlo simulation, MCS)을 주로 사용함</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Volume과 적분</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>$x\sim uniform<span class="co">[</span><span class="ot">0,1</span><span class="co">]</span>\;일 때,\;\;\alpha=E<span class="co">[</span><span class="ot">f(x)</span><span class="co">]</span>=\int_0^1f(x)dx$</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>그러나, MCS를 이용하는 경우 임의변수 $x_1,x_2,...,x_n$을 샘플링하여 $\hat{\alpha}=\frac{1}{N}\sum_i^Nf(x_i)$로 산출함</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>두 값이 정확히 일치하지는 않지만, 표본이 커질수록 그 오차는 0으로 수렴함($\alpha\approx\hat{\alpha}$)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>이는 **대수의 법칙과 중심극한정리**에 따라 수학적으로 정의할 수 있음</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="중심극한정리"}</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>표본평균($\hat{\alpha}$)은 정규분포를 따르므로, $\hat{\alpha}-\alpha\sim N(0,\frac{\sigma^2}{N})$</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>즉, 표본의 크기가 커질수록 두 차이는 0으로 수렴함(probibility convergence)</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>오차의 표준편차는 $\frac{\sigma}{\sqrt{N}}$이므로, 표본의 크기가 100배 증가하면 오차의 표준편차는 10배 감소함</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>이외에도 간단힌 사다리꼴(trapezoidal) 방식을 이용해볼 수 있음.</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>$3.\;\alpha\approx \frac{f(0)+f(1)}{2n}+\frac{1}{n}\sum_{i=1}^{n-1}f(\frac{i}{n})\;\;(구분구적법의\;앞뒤\;평균치)$</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>이는 매우 간단하고 효율적인 방법이지만, 변수가 늘어날 수록 효율이 급감함.</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## MCS 기초</span></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>몬테카를로 시뮬레이션을 개념적으로 설명함</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>예를 들어, 1X1 사각형에 내접한 원에 대하여, 사각형 안에 임의의 점을 찍을 때 원에 포함될 확률?</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>직관적으로 면적을 통해 $\Pi/4$임을 알 수 있음.</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>이를 다변수, 다차원, 복잡한 함수꼴로 확장한다면 면적을 구하는 적분을 통해 구할 수 있음을 의미함.</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a>근데 그런 복잡한 계산 대신에 랜덤변수를 생성해서 시행횟수를 수없이 시행하고,</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>원(면적) 안에 속할 확률을 구한다면? 이게 몬테카를로 시뮬레이션의 기초임.</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>수없이 많은 $(x,y)$를 생성하고, 좌표평면의 1X1 사각형에 대해 원안에 속할 확률은 $x^2+y^2&lt;1/4$임.</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a>이러한 확률을 구하는 것은 기대값으로 표현할 수 있게 되고, 결국 이 확률은 $\Pi/4$로 수렴</span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>$$Pr(x\in B)=E(\int_A 1_B)=\Pi/4$$</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### 확률기대값 및 원주율 계산 예시</span></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.rand(n) <span class="co"># uniform random number in (0,1)</span></span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>x <span class="op">-=</span> <span class="fl">0.5</span></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> np.random.rand(n)</span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>y <span class="op">-=</span> <span class="fl">0.5</span></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> np.sqrt(x<span class="op">**</span><span class="dv">2</span><span class="op">+</span>y<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> d<span class="op">&lt;</span><span class="fl">0.5</span></span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a>prob <span class="op">=</span> i.<span class="bu">sum</span>() <span class="op">/</span> n</span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>pi <span class="op">=</span> <span class="dv">4</span> <span class="op">*</span> i.<span class="bu">sum</span>() <span class="op">/</span> n</span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prob,pi,sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a><span class="fu">### 표본표준편차 계산 : numpy는 n으로 나누고, pandas는 n-1로 나누는 것이 기본</span></span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a>np_s <span class="op">=</span> i.std()</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>pd_s <span class="op">=</span> pd.Series(i).std()</span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>np_s_df1 <span class="op">=</span> i.std(ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np_s, pd_s, np_s_df1, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a><span class="fu">### 표준오차 계산 및 95% 신뢰구간 계산</span></span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a>se <span class="op">=</span> pd_s <span class="op">/</span> np.sqrt(n)</span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a>prob_95lb <span class="op">=</span> prob <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>se</span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a>prob_95ub <span class="op">=</span> prob <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>se</span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a>pi_95lb <span class="op">=</span> prob_95lb<span class="op">*</span><span class="dv">4</span></span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a>pi_95ub <span class="op">=</span> prob_95ub<span class="op">*</span><span class="dv">4</span></span>
+<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(se, pi_95lb, pi_95ub, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a><span class="fu">## 경로의존성 (Path-dependent)</span></span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>일반적인(Plain vanilla) 옵션은 pay-off가 기초자산의 만기시점의 가격 $S(T)$에 의해서만 결정되므로,</span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>그 사이의 기초자산의 가격을 생성할 필요는 없음(0~T)</span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a>그러나, 아시안옵션 등은 $S(T)$ 뿐만 아니라 그 과정에 의해서 pay-off가 결정되므로 그 경로를 알아야 함.</span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a>또한, 블랙숄즈의 가정이 성립하지 않는 경우 모델링을 하기 위해서도 그 경로를 알아야 할 필요가 있음.</span>
+<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a>이를 **경로의존성**이라고 함.</span>
+<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a><span class="fu">### 시뮬레이션 예시</span></span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a>일반적인 주가에 대한 확률과정이 GBM을 따른다면,</span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a>$dS(t)=rS(t)dt+\sigma S(t)dW(t)$</span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a>그러나, 변동성이 주가에 따라 변하면 주가의 흐름에 따라 변동성이 바뀌므로 경로의존성이 발생</span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a>즉, $dS(t)=rS(t)dt+\sigma (S(t)) S(t)dW(t)$를 따르게 되므로</span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a>우리가 앞서 사용한 $S(T)=S(0)e^{(r-\frac{1}{2}\sigma^2)T+\sigma\sqrt{T}Z}$를 사용할 수 없음.</span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a>따라서, Analytic solution이 없으므로 근사치를 구할 수 밖에 없으며 그 예시로 **이산오일러근사**가 있음</span>
+<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a>(0~T) 구간을 m개로 나누고, 각 구간의 길이 $\frac{T}{m}=\Delta t$라고 하면 기초자산의 경로 $S(t)$는,</span>
+<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>$$S(t+\Delta t)=S(t)+rS(t)\Delta t+\sigma (S(t)) S(t)\sqrt{\Delta t}Z$$</span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a>다만, 이러한 경우에는 그 경로의 길이를 얼마나 짧게 구성하는지에 따라 시뮬레이션 정밀도에 영향을 미침.</span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a>즉, 시뮬레이션 횟수 n과 경로의 길이 m이 모두 정확도를 결정하는 파라미터가 됨.</span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a><span class="fu">## MCS 추정치 개선 방향</span></span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a>MCS의 효율성은 아래 3개의 기준에 따라 평가할 수 있습니다.</span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>계산시간 (Computing time)</span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>편의 (Bias)</span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>분산 (Variance)</span>
+<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a>여기서, 시뮬레이션의 $Prediction\;error\;=\;Variance\;+\;Bias^2$</span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a>::: {.callout}</span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>$Var<span class="co">[</span><span class="ot">\epsilon</span><span class="co">]</span>=E<span class="co">[</span><span class="ot">\epsilon^2</span><span class="co">]</span>-(E<span class="co">[</span><span class="ot">\epsilon</span><span class="co">]</span>)^2$</span>
+<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a>$MSE=E<span class="co">[</span><span class="ot">\epsilon^2)=Var[\epsilon</span><span class="co">]</span>+(E<span class="co">[</span><span class="ot">\epsilon</span><span class="co">]</span>)^2=Variance+Bias^2$</span>
+<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a><span class="fu">### 분산감소와 계산시간</span></span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a>시행횟수가 증가하면 분산은 감소함. ($n\rightarrow\infty,Var<span class="co">[</span><span class="ot">\epsilon</span><span class="co">]</span>\rightarrow 0$)</span>
+<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a>한번의 시뮬레이션에 정확한방법을 사용할 수록 편의는 감소함($m\rightarrow\infty,Bias\rightarrow 0$)</span>
+<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>(정확한방법을 사용할 수록 분산은 증가할 수 있음 (머신러닝 overfitting 같은 문제?))</span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a>(정확한방법을 쓸수록 계산비용이 증가하여 시뮬레이션 횟수가 감소함, 분산이 그래서 증가함)</span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 시뮬레이션의 횟수</span></span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a>계산 예산에 $s$이고, 한번의 시뮬레이션의 계산량이 $\tau$일 때, 가능한 시뮬레이션 횟수는 $s/\tau$임</span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a>이 때, 추정치의 분포 $\sqrt{\frac{s}{\tau}}<span class="co">[</span><span class="ot">\hat{C}-C</span><span class="co">]</span>\rightarrow N(0,\sigma_c^2)$</span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a>$\Rightarrow <span class="co">[</span><span class="ot">\hat{C}-C</span><span class="co">]</span>\rightarrow N(0,\sigma_c^2(\frac{\tau}{c}))$ 이므로,</span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a>계산오차는 분산이 $\sigma_c^2(\frac{tau}{c})$인 정규분포에 수렴함을 의미</span>
+<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 편의</span></span>
+<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a>경로의존성이 있는 시뮬레이션 중, 과거 연속적인 수치에 따라 pay-off가 정해진다면,</span>
+<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a>이산오일러근사를 사용할 때 편의가 발생함.</span>
+<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a>**e.g.** 룩백옵션의 경우 시뮬레이션이 항상 실제 pay-off를 과소평가 = (-) bias 존재</span>
+<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a>이 때, 이산구간의 간격 m을 작게할 수록 편의는 감소함.</span>
+<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a>또는, 기초자산이 비선형구조인 경우 등에도 편의가 발생할 수 있음.</span>
+<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a>**e.g.** Compound 옵션의 경우 기초자산인 옵션 가격이 비선형이므로,</span>
+<span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a>Compound 옵션을 Analytic solution을 적용하여 푸는 경우 항상 실제 옵션보다 가격이 높음 = (+) bias 존재</span>
+<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a>이 때, $T_1\sim T_2$의 $n_2$개의 경로를 추가로 생성하여 경로를 이중으로 구성한다면 bias 제거가 가능함.</span>
+<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a><span class="fu">## Asian Option 평가 해볼 것</span></span>
+<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

@@ -10,80 +10,300 @@
     ]
   },
   {
+    "objectID": "머신러닝1.html",
+    "href": "머신러닝1.html",
+    "title": "머신러닝 1주차",
+    "section": "",
+    "text": "하이퍼파라미터\n머신러닝에 이용할 모델에 대한 파리미터(\\(\\alpha,\\beta\\) 등)가 아닌,\n학습알고리즘의 파라미터(학습률 등)\n\\(\\hat{y}=\\beta_0+\\beta_1x_1+\\dotsm+\\beta_kx_k\\)\n여기서, \\(\\beta_n\\)은 파라미터이며 주어진 데이터를 학습하여 파라미터를 산출하는 것임.\n근데 만약에 모델 성능 향상을 위해 각 \\(\\beta\\)의 제약조건(constraint)를 정한다?\n해당 제약조건은 하이퍼파라미터(hyper-parameter, h-para)가 되는 것임\n이런 회귀분석을 릿지(Ridge regression)이라고 함.",
+    "crumbs": [
+      "머신러닝('24 가을)",
+      "머신러닝 1주차"
+    ]
+  },
+  {
+    "objectID": "머신러닝1.html#모델의-평가와-검증",
+    "href": "머신러닝1.html#모델의-평가와-검증",
+    "title": "머신러닝 1주차",
+    "section": "모델의 평가와 검증",
+    "text": "모델의 평가와 검증\n\n낮은 복잡도 = 선형회귀분석 or logistic 분류면 높은 복잡도 = 변수를 추가한 모델 (과대적합 케이스)\n훈련데이터(training sample)은 복잡도가 높아질수록 예측오차가 줄어듬 (우하향)\n평가데이터(text sample)은 복잡도가 높아지면 오차가 줄어들기는 하지만,\n너무 복잡도가 높아지면 평가데이터에서는 오차가 오히려 발생함\n즉, 일반화가 어렵고 과대적합(overfitting) 문제가 발생함",
+    "crumbs": [
+      "머신러닝('24 가을)",
+      "머신러닝 1주차"
+    ]
+  },
+  {
+    "objectID": "머신러닝1.html#일반화-오차",
+    "href": "머신러닝1.html#일반화-오차",
+    "title": "머신러닝 1주차",
+    "section": "일반화 오차",
+    "text": "일반화 오차\n평가데이터를 이용하였을 때 발생하는 오차를 일반화 오차라고 함\n(Generalization error, test error)\n\\[일반화 오차 = 편향^2+분산+오차\\]\n\n편향(Bias)\n모집단에서 크기 m의 (x,y) 순서쌍을 샘플링할 때,\n해당 샘플링을 n번 반복해서 모델링을 한다고 하면,\n각각의 \\(f_1,...,f_n\\)이 있을 것이고, \\(\\bar{f}=mean(f_m)\\)이면,\n실제 모집단을 나타내는 모델인 \\(f_{true}\\)와 \\(\\bar{f}\\)의 차이를 편향(bias)이라고 합니다.\n\n\n분산(Variance)\n한편, \\(f_1,...,f_n\\)의 추정모델간의 편차의 제곱합이 분산이 됩니다.\n\n\n관계\n즉, 모델이 단순할수록 실제로는 더 복잡한 모델을 잘 반영하기 어렵기때문에 편향이 큰 대신,\n추정모델간의 오차는 작아지므로 분산이 작습니다.\n하지만, 모델이 복잡할수록 추정모델을 평균하면 실제 모델과 유사해질 것 이므로 편향은 작고,\n추정모델간의 오차는 클 것이므로 분산이 큽니다.",
+    "crumbs": [
+      "머신러닝('24 가을)",
+      "머신러닝 1주차"
+    ]
+  },
+  {
+    "objectID": "머신러닝1.html#데이터의-분할-방법",
+    "href": "머신러닝1.html#데이터의-분할-방법",
+    "title": "머신러닝 1주차",
+    "section": "데이터의 분할 방법",
+    "text": "데이터의 분할 방법\n\nHold-out 방식\n주어진 자료를 목적에 따라 훈련/검증/평가 데이터로 나누어서 활용.\n(훈련, 검증이 8~90% / 평가가 1~20%)\n검증데이터는 h-para tuning에 주로 사용함.\n\n각 h-para별로 훈련데이터를 통해 모델 도출\n각 모델에 대해 검증데이터를 이용해 평가 (MSE 산출)\n성능이 가장 좋은 h-para를 채택\n해당 h-para 및 훈련+검증데이터를 통해 최종모델 도출\n평가데이터를 이용해 최종모델을 평가하여 성능 확인\n\n단점 : 전체 데이터에서 평가데이터는 따로 빼놔야해서 자료가 충분치 않으면 사용하기 애매함\n\n\nK-fold 교차검증(Cross-validation) 방식을 이용한 검증\n데이터가 그다지 많지 않을때 유용.\n모든 데이터가 훈련, 검증, 평가에 활용될 수 있음.\n주어진 자료를 K개로 분할하여 반복활용\n(3-fold cv 예시)\n\n주어진 자료를 3개로 분할 (1,2 훈련 + 3 검증 / 1,3 훈련 + 2 검증 / 2,3 훈련 + 1 검증)\n각 분할데이터로 특정 h-para에 대해 훈련 + 검증데이터로 성능 평가(MSE)\n3개의 분할데이터의 성능의 평균이 해당 h-para의 검증결과임\n모든 h-para에 대해 1~3 반복\nh-para의 검증결과 중 가장 성능이 좋은 h-para 채택\n다시 주어진 자료를 3개로 분할 (훈련+평가)\n각 분할데이터로 훈련 및 평가를 통해 성능 평가\n성능의 평균값이 우리의 모델의 성능임.\n\n방법론에 따라 한꺼번에 훈련시켜서 성능을 평가하기도 하고,\n이러한 분할(folding)을 수회~수백회 반복해서 모델의 성능을 추정하기도 함.\n(folding별 성능의 평균/표준편차 고려)\n::: {.callout, title=“Imbalanced data”} 머신러닝으로 분류문제를 해결하는 경우,\n실제 세상에서는 분류대상의 비율이 매우 적은 경우가 많음.\n이러한 샘플을 imbalanced data라고 하며,\nHold-out, K-fold cv 등을 할 때,\n원 자료의 분류대상의 비율을 유지한채로 주어진 자료를 분할해야 함. :::",
+    "crumbs": [
+      "머신러닝('24 가을)",
+      "머신러닝 1주차"
+    ]
+  },
+  {
+    "objectID": "딥러닝1.html",
+    "href": "딥러닝1.html",
+    "title": "딥러닝 1주차",
+    "section": "",
+    "text": "머신러닝 알고리즘의 구분",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "딥러닝 1주차"
+    ]
+  },
+  {
+    "objectID": "딥러닝1.html#머신러닝-알고리즘의-구분",
+    "href": "딥러닝1.html#머신러닝-알고리즘의-구분",
+    "title": "딥러닝 1주차",
+    "section": "",
+    "text": "지도학습\n입력값에 대한 결과값이 주어진 경우,\n모델이 입력값과 결과값을 모두 알고 학습하여 새로운 입력값에 대한 적정 결과값 추정치를 제공하게 됨.\n결과값(label)이 숫자형이면 회귀(regression) 알고리즘, 범주형이면 분류(classification) 알고리즘으로 구분.\n\n\n비지도학습\n결과값이 없고, 주어진 입력값만으로 학습함.\n의미있는 패턴을 추출하는 것이 목적.\n군집화(행을 묶음) 및 차원축소(열을 묶어 열의 갯수를 감소시킴)에 주로 활용\n\n\n강화학습\n모델 자체가 어떠한 변화를 주도하는데,\n해당 변화에 따른 보상/패널티를 주는 환경을 구성함.\n모델은 이러한 변화에 따른 누적보상이 최대가 되도록하는 변화패턴을 학습함",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "딥러닝 1주차"
+    ]
+  },
+  {
+    "objectID": "딥러닝1.html#지도학습-알고리즘의-절차",
+    "href": "딥러닝1.html#지도학습-알고리즘의-절차",
+    "title": "딥러닝 1주차",
+    "section": "지도학습 알고리즘의 절차",
+    "text": "지도학습 알고리즘의 절차\n\n전처리 및 탐색\n적절한 모델 선택\n주어진 데이터로 모델 훈련\n새로운 데이터를 통해 결과값을 예측하여 모델의 성능을 평가\n\n\n경사하강법 (Gradient Descent Method)\n다차원 선형회귀 모형에서 모델결과값과 실제결과값의 차이(MSE; Mean Square Error)를 최소화하는 방식\nMSE의 미분계수(Gradient)의 일정수준(학습률)만큼 선형회귀모형의 각 파라미터가 모두 감소하도록 지속 업데이트하면서,\n결과적으로 MSE의 Gradient가 0이 되면 학습이 종료되는 방식.\nMSE의 미분계수가 0이면 최솟값이고, 모델결과값의 오차가 최소가 되므로 가장 적정한 파라미터를 추론한 것으로 판단.\n\n경사하강법 종류\n한번의 회귀계수 업데이트에 모든 훈련데이터를 사용하면 배치 경사하강법\n임의추출로 하나의 훈련데이터만 사용하면 확률 경사하강법(SGD)\n일부만 사용하면 미니 경사하강법.\n많이 사용할수록 규칙적으로 MSE가 감소하고 일관적으로 움직이나, 산출시간이 오래걸리고, 지역최소값에 갇힐 가능성이 높아짐.",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "딥러닝 1주차"
+    ]
+  },
+  {
+    "objectID": "딥러닝1.html#모델-평가-및-검증",
+    "href": "딥러닝1.html#모델-평가-및-검증",
+    "title": "딥러닝 1주차",
+    "section": "모델 평가 및 검증",
+    "text": "모델 평가 및 검증\nlow bias - high vol\nhigh bias - low vol\n제대로 못들어서 정리 필요\n\n자료의 구분\n일반적으로 전체 데이터를 임의로 3개로 나눔.\n훈련 데이터 / 검증 데이터 / 평가 데이터\ne.g. 훈련데이터로 여러 h-para에 대해 모델 돌림\n검증데이터를 이용해 각 h-para별 성능 평가\n제일 좋은 h-para로 모델을 구성하여 훈련+검증데이터로 다시 훈련\n최종 모델을 평가데이터를 이용하여 평가\n\n딥러닝에서는 검증데이터가 다른 의미로도 활용됨.\n경사하강법 같은걸 복잡한 모델에 사용할 때, 파라미터 튜닝 과정에서 손실함수가 더이상 감소하지 않는다면?\n불필요한 훈련이 될 수 있어 파라미터 자체가 학습이 잘 되고 있는지 모니터링을 해야 함.\n이러한 모니터링에 검증 데이터가 활용됨.\n\n\n모델의 평가를 위한 지표\n\n회귀모형, Regression model\nRMSE : \\(\\sqrt{MSE}\\)\nMAE(mean absolute error) : \\(\\frac{1}{n}\\sum_{i=1}^n|y_i-\\hat{y}_i|\\)\nR square(결정계수) : \\(1-\\frac{\\sum_{i=1}^n(y_i-\\hat{y}_i)^2}{\\sum_{i=1}^n(y_i-\\bar{y})^2}=1-\\frac{SSE}{SST}(=\\frac{SSR}{SST})\\)",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "딥러닝 1주차"
+    ]
+  },
+  {
     "objectID": "시뮬레이션1.html",
     "href": "시뮬레이션1.html",
-    "title": "시뮬레이션방법론 1주차",
+    "title": "시뮬레이션방법론 Ch1",
     "section": "",
     "text": "블랙숄즈공식 예시\n\\(1.\\;f_t+\\frac{1}{2}\\sigma^2S^2f_{ss}+rSf_s-rf=0\\)\n-&gt; 수치해석적인 방법으로 풀게 됨, FDM(Finite Difference Method)\n\\(2.\\;P(0)=e^{-rT}E^Q[P(T)]\\)\n-&gt; 마팅게일, 몬테카를로 시뮬레이션(Montecarlo simulation, MCS)을 주로 사용함",
     "crumbs": [
       "시뮬레이션 방법론('24 가을)",
-      "시뮬레이션방법론 1주차"
+      "시뮬레이션방법론 Ch1"
     ]
   },
   {
     "objectID": "시뮬레이션1.html#volume과-적분",
     "href": "시뮬레이션1.html#volume과-적분",
-    "title": "시뮬레이션방법론 1주차",
+    "title": "시뮬레이션방법론 Ch1",
     "section": "Volume과 적분",
     "text": "Volume과 적분\n\\(x\\sim uniform[0,1]\\;일 때,\\;\\;\\alpha=E[f(x)]=\\int_0^1f(x)dx\\)\n그러나, MCS를 이용하는 경우 임의변수 \\(x_1,x_2,...,x_n\\)을 샘플링하여 \\(\\hat{\\alpha}=\\frac{1}{N}\\sum_i^Nf(x_i)\\)로 산출함\n두 값이 정확히 일치하지는 않지만, 표본이 커질수록 그 오차는 0으로 수렴함(\\(\\alpha\\approx\\hat{\\alpha}\\))\n이는 대수의 법칙과 중심극한정리에 따라 수학적으로 정의할 수 있음\n\n\n\n\n\n\n중심극한정리\n\n\n\n표본평균(\\(\\hat{\\alpha}\\))은 정규분포를 따르므로, \\(\\hat{\\alpha}-\\alpha\\sim N(0,\\frac{\\sigma^2}{N})\\)\n즉, 표본의 크기가 커질수록 두 차이는 0으로 수렴함(probibility convergence)\n오차의 표준편차는 \\(\\frac{\\sigma}{\\sqrt{N}}\\)이므로, 표본의 크기가 100배 증가하면 오차의 표준편차는 10배 감소함\n\n\n이외에도 간단힌 사다리꼴(trapezoidal) 방식을 이용해볼 수 있음.\n\\(3.\\;\\alpha\\approx \\frac{f(0)+f(1)}{2n}+\\frac{1}{n}\\sum_{i=1}^{n-1}f(\\frac{i}{n})\\;\\;(구분구적법의\\;앞뒤\\;평균치)\\)\n이는 매우 간단하고 효율적인 방법이지만, 변수가 늘어날 수록 효율이 급감함.",
     "crumbs": [
       "시뮬레이션 방법론('24 가을)",
-      "시뮬레이션방법론 1주차"
+      "시뮬레이션방법론 Ch1"
+    ]
+  },
+  {
+    "objectID": "시뮬레이션1.html#mcs-기초",
+    "href": "시뮬레이션1.html#mcs-기초",
+    "title": "시뮬레이션방법론 Ch1",
+    "section": "MCS 기초",
+    "text": "MCS 기초\n몬테카를로 시뮬레이션을 개념적으로 설명함\n예를 들어, 1X1 사각형에 내접한 원에 대하여, 사각형 안에 임의의 점을 찍을 때 원에 포함될 확률?\n직관적으로 면적을 통해 \\(\\Pi/4\\)임을 알 수 있음.\n이를 다변수, 다차원, 복잡한 함수꼴로 확장한다면 면적을 구하는 적분을 통해 구할 수 있음을 의미함.\n근데 그런 복잡한 계산 대신에 랜덤변수를 생성해서 시행횟수를 수없이 시행하고,\n원(면적) 안에 속할 확률을 구한다면? 이게 몬테카를로 시뮬레이션의 기초임.\n수없이 많은 \\((x,y)\\)를 생성하고, 좌표평면의 1X1 사각형에 대해 원안에 속할 확률은 \\(x^2+y^2&lt;1/4\\)임.\n이러한 확률을 구하는 것은 기대값으로 표현할 수 있게 되고, 결국 이 확률은 \\(\\Pi/4\\)로 수렴\n\\[Pr(x\\in B)=E(\\int_A 1_B)=\\Pi/4\\]\n\n확률기대값 및 원주율 계산 예시\n\nimport numpy as np\nn = 10000\nx = np.random.rand(n) # uniform random number in (0,1)\nx -= 0.5\ny = np.random.rand(n)\ny -= 0.5\n\nd = np.sqrt(x**2+y**2)\ni = d&lt;0.5\nprob = i.sum() / n\npi = 4 * i.sum() / n\n\nprint(prob,pi,sep=\"\\n\")\n\n0.7773\n3.1092\n\n\n\n\n표본표준편차 계산 : numpy는 n으로 나누고, pandas는 n-1로 나누는 것이 기본\n\nimport pandas as pd\nnp_s = i.std()\npd_s = pd.Series(i).std()\nnp_s_df1 = i.std(ddof=1)\nprint(np_s, pd_s, np_s_df1, sep = \"\\n\")\n\n0.41605854155395006\n0.41607934604137736\n0.41607934604137736\n\n\n\n\n표준오차 계산 및 95% 신뢰구간 계산\n\nse = pd_s / np.sqrt(n)\nprob_95lb = prob - 2*se\nprob_95ub = prob + 2*se\npi_95lb = prob_95lb*4\npi_95ub = prob_95ub*4\nprint(se, pi_95lb, pi_95ub, sep=\"\\n\")\n\n0.004160793460413773\n3.07591365231669\n3.14248634768331",
+    "crumbs": [
+      "시뮬레이션 방법론('24 가을)",
+      "시뮬레이션방법론 Ch1"
+    ]
+  },
+  {
+    "objectID": "시뮬레이션1.html#경로의존성-path-dependent",
+    "href": "시뮬레이션1.html#경로의존성-path-dependent",
+    "title": "시뮬레이션방법론 Ch1",
+    "section": "경로의존성 (Path-dependent)",
+    "text": "경로의존성 (Path-dependent)\n일반적인(Plain vanilla) 옵션은 pay-off가 기초자산의 만기시점의 가격 \\(S(T)\\)에 의해서만 결정되므로,\n그 사이의 기초자산의 가격을 생성할 필요는 없음(0~T)\n그러나, 아시안옵션 등은 \\(S(T)\\) 뿐만 아니라 그 과정에 의해서 pay-off가 결정되므로 그 경로를 알아야 함.\n또한, 블랙숄즈의 가정이 성립하지 않는 경우 모델링을 하기 위해서도 그 경로를 알아야 할 필요가 있음.\n이를 경로의존성이라고 함.\n\n시뮬레이션 예시\n일반적인 주가에 대한 확률과정이 GBM을 따른다면,\n\\(dS(t)=rS(t)dt+\\sigma S(t)dW(t)\\)\n그러나, 변동성이 주가에 따라 변하면 주가의 흐름에 따라 변동성이 바뀌므로 경로의존성이 발생\n즉, \\(dS(t)=rS(t)dt+\\sigma (S(t)) S(t)dW(t)\\)를 따르게 되므로\n우리가 앞서 사용한 \\(S(T)=S(0)e^{(r-\\frac{1}{2}\\sigma^2)T+\\sigma\\sqrt{T}Z}\\)를 사용할 수 없음.\n따라서, Analytic solution이 없으므로 근사치를 구할 수 밖에 없으며 그 예시로 이산오일러근사가 있음\n(0~T) 구간을 m개로 나누고, 각 구간의 길이 \\(\\frac{T}{m}=\\Delta t\\)라고 하면 기초자산의 경로 \\(S(t)\\)는,\n\\[S(t+\\Delta t)=S(t)+rS(t)\\Delta t+\\sigma (S(t)) S(t)\\sqrt{\\Delta t}Z\\]\n다만, 이러한 경우에는 그 경로의 길이를 얼마나 짧게 구성하는지에 따라 시뮬레이션 정밀도에 영향을 미침.\n즉, 시뮬레이션 횟수 n과 경로의 길이 m이 모두 정확도를 결정하는 파라미터가 됨.",
+    "crumbs": [
+      "시뮬레이션 방법론('24 가을)",
+      "시뮬레이션방법론 Ch1"
+    ]
+  },
+  {
+    "objectID": "시뮬레이션1.html#mcs-추정치-개선-방향",
+    "href": "시뮬레이션1.html#mcs-추정치-개선-방향",
+    "title": "시뮬레이션방법론 Ch1",
+    "section": "MCS 추정치 개선 방향",
+    "text": "MCS 추정치 개선 방향\nMCS의 효율성은 아래 3개의 기준에 따라 평가할 수 있습니다.\n\n계산시간 (Computing time)\n편의 (Bias)\n분산 (Variance)\n\n여기서, 시뮬레이션의 \\(Prediction\\;error\\;=\\;Variance\\;+\\;Bias^2\\)\n\n\n\n\n\n\n\\(Var[\\epsilon]=E[\\epsilon^2]-(E[\\epsilon])^2\\)\n\\(MSE=E[\\epsilon^2)=Var[\\epsilon]+(E[\\epsilon])^2=Variance+Bias^2\\)\n\n\n\n\n분산감소와 계산시간\n시행횟수가 증가하면 분산은 감소함. (\\(n\\rightarrow\\infty,Var[\\epsilon]\\rightarrow 0\\))\n한번의 시뮬레이션에 정확한방법을 사용할 수록 편의는 감소함(\\(m\\rightarrow\\infty,Bias\\rightarrow 0\\))\n(정확한방법을 사용할 수록 분산은 증가할 수 있음 (머신러닝 overfitting 같은 문제?))\n(정확한방법을 쓸수록 계산비용이 증가하여 시뮬레이션 횟수가 감소함, 분산이 그래서 증가함)\n\n시뮬레이션의 횟수\n계산 예산에 \\(s\\)이고, 한번의 시뮬레이션의 계산량이 \\(\\tau\\)일 때, 가능한 시뮬레이션 횟수는 \\(s/\\tau\\)임\n이 때, 추정치의 분포 \\(\\sqrt{\\frac{s}{\\tau}}[\\hat{C}-C]\\rightarrow N(0,\\sigma_c^2)\\)\n\\(\\Rightarrow [\\hat{C}-C]\\rightarrow N(0,\\sigma_c^2(\\frac{\\tau}{c}))\\) 이므로,\n계산오차는 분산이 \\(\\sigma_c^2(\\frac{tau}{c})\\)인 정규분포에 수렴함을 의미\n\n\n편의\n경로의존성이 있는 시뮬레이션 중, 과거 연속적인 수치에 따라 pay-off가 정해진다면,\n이산오일러근사를 사용할 때 편의가 발생함.\ne.g. 룩백옵션의 경우 시뮬레이션이 항상 실제 pay-off를 과소평가 = (-) bias 존재\n이 때, 이산구간의 간격 m을 작게할 수록 편의는 감소함.\n또는, 기초자산이 비선형구조인 경우 등에도 편의가 발생할 수 있음.\ne.g. Compound 옵션의 경우 기초자산인 옵션 가격이 비선형이므로,\nCompound 옵션을 Analytic solution을 적용하여 푸는 경우 항상 실제 옵션보다 가격이 높음 = (+) bias 존재\n이 때, \\(T_1\\sim T_2\\)의 \\(n_2\\)개의 경로를 추가로 생성하여 경로를 이중으로 구성한다면 bias 제거가 가능함.",
+    "crumbs": [
+      "시뮬레이션 방법론('24 가을)",
+      "시뮬레이션방법론 Ch1"
+    ]
+  },
+  {
+    "objectID": "시뮬레이션1.html#asian-option-평가-해볼-것",
+    "href": "시뮬레이션1.html#asian-option-평가-해볼-것",
+    "title": "시뮬레이션방법론 Ch1",
+    "section": "Asian Option 평가 해볼 것",
+    "text": "Asian Option 평가 해볼 것",
+    "crumbs": [
+      "시뮬레이션 방법론('24 가을)",
+      "시뮬레이션방법론 Ch1"
     ]
   },
   {
     "objectID": "수치해석1.html",
     "href": "수치해석1.html",
-    "title": "수치해석학 1주차",
+    "title": "수치해석학 Ch1",
     "section": "",
     "text": "강의 개요 : 금융수치해석의 필요성\n주로 파생상품 평가와 최적화 방법론에 대해서 다룰 예정",
     "crumbs": [
       "수치해석학('24 가을)",
-      "수치해석학 1주차"
+      "수치해석학 Ch1"
     ]
   },
   {
     "objectID": "수치해석1.html#강의-개요-금융수치해석의-필요성",
     "href": "수치해석1.html#강의-개요-금융수치해석의-필요성",
-    "title": "수치해석학 1주차",
+    "title": "수치해석학 Ch1",
     "section": "",
     "text": "파생상품 평가\n\\(ds=rSdt+\\sigma SdW^Q\\)\n기하학적 브라운운동을 따르는 기초자산에 대한 파생상품의 가격 \\(f(t,S)\\)는 아래의 PDE로 표현됨\n\\(f_t+\\frac{1}{2}\\sigma^2S^2f_{ss}+rSf_s-rf=0\\)\n이 블랙숄즈 미분방정식을 컴퓨터로 풀어내는 것이 주요 내용임\n여기에는 반드시 연속적인 수식을 이산화하는 과정이 필요하며, 다양한 수치해석적인 기법이 활용됨\n대표적으로 유한차분법(Finite Difference Method, FDM)이 존재\n\n\n최적화 방법론\n이외의 다양한 최적화방법론은 시간이 여유롭다면 이것저것 다룰 예정\n\nMinimum Variance Portfolio : Single-period에 대해 Sharpe ratio 극대화 등\nStochastic programming : Multi-period에 대해 Minimum var 문제 해결 등\nNon-convex optimization : 미분을 통해 극값을 산출할 수 없는 경우의 최적화\nParameter estimation 또는 Model calibration : \\(min_{\\theta,\\sigma,k}\\sum(model\\;price - market\\;price)^2\\)와 같은 문제 등",
     "crumbs": [
       "수치해석학('24 가을)",
-      "수치해석학 1주차"
+      "수치해석학 Ch1"
     ]
   },
   {
     "objectID": "수치해석1.html#컴퓨터-연산에-대한-이해",
     "href": "수치해석1.html#컴퓨터-연산에-대한-이해",
-    "title": "수치해석학 1주차",
+    "title": "수치해석학 Ch1",
     "section": "컴퓨터 연산에 대한 이해",
-    "text": "컴퓨터 연산에 대한 이해\n수치해석기법을 사용할 때 필연적으로 오차(error) 발생\n\nTruncation error : 연속적인 수학적인 모델을 이산화하면서 발생하는 오차(e.g. 미분계수)\nRounding error : 컴퓨터 시스템상 실수(real number)를 정확히 표현할 수 없는 데에서 기인(2진법 vs. 10진법)\n\n\nimport numpy as np\n\na = 0.1\n\nprint(a+a+a==0.3,a+a+a+a==0.4)\n\nFalse True",
+    "text": "컴퓨터 연산에 대한 이해\n수치해석기법을 사용할 때 필연적으로 오차(error) 발생\n\nTruncation error : 연속적인 수학적인 모델을 이산화하면서 발생하는 오차(e.g. 미분계수)\nRounding error : 컴퓨터 시스템상 실수(real number)를 정확히 표현할 수 없는 데에서 기인(2진법 vs. 10진법)\n\n\nimport numpy as np\n\na = 0.1\n\nprint(a+a+a==0.3,a+a+a+a==0.4)\n\nFalse True\n\n\n\nRounding error 관련\n컴퓨터가 실수를 나타내는 방법은 일반적으로 \\(x=\\pm n\\times b^e\\)로 나타냄.\n여기서 \\(n\\)은 가수, \\(e\\)는 지수이며, 일반적으로 밑인 \\(b\\)는 2를 사용함.\n컴퓨터에서 많이 사용하는 float타입 실수는 32bit를 사용하여 실수를 표현하며,\n이는 \\(2^32\\)가지로 모든 실수를 표현하게됨을 의미함. (정수는 int타입으로 모두 표현가능)\n따라서 소수점에 따라 정확한 값을 나타내지 못하는 문제는 항상 존재.\n\nPrecision of floating point arithmetic\n실수표현의 정밀도는 \\(float(1+\\epsilon_{math})&gt;1\\)이 되는 가장 작은 \\(\\epsilon_{math}\\)를 의미\n\ne = 1\nwhile 1 + e &gt; 1:\n    e = e/2\ne_math = 2 * e\nprint(e_math)\n\n2.220446049250313e-16\n\n\n내장함수 활용 가능. 파이썬에서는 기본적으로 64bit double타입을 사용함\n\nimport numpy as np\nprint(np.finfo(np.double).eps,\n      np.finfo(float).eps)\n\n2.220446049250313e-16 2.220446049250313e-16\n\n\n\nprint(1+e, 1+e+e, 1+2*e, 1+1.0000001*e)\n\n1.0 1.0 1.0000000000000002 1.0000000000000002\n\n\n많이 쓰이는 double타입의 경우 64bit로 실수를 표현하는데,\n\\(x=\\pm n\\times 2^e\\)에서 부호(\\(\\pm\\)) 1자리, 가수(\\(n\\)) 52자리, 지수 11자리(\\(e\\))를 의미",
     "crumbs": [
       "수치해석학('24 가을)",
-      "수치해석학 1주차"
+      "수치해석학 Ch1"
+    ]
+  },
+  {
+    "objectID": "수치해석1.html#계산오차",
+    "href": "수치해석1.html#계산오차",
+    "title": "수치해석학 Ch1",
+    "section": "계산오차",
+    "text": "계산오차\n절대오차 : \\(|{\\hat{x}-x}|\\)\n상대오차 : \\(\\frac{|{\\hat{x}-x}|}{|x|}\\)\n결합오차 : \\(e_{comb}=\\frac{|{\\hat{x}-x}|}{|x|+1}\\)\n\n유한차분을 이용한 도함수의 근사\n\\[f'(x)=\\lim_{h\\rightarrow 0}\\frac{f(x+h)-f(x)}{h}\\]\n컴퓨터로는 \\(h\\rightarrow 0\\)을 정확히 표현할 수 없음.\n따라서, 적당히 작은 값으로 이를 대체하여 \\(f'(x)\\)를 근사해야함.\n\nTruncation error 최소화를 위해서는 h는 작을 수록 좋음\n그러나, 너무 작은 값을 선택하면 rounding error가 발생하여 \\(x=x+h\\) 될 가능성\n\n\nTaylor expansion\n\\[f(x)=\\sum_{k=0}^\\infty \\frac{f^{(k)}(x_0)}{k!}(x-x_0)^{k}=\\sum_{k=0}^n \\frac{f^{(k)}(x_0)}{k!}(x-x_0)^{k}+\\frac{f^{(n+1)}(\\xi)}{(n+1)!}(x-x_0)^{n+1}\\]\n이를 도함수에 적용하면,\n\\[f(x+h)=f(x)+hf'(x)+\\frac{h^2}{2}f''(x)+\\frac{h^3}{3!}f'''(x)+\\dotsm+\\frac{h^n}{n!}f^{(n)}(x)+R_n(x+h)\\]\n\\(n=1\\)을 적용하면,\n\\(\\Rightarrow\\;f(x+h)=f(x)+hf'(x)+\\frac{h^2}{2}f''(\\xi)\\;for\\;\\xi\\in[x,x+h]\\)\n\\(\\Rightarrow\\;f'(x)=\\frac{f(x+h)-f(x)}{h}-\\frac{h}{2}f''(\\xi)\\;(Forward\\;Approximation)\\)\n\\(n=2\\)를 적용하고 forward - backward를 정리하면,\n\\(f'(x)=\\frac{f(x+h)-f(x-h)}{h}-\\frac{h^2}{3}f'''(\\xi)\\;(Central\\;Difference\\;Approximation)\\)\n::: {.callout, title=“Central Difference Approximation”} \\(for\\;n=2,\\)\n\\((Forward)\\;f(x+h)=f(x)+hf'(x)+\\frac{h^2}{2}f''(x)+\\frac{h^3}{3!}f'''(\\xi_+),\\;\\xi\\in[x,x+h]\\)\n\\((Backward)\\;f(x-h)=f(x)-hf'(x)+\\frac{h^2}{2}f''(x)-\\frac{h^3}{3!}f'''(\\xi_-),\\;\\xi\\in[x-h,x]\\)\n\\(f(x+h)-f(x-h)=2hf'(x)+\\frac{h^2}{6}\\{f'''(\\xi_+)+f'''(\\xi_-)\\}\\)\n\\(\\Rightarrow\\;f'(x)=\\frac{f(x+h)-f(x-h)}{h}-\\frac{h^2}{3}f'''(\\xi),\\;\\xi\\in[x-h,x+h]\\) :::\n위의 식에서 볼 수 있는 것처럼, Central 방식에서는 truncation error의 order가 \\(h^2\\)이므로,\n다른 방식에 비해서 오차가 훨씬 줄어들게 됨\n유사한 방식으로 이계도함수와 편도함수를 유도하면,\n\\(f''(x)=\\frac{f(x+h)+f(x-h)-2f(x)}{h^2}-\\frac{h^2}{24}f^{(4)}(\\xi)\\)\n\\(f_x(x,y)=\\frac{f(x+h_x,y)-f(x-h_x,y)}{2h_x}+trunc.\\;error\\)\n\n\n\n총오차 및 최적의 h 산출\nForward difference approximation을 사용하고, \\(|f''(x)|&lt;=M\\)이라고 하면,\n\\(|f_h'(x)-f'(x)|=\\frac{h}{2}|f''(x)|&lt;=\\frac{h}{2}M\\;(trunc.\\;error)\\)\n유인물 참조\n총오차 최소화를 위한 \\(h^*\\) 산출이 목표\n\n\n유한차분을 이용한 도함수 근사 예시\n\\(f(x)=cos(x^x)-sin(e^x)\\)\n함수 및 도함수(analytic form) 정의 및 도식화\n\nimport numpy as np \nimport matplotlib.pyplot as plt \ndef fun(x):\n    return np.cos(x**x) - np.sin(np.exp(x))\n\ndef fprime(x):\n    return -np.sin(x**x)*(x**x)*(np.log(x)+1)  - np.cos(np.exp(x))*np.exp(x)\n\nx = np.linspace(0.5,2.5,101)\ny = fun(x)\nplt.plot(x,y,'-')\n\n\n\n\n\n\n\n\n미분계수 산출\n\nx = 1.5\nd = fprime(x)\nprint(\"derivative = \", d)\n\nderivative =  -1.466199173237208\n\n\nforward 및 central difference approx. 산출 및 비교, 총오차를 log scale로 표현\ntrunc. error는 h가 작아질수록 감소하지만 특정구간 이후에는 rounding error가 발생하므로\n총오차는 항상 감소하지 않게 됨.\n최적 \\(h^*\\)를 찾는 것이 매우 중요함\n\np = np.linspace(1,16,151)\nh = 10**(-p)\n\ndef forward_difference(x,h):\n    return (fun(x+h)-fun(x)) / h\n\ndef central_difference(x,h):\n    return (fun(x+h)-fun(x-h)) / (2*h)\n\nfd = forward_difference(x, h)\ncd = central_difference(x, h)\nprint(\"forward = \", fd)\nprint(\"central = \", cd)\n\nfd_error = np.log(np.abs(fd-d)/np.abs(d))\ncd_error = np.log(np.abs(cd-d)/np.abs(d))\nplt.plot(p,fd_error, p, cd_error)\nplt.legend(['forward difference', 'central difference'])\n\nforward =  [-2.62212289 -2.37366424 -2.17930621 -2.02733993 -1.90838758 -1.81511559\n -1.74184228 -1.68417626 -1.63872005 -1.60283855 -1.57448171 -1.55204964\n -1.53429022 -1.52022092 -1.50906909 -1.50022597 -1.49321118 -1.48764519\n -1.48322779 -1.47972134 -1.47693759 -1.47472735 -1.4729723  -1.4715786\n -1.47047179 -1.46959277 -1.46889464 -1.46834015 -1.46789975 -1.46754995\n -1.4672721  -1.46705142 -1.46687612 -1.46673689 -1.46662629 -1.46653844\n -1.46646866 -1.46641323 -1.46636921 -1.46633424 -1.46630646 -1.46628439\n -1.46626686 -1.46625294 -1.46624188 -1.4662331  -1.46622612 -1.46622058\n -1.46621618 -1.46621268 -1.4662099  -1.4662077  -1.46620594 -1.46620455\n -1.46620344 -1.46620257 -1.46620187 -1.46620131 -1.46620087 -1.46620053\n -1.46620025 -1.46620002 -1.46619985 -1.46619971 -1.46619959 -1.46619951\n -1.46619944 -1.46619939 -1.46619934 -1.46619931 -1.46619927 -1.46619923\n -1.46619922 -1.46619918 -1.46619921 -1.46619915 -1.46619915 -1.46619919\n -1.46619909 -1.46619907 -1.46619916 -1.46619915 -1.46619876 -1.46619938\n -1.46619893 -1.46619919 -1.46619932 -1.46619869 -1.46619769 -1.4662003\n -1.46619716 -1.46619985 -1.46619876 -1.46620071 -1.46619865 -1.46619427\n -1.46619269 -1.46620314 -1.46618158 -1.46619854 -1.46618273 -1.46617469\n -1.46619173 -1.46614311 -1.46615961 -1.46626449 -1.46620595 -1.46619201\n -1.46615356 -1.46621617 -1.46616053 -1.46617469 -1.46608615 -1.46578868\n -1.46632693 -1.46612406 -1.46518938 -1.46619201 -1.46545305 -1.46568705\n -1.46438417 -1.46757238 -1.46221506 -1.46202287 -1.46130718 -1.46050672\n -1.45413969 -1.46897416 -1.45004198 -1.46392328 -1.44328993 -1.4535955\n -1.40766793 -1.46202287 -1.39437708 -1.40433339 -1.32596324 -1.44671698\n -1.40100674 -1.41101039 -1.66533454 -1.39768798 -1.05575095 -0.88607446\n -1.11550166 -0.70216669 -0.88397549 -1.11285921 -1.40100674 -1.76376299\n  0.        ]\ncentral =  [-1.5635526  -1.52856423 -1.50592274 -1.49141188 -1.48216656 -1.4762975\n -1.47258018 -1.47022905 -1.46874334 -1.46780503 -1.46721263 -1.46683872\n -1.46660274 -1.46645382 -1.46635985 -1.46630056 -1.46626314 -1.46623954\n -1.46622464 -1.46621524 -1.46620931 -1.46620557 -1.46620321 -1.46620172\n -1.46620078 -1.46620019 -1.46619981 -1.46619958 -1.46619943 -1.46619933\n -1.46619927 -1.46619924 -1.46619921 -1.4661992  -1.46619919 -1.46619918\n -1.46619918 -1.46619918 -1.46619918 -1.46619917 -1.46619917 -1.46619917\n -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917\n -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917\n -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917\n -1.46619918 -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917\n -1.46619917 -1.46619917 -1.46619918 -1.46619918 -1.46619917 -1.46619916\n -1.46619918 -1.46619915 -1.46619918 -1.46619915 -1.46619923 -1.46619922\n -1.46619909 -1.46619924 -1.46619938 -1.46619908 -1.46619894 -1.46619938\n -1.46619879 -1.46619919 -1.4661991  -1.46619925 -1.46619804 -1.46620118\n -1.46619883 -1.46620125 -1.46619876 -1.46620071 -1.46620423 -1.46619603\n -1.4661949  -1.46620592 -1.46619208 -1.46620736 -1.46619383 -1.46617469\n -1.46620932 -1.46616527 -1.4661875  -1.46626449 -1.46622805 -1.46619201\n -1.46629366 -1.46630436 -1.46638257 -1.46624457 -1.46626211 -1.46612096\n -1.46632693 -1.4662996  -1.46585236 -1.46647023 -1.46615356 -1.46612799\n -1.46493928 -1.46827122 -1.46485444 -1.46645324 -1.46409593 -1.46401756\n -1.4607695  -1.47732061 -1.46054953 -1.46392328 -1.45439216 -1.46757238\n -1.44285963 -1.50632659 -1.45015216 -1.43944172 -1.41436079 -1.50235994\n -1.40100674 -1.58738669 -1.72084569 -1.67722557 -1.40766793 -1.10759308\n -1.39437708 -1.05325004 -1.32596324 -1.66928882 -2.10151011 -2.64564449\n  0.        ]",
+    "crumbs": [
+      "수치해석학('24 가을)",
+      "수치해석학 Ch1"
     ]
   },
   {
     "objectID": "리스크관리1.html",
     "href": "리스크관리1.html",
-    "title": "금융시장 리스크관리 1주차",
+    "title": "금융시장 리스크관리 1~2주차",
     "section": "",
     "text": "Lecture2 : How Traders Manage Their Risks?\nGreeks letters & Scenario analysis",
     "crumbs": [
       "금융시장 리스크관리('24 가을)",
-      "금융시장 리스크관리 1주차"
+      "금융시장 리스크관리 1~2주차"
     ]
   },
   {
     "objectID": "리스크관리1.html#lecture2-how-traders-manage-their-risks",
     "href": "리스크관리1.html#lecture2-how-traders-manage-their-risks",
-    "title": "금융시장 리스크관리 1주차",
+    "title": "금융시장 리스크관리 1~2주차",
     "section": "",
-    "text": "Delta hedging (\\(\\Delta=\\frac{\\partial P}{\\partial S}\\))\n가장 기본적인 헷징방법으로, 파생상품과 같은 금융상품으로 구성된 포트폴리오에 대해\n기초자산의 가격변동에 대한 민감도인 델타를 계산하여 이를 0으로 만듦으로써\n기초자산의 가격변화로 인한 포트폴리오의 가치변화를 0으로 만드는 방법.\n포트폴리오의 payoff가 선형이라면, 한번의 헷징만으로 완전헷지(perfect hedge)가 가능\n이를 Hedge and forget이라고 함.\n그러나 비선형이라면, 기초자산의 가격변동에 따라 델타도 변하게 됨.\n\n\n\n\n\n\n델타헷지 예시\n\n\n\n은행이 특정 주식 10만주에 대한 콜옵션을 30만불에 매도할 수 있음.\n블랙숄즈공식에 따른 이 옵션의 가치는 24만불 (\\(S_0=49,K=50,r=0.05,\\sigma=0.2,T=20w\\))\n어떻게 6만불의 차익거래를 실현시킬지?\n\n풋콜페리티 또는 시장에서 동일한 옵션을 24만불에 매수하여 실현\n그러나, 옵션매수가 불가능한 경우 기초자산 주식을 이용한 델타헷징을 반복\n\n즉, 옵션 매도포지션의 델타만큼 주식을 매수하고 매주 리밸런싱\n20주 후 주식 매도수를 반복하여 구축한 델타헷징은 약 26만불의 비용이 발생하였음\n-&gt; 약 4만불의 차익거래를 실현함\n2만불은 어디로 증발함? : 델타헷징에 드는 비용 (거래비용 등)\n헷지를 자주할수록, 거래비용이 적을수록, 기초자산의 가격변동이 작을수록 차익은 6만불로 수렴\n\n\n기초자산을 이용한 델타헷징은 비용이 발생할수밖에 없음.\n콜옵션을 기준으로 할 때, 기초자산의 가격이 상승하면 콜옵션의 머니니스가 증가하면서 델타가 증가함.\n콜옵션 매도를 델타헷징하다보면, 주가 상승 -&gt; 델타 상승 -&gt; 주식 매수\n반대로, 주가 하락 -&gt; 델타 감소 -&gt; 주식 매도\n즉, 주식이 오르면 팔고 내리면 팔아야함 (Sell low, Buy high Strategy)\n\n\n기타 그릭스\nGamma (\\(\\Gamma=\\frac{\\partial\\Delta}{\\partial S}=\\frac{\\partial^2P}{\\partial S^2}\\))\n베가 로 그런거는 대충넘어갔음",
+    "text": "Delta hedging\n\\(\\Delta=\\frac{\\partial P}{\\partial S}\\)\n가장 기본적인 헷징방법으로, 파생상품과 같은 금융상품으로 구성된 포트폴리오에 대해\n기초자산의 가격변동에 대한 민감도인 델타를 계산하여 이를 0으로 만듦으로써\n기초자산의 가격변화로 인한 포트폴리오의 가치변화를 0으로 만드는 방법.\n포트폴리오의 payoff가 선형이라면, 한번의 헷징만으로 완전헷지(perfect hedge)가 가능\n이를 Hedge and forget이라고 함.\n그러나 비선형이라면, 기초자산의 가격변동에 따라 델타도 변하게 됨.\n\n\n\n\n\n\n델타헷지 예시\n\n\n\n은행이 특정 주식 10만주에 대한 콜옵션을 30만불에 매도할 수 있음.\n블랙숄즈공식에 따른 이 옵션의 가치는 24만불 (\\(S_0=49,K=50,r=0.05,\\sigma=0.2,T=20w\\))\n어떻게 6만불의 차익거래를 실현시킬지?\n\n풋콜페리티 또는 시장에서 동일한 옵션을 24만불에 매수하여 실현\n그러나, 옵션매수가 불가능한 경우 기초자산 주식을 이용한 델타헷징을 반복\n\n즉, 옵션 매도포지션의 델타만큼 주식을 매수하고 매주 리밸런싱\n20주 후 주식 매도수를 반복하여 구축한 델타헷징은 약 26만불의 비용이 발생하였음\n-&gt; 약 4만불의 차익거래를 실현함\n2만불은 어디로 증발함? : 델타헷징에 드는 비용 (거래비용 등)\n헷지를 자주할수록, 거래비용이 적을수록, 기초자산의 가격변동이 작을수록 차익은 6만불로 수렴\n\n\n기초자산을 이용한 델타헷징은 비용이 발생할수밖에 없음.\n콜옵션을 기준으로 할 때, 기초자산의 가격이 상승하면 콜옵션의 머니니스가 증가하면서 델타가 증가함.\n콜옵션 매도를 델타헷징하다보면, 주가 상승 -&gt; 델타 상승 -&gt; 주식 매수\n반대로, 주가 하락 -&gt; 델타 감소 -&gt; 주식 매도\n즉, 주식이 오르면 팔고 내리면 팔아야함 (Sell low, Buy high Strategy)\n\n\n기타 그릭스\nGamma (\\(\\Gamma=\\frac{\\partial\\Delta}{\\partial S}=\\frac{\\partial^2P}{\\partial S^2}\\))\n베가 로 그런거는 대충넘어갔음\n\n\nTaylor Series Expansion\n테일러 전개는 다항전개식의 일종으로, 복잡한 함수를 다항함수를 이용하여 간단히 전개할 수 있어 근사식에 많이 활용\n\\[f(x)=f(x_0)+f'(x_0)(x-x_0)+\\frac{1}{2}f''(x_0)(x-x_0)^2+\\dotsm\\]\n금융시장에서 이를 적용한다면? \\(f(x)\\)는 포트폴리오의 가격함수이며, \\(x\\)는 기초자산가격으로 대입 가능\n\\(\\Rightarrow f(x)-f(x_0)=f'(x_0)(x-x_0)+\\frac{1}{2}f''(x_0)(x-x_0)^2\\)\n\\(\\Rightarrow \\Delta f(x)=f'(x_0)\\Delta x+\\frac{1}{2}f''(x_0)\\Delta x^2\\)\n기초자산의 변화(\\(\\Delta x\\))에 따른 포트폴리오 가치변화(\\(\\Delta f\\))는 델타(듀레이션) 및 감마(컨벡시티)로 근사 가능\n포트폴리오 \\(P\\)를 기초자산의 가격 및 시간에 따른 함수 \\(P(S,t)\\)라고 한다면, (변동성은 상수로 가정)\n\\[\\Delta P=\\frac{\\partial P}{\\partial S}\\Delta S+\\frac{\\partial P}{\\partial t}\\Delta t+\\frac{1}{2}\\frac{\\partial^2P}{\\partial S^2}\\Delta S^2+\\frac{1}{2}\\frac{\\partial^2P}{\\partial t^2}\\Delta t^2+\\frac{\\partial^2P}{\\partial S\\partial t}\\Delta S\\Delta t+\\dotsm\\]\n일반적으로 \\(\\Delta t^2=0, \\Delta S\\Delta t=0\\)으로 가정하므로,\n\\[\\Rightarrow \\Delta P\\approx \\frac{\\partial P}{\\partial S}\\Delta S+\\frac{\\partial P}{\\partial t}\\Delta t+\\frac{1}{2}\\frac{\\partial^2P}{\\partial S^2}\\Delta S^2\\]\n즉, 포트폴리오의 가치변화는 델타, 세타, 감마로 표현되며 델타중립 포트폴리오를 구성했다면,\n\\[\\Delta P=\\Theta \\Delta t+\\frac{1}{2}\\Gamma \\Delta S^2\\]\n\n\n\n\n\n\nNote\n\n\n\n아래로 볼록한 형태인 옵션 매수는 positive gamma,\n위로 볼록한 형태인 옵션 매도는 negative gamma (관리 어려움)\n\n\n만약 변동성이 변수라면?\n\\(\\Delta P=\\delta \\Delta S+Vega\\Delta\\sigma+\\Theta\\Delta t+\\frac{1}{2}\\Gamma\\Delta S^2\\)\n\n\nHedging in practice\n델타헷징은 보통 매일하고, 감마나 베가는 영향이 매우 크지는 않아서 모니터링하다가,\n일정 임계치를 넘어가면 헷지 시작(헷지도 어렵고 비용도 보다 많이 듬)\n특히, 만기가 임박한 ATM옵션은 감마와 베가가 매우 크므로, 주로 관리하게됨",
     "crumbs": [
       "금융시장 리스크관리('24 가을)",
-      "금융시장 리스크관리 1주차"
+      "금융시장 리스크관리 1~2주차"
+    ]
+  },
+  {
+    "objectID": "미시1.html",
+    "href": "미시1.html",
+    "title": "미시경제학 Ch1",
+    "section": "",
+    "text": "Law of demand\n가격이 상승하면 수요는 하락하고, 가격이 하락하면 수요는 증가한다\nwhen Other things equal(ceteris paribus)\n따라서, x축이 수요량이고 y축이 가격일 때 수요곡선은 우하향함",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "미시경제학 Ch1"
+    ]
+  },
+  {
+    "objectID": "미시1.html#law-of-demand",
+    "href": "미시1.html#law-of-demand",
+    "title": "미시경제학 Ch1",
+    "section": "",
+    "text": "Other things?\n이는 수요곡선 자체를 변화시키는 모든 변수 일체를 의미함.\n\nIncome : normal goods vs. inferior goods\nNumber of buyers\nSubstitutes vs. Complements\nTastes\n\n\n1. Income\n일반적인 재화는 소득이 증가하면 수요가 증가함.\n즉, 수요곡선을 오른쪽으로 평행이동시킴 Normal Goods\n그러나, 대중교통이나 감자같은 재화는 소득이 증가하면 오히려 수요가 감소할 수 있음.\n이 경우는 수요곡선을 왼쪽으로 평행이동시킴 Inferior Goods\n이는 재화에 따라 고정되어있지 않으며,\n때로는 소득수준이 증가함에 따라 수요가 증가하는 Normal goods였다가 소득수준이 더 크게 증가하면 수요가 감소하는 Inferior goods가 되기도 함. (e.g. Hamburger)\n\n\n2. Substitutes vs. Complements\n대체제(e.g. 맥도날드, 버거킹)는 대체관계에 있는 재화들로, 대체제의 수요가 감소하면 재화의 수요가 증가함.\n즉, 대체제의 가격상승은 재화의 수요곡선을 우측 평행이동시킴\n보완재(자동차, 기름)은 상호보완관계에 있는 재화로, 보완재의 수요가 증가하면 재화의 수요가 감소함. 보완재 가격상승은 수요곡선 좌측 평행이동\n\n\n이외의 수요곡선을 이동시키는건 매우 많을 수 있음\n중요한건, 특정재화의 수요에 영향을 미치는 방법은\n\n다른 요소를 건드려서 수요곡선 자체를 이동시키거나\n재화의 가격을 건드려서 수요곡선 내에서 이동시키는거임",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "미시경제학 Ch1"
+    ]
+  },
+  {
+    "objectID": "미시1.html#law-of-supply",
+    "href": "미시1.html#law-of-supply",
+    "title": "미시경제학 Ch1",
+    "section": "Law of Supply",
+    "text": "Law of Supply\n공급의 법칙\n똑같음. 가격이 올라가면 공급이 늘어나고 감소하면 공급도 감소함\n따라서 일반적으로 우상향하는 공급곡선이 나타남.\n언제? 다른 모든 것들이 동일할 때\n\n공급곡선의 이동\n\n생산가격 Input price\nTechnology\nNumber of sellers\n\n\n1. Input price\n생산단가가 감소하면 공급은 증가함. 공급곡선 우측 이동\n생산단가 증가 - 공급량 감소 - 곡선 좌측 이동\n\n\n2. Technology\n기술수준이 상승하면 생산단가가 감소함. 공급곡선 우측이동.",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "미시경제학 Ch1"
+    ]
+  },
+  {
+    "objectID": "미시hw1.html",
+    "href": "미시hw1.html",
+    "title": "Microanalysis of financial economics Assignment1",
+    "section": "",
+    "text": "Sample Question",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "Microanalysis of financial economics Assignment1"
+    ]
+  },
+  {
+    "objectID": "미시hw1.html#sample-question",
+    "href": "미시hw1.html#sample-question",
+    "title": "Microanalysis of financial economics Assignment1",
+    "section": "",
+    "text": "Answer\nBecomes more expensive for steel production\n-&gt; Increase input prices for steel production\n-&gt; Supply curve shifts to the left.\nReduced the demand for steel products\n-&gt; Decrease number of buyers for steel production\n-&gt; Demand curve shifts to the left.\nBoth curves will shift to the left side,\nso NEW equilibrium point also shift to the left side.\nIt is clear that NEW equilibrium quantity will increase, but price is not.\nWhether equilibrium price increase or not, it depends on how each curves shifts and their elasticity.\n\n\n\nSample question",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "Microanalysis of financial economics Assignment1"
+    ]
+  },
+  {
+    "objectID": "미시hw1.html#assignments-1",
+    "href": "미시hw1.html#assignments-1",
+    "title": "Microanalysis of financial economics Assignment1",
+    "section": "Assignments 1",
+    "text": "Assignments 1\n\n\nAnswer\nLet \\(P_0=3.46\\) and \\(Q_0^D=Q_0^S=2630\\),\nSet \\(\\frac{\\Delta P_{(=P_1-P_0)}}{P_0}=0.01\\), so \\(P_1=3.46+0.0346=3.4946\\)\nThen, \\(Q_1^D=3550-266P_1=2620.4364\\) and \\(Q_1^S=1800+240P_1=2638.704\\)\nSo, \\(\\frac{\\Delta Q^D}{Q_0^D}=\\frac{-9.5636}{2630}\\approx -0.36\\%\\) and \\(\\frac{\\Delta Q^S}{Q_0^S}=\\frac{8.704}{2630}\\approx 0.33\\%\\)\nFinally, Price elasticity of Demand is \\(\\frac{-0.36\\%}{1\\%}\\approx -0.3636\\).\nPrice elasticity of Supply is \\(\\frac{0.33\\%}{1\\%}\\approx 0.3310\\)",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "Microanalysis of financial economics Assignment1"
+    ]
+  },
+  {
+    "objectID": "리스크관리1.html#lecture3-volatility",
+    "href": "리스크관리1.html#lecture3-volatility",
+    "title": "금융시장 리스크관리 1~2주차",
+    "section": "Lecture3 : Volatility",
+    "text": "Lecture3 : Volatility\nStandard approach to estimating Volatility\n\\(\\sigma_n^2=\\frac{1}{m-1}\\sum_{i=1}^m(u_{n-i}-\\bar{n})^2\\;for\\;u_i=\\ln(\\frac{S_i}{S_{i-1}})\\)\nSimplify, \\(\\sigma_n^2=\\frac{1}{m}\\sum_{i=1}^mu_{n-i}^2\\;for\\;u_i=\\frac{S_i-S_{i-1}}{S_{i-1}},\\bar{u}=0\\)\n\nWeighting Schemes\n$\\(\\sigma_n^2=\\sum_{i=1}^m\\alpha_iu_{n-i}^2\\;for\\;\\sum_i\\alpha_i=1\\)\nEWMA(Exponentially Weighted Moving Average) : \\(\\alpha_{i+1}=\\lambda\\alpha_i\\;where\\;0&lt;\\lambda&lt;1\\)\nARCH, GARCH 등등 많음\n\n\n최대우도법, Maximum Likelihood Method\n최대우도법이란, 우리에게 주어진 데이터가 있고, 이 데이터가 어떠한 분포를 따르는지 추정하기 위함.\n\n주어진 데이터가 있고\n어떤 분포를 따르는지 사전에 설정함\n분포에 따라 추정이 필요한 파라미터 \\(\\theta_n\\)이 생길 때,\n주어진 데이터에 대한 확률밀도함수의 곱(독립된 결합밀도함수)을 최대화시키는 \\(\\theta\\)를 찾는 것이 목표\n즉, 확률을 최대화시키는 파라미터를 추정하여 추정분포를 결정함\n\n주가수익률의 관측치 \\(u_i\\)가 평균이 0인 정규분포를 따른다고 가정한다면?\n변동성 \\(\\sigma\\)를 추정하기 위해 최대우도법을 사용할 수 있음.\nMaximize : \\(ML=\\Pi_{i=1}^n[\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{\\frac{-u_i^2}{2\\sigma}}]\\)\n\\(y=x\\)와 \\(y=\\ln x\\)는 일대일대응관계가 성립하므로, log transform을 통해\nSame to maximize : \\(\\ln ML=\\sum_{i=1}^n[\\ln(\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{\\frac{-u_i^2}{2\\sigma^2}})]=n\\ln(\\frac{1}{\\sqrt{2\\pi\\sigma^2}})-\\frac{1}{2\\sigma^2}\\sum_{i=1}^nu_i^2\\)\n위 식을 \\(\\sigma\\)에 대해 다시 정리하면, \\(n\\ln(\\frac{1}{\\sqrt{2\\pi}})-\\frac{n}{2}\\ln(\\sigma^2)-\\sum u_i^2\\frac{1}{2\\sigma^2}\\)\n\\(\\sigma^2\\)에 대해 미분을 통해, \\(\\ln ML_{\\sigma^2}=-\\frac{n}{2\\sigma^2}+\\frac{\\sum u_i}{2(\\sigma^2)^2}\\)\n미분계수가 0인 점이 ML 함수를 극대화 시키는 점이므로, \\(-\\frac{n}{2\\sigma^2}+\\frac{\\sum u_i}{2(\\sigma^2)^2}=0\\)\n\\(\\Rightarrow\\;n\\sigma^2=\\sum u_i,\\;\\therefore\\;\\sigma^2=\\frac{\\sum u_i}{n}\\)",
+    "crumbs": [
+      "금융시장 리스크관리('24 가을)",
+      "금융시장 리스크관리 1~2주차"
     ]
   }
 ]

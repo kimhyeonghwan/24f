@@ -1,4 +1,6 @@
-# 시뮬레이션방법론 1주차 {.unnumbered}
+# 시뮬레이션방법론 Ch1 {.unnumbered}
+
+몬테카를로 시뮬레이션 기초
 
 ## 블랙숄즈공식 예시
 
@@ -33,3 +35,152 @@ $x\sim uniform[0,1]\;일 때,\;\;\alpha=E[f(x)]=\int_0^1f(x)dx$
 $3.\;\alpha\approx \frac{f(0)+f(1)}{2n}+\frac{1}{n}\sum_{i=1}^{n-1}f(\frac{i}{n})\;\;(구분구적법의\;앞뒤\;평균치)$
 
 이는 매우 간단하고 효율적인 방법이지만, 변수가 늘어날 수록 효율이 급감함.
+
+## MCS 기초
+
+몬테카를로 시뮬레이션을 개념적으로 설명함
+
+예를 들어, 1X1 사각형에 내접한 원에 대하여, 사각형 안에 임의의 점을 찍을 때 원에 포함될 확률?
+
+직관적으로 면적을 통해 $\Pi/4$임을 알 수 있음.
+
+이를 다변수, 다차원, 복잡한 함수꼴로 확장한다면 면적을 구하는 적분을 통해 구할 수 있음을 의미함.
+
+근데 그런 복잡한 계산 대신에 랜덤변수를 생성해서 시행횟수를 수없이 시행하고,
+
+원(면적) 안에 속할 확률을 구한다면? 이게 몬테카를로 시뮬레이션의 기초임.
+
+수없이 많은 $(x,y)$를 생성하고, 좌표평면의 1X1 사각형에 대해 원안에 속할 확률은 $x^2+y^2<1/4$임.
+
+이러한 확률을 구하는 것은 기대값으로 표현할 수 있게 되고, 결국 이 확률은 $\Pi/4$로 수렴
+
+$$Pr(x\in B)=E(\int_A 1_B)=\Pi/4$$
+
+### 확률기대값 및 원주율 계산 예시
+```{python}
+import numpy as np
+n = 10000
+x = np.random.rand(n) # uniform random number in (0,1)
+x -= 0.5
+y = np.random.rand(n)
+y -= 0.5
+
+d = np.sqrt(x**2+y**2)
+i = d<0.5
+prob = i.sum() / n
+pi = 4 * i.sum() / n
+
+print(prob,pi,sep="\n")
+```
+
+### 표본표준편차 계산 : numpy는 n으로 나누고, pandas는 n-1로 나누는 것이 기본
+```{python}
+import pandas as pd
+np_s = i.std()
+pd_s = pd.Series(i).std()
+np_s_df1 = i.std(ddof=1)
+print(np_s, pd_s, np_s_df1, sep = "\n")
+```
+
+### 표준오차 계산 및 95% 신뢰구간 계산
+
+```{python}
+se = pd_s / np.sqrt(n)
+prob_95lb = prob - 2*se
+prob_95ub = prob + 2*se
+pi_95lb = prob_95lb*4
+pi_95ub = prob_95ub*4
+print(se, pi_95lb, pi_95ub, sep="\n")
+```
+
+## 경로의존성 (Path-dependent)
+
+일반적인(Plain vanilla) 옵션은 pay-off가 기초자산의 만기시점의 가격 $S(T)$에 의해서만 결정되므로,
+
+그 사이의 기초자산의 가격을 생성할 필요는 없음(0~T)
+
+그러나, 아시안옵션 등은 $S(T)$ 뿐만 아니라 그 과정에 의해서 pay-off가 결정되므로 그 경로를 알아야 함.
+
+또한, 블랙숄즈의 가정이 성립하지 않는 경우 모델링을 하기 위해서도 그 경로를 알아야 할 필요가 있음.
+
+이를 **경로의존성**이라고 함.
+
+### 시뮬레이션 예시
+
+일반적인 주가에 대한 확률과정이 GBM을 따른다면,
+
+$dS(t)=rS(t)dt+\sigma S(t)dW(t)$
+
+그러나, 변동성이 주가에 따라 변하면 주가의 흐름에 따라 변동성이 바뀌므로 경로의존성이 발생
+
+즉, $dS(t)=rS(t)dt+\sigma (S(t)) S(t)dW(t)$를 따르게 되므로
+
+우리가 앞서 사용한 $S(T)=S(0)e^{(r-\frac{1}{2}\sigma^2)T+\sigma\sqrt{T}Z}$를 사용할 수 없음.
+
+따라서, Analytic solution이 없으므로 근사치를 구할 수 밖에 없으며 그 예시로 **이산오일러근사**가 있음
+
+(0~T) 구간을 m개로 나누고, 각 구간의 길이 $\frac{T}{m}=\Delta t$라고 하면 기초자산의 경로 $S(t)$는,
+
+$$S(t+\Delta t)=S(t)+rS(t)\Delta t+\sigma (S(t)) S(t)\sqrt{\Delta t}Z$$
+
+다만, 이러한 경우에는 그 경로의 길이를 얼마나 짧게 구성하는지에 따라 시뮬레이션 정밀도에 영향을 미침.
+
+즉, 시뮬레이션 횟수 n과 경로의 길이 m이 모두 정확도를 결정하는 파라미터가 됨.
+
+## MCS 추정치 개선 방향
+
+MCS의 효율성은 아래 3개의 기준에 따라 평가할 수 있습니다.
+
+1. 계산시간 (Computing time)
+2. 편의 (Bias)
+3. 분산 (Variance)
+
+여기서, 시뮬레이션의 $Prediction\;error\;=\;Variance\;+\;Bias^2$
+
+::: {.callout}
+$Var[\epsilon]=E[\epsilon^2]-(E[\epsilon])^2$
+
+$MSE=E[\epsilon^2)=Var[\epsilon]+(E[\epsilon])^2=Variance+Bias^2$
+:::
+
+### 분산감소와 계산시간
+
+시행횟수가 증가하면 분산은 감소함. ($n\rightarrow\infty,Var[\epsilon]\rightarrow 0$)
+
+한번의 시뮬레이션에 정확한방법을 사용할 수록 편의는 감소함($m\rightarrow\infty,Bias\rightarrow 0$)
+
+(정확한방법을 사용할 수록 분산은 증가할 수 있음 (머신러닝 overfitting 같은 문제?))
+
+(정확한방법을 쓸수록 계산비용이 증가하여 시뮬레이션 횟수가 감소함, 분산이 그래서 증가함)
+
+#### 시뮬레이션의 횟수
+
+계산 예산에 $s$이고, 한번의 시뮬레이션의 계산량이 $\tau$일 때, 가능한 시뮬레이션 횟수는 $s/\tau$임
+
+이 때, 추정치의 분포 $\sqrt{\frac{s}{\tau}}[\hat{C}-C]\rightarrow N(0,\sigma_c^2)$
+
+$\Rightarrow [\hat{C}-C]\rightarrow N(0,\sigma_c^2(\frac{\tau}{c}))$ 이므로,
+
+계산오차는 분산이 $\sigma_c^2(\frac{tau}{c})$인 정규분포에 수렴함을 의미
+
+#### 편의
+
+경로의존성이 있는 시뮬레이션 중, 과거 연속적인 수치에 따라 pay-off가 정해진다면,
+
+이산오일러근사를 사용할 때 편의가 발생함.
+
+**e.g.** 룩백옵션의 경우 시뮬레이션이 항상 실제 pay-off를 과소평가 = (-) bias 존재
+
+이 때, 이산구간의 간격 m을 작게할 수록 편의는 감소함.
+
+또는, 기초자산이 비선형구조인 경우 등에도 편의가 발생할 수 있음.
+
+**e.g.** Compound 옵션의 경우 기초자산인 옵션 가격이 비선형이므로,
+
+Compound 옵션을 Analytic solution을 적용하여 푸는 경우 항상 실제 옵션보다 가격이 높음 = (+) bias 존재
+
+이 때, $T_1\sim T_2$의 $n_2$개의 경로를 추가로 생성하여 경로를 이중으로 구성한다면 bias 제거가 가능함.
+
+## Asian Option 평가 해볼 것
+
+

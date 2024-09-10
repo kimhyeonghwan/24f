@@ -1,10 +1,12 @@
-# 금융시장 리스크관리 1주차 {.unnumbered}
+# 금융시장 리스크관리 1~2주차 {.unnumbered}
 
 ## Lecture2 : How Traders Manage Their Risks?
 
 Greeks letters & Scenario analysis
 
-### Delta hedging ($\Delta=\frac{\partial P}{\partial S}$)
+### Delta hedging
+
+$\Delta=\frac{\partial P}{\partial S}$
 
 가장 기본적인 헷징방법으로, 파생상품과 같은 금융상품으로 구성된 포트폴리오에 대해
 
@@ -25,9 +27,9 @@ Greeks letters & Scenario analysis
 
 어떻게 6만불의 차익거래를 실현시킬지?
 
-1. 풋콜페리티 또는 시장에서 동일한 옵션을 24만불에 매수하여 실현
+1.  풋콜페리티 또는 시장에서 동일한 옵션을 24만불에 매수하여 실현
 
-2. 그러나, 옵션매수가 불가능한 경우 기초자산 주식을 이용한 델타헷징을 반복
+2.  그러나, 옵션매수가 불가능한 경우 기초자산 주식을 이용한 델타헷징을 반복
 
 즉, 옵션 매도포지션의 델타만큼 주식을 매수하고 매주 리밸런싱
 
@@ -56,3 +58,90 @@ Gamma ($\Gamma=\frac{\partial\Delta}{\partial S}=\frac{\partial^2P}{\partial S^2
 
 베가 로 그런거는 대충넘어갔음
 
+### Taylor Series Expansion
+
+테일러 전개는 다항전개식의 일종으로, 복잡한 함수를 다항함수를 이용하여 간단히 전개할 수 있어 근사식에 많이 활용
+
+$$f(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{1}{2}f''(x_0)(x-x_0)^2+\dotsm$$
+
+금융시장에서 이를 적용한다면? $f(x)$는 포트폴리오의 가격함수이며, $x$는 기초자산가격으로 대입 가능
+
+$\Rightarrow f(x)-f(x_0)=f'(x_0)(x-x_0)+\frac{1}{2}f''(x_0)(x-x_0)^2$
+
+$\Rightarrow \Delta f(x)=f'(x_0)\Delta x+\frac{1}{2}f''(x_0)\Delta x^2$
+
+기초자산의 변화($\Delta x$)에 따른 포트폴리오 가치변화($\Delta f$)는 델타(듀레이션) 및 감마(컨벡시티)로 근사 가능
+
+포트폴리오 $P$를 기초자산의 가격 및 시간에 따른 함수 $P(S,t)$라고 한다면, (변동성은 상수로 가정)
+
+$$\Delta P=\frac{\partial P}{\partial S}\Delta S+\frac{\partial P}{\partial t}\Delta t+\frac{1}{2}\frac{\partial^2P}{\partial S^2}\Delta S^2+\frac{1}{2}\frac{\partial^2P}{\partial t^2}\Delta t^2+\frac{\partial^2P}{\partial S\partial t}\Delta S\Delta t+\dotsm$$
+
+일반적으로 $\Delta t^2=0, \Delta S\Delta t=0$으로 가정하므로,
+
+$$\Rightarrow \Delta P\approx \frac{\partial P}{\partial S}\Delta S+\frac{\partial P}{\partial t}\Delta t+\frac{1}{2}\frac{\partial^2P}{\partial S^2}\Delta S^2$$
+
+즉, 포트폴리오의 가치변화는 델타, 세타, 감마로 표현되며 델타중립 포트폴리오를 구성했다면,
+
+$$\Delta P=\Theta \Delta t+\frac{1}{2}\Gamma \Delta S^2$$
+
+::: {.callout-note}
+아래로 볼록한 형태인 **옵션 매수는 positive gamma**,
+
+위로 볼록한 형태인 **옵션 매도는 negative gamma** (관리 어려움)
+:::
+
+만약 변동성이 변수라면?
+
+$\Delta P=\delta \Delta S+Vega\Delta\sigma+\Theta\Delta t+\frac{1}{2}\Gamma\Delta S^2$
+
+### Hedging in practice
+
+델타헷징은 보통 매일하고, 감마나 베가는 영향이 매우 크지는 않아서 모니터링하다가,
+
+일정 임계치를 넘어가면 헷지 시작(헷지도 어렵고 비용도 보다 많이 듬)
+
+특히, 만기가 임박한 ATM옵션은 감마와 베가가 매우 크므로, 주로 관리하게됨
+
+## Lecture3 : Volatility
+
+Standard approach to estimating Volatility
+
+$\sigma_n^2=\frac{1}{m-1}\sum_{i=1}^m(u_{n-i}-\bar{n})^2\;for\;u_i=\ln(\frac{S_i}{S_{i-1}})$
+
+Simplify, $\sigma_n^2=\frac{1}{m}\sum_{i=1}^mu_{n-i}^2\;for\;u_i=\frac{S_i-S_{i-1}}{S_{i-1}},\bar{u}=0$
+
+### Weighting Schemes
+
+$$\sigma_n^2=\sum_{i=1}^m\alpha_iu_{n-i}^2\;for\;\sum_i\alpha_i=1$
+
+EWMA(Exponentially Weighted Moving Average) : $\alpha_{i+1}=\lambda\alpha_i\;where\;0<\lambda<1$
+
+ARCH, GARCH 등등 많음
+
+### 최대우도법, Maximum Likelihood Method
+
+최대우도법이란, 우리에게 주어진 데이터가 있고, 이 데이터가 어떠한 분포를 따르는지 추정하기 위함.
+
+1. 주어진 데이터가 있고
+2. 어떤 분포를 따르는지 사전에 설정함
+3. 분포에 따라 추정이 필요한 파라미터 $\theta_n$이 생길 때,
+4. 주어진 데이터에 대한 확률밀도함수의 곱(독립된 결합밀도함수)을 최대화시키는 $\theta$를 찾는 것이 목표
+5. 즉, 확률을 최대화시키는 파라미터를 추정하여 추정분포를 결정함
+
+주가수익률의 관측치 $u_i$가 평균이 0인 정규분포를 따른다고 가정한다면?
+
+변동성 $\sigma$를 추정하기 위해 최대우도법을 사용할 수 있음.
+
+Maximize : $ML=\Pi_{i=1}^n[\frac{1}{\sqrt{2\pi\sigma^2}}e^{\frac{-u_i^2}{2\sigma}}]$
+
+$y=x$와 $y=\ln x$는 일대일대응관계가 성립하므로, log transform을 통해
+
+Same to maximize : $\ln ML=\sum_{i=1}^n[\ln(\frac{1}{\sqrt{2\pi\sigma^2}}e^{\frac{-u_i^2}{2\sigma^2}})]=n\ln(\frac{1}{\sqrt{2\pi\sigma^2}})-\frac{1}{2\sigma^2}\sum_{i=1}^nu_i^2$
+
+위 식을 $\sigma$에 대해 다시 정리하면, $n\ln(\frac{1}{\sqrt{2\pi}})-\frac{n}{2}\ln(\sigma^2)-\sum u_i^2\frac{1}{2\sigma^2}$
+
+$\sigma^2$에 대해 미분을 통해, $\ln ML_{\sigma^2}=-\frac{n}{2\sigma^2}+\frac{\sum u_i}{2(\sigma^2)^2}$
+
+미분계수가 0인 점이 ML 함수를 극대화 시키는 점이므로, $-\frac{n}{2\sigma^2}+\frac{\sum u_i}{2(\sigma^2)^2}=0$
+
+$\Rightarrow\;n\sigma^2=\sum u_i,\;\therefore\;\sigma^2=\frac{\sum u_i}{n}$

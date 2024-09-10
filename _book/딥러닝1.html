@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -195,7 +224,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./시뮬레이션1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">시뮬레이션방법론 1주차</span></a>
+ <span class="menu-text">시뮬레이션방법론 Ch1</span></a>
   </div>
 </li>
       </ul>
@@ -229,7 +258,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./수치해석1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">수치해석학 1주차</span></a>
+ <span class="menu-text">수치해석학 Ch1</span></a>
   </div>
 </li>
       </ul>
@@ -246,7 +275,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./리스크관리1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">금융시장 리스크관리 1주차</span></a>
+ <span class="menu-text">금융시장 리스크관리 1~2주차</span></a>
   </div>
 </li>
       </ul>
@@ -263,7 +292,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./미시1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">미시경제학 1주차</span></a>
+ <span class="menu-text">미시경제학 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment1</span></a>
   </div>
 </li>
       </ul>
@@ -291,7 +326,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#머신러닝-알고리즘의-구분" id="toc-머신러닝-알고리즘의-구분" class="nav-link active" data-scroll-target="#머신러닝-알고리즘의-구분">머신러닝 알고리즘의 구분</a>
+  <ul class="collapse">
+  <li><a href="#지도학습" id="toc-지도학습" class="nav-link" data-scroll-target="#지도학습">지도학습</a></li>
+  <li><a href="#비지도학습" id="toc-비지도학습" class="nav-link" data-scroll-target="#비지도학습">비지도학습</a></li>
+  <li><a href="#강화학습" id="toc-강화학습" class="nav-link" data-scroll-target="#강화학습">강화학습</a></li>
+  </ul></li>
+  <li><a href="#지도학습-알고리즘의-절차" id="toc-지도학습-알고리즘의-절차" class="nav-link" data-scroll-target="#지도학습-알고리즘의-절차">지도학습 알고리즘의 절차</a>
+  <ul class="collapse">
+  <li><a href="#경사하강법-gradient-descent-method" id="toc-경사하강법-gradient-descent-method" class="nav-link" data-scroll-target="#경사하강법-gradient-descent-method">경사하강법 (Gradient Descent Method)</a></li>
+  </ul></li>
+  <li><a href="#모델-평가-및-검증" id="toc-모델-평가-및-검증" class="nav-link" data-scroll-target="#모델-평가-및-검증">모델 평가 및 검증</a>
+  <ul class="collapse">
+  <li><a href="#자료의-구분" id="toc-자료의-구분" class="nav-link" data-scroll-target="#자료의-구분">자료의 구분</a></li>
+  <li><a href="#모델의-평가를-위한-지표" id="toc-모델의-평가를-위한-지표" class="nav-link" data-scroll-target="#모델의-평가를-위한-지표">모델의 평가를 위한 지표</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -315,10 +370,90 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>머신러닝 vs.&nbsp;딥러닝?</p>
+<p>암튼 머신러닝이란건 기계가 스스로 학습해서 문제를 해결한다는 의미.</p>
+<p>우리가 컴퓨터에게 적정한 모델을 입력하면, 해당 모델을 가지고 주어진 데이터를 반복계산하여 적절한 결과값을 도출.</p>
+<p>딥러닝은 머신러닝의 한 분류로, 적정한 모델을 인공신경망 기반의 모델을 사용한 것을 의미한다고 보면 됨.</p>
+<p>인공신경망이 뭔지는 아직 모름. 매우 복잡하고, 적절한 결과값 도출 과정을 해석하기 어렵고, 예측력은 매우 높음.</p>
+<p>학습데이터가 매우 많이 필요하고, 많은 계산시간, 모델 탐색시간, 하이퍼파라미터 조율시간 등이 필요함.</p>
+<p>오류에 대한 디버깅이나 해석도 어렵다고 함.</p>
+<section id="머신러닝-알고리즘의-구분" class="level2">
+<h2 class="anchored" data-anchor-id="머신러닝-알고리즘의-구분">머신러닝 알고리즘의 구분</h2>
+<section id="지도학습" class="level3">
+<h3 class="anchored" data-anchor-id="지도학습">지도학습</h3>
+<p>입력값에 대한 결과값이 주어진 경우,</p>
+<p>모델이 입력값과 결과값을 모두 알고 학습하여 새로운 입력값에 대한 적정 결과값 추정치를 제공하게 됨.</p>
+<p>결과값(label)이 숫자형이면 회귀(regression) 알고리즘, 범주형이면 분류(classification) 알고리즘으로 구분.</p>
+</section>
+<section id="비지도학습" class="level3">
+<h3 class="anchored" data-anchor-id="비지도학습">비지도학습</h3>
+<p>결과값이 없고, 주어진 입력값만으로 학습함.</p>
+<p>의미있는 패턴을 추출하는 것이 목적.</p>
+<p>군집화(행을 묶음) 및 차원축소(열을 묶어 열의 갯수를 감소시킴)에 주로 활용</p>
+</section>
+<section id="강화학습" class="level3">
+<h3 class="anchored" data-anchor-id="강화학습">강화학습</h3>
+<p>모델 자체가 어떠한 변화를 주도하는데,</p>
+<p>해당 변화에 따른 보상/패널티를 주는 환경을 구성함.</p>
+<p>모델은 이러한 변화에 따른 누적보상이 최대가 되도록하는 변화패턴을 학습함</p>
+</section>
+</section>
+<section id="지도학습-알고리즘의-절차" class="level2">
+<h2 class="anchored" data-anchor-id="지도학습-알고리즘의-절차">지도학습 알고리즘의 절차</h2>
+<ol type="1">
+<li><p>전처리 및 탐색</p></li>
+<li><p>적절한 모델 선택</p></li>
+<li><p>주어진 데이터로 모델 훈련</p></li>
+<li><p>새로운 데이터를 통해 결과값을 예측하여 모델의 성능을 평가</p></li>
+</ol>
+<section id="경사하강법-gradient-descent-method" class="level3">
+<h3 class="anchored" data-anchor-id="경사하강법-gradient-descent-method">경사하강법 (Gradient Descent Method)</h3>
+<p>다차원 선형회귀 모형에서 모델결과값과 실제결과값의 차이(MSE; Mean Square Error)를 최소화하는 방식</p>
+<p>MSE의 미분계수(Gradient)의 일정수준(학습률)만큼 선형회귀모형의 각 파라미터가 모두 감소하도록 지속 업데이트하면서,</p>
+<p>결과적으로 MSE의 Gradient가 0이 되면 학습이 종료되는 방식.</p>
+<p>MSE의 미분계수가 0이면 최솟값이고, 모델결과값의 오차가 최소가 되므로 가장 적정한 파라미터를 추론한 것으로 판단.</p>
+<section id="경사하강법-종류" class="level4">
+<h4 class="anchored" data-anchor-id="경사하강법-종류">경사하강법 종류</h4>
+<p>한번의 회귀계수 업데이트에 모든 훈련데이터를 사용하면 배치 경사하강법</p>
+<p>임의추출로 하나의 훈련데이터만 사용하면 확률 경사하강법(SGD)</p>
+<p>일부만 사용하면 미니 경사하강법.</p>
+<p>많이 사용할수록 규칙적으로 MSE가 감소하고 일관적으로 움직이나, 산출시간이 오래걸리고, 지역최소값에 갇힐 가능성이 높아짐.</p>
+</section>
+</section>
+</section>
+<section id="모델-평가-및-검증" class="level2">
+<h2 class="anchored" data-anchor-id="모델-평가-및-검증">모델 평가 및 검증</h2>
+<p>low bias - high vol</p>
+<p>high bias - low vol</p>
+<p>제대로 못들어서 정리 필요</p>
+<section id="자료의-구분" class="level3">
+<h3 class="anchored" data-anchor-id="자료의-구분">자료의 구분</h3>
+<p>일반적으로 전체 데이터를 임의로 3개로 나눔.</p>
+<p>훈련 데이터 / 검증 데이터 / 평가 데이터</p>
+<p>e.g.&nbsp;훈련데이터로 여러 h-para에 대해 모델 돌림</p>
+<p>검증데이터를 이용해 각 h-para별 성능 평가</p>
+<p>제일 좋은 h-para로 모델을 구성하여 훈련+검증데이터로 다시 훈련</p>
+<p>최종 모델을 평가데이터를 이용하여 평가</p>
+<hr>
+<p>딥러닝에서는 검증데이터가 다른 의미로도 활용됨.</p>
+<p>경사하강법 같은걸 복잡한 모델에 사용할 때, 파라미터 튜닝 과정에서 손실함수가 더이상 감소하지 않는다면?</p>
+<p>불필요한 훈련이 될 수 있어 파라미터 자체가 학습이 잘 되고 있는지 모니터링을 해야 함.</p>
+<p>이러한 모니터링에 검증 데이터가 활용됨.</p>
+</section>
+<section id="모델의-평가를-위한-지표" class="level3">
+<h3 class="anchored" data-anchor-id="모델의-평가를-위한-지표">모델의 평가를 위한 지표</h3>
+<section id="회귀모형-regression-model" class="level4">
+<h4 class="anchored" data-anchor-id="회귀모형-regression-model">회귀모형, Regression model</h4>
+<p>RMSE : <span class="math inline">\(\sqrt{MSE}\)</span></p>
+<p>MAE(mean absolute error) : <span class="math inline">\(\frac{1}{n}\sum_{i=1}^n|y_i-\hat{y}_i|\)</span></p>
+<p>R square(결정계수) : <span class="math inline">\(1-\frac{\sum_{i=1}^n(y_i-\hat{y}_i)^2}{\sum_{i=1}^n(y_i-\bar{y})^2}=1-\frac{SSE}{SST}(=\frac{SSR}{SST})\)</span></p>
 
 
 <!-- -->
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -788,12 +923,124 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./시뮬레이션1.html" class="pagination-link" aria-label="시뮬레이션방법론 1주차">
-        <span class="nav-page-text">시뮬레이션방법론 1주차</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./시뮬레이션1.html" class="pagination-link" aria-label="시뮬레이션방법론 Ch1">
+        <span class="nav-page-text">시뮬레이션방법론 Ch1</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 딥러닝 1주차 {.unnumbered}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 딥러닝 1주차 {.unnumbered}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>머신러닝 vs. 딥러닝?</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>암튼 머신러닝이란건 기계가 스스로 학습해서 문제를 해결한다는 의미.</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>우리가 컴퓨터에게 적정한 모델을 입력하면, 해당 모델을 가지고 주어진 데이터를 반복계산하여 적절한 결과값을 도출.</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>딥러닝은 머신러닝의 한 분류로, 적정한 모델을 인공신경망 기반의 모델을 사용한 것을 의미한다고 보면 됨.</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>인공신경망이 뭔지는 아직 모름. 매우 복잡하고, 적절한 결과값 도출 과정을 해석하기 어렵고, 예측력은 매우 높음.</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>학습데이터가 매우 많이 필요하고, 많은 계산시간, 모델 탐색시간, 하이퍼파라미터 조율시간 등이 필요함.</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>오류에 대한 디버깅이나 해석도 어렵다고 함.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 머신러닝 알고리즘의 구분</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### 지도학습</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>입력값에 대한 결과값이 주어진 경우, </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>모델이 입력값과 결과값을 모두 알고 학습하여 새로운 입력값에 대한 적정 결과값 추정치를 제공하게 됨.</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>결과값(label)이 숫자형이면 회귀(regression) 알고리즘, 범주형이면 분류(classification) 알고리즘으로 구분.</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### 비지도학습</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>결과값이 없고, 주어진 입력값만으로 학습함.</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>의미있는 패턴을 추출하는 것이 목적.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>군집화(행을 묶음) 및 차원축소(열을 묶어 열의 갯수를 감소시킴)에 주로 활용</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### 강화학습</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>모델 자체가 어떠한 변화를 주도하는데,</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>해당 변화에 따른 보상/패널티를 주는 환경을 구성함.</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>모델은 이러한 변화에 따른 누적보상이 최대가 되도록하는 변화패턴을 학습함</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## 지도학습 알고리즘의 절차</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>전처리 및 탐색</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>적절한 모델 선택</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>주어진 데이터로 모델 훈련</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>새로운 데이터를 통해 결과값을 예측하여 모델의 성능을 평가</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="fu">### 경사하강법 (Gradient Descent Method)</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>다차원 선형회귀 모형에서 모델결과값과 실제결과값의 차이(MSE; Mean Square Error)를 최소화하는 방식</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>MSE의 미분계수(Gradient)의 일정수준(학습률)만큼 선형회귀모형의 각 파라미터가 모두 감소하도록 지속 업데이트하면서,</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>결과적으로 MSE의 Gradient가 0이 되면 학습이 종료되는 방식.</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>MSE의 미분계수가 0이면 최솟값이고, 모델결과값의 오차가 최소가 되므로 가장 적정한 파라미터를 추론한 것으로 판단.</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 경사하강법 종류</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>한번의 회귀계수 업데이트에 모든 훈련데이터를 사용하면 배치 경사하강법</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>임의추출로 하나의 훈련데이터만 사용하면 확률 경사하강법(SGD)</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>일부만 사용하면 미니 경사하강법.</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>많이 사용할수록 규칙적으로 MSE가 감소하고 일관적으로 움직이나, 산출시간이 오래걸리고, 지역최소값에 갇힐 가능성이 높아짐.</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="fu">## 모델 평가 및 검증</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>low bias - high vol</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>high bias - low vol</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>제대로 못들어서 정리 필요</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="fu">### 자료의 구분</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>일반적으로 전체 데이터를 임의로 3개로 나눔.</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>훈련 데이터 / 검증 데이터 / 평가 데이터</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>e.g. 훈련데이터로 여러 h-para에 대해 모델 돌림</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>검증데이터를 이용해 각 h-para별 성능 평가</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>제일 좋은 h-para로 모델을 구성하여 훈련+검증데이터로 다시 훈련</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>최종 모델을 평가데이터를 이용하여 평가</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>----</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>딥러닝에서는 검증데이터가 다른 의미로도 활용됨.</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>경사하강법 같은걸 복잡한 모델에 사용할 때, 파라미터 튜닝 과정에서 손실함수가 더이상 감소하지 않는다면?</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>불필요한 훈련이 될 수 있어 파라미터 자체가 학습이 잘 되고 있는지 모니터링을 해야 함.</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>이러한 모니터링에 검증 데이터가 활용됨.</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a><span class="fu">### 모델의 평가를 위한 지표</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 회귀모형, Regression model</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>RMSE : $\sqrt{MSE}$</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>MAE(mean absolute error) : $\frac{1}{n}\sum_{i=1}^n|y_i-\hat{y}_i|$</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>R square(결정계수) : $1-\frac{\sum_{i=1}^n(y_i-\hat{y}_i)^2}{\sum_{i=1}^n(y_i-\bar{y})^2}=1-\frac{SSE}{SST}(=\frac{SSR}{SST})$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

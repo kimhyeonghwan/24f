@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>KAIST MFE, 2024 Fall - 미시경제학 1주차</title>
+<title>KAIST MFE, 2024 Fall - 미시경제학 Ch1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./글로벌회계1.html" rel="next">
+<link href="./미시hw1.html" rel="next">
 <link href="./리스크관리1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -115,7 +115,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./미시1.html">미시경제학(’24 가을)</a></li><li class="breadcrumb-item"><a href="./미시1.html">미시경제학 1주차</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./미시1.html">미시경제학(’24 가을)</a></li><li class="breadcrumb-item"><a href="./미시1.html">미시경제학 Ch1</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -195,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./시뮬레이션1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">시뮬레이션방법론 1주차</span></a>
+ <span class="menu-text">시뮬레이션방법론 Ch1</span></a>
   </div>
 </li>
       </ul>
@@ -229,7 +229,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./수치해석1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">수치해석학 1주차</span></a>
+ <span class="menu-text">수치해석학 Ch1</span></a>
   </div>
 </li>
       </ul>
@@ -263,7 +263,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./미시1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">미시경제학 1주차</span></a>
+ <span class="menu-text">미시경제학 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment1</span></a>
   </div>
 </li>
       </ul>
@@ -291,14 +297,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#law-of-demand" id="toc-law-of-demand" class="nav-link active" data-scroll-target="#law-of-demand">Law of demand</a>
+  <ul class="collapse">
+  <li><a href="#other-things" id="toc-other-things" class="nav-link" data-scroll-target="#other-things">Other things?</a></li>
+  </ul></li>
+  <li><a href="#law-of-supply" id="toc-law-of-supply" class="nav-link" data-scroll-target="#law-of-supply">Law of Supply</a>
+  <ul class="collapse">
+  <li><a href="#공급곡선의-이동" id="toc-공급곡선의-이동" class="nav-link" data-scroll-target="#공급곡선의-이동">공급곡선의 이동</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./미시1.html">미시경제학(’24 가을)</a></li><li class="breadcrumb-item"><a href="./미시1.html">미시경제학 1주차</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./미시1.html">미시경제학(’24 가을)</a></li><li class="breadcrumb-item"><a href="./미시1.html">미시경제학 Ch1</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">미시경제학 1주차</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">미시경제학 Ch1</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -315,10 +334,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>Demand, Supply, Elasticity</p>
+<section id="law-of-demand" class="level2">
+<h2 class="anchored" data-anchor-id="law-of-demand">Law of demand</h2>
+<p>가격이 상승하면 수요는 하락하고, 가격이 하락하면 수요는 증가한다</p>
+<p>when Other things equal(ceteris paribus)</p>
+<p>따라서, x축이 수요량이고 y축이 가격일 때 수요곡선은 우하향함</p>
+<section id="other-things" class="level3">
+<h3 class="anchored" data-anchor-id="other-things">Other things?</h3>
+<p>이는 수요곡선 자체를 변화시키는 모든 변수 일체를 의미함.</p>
+<ol type="1">
+<li>Income : normal goods vs.&nbsp;inferior goods</li>
+<li>Number of buyers</li>
+<li>Substitutes vs.&nbsp;Complements</li>
+<li>Tastes</li>
+</ol>
+<section id="income" class="level4">
+<h4 class="anchored" data-anchor-id="income">1. Income</h4>
+<p>일반적인 재화는 소득이 증가하면 수요가 증가함.</p>
+<p>즉, 수요곡선을 오른쪽으로 평행이동시킴 <strong><em>Normal Goods</em></strong></p>
+<p>그러나, 대중교통이나 감자같은 재화는 소득이 증가하면 오히려 수요가 감소할 수 있음.</p>
+<p>이 경우는 수요곡선을 왼쪽으로 평행이동시킴 <strong><em>Inferior Goods</em></strong></p>
+<p>이는 재화에 따라 고정되어있지 않으며,</p>
+<p>때로는 소득수준이 증가함에 따라 수요가 증가하는 Normal goods였다가 소득수준이 더 크게 증가하면 수요가 감소하는 Inferior goods가 되기도 함. (e.g.&nbsp;Hamburger)</p>
+</section>
+<section id="substitutes-vs.-complements" class="level4">
+<h4 class="anchored" data-anchor-id="substitutes-vs.-complements">2. Substitutes vs.&nbsp;Complements</h4>
+<p>대체제(e.g.&nbsp;맥도날드, 버거킹)는 대체관계에 있는 재화들로, 대체제의 수요가 감소하면 재화의 수요가 증가함.</p>
+<p>즉, 대체제의 가격상승은 재화의 수요곡선을 우측 평행이동시킴</p>
+<p>보완재(자동차, 기름)은 상호보완관계에 있는 재화로, 보완재의 수요가 증가하면 재화의 수요가 감소함. 보완재 가격상승은 수요곡선 좌측 평행이동</p>
+</section>
+<section id="이외의-수요곡선을-이동시키는건-매우-많을-수-있음" class="level4">
+<h4 class="anchored" data-anchor-id="이외의-수요곡선을-이동시키는건-매우-많을-수-있음">이외의 수요곡선을 이동시키는건 매우 많을 수 있음</h4>
+<p>중요한건, 특정재화의 수요에 영향을 미치는 방법은</p>
+<ol type="1">
+<li>다른 요소를 건드려서 수요곡선 자체를 이동시키거나</li>
+<li>재화의 가격을 건드려서 수요곡선 내에서 이동시키는거임</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="law-of-supply" class="level2">
+<h2 class="anchored" data-anchor-id="law-of-supply">Law of Supply</h2>
+<p>공급의 법칙</p>
+<p>똑같음. 가격이 올라가면 공급이 늘어나고 감소하면 공급도 감소함</p>
+<p>따라서 일반적으로 우상향하는 공급곡선이 나타남.</p>
+<p>언제? 다른 모든 것들이 동일할 때</p>
+<section id="공급곡선의-이동" class="level3">
+<h3 class="anchored" data-anchor-id="공급곡선의-이동">공급곡선의 이동</h3>
+<ol type="1">
+<li>생산가격 Input price</li>
+<li>Technology</li>
+<li>Number of sellers</li>
+</ol>
+<section id="input-price" class="level4">
+<h4 class="anchored" data-anchor-id="input-price">1. Input price</h4>
+<p>생산단가가 감소하면 공급은 증가함. 공급곡선 우측 이동</p>
+<p>생산단가 증가 - 공급량 감소 - 곡선 좌측 이동</p>
+</section>
+<section id="technology" class="level4">
+<h4 class="anchored" data-anchor-id="technology">2. Technology</h4>
+<p>기술수준이 상승하면 생산단가가 감소함. 공급곡선 우측이동.</p>
 
 
 <!-- -->
 
+</section>
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -788,12 +871,86 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./글로벌회계1.html" class="pagination-link" aria-label="글로벌 지속가능회계 1주차">
-        <span class="nav-page-text">글로벌 지속가능회계 1주차</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./미시hw1.html" class="pagination-link" aria-label="Microanalysis of financial economics Assignment1">
+        <span class="nav-page-text">Microanalysis of financial economics Assignment1</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 미시경제학 1주차 {.unnumbered}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 미시경제학 Ch1 {.unnumbered}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Demand, Supply, Elasticity</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Law of demand</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>가격이 상승하면 수요는 하락하고, 가격이 하락하면 수요는 증가한다</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>when Other things equal(ceteris paribus)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>따라서, x축이 수요량이고 y축이 가격일 때 수요곡선은 우하향함</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">### Other things?</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>이는 수요곡선 자체를 변화시키는 모든 변수 일체를 의미함.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Income : normal goods vs. inferior goods</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Number of buyers</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Substitutes vs. Complements</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Tastes</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1. Income</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>일반적인 재화는 소득이 증가하면 수요가 증가함.</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>즉, 수요곡선을 오른쪽으로 평행이동시킴 ***Normal Goods***</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>그러나, 대중교통이나 감자같은 재화는 소득이 증가하면 오히려 수요가 감소할 수 있음.</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>이 경우는 수요곡선을 왼쪽으로 평행이동시킴 ***Inferior Goods***</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>이는 재화에 따라 고정되어있지 않으며,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>때로는 소득수준이 증가함에 따라 수요가 증가하는 Normal goods였다가 소득수준이 더 크게 증가하면 수요가 감소하는 Inferior goods가 되기도 함. (e.g. Hamburger)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 2. Substitutes vs. Complements</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>대체제(e.g. 맥도날드, 버거킹)는 대체관계에 있는 재화들로, 대체제의 수요가 감소하면 재화의 수요가 증가함.</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>즉, 대체제의 가격상승은 재화의 수요곡선을 우측 평행이동시킴</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>보완재(자동차, 기름)은 상호보완관계에 있는 재화로, 보완재의 수요가 증가하면 재화의 수요가 감소함. 보완재 가격상승은 수요곡선 좌측 평행이동</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 이외의 수요곡선을 이동시키는건 매우 많을 수 있음</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>중요한건, 특정재화의 수요에 영향을 미치는 방법은</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>다른 요소를 건드려서 수요곡선 자체를 이동시키거나</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>재화의 가격을 건드려서 수요곡선 내에서 이동시키는거임</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## Law of Supply</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>공급의 법칙</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>똑같음. 가격이 올라가면 공급이 늘어나고 감소하면 공급도 감소함</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>따라서 일반적으로 우상향하는 공급곡선이 나타남.</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>언제? 다른 모든 것들이 동일할 때</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="fu">### 공급곡선의 이동</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>생산가격 Input price</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Technology</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Number of sellers</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 1. Input price</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>생산단가가 감소하면 공급은 증가함. 공급곡선 우측 이동</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>생산단가 증가 - 공급량 감소 - 곡선 좌측 이동</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 2. Technology</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>기술수준이 상승하면 생산단가가 감소함. 공급곡선 우측이동.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

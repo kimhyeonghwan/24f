@@ -1,4 +1,6 @@
-# 수치해석학 1주차 {.unnumbered}
+# 수치해석학 Ch1 {.unnumbered}
+
+금융 수치해석의 소개
 
 ## 강의 개요 : 금융수치해석의 필요성
 
@@ -42,3 +44,170 @@ a = 0.1
 
 print(a+a+a==0.3,a+a+a+a==0.4)
 ```
+
+### Rounding error 관련
+
+컴퓨터가 실수를 나타내는 방법은 일반적으로 $x=\pm n\times b^e$로 나타냄.
+
+여기서 $n$은 가수, $e$는 지수이며, 일반적으로 밑인 $b$는 2를 사용함.
+
+컴퓨터에서 많이 사용하는 float타입 실수는 32bit를 사용하여 실수를 표현하며,
+
+이는 $2^32$가지로 모든 실수를 표현하게됨을 의미함. (정수는 int타입으로 모두 표현가능)
+
+따라서 소수점에 따라 정확한 값을 나타내지 못하는 문제는 항상 존재.
+
+#### Precision of floating point arithmetic
+
+실수표현의 정밀도는 $float(1+\epsilon_{math})>1$이 되는 가장 작은 $\epsilon_{math}$를 의미
+
+```{python}
+e = 1
+while 1 + e > 1:
+    e = e/2
+e_math = 2 * e
+print(e_math)
+```
+
+내장함수 활용 가능. 파이썬에서는 기본적으로 64bit double타입을 사용함
+
+```{python}
+import numpy as np
+print(np.finfo(np.double).eps,
+      np.finfo(float).eps)
+```
+
+```{python}
+print(1+e, 1+e+e, 1+2*e, 1+1.0000001*e)
+```
+
+많이 쓰이는 double타입의 경우 64bit로 실수를 표현하는데,
+
+$x=\pm n\times 2^e$에서 부호($\pm$) 1자리, 가수($n$) 52자리, 지수 11자리($e$)를 의미
+
+## 계산오차
+
+절대오차 : $|{\hat{x}-x}|$
+
+상대오차 : $\frac{|{\hat{x}-x}|}{|x|}$
+
+결합오차 : $e_{comb}=\frac{|{\hat{x}-x}|}{|x|+1}$
+
+### 유한차분을 이용한 도함수의 근사
+
+$$f'(x)=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}$$
+
+컴퓨터로는 $h\rightarrow 0$을 정확히 표현할 수 없음.
+
+따라서, 적당히 작은 값으로 이를 대체하여 $f'(x)$를 근사해야함.
+
+1. Truncation error 최소화를 위해서는 h는 작을 수록 좋음
+2. 그러나, 너무 작은 값을 선택하면 rounding error가 발생하여 $x=x+h$ 될 가능성
+
+#### Taylor expansion
+
+$$f(x)=\sum_{k=0}^\infty \frac{f^{(k)}(x_0)}{k!}(x-x_0)^{k}=\sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^{k}+\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}$$
+
+이를 도함수에 적용하면,
+
+$$f(x+h)=f(x)+hf'(x)+\frac{h^2}{2}f''(x)+\frac{h^3}{3!}f'''(x)+\dotsm+\frac{h^n}{n!}f^{(n)}(x)+R_n(x+h)$$
+
+$n=1$을 적용하면,
+
+$\Rightarrow\;f(x+h)=f(x)+hf'(x)+\frac{h^2}{2}f''(\xi)\;for\;\xi\in[x,x+h]$
+
+$\Rightarrow\;f'(x)=\frac{f(x+h)-f(x)}{h}-\frac{h}{2}f''(\xi)\;(Forward\;Approximation)$
+
+$n=2$를 적용하고 forward - backward를 정리하면,
+
+$f'(x)=\frac{f(x+h)-f(x-h)}{h}-\frac{h^2}{3}f'''(\xi)\;(Central\;Difference\;Approximation)$
+
+::: {.callout, title="Central Difference Approximation"}
+$for\;n=2,$
+
+$(Forward)\;f(x+h)=f(x)+hf'(x)+\frac{h^2}{2}f''(x)+\frac{h^3}{3!}f'''(\xi_+),\;\xi\in[x,x+h]$
+
+$(Backward)\;f(x-h)=f(x)-hf'(x)+\frac{h^2}{2}f''(x)-\frac{h^3}{3!}f'''(\xi_-),\;\xi\in[x-h,x]$
+
+$f(x+h)-f(x-h)=2hf'(x)+\frac{h^2}{6}\{f'''(\xi_+)+f'''(\xi_-)\}$
+
+$\Rightarrow\;f'(x)=\frac{f(x+h)-f(x-h)}{h}-\frac{h^2}{3}f'''(\xi),\;\xi\in[x-h,x+h]$
+:::
+
+위의 식에서 볼 수 있는 것처럼, Central 방식에서는 truncation error의 order가 $h^2$이므로,
+
+다른 방식에 비해서 오차가 훨씬 줄어들게 됨
+
+유사한 방식으로 이계도함수와 편도함수를 유도하면,
+
+$f''(x)=\frac{f(x+h)+f(x-h)-2f(x)}{h^2}-\frac{h^2}{24}f^{(4)}(\xi)$
+
+$f_x(x,y)=\frac{f(x+h_x,y)-f(x-h_x,y)}{2h_x}+trunc.\;error$
+
+### 총오차 및 최적의 h 산출
+
+Forward difference approximation을 사용하고, $|f''(x)|<=M$이라고 하면,
+
+$|f_h'(x)-f'(x)|=\frac{h}{2}|f''(x)|<=\frac{h}{2}M\;(trunc.\;error)$
+
+유인물 참조
+
+총오차 최소화를 위한 $h^*$ 산출이 목표
+
+### 유한차분을 이용한 도함수 근사 예시
+
+$f(x)=cos(x^x)-sin(e^x)$
+
+***함수 및 도함수(analytic form) 정의 및 도식화***
+
+```{python}
+import numpy as np 
+import matplotlib.pyplot as plt 
+def fun(x):
+    return np.cos(x**x) - np.sin(np.exp(x))
+
+def fprime(x):
+    return -np.sin(x**x)*(x**x)*(np.log(x)+1)  - np.cos(np.exp(x))*np.exp(x)
+
+x = np.linspace(0.5,2.5,101)
+y = fun(x)
+plt.plot(x,y,'-')
+```
+
+***미분계수 산출***
+
+```{python}
+x = 1.5
+d = fprime(x)
+print("derivative = ", d)
+```
+
+***forward 및 central difference approx. 산출 및 비교, 총오차를 log scale로 표현***
+
+trunc. error는 h가 작아질수록 감소하지만 특정구간 이후에는 rounding error가 발생하므로
+
+총오차는 항상 감소하지 않게 됨.
+
+최적 $h^*$를 찾는 것이 매우 중요함
+
+```{python}
+p = np.linspace(1,16,151)
+h = 10**(-p)
+
+def forward_difference(x,h):
+    return (fun(x+h)-fun(x)) / h
+
+def central_difference(x,h):
+    return (fun(x+h)-fun(x-h)) / (2*h)
+
+fd = forward_difference(x, h)
+cd = central_difference(x, h)
+print("forward = ", fd)
+print("central = ", cd)
+
+fd_error = np.log(np.abs(fd-d)/np.abs(d))
+cd_error = np.log(np.abs(cd-d)/np.abs(d))
+plt.plot(p,fd_error, p, cd_error)
+plt.legend(['forward difference', 'central difference'])
+```
+

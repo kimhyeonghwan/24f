@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>KAIST MFE, 2024 Fall - 수치해석학 1주차</title>
+<title>KAIST MFE, 2024 Fall - 수치해석학 Ch1</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -144,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./수치해석1.html">수치해석학(’24 가을)</a></li><li class="breadcrumb-item"><a href="./수치해석1.html">수치해석학 1주차</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./수치해석1.html">수치해석학(’24 가을)</a></li><li class="breadcrumb-item"><a href="./수치해석1.html">수치해석학 Ch1</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -224,7 +224,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./시뮬레이션1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">시뮬레이션방법론 1주차</span></a>
+ <span class="menu-text">시뮬레이션방법론 Ch1</span></a>
   </div>
 </li>
       </ul>
@@ -258,7 +258,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./수치해석1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">수치해석학 1주차</span></a>
+ <span class="menu-text">수치해석학 Ch1</span></a>
   </div>
 </li>
       </ul>
@@ -292,7 +292,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./미시1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">미시경제학 1주차</span></a>
+ <span class="menu-text">미시경제학 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment1</span></a>
   </div>
 </li>
       </ul>
@@ -329,16 +335,25 @@ window.Quarto = {
   <li><a href="#파생상품-평가" id="toc-파생상품-평가" class="nav-link" data-scroll-target="#파생상품-평가">파생상품 평가</a></li>
   <li><a href="#최적화-방법론" id="toc-최적화-방법론" class="nav-link" data-scroll-target="#최적화-방법론">최적화 방법론</a></li>
   </ul></li>
-  <li><a href="#컴퓨터-연산에-대한-이해" id="toc-컴퓨터-연산에-대한-이해" class="nav-link" data-scroll-target="#컴퓨터-연산에-대한-이해">컴퓨터 연산에 대한 이해</a></li>
+  <li><a href="#컴퓨터-연산에-대한-이해" id="toc-컴퓨터-연산에-대한-이해" class="nav-link" data-scroll-target="#컴퓨터-연산에-대한-이해">컴퓨터 연산에 대한 이해</a>
+  <ul class="collapse">
+  <li><a href="#rounding-error-관련" id="toc-rounding-error-관련" class="nav-link" data-scroll-target="#rounding-error-관련">Rounding error 관련</a></li>
+  </ul></li>
+  <li><a href="#계산오차" id="toc-계산오차" class="nav-link" data-scroll-target="#계산오차">계산오차</a>
+  <ul class="collapse">
+  <li><a href="#유한차분을-이용한-도함수의-근사" id="toc-유한차분을-이용한-도함수의-근사" class="nav-link" data-scroll-target="#유한차분을-이용한-도함수의-근사">유한차분을 이용한 도함수의 근사</a></li>
+  <li><a href="#총오차-및-최적의-h-산출" id="toc-총오차-및-최적의-h-산출" class="nav-link" data-scroll-target="#총오차-및-최적의-h-산출">총오차 및 최적의 h 산출</a></li>
+  <li><a href="#유한차분을-이용한-도함수-근사-예시" id="toc-유한차분을-이용한-도함수-근사-예시" class="nav-link" data-scroll-target="#유한차분을-이용한-도함수-근사-예시">유한차분을 이용한 도함수 근사 예시</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./수치해석1.html">수치해석학(’24 가을)</a></li><li class="breadcrumb-item"><a href="./수치해석1.html">수치해석학 1주차</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./수치해석1.html">수치해석학(’24 가을)</a></li><li class="breadcrumb-item"><a href="./수치해석1.html">수치해석학 Ch1</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">수치해석학 1주차</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">수치해석학 Ch1</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -355,6 +370,7 @@ window.Quarto = {
 </header>
 
 
+<p>금융 수치해석의 소개</p>
 <section id="강의-개요-금융수치해석의-필요성" class="level2">
 <h2 class="anchored" data-anchor-id="강의-개요-금융수치해석의-필요성">강의 개요 : 금융수치해석의 필요성</h2>
 <p>주로 파생상품 평가와 최적화 방법론에 대해서 다룰 예정</p>
@@ -385,7 +401,7 @@ window.Quarto = {
 <li><p>Truncation error : 연속적인 수학적인 모델을 이산화하면서 발생하는 오차(e.g.&nbsp;미분계수)</p></li>
 <li><p>Rounding error : 컴퓨터 시스템상 실수(real number)를 정확히 표현할 수 없는 데에서 기인(2진법 vs.&nbsp;10진법)</p></li>
 </ol>
-<div id="7403a5d4" class="cell" data-execution_count="1">
+<div id="164fd1d1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">0.1</span></span>
@@ -395,10 +411,212 @@ window.Quarto = {
 <pre><code>False True</code></pre>
 </div>
 </div>
+<section id="rounding-error-관련" class="level3">
+<h3 class="anchored" data-anchor-id="rounding-error-관련">Rounding error 관련</h3>
+<p>컴퓨터가 실수를 나타내는 방법은 일반적으로 <span class="math inline">\(x=\pm n\times b^e\)</span>로 나타냄.</p>
+<p>여기서 <span class="math inline">\(n\)</span>은 가수, <span class="math inline">\(e\)</span>는 지수이며, 일반적으로 밑인 <span class="math inline">\(b\)</span>는 2를 사용함.</p>
+<p>컴퓨터에서 많이 사용하는 float타입 실수는 32bit를 사용하여 실수를 표현하며,</p>
+<p>이는 <span class="math inline">\(2^32\)</span>가지로 모든 실수를 표현하게됨을 의미함. (정수는 int타입으로 모두 표현가능)</p>
+<p>따라서 소수점에 따라 정확한 값을 나타내지 못하는 문제는 항상 존재.</p>
+<section id="precision-of-floating-point-arithmetic" class="level4">
+<h4 class="anchored" data-anchor-id="precision-of-floating-point-arithmetic">Precision of floating point arithmetic</h4>
+<p>실수표현의 정밀도는 <span class="math inline">\(float(1+\epsilon_{math})&gt;1\)</span>이 되는 가장 작은 <span class="math inline">\(\epsilon_{math}\)</span>를 의미</p>
+<div id="0f127c0f" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="dv">1</span> <span class="op">+</span> e <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    e <span class="op">=</span> e<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>e_math <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> e</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e_math)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2.220446049250313e-16</code></pre>
+</div>
+</div>
+<p>내장함수 활용 가능. 파이썬에서는 기본적으로 64bit double타입을 사용함</p>
+<div id="45dafc56" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.finfo(np.double).eps,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>      np.finfo(<span class="bu">float</span>).eps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>2.220446049250313e-16 2.220446049250313e-16</code></pre>
+</div>
+</div>
+<div id="108eb29f" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span><span class="op">+</span>e, <span class="dv">1</span><span class="op">+</span>e<span class="op">+</span>e, <span class="dv">1</span><span class="op">+</span><span class="dv">2</span><span class="op">*</span>e, <span class="dv">1</span><span class="op">+</span><span class="fl">1.0000001</span><span class="op">*</span>e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>1.0 1.0 1.0000000000000002 1.0000000000000002</code></pre>
+</div>
+</div>
+<p>많이 쓰이는 double타입의 경우 64bit로 실수를 표현하는데,</p>
+<p><span class="math inline">\(x=\pm n\times 2^e\)</span>에서 부호(<span class="math inline">\(\pm\)</span>) 1자리, 가수(<span class="math inline">\(n\)</span>) 52자리, 지수 11자리(<span class="math inline">\(e\)</span>)를 의미</p>
+</section>
+</section>
+</section>
+<section id="계산오차" class="level2">
+<h2 class="anchored" data-anchor-id="계산오차">계산오차</h2>
+<p>절대오차 : <span class="math inline">\(|{\hat{x}-x}|\)</span></p>
+<p>상대오차 : <span class="math inline">\(\frac{|{\hat{x}-x}|}{|x|}\)</span></p>
+<p>결합오차 : <span class="math inline">\(e_{comb}=\frac{|{\hat{x}-x}|}{|x|+1}\)</span></p>
+<section id="유한차분을-이용한-도함수의-근사" class="level3">
+<h3 class="anchored" data-anchor-id="유한차분을-이용한-도함수의-근사">유한차분을 이용한 도함수의 근사</h3>
+<p><span class="math display">\[f'(x)=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}\]</span></p>
+<p>컴퓨터로는 <span class="math inline">\(h\rightarrow 0\)</span>을 정확히 표현할 수 없음.</p>
+<p>따라서, 적당히 작은 값으로 이를 대체하여 <span class="math inline">\(f'(x)\)</span>를 근사해야함.</p>
+<ol type="1">
+<li>Truncation error 최소화를 위해서는 h는 작을 수록 좋음</li>
+<li>그러나, 너무 작은 값을 선택하면 rounding error가 발생하여 <span class="math inline">\(x=x+h\)</span> 될 가능성</li>
+</ol>
+<section id="taylor-expansion" class="level4">
+<h4 class="anchored" data-anchor-id="taylor-expansion">Taylor expansion</h4>
+<p><span class="math display">\[f(x)=\sum_{k=0}^\infty \frac{f^{(k)}(x_0)}{k!}(x-x_0)^{k}=\sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^{k}+\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}\]</span></p>
+<p>이를 도함수에 적용하면,</p>
+<p><span class="math display">\[f(x+h)=f(x)+hf'(x)+\frac{h^2}{2}f''(x)+\frac{h^3}{3!}f'''(x)+\dotsm+\frac{h^n}{n!}f^{(n)}(x)+R_n(x+h)\]</span></p>
+<p><span class="math inline">\(n=1\)</span>을 적용하면,</p>
+<p><span class="math inline">\(\Rightarrow\;f(x+h)=f(x)+hf'(x)+\frac{h^2}{2}f''(\xi)\;for\;\xi\in[x,x+h]\)</span></p>
+<p><span class="math inline">\(\Rightarrow\;f'(x)=\frac{f(x+h)-f(x)}{h}-\frac{h}{2}f''(\xi)\;(Forward\;Approximation)\)</span></p>
+<p><span class="math inline">\(n=2\)</span>를 적용하고 forward - backward를 정리하면,</p>
+<p><span class="math inline">\(f'(x)=\frac{f(x+h)-f(x-h)}{h}-\frac{h^2}{3}f'''(\xi)\;(Central\;Difference\;Approximation)\)</span></p>
+<p>::: {.callout, title=“Central Difference Approximation”} <span class="math inline">\(for\;n=2,\)</span></p>
+<p><span class="math inline">\((Forward)\;f(x+h)=f(x)+hf'(x)+\frac{h^2}{2}f''(x)+\frac{h^3}{3!}f'''(\xi_+),\;\xi\in[x,x+h]\)</span></p>
+<p><span class="math inline">\((Backward)\;f(x-h)=f(x)-hf'(x)+\frac{h^2}{2}f''(x)-\frac{h^3}{3!}f'''(\xi_-),\;\xi\in[x-h,x]\)</span></p>
+<p><span class="math inline">\(f(x+h)-f(x-h)=2hf'(x)+\frac{h^2}{6}\{f'''(\xi_+)+f'''(\xi_-)\}\)</span></p>
+<p><span class="math inline">\(\Rightarrow\;f'(x)=\frac{f(x+h)-f(x-h)}{h}-\frac{h^2}{3}f'''(\xi),\;\xi\in[x-h,x+h]\)</span> :::</p>
+<p>위의 식에서 볼 수 있는 것처럼, Central 방식에서는 truncation error의 order가 <span class="math inline">\(h^2\)</span>이므로,</p>
+<p>다른 방식에 비해서 오차가 훨씬 줄어들게 됨</p>
+<p>유사한 방식으로 이계도함수와 편도함수를 유도하면,</p>
+<p><span class="math inline">\(f''(x)=\frac{f(x+h)+f(x-h)-2f(x)}{h^2}-\frac{h^2}{24}f^{(4)}(\xi)\)</span></p>
+<p><span class="math inline">\(f_x(x,y)=\frac{f(x+h_x,y)-f(x-h_x,y)}{2h_x}+trunc.\;error\)</span></p>
+</section>
+</section>
+<section id="총오차-및-최적의-h-산출" class="level3">
+<h3 class="anchored" data-anchor-id="총오차-및-최적의-h-산출">총오차 및 최적의 h 산출</h3>
+<p>Forward difference approximation을 사용하고, <span class="math inline">\(|f''(x)|&lt;=M\)</span>이라고 하면,</p>
+<p><span class="math inline">\(|f_h'(x)-f'(x)|=\frac{h}{2}|f''(x)|&lt;=\frac{h}{2}M\;(trunc.\;error)\)</span></p>
+<p>유인물 참조</p>
+<p>총오차 최소화를 위한 <span class="math inline">\(h^*\)</span> 산출이 목표</p>
+</section>
+<section id="유한차분을-이용한-도함수-근사-예시" class="level3">
+<h3 class="anchored" data-anchor-id="유한차분을-이용한-도함수-근사-예시">유한차분을 이용한 도함수 근사 예시</h3>
+<p><span class="math inline">\(f(x)=cos(x^x)-sin(e^x)\)</span></p>
+<p><strong><em>함수 및 도함수(analytic form) 정의 및 도식화</em></strong></p>
+<div id="9940d63f" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fun(x):</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.cos(x<span class="op">**</span>x) <span class="op">-</span> np.sin(np.exp(x))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fprime(x):</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.sin(x<span class="op">**</span>x)<span class="op">*</span>(x<span class="op">**</span>x)<span class="op">*</span>(np.log(x)<span class="op">+</span><span class="dv">1</span>)  <span class="op">-</span> np.cos(np.exp(x))<span class="op">*</span>np.exp(x)</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="fl">0.5</span>,<span class="fl">2.5</span>,<span class="dv">101</span>)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> fun(x)</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y,<span class="st">'-'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="수치해석1_files/figure-html/cell-6-output-1.png" width="582" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong><em>미분계수 산출</em></strong></p>
+<div id="97bc42c6" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> fprime(x)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"derivative = "</span>, d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>derivative =  -1.466199173237208</code></pre>
+</div>
+</div>
+<p><strong><em>forward 및 central difference approx. 산출 및 비교, 총오차를 log scale로 표현</em></strong></p>
+<p>trunc. error는 h가 작아질수록 감소하지만 특정구간 이후에는 rounding error가 발생하므로</p>
+<p>총오차는 항상 감소하지 않게 됨.</p>
+<p>최적 <span class="math inline">\(h^*\)</span>를 찾는 것이 매우 중요함</p>
+<div id="778135d7" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.linspace(<span class="dv">1</span>,<span class="dv">16</span>,<span class="dv">151</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>p)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> forward_difference(x,h):</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (fun(x<span class="op">+</span>h)<span class="op">-</span>fun(x)) <span class="op">/</span> h</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> central_difference(x,h):</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (fun(x<span class="op">+</span>h)<span class="op">-</span>fun(x<span class="op">-</span>h)) <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>h)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>fd <span class="op">=</span> forward_difference(x, h)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>cd <span class="op">=</span> central_difference(x, h)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"forward = "</span>, fd)</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"central = "</span>, cd)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>fd_error <span class="op">=</span> np.log(np.<span class="bu">abs</span>(fd<span class="op">-</span>d)<span class="op">/</span>np.<span class="bu">abs</span>(d))</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>cd_error <span class="op">=</span> np.log(np.<span class="bu">abs</span>(cd<span class="op">-</span>d)<span class="op">/</span>np.<span class="bu">abs</span>(d))</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>plt.plot(p,fd_error, p, cd_error)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">'forward difference'</span>, <span class="st">'central difference'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>forward =  [-2.62212289 -2.37366424 -2.17930621 -2.02733993 -1.90838758 -1.81511559
+ -1.74184228 -1.68417626 -1.63872005 -1.60283855 -1.57448171 -1.55204964
+ -1.53429022 -1.52022092 -1.50906909 -1.50022597 -1.49321118 -1.48764519
+ -1.48322779 -1.47972134 -1.47693759 -1.47472735 -1.4729723  -1.4715786
+ -1.47047179 -1.46959277 -1.46889464 -1.46834015 -1.46789975 -1.46754995
+ -1.4672721  -1.46705142 -1.46687612 -1.46673689 -1.46662629 -1.46653844
+ -1.46646866 -1.46641323 -1.46636921 -1.46633424 -1.46630646 -1.46628439
+ -1.46626686 -1.46625294 -1.46624188 -1.4662331  -1.46622612 -1.46622058
+ -1.46621618 -1.46621268 -1.4662099  -1.4662077  -1.46620594 -1.46620455
+ -1.46620344 -1.46620257 -1.46620187 -1.46620131 -1.46620087 -1.46620053
+ -1.46620025 -1.46620002 -1.46619985 -1.46619971 -1.46619959 -1.46619951
+ -1.46619944 -1.46619939 -1.46619934 -1.46619931 -1.46619927 -1.46619923
+ -1.46619922 -1.46619918 -1.46619921 -1.46619915 -1.46619915 -1.46619919
+ -1.46619909 -1.46619907 -1.46619916 -1.46619915 -1.46619876 -1.46619938
+ -1.46619893 -1.46619919 -1.46619932 -1.46619869 -1.46619769 -1.4662003
+ -1.46619716 -1.46619985 -1.46619876 -1.46620071 -1.46619865 -1.46619427
+ -1.46619269 -1.46620314 -1.46618158 -1.46619854 -1.46618273 -1.46617469
+ -1.46619173 -1.46614311 -1.46615961 -1.46626449 -1.46620595 -1.46619201
+ -1.46615356 -1.46621617 -1.46616053 -1.46617469 -1.46608615 -1.46578868
+ -1.46632693 -1.46612406 -1.46518938 -1.46619201 -1.46545305 -1.46568705
+ -1.46438417 -1.46757238 -1.46221506 -1.46202287 -1.46130718 -1.46050672
+ -1.45413969 -1.46897416 -1.45004198 -1.46392328 -1.44328993 -1.4535955
+ -1.40766793 -1.46202287 -1.39437708 -1.40433339 -1.32596324 -1.44671698
+ -1.40100674 -1.41101039 -1.66533454 -1.39768798 -1.05575095 -0.88607446
+ -1.11550166 -0.70216669 -0.88397549 -1.11285921 -1.40100674 -1.76376299
+  0.        ]
+central =  [-1.5635526  -1.52856423 -1.50592274 -1.49141188 -1.48216656 -1.4762975
+ -1.47258018 -1.47022905 -1.46874334 -1.46780503 -1.46721263 -1.46683872
+ -1.46660274 -1.46645382 -1.46635985 -1.46630056 -1.46626314 -1.46623954
+ -1.46622464 -1.46621524 -1.46620931 -1.46620557 -1.46620321 -1.46620172
+ -1.46620078 -1.46620019 -1.46619981 -1.46619958 -1.46619943 -1.46619933
+ -1.46619927 -1.46619924 -1.46619921 -1.4661992  -1.46619919 -1.46619918
+ -1.46619918 -1.46619918 -1.46619918 -1.46619917 -1.46619917 -1.46619917
+ -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917
+ -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917
+ -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917
+ -1.46619918 -1.46619917 -1.46619917 -1.46619917 -1.46619917 -1.46619917
+ -1.46619917 -1.46619917 -1.46619918 -1.46619918 -1.46619917 -1.46619916
+ -1.46619918 -1.46619915 -1.46619918 -1.46619915 -1.46619923 -1.46619922
+ -1.46619909 -1.46619924 -1.46619938 -1.46619908 -1.46619894 -1.46619938
+ -1.46619879 -1.46619919 -1.4661991  -1.46619925 -1.46619804 -1.46620118
+ -1.46619883 -1.46620125 -1.46619876 -1.46620071 -1.46620423 -1.46619603
+ -1.4661949  -1.46620592 -1.46619208 -1.46620736 -1.46619383 -1.46617469
+ -1.46620932 -1.46616527 -1.4661875  -1.46626449 -1.46622805 -1.46619201
+ -1.46629366 -1.46630436 -1.46638257 -1.46624457 -1.46626211 -1.46612096
+ -1.46632693 -1.4662996  -1.46585236 -1.46647023 -1.46615356 -1.46612799
+ -1.46493928 -1.46827122 -1.46485444 -1.46645324 -1.46409593 -1.46401756
+ -1.4607695  -1.47732061 -1.46054953 -1.46392328 -1.45439216 -1.46757238
+ -1.44285963 -1.50632659 -1.45015216 -1.43944172 -1.41436079 -1.50235994
+ -1.40100674 -1.58738669 -1.72084569 -1.67722557 -1.40766793 -1.10759308
+ -1.39437708 -1.05325004 -1.32596324 -1.66928882 -2.10151011 -2.64564449
+  0.        ]</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="수치해석1_files/figure-html/cell-8-output-2.png" width="577" height="411" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 <!-- -->
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -874,50 +1092,218 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 수치해석학 1주차 {.unnumbered}</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## 강의 개요 : 금융수치해석의 필요성</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>주로 파생상품 평가와 최적화 방법론에 대해서 다룰 예정</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">### 파생상품 평가</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>$ds=rSdt+\sigma SdW^Q$</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>기하학적 브라운운동을 따르는 기초자산에 대한 파생상품의 가격 $f(t,S)$는 아래의 PDE로 표현됨</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>$f_t+\frac{1}{2}\sigma^2S^2f_{ss}+rSf_s-rf=0$</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>이 블랙숄즈 미분방정식을 컴퓨터로 풀어내는 것이 주요 내용임</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>여기에는 반드시 연속적인 수식을 이산화하는 과정이 필요하며, 다양한 수치해석적인 기법이 활용됨</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>대표적으로 유한차분법(Finite Difference Method, FDM)이 존재</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="fu">### 최적화 방법론</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>이외의 다양한 최적화방법론은 시간이 여유롭다면 이것저것 다룰 예정</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Minimum Variance Portfolio : Single-period에 대해 Sharpe ratio 극대화 등</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Stochastic programming : Multi-period에 대해 Minimum var 문제 해결 등</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Non-convex optimization : 미분을 통해 극값을 산출할 수 없는 경우의 최적화</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Parameter estimation 또는 Model calibration : $min_{\theta,\sigma,k}\sum(model\;price - market\;price)^2$와 같은 문제 등</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="fu">## 컴퓨터 연산에 대한 이해</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>수치해석기법을 사용할 때 필연적으로 오차(error) 발생</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Truncation error : 연속적인 수학적인 모델을 이산화하면서 발생하는 오차(e.g. 미분계수)</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Rounding error : 컴퓨터 시스템상 실수(real number)를 정확히 표현할 수 없는 데에서 기인(2진법 vs. 10진법)</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">0.1</span></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">+</span>a<span class="op">+</span>a<span class="op">==</span><span class="fl">0.3</span>,a<span class="op">+</span>a<span class="op">+</span>a<span class="op">+</span>a<span class="op">==</span><span class="fl">0.4</span>)</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<div class="sourceCode" id="cb14" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 수치해석학 Ch1 {.unnumbered}</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>금융 수치해석의 소개</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## 강의 개요 : 금융수치해석의 필요성</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>주로 파생상품 평가와 최적화 방법론에 대해서 다룰 예정</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">### 파생상품 평가</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>$ds=rSdt+\sigma SdW^Q$</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>기하학적 브라운운동을 따르는 기초자산에 대한 파생상품의 가격 $f(t,S)$는 아래의 PDE로 표현됨</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>$f_t+\frac{1}{2}\sigma^2S^2f_{ss}+rSf_s-rf=0$</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>이 블랙숄즈 미분방정식을 컴퓨터로 풀어내는 것이 주요 내용임</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>여기에는 반드시 연속적인 수식을 이산화하는 과정이 필요하며, 다양한 수치해석적인 기법이 활용됨</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>대표적으로 유한차분법(Finite Difference Method, FDM)이 존재</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a><span class="fu">### 최적화 방법론</span></span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>이외의 다양한 최적화방법론은 시간이 여유롭다면 이것저것 다룰 예정</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Minimum Variance Portfolio : Single-period에 대해 Sharpe ratio 극대화 등</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Stochastic programming : Multi-period에 대해 Minimum var 문제 해결 등</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Non-convex optimization : 미분을 통해 극값을 산출할 수 없는 경우의 최적화</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Parameter estimation 또는 Model calibration : $min_{\theta,\sigma,k}\sum(model\;price - market\;price)^2$와 같은 문제 등</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## 컴퓨터 연산에 대한 이해</span></span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>수치해석기법을 사용할 때 필연적으로 오차(error) 발생</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Truncation error : 연속적인 수학적인 모델을 이산화하면서 발생하는 오차(e.g. 미분계수)</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Rounding error : 컴퓨터 시스템상 실수(real number)를 정확히 표현할 수 없는 데에서 기인(2진법 vs. 10진법)</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">0.1</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(a<span class="op">+</span>a<span class="op">+</span>a<span class="op">==</span><span class="fl">0.3</span>,a<span class="op">+</span>a<span class="op">+</span>a<span class="op">+</span>a<span class="op">==</span><span class="fl">0.4</span>)</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### Rounding error 관련</span></span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>컴퓨터가 실수를 나타내는 방법은 일반적으로 $x=\pm n\times b^e$로 나타냄.</span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>여기서 $n$은 가수, $e$는 지수이며, 일반적으로 밑인 $b$는 2를 사용함.</span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>컴퓨터에서 많이 사용하는 float타입 실수는 32bit를 사용하여 실수를 표현하며,</span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>이는 $2^32$가지로 모든 실수를 표현하게됨을 의미함. (정수는 int타입으로 모두 표현가능)</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a>따라서 소수점에 따라 정확한 값을 나타내지 못하는 문제는 항상 존재.</span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Precision of floating point arithmetic</span></span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>실수표현의 정밀도는 $float(1+\epsilon_{math})&gt;1$이 되는 가장 작은 $\epsilon_{math}$를 의미</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-68"><a href="#cb14-68" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-69"><a href="#cb14-69" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb14-70"><a href="#cb14-70" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="dv">1</span> <span class="op">+</span> e <span class="op">&gt;</span> <span class="dv">1</span>:</span>
+<span id="cb14-71"><a href="#cb14-71" aria-hidden="true" tabindex="-1"></a>    e <span class="op">=</span> e<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb14-72"><a href="#cb14-72" aria-hidden="true" tabindex="-1"></a>e_math <span class="op">=</span> <span class="dv">2</span> <span class="op">*</span> e</span>
+<span id="cb14-73"><a href="#cb14-73" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(e_math)</span>
+<span id="cb14-74"><a href="#cb14-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-75"><a href="#cb14-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-76"><a href="#cb14-76" aria-hidden="true" tabindex="-1"></a>내장함수 활용 가능. 파이썬에서는 기본적으로 64bit double타입을 사용함</span>
+<span id="cb14-77"><a href="#cb14-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-80"><a href="#cb14-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-81"><a href="#cb14-81" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb14-82"><a href="#cb14-82" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.finfo(np.double).eps,</span>
+<span id="cb14-83"><a href="#cb14-83" aria-hidden="true" tabindex="-1"></a>      np.finfo(<span class="bu">float</span>).eps)</span>
+<span id="cb14-84"><a href="#cb14-84" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-85"><a href="#cb14-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-88"><a href="#cb14-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-89"><a href="#cb14-89" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span><span class="op">+</span>e, <span class="dv">1</span><span class="op">+</span>e<span class="op">+</span>e, <span class="dv">1</span><span class="op">+</span><span class="dv">2</span><span class="op">*</span>e, <span class="dv">1</span><span class="op">+</span><span class="fl">1.0000001</span><span class="op">*</span>e)</span>
+<span id="cb14-90"><a href="#cb14-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-91"><a href="#cb14-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-92"><a href="#cb14-92" aria-hidden="true" tabindex="-1"></a>많이 쓰이는 double타입의 경우 64bit로 실수를 표현하는데,</span>
+<span id="cb14-93"><a href="#cb14-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-94"><a href="#cb14-94" aria-hidden="true" tabindex="-1"></a>$x=\pm n\times 2^e$에서 부호($\pm$) 1자리, 가수($n$) 52자리, 지수 11자리($e$)를 의미</span>
+<span id="cb14-95"><a href="#cb14-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-96"><a href="#cb14-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## 계산오차</span></span>
+<span id="cb14-97"><a href="#cb14-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-98"><a href="#cb14-98" aria-hidden="true" tabindex="-1"></a>절대오차 : $|{\hat{x}-x}|$</span>
+<span id="cb14-99"><a href="#cb14-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-100"><a href="#cb14-100" aria-hidden="true" tabindex="-1"></a>상대오차 : $\frac{|{\hat{x}-x}|}{|x|}$</span>
+<span id="cb14-101"><a href="#cb14-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-102"><a href="#cb14-102" aria-hidden="true" tabindex="-1"></a>결합오차 : $e_{comb}=\frac{|{\hat{x}-x}|}{|x|+1}$</span>
+<span id="cb14-103"><a href="#cb14-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-104"><a href="#cb14-104" aria-hidden="true" tabindex="-1"></a><span class="fu">### 유한차분을 이용한 도함수의 근사</span></span>
+<span id="cb14-105"><a href="#cb14-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-106"><a href="#cb14-106" aria-hidden="true" tabindex="-1"></a>$$f'(x)=\lim_{h\rightarrow 0}\frac{f(x+h)-f(x)}{h}$$</span>
+<span id="cb14-107"><a href="#cb14-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-108"><a href="#cb14-108" aria-hidden="true" tabindex="-1"></a>컴퓨터로는 $h\rightarrow 0$을 정확히 표현할 수 없음.</span>
+<span id="cb14-109"><a href="#cb14-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-110"><a href="#cb14-110" aria-hidden="true" tabindex="-1"></a>따라서, 적당히 작은 값으로 이를 대체하여 $f'(x)$를 근사해야함.</span>
+<span id="cb14-111"><a href="#cb14-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-112"><a href="#cb14-112" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Truncation error 최소화를 위해서는 h는 작을 수록 좋음</span>
+<span id="cb14-113"><a href="#cb14-113" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>그러나, 너무 작은 값을 선택하면 rounding error가 발생하여 $x=x+h$ 될 가능성</span>
+<span id="cb14-114"><a href="#cb14-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-115"><a href="#cb14-115" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Taylor expansion</span></span>
+<span id="cb14-116"><a href="#cb14-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-117"><a href="#cb14-117" aria-hidden="true" tabindex="-1"></a>$$f(x)=\sum_{k=0}^\infty \frac{f^{(k)}(x_0)}{k!}(x-x_0)^{k}=\sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}(x-x_0)^{k}+\frac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}$$</span>
+<span id="cb14-118"><a href="#cb14-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-119"><a href="#cb14-119" aria-hidden="true" tabindex="-1"></a>이를 도함수에 적용하면,</span>
+<span id="cb14-120"><a href="#cb14-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-121"><a href="#cb14-121" aria-hidden="true" tabindex="-1"></a>$$f(x+h)=f(x)+hf'(x)+\frac{h^2}{2}f''(x)+\frac{h^3}{3!}f'''(x)+\dotsm+\frac{h^n}{n!}f^{(n)}(x)+R_n(x+h)$$</span>
+<span id="cb14-122"><a href="#cb14-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-123"><a href="#cb14-123" aria-hidden="true" tabindex="-1"></a>$n=1$을 적용하면,</span>
+<span id="cb14-124"><a href="#cb14-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-125"><a href="#cb14-125" aria-hidden="true" tabindex="-1"></a>$\Rightarrow\;f(x+h)=f(x)+hf'(x)+\frac{h^2}{2}f''(\xi)\;for\;\xi\in<span class="co">[</span><span class="ot">x,x+h</span><span class="co">]</span>$</span>
+<span id="cb14-126"><a href="#cb14-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-127"><a href="#cb14-127" aria-hidden="true" tabindex="-1"></a>$\Rightarrow\;f'(x)=\frac{f(x+h)-f(x)}{h}-\frac{h}{2}f''(\xi)\;(Forward\;Approximation)$</span>
+<span id="cb14-128"><a href="#cb14-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-129"><a href="#cb14-129" aria-hidden="true" tabindex="-1"></a>$n=2$를 적용하고 forward - backward를 정리하면,</span>
+<span id="cb14-130"><a href="#cb14-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-131"><a href="#cb14-131" aria-hidden="true" tabindex="-1"></a>$f'(x)=\frac{f(x+h)-f(x-h)}{h}-\frac{h^2}{3}f'''(\xi)\;(Central\;Difference\;Approximation)$</span>
+<span id="cb14-132"><a href="#cb14-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-133"><a href="#cb14-133" aria-hidden="true" tabindex="-1"></a>::: {.callout, title="Central Difference Approximation"}</span>
+<span id="cb14-134"><a href="#cb14-134" aria-hidden="true" tabindex="-1"></a>$for\;n=2,$</span>
+<span id="cb14-135"><a href="#cb14-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-136"><a href="#cb14-136" aria-hidden="true" tabindex="-1"></a>$(Forward)\;f(x+h)=f(x)+hf'(x)+\frac{h^2}{2}f''(x)+\frac{h^3}{3!}f'''(\xi_+),\;\xi\in<span class="co">[</span><span class="ot">x,x+h</span><span class="co">]</span>$</span>
+<span id="cb14-137"><a href="#cb14-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-138"><a href="#cb14-138" aria-hidden="true" tabindex="-1"></a>$(Backward)\;f(x-h)=f(x)-hf'(x)+\frac{h^2}{2}f''(x)-\frac{h^3}{3!}f'''(\xi_-),\;\xi\in<span class="co">[</span><span class="ot">x-h,x</span><span class="co">]</span>$</span>
+<span id="cb14-139"><a href="#cb14-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-140"><a href="#cb14-140" aria-hidden="true" tabindex="-1"></a>$f(x+h)-f(x-h)=2hf'(x)+\frac{h^2}{6}<span class="sc">\{</span>f'''(\xi_+)+f'''(\xi_-)<span class="sc">\}</span>$</span>
+<span id="cb14-141"><a href="#cb14-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-142"><a href="#cb14-142" aria-hidden="true" tabindex="-1"></a>$\Rightarrow\;f'(x)=\frac{f(x+h)-f(x-h)}{h}-\frac{h^2}{3}f'''(\xi),\;\xi\in<span class="co">[</span><span class="ot">x-h,x+h</span><span class="co">]</span>$</span>
+<span id="cb14-143"><a href="#cb14-143" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb14-144"><a href="#cb14-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-145"><a href="#cb14-145" aria-hidden="true" tabindex="-1"></a>위의 식에서 볼 수 있는 것처럼, Central 방식에서는 truncation error의 order가 $h^2$이므로,</span>
+<span id="cb14-146"><a href="#cb14-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-147"><a href="#cb14-147" aria-hidden="true" tabindex="-1"></a>다른 방식에 비해서 오차가 훨씬 줄어들게 됨</span>
+<span id="cb14-148"><a href="#cb14-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-149"><a href="#cb14-149" aria-hidden="true" tabindex="-1"></a>유사한 방식으로 이계도함수와 편도함수를 유도하면,</span>
+<span id="cb14-150"><a href="#cb14-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-151"><a href="#cb14-151" aria-hidden="true" tabindex="-1"></a>$f''(x)=\frac{f(x+h)+f(x-h)-2f(x)}{h^2}-\frac{h^2}{24}f^{(4)}(\xi)$</span>
+<span id="cb14-152"><a href="#cb14-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-153"><a href="#cb14-153" aria-hidden="true" tabindex="-1"></a>$f_x(x,y)=\frac{f(x+h_x,y)-f(x-h_x,y)}{2h_x}+trunc.\;error$</span>
+<span id="cb14-154"><a href="#cb14-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-155"><a href="#cb14-155" aria-hidden="true" tabindex="-1"></a><span class="fu">### 총오차 및 최적의 h 산출</span></span>
+<span id="cb14-156"><a href="#cb14-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-157"><a href="#cb14-157" aria-hidden="true" tabindex="-1"></a>Forward difference approximation을 사용하고, $|f''(x)|&lt;=M$이라고 하면,</span>
+<span id="cb14-158"><a href="#cb14-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-159"><a href="#cb14-159" aria-hidden="true" tabindex="-1"></a>$|f_h'(x)-f'(x)|=\frac{h}{2}|f''(x)|&lt;=\frac{h}{2}M\;(trunc.\;error)$</span>
+<span id="cb14-160"><a href="#cb14-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-161"><a href="#cb14-161" aria-hidden="true" tabindex="-1"></a>유인물 참조</span>
+<span id="cb14-162"><a href="#cb14-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-163"><a href="#cb14-163" aria-hidden="true" tabindex="-1"></a>총오차 최소화를 위한 $h^*$ 산출이 목표</span>
+<span id="cb14-164"><a href="#cb14-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-165"><a href="#cb14-165" aria-hidden="true" tabindex="-1"></a><span class="fu">### 유한차분을 이용한 도함수 근사 예시</span></span>
+<span id="cb14-166"><a href="#cb14-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-167"><a href="#cb14-167" aria-hidden="true" tabindex="-1"></a>$f(x)=cos(x^x)-sin(e^x)$</span>
+<span id="cb14-168"><a href="#cb14-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-169"><a href="#cb14-169" aria-hidden="true" tabindex="-1"></a>***함수 및 도함수(analytic form) 정의 및 도식화***</span>
+<span id="cb14-170"><a href="#cb14-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-173"><a href="#cb14-173" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-174"><a href="#cb14-174" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
+<span id="cb14-175"><a href="#cb14-175" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
+<span id="cb14-176"><a href="#cb14-176" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fun(x):</span>
+<span id="cb14-177"><a href="#cb14-177" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.cos(x<span class="op">**</span>x) <span class="op">-</span> np.sin(np.exp(x))</span>
+<span id="cb14-178"><a href="#cb14-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-179"><a href="#cb14-179" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fprime(x):</span>
+<span id="cb14-180"><a href="#cb14-180" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="op">-</span>np.sin(x<span class="op">**</span>x)<span class="op">*</span>(x<span class="op">**</span>x)<span class="op">*</span>(np.log(x)<span class="op">+</span><span class="dv">1</span>)  <span class="op">-</span> np.cos(np.exp(x))<span class="op">*</span>np.exp(x)</span>
+<span id="cb14-181"><a href="#cb14-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-182"><a href="#cb14-182" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.linspace(<span class="fl">0.5</span>,<span class="fl">2.5</span>,<span class="dv">101</span>)</span>
+<span id="cb14-183"><a href="#cb14-183" aria-hidden="true" tabindex="-1"></a>y <span class="op">=</span> fun(x)</span>
+<span id="cb14-184"><a href="#cb14-184" aria-hidden="true" tabindex="-1"></a>plt.plot(x,y,<span class="st">'-'</span>)</span>
+<span id="cb14-185"><a href="#cb14-185" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-186"><a href="#cb14-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-187"><a href="#cb14-187" aria-hidden="true" tabindex="-1"></a>***미분계수 산출***</span>
+<span id="cb14-188"><a href="#cb14-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-191"><a href="#cb14-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-192"><a href="#cb14-192" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">1.5</span></span>
+<span id="cb14-193"><a href="#cb14-193" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> fprime(x)</span>
+<span id="cb14-194"><a href="#cb14-194" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"derivative = "</span>, d)</span>
+<span id="cb14-195"><a href="#cb14-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-196"><a href="#cb14-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-197"><a href="#cb14-197" aria-hidden="true" tabindex="-1"></a>***forward 및 central difference approx. 산출 및 비교, 총오차를 log scale로 표현***</span>
+<span id="cb14-198"><a href="#cb14-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-199"><a href="#cb14-199" aria-hidden="true" tabindex="-1"></a>trunc. error는 h가 작아질수록 감소하지만 특정구간 이후에는 rounding error가 발생하므로</span>
+<span id="cb14-200"><a href="#cb14-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-201"><a href="#cb14-201" aria-hidden="true" tabindex="-1"></a>총오차는 항상 감소하지 않게 됨.</span>
+<span id="cb14-202"><a href="#cb14-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-203"><a href="#cb14-203" aria-hidden="true" tabindex="-1"></a>최적 $h^*$를 찾는 것이 매우 중요함</span>
+<span id="cb14-204"><a href="#cb14-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-207"><a href="#cb14-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb14-208"><a href="#cb14-208" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.linspace(<span class="dv">1</span>,<span class="dv">16</span>,<span class="dv">151</span>)</span>
+<span id="cb14-209"><a href="#cb14-209" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>p)</span>
+<span id="cb14-210"><a href="#cb14-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-211"><a href="#cb14-211" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> forward_difference(x,h):</span>
+<span id="cb14-212"><a href="#cb14-212" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (fun(x<span class="op">+</span>h)<span class="op">-</span>fun(x)) <span class="op">/</span> h</span>
+<span id="cb14-213"><a href="#cb14-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-214"><a href="#cb14-214" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> central_difference(x,h):</span>
+<span id="cb14-215"><a href="#cb14-215" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (fun(x<span class="op">+</span>h)<span class="op">-</span>fun(x<span class="op">-</span>h)) <span class="op">/</span> (<span class="dv">2</span><span class="op">*</span>h)</span>
+<span id="cb14-216"><a href="#cb14-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-217"><a href="#cb14-217" aria-hidden="true" tabindex="-1"></a>fd <span class="op">=</span> forward_difference(x, h)</span>
+<span id="cb14-218"><a href="#cb14-218" aria-hidden="true" tabindex="-1"></a>cd <span class="op">=</span> central_difference(x, h)</span>
+<span id="cb14-219"><a href="#cb14-219" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"forward = "</span>, fd)</span>
+<span id="cb14-220"><a href="#cb14-220" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"central = "</span>, cd)</span>
+<span id="cb14-221"><a href="#cb14-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-222"><a href="#cb14-222" aria-hidden="true" tabindex="-1"></a>fd_error <span class="op">=</span> np.log(np.<span class="bu">abs</span>(fd<span class="op">-</span>d)<span class="op">/</span>np.<span class="bu">abs</span>(d))</span>
+<span id="cb14-223"><a href="#cb14-223" aria-hidden="true" tabindex="-1"></a>cd_error <span class="op">=</span> np.log(np.<span class="bu">abs</span>(cd<span class="op">-</span>d)<span class="op">/</span>np.<span class="bu">abs</span>(d))</span>
+<span id="cb14-224"><a href="#cb14-224" aria-hidden="true" tabindex="-1"></a>plt.plot(p,fd_error, p, cd_error)</span>
+<span id="cb14-225"><a href="#cb14-225" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">'forward difference'</span>, <span class="st">'central difference'</span>])</span>
+<span id="cb14-226"><a href="#cb14-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

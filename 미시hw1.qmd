@@ -1,0 +1,49 @@
+# Microanalysis of financial economics Assignment1 {.unnumbered}
+
+20249132 Kim Hyeonghwan (김형환)
+
+## Sample Question
+
+![](image/미시hw1_1.png){width="600"}
+
+### Answer
+
+**Becomes more expensive for steel production**
+
+-\> Increase input prices for steel production
+
+-\> Supply curve shifts to the left.
+
+**Reduced the demand for steel products**
+
+-\> Decrease number of buyers for steel production
+
+-\> Demand curve shifts to the left.
+
+**Both curves will shift to the left side,**
+
+so NEW equilibrium point also shift to the left side.
+
+**It is clear that NEW equilibrium quantity will increase**, but price is not.
+
+**Whether equilibrium price increase or not, it depends on how each curves shifts and their elasticity.**
+
+![Sample question](image/미시hw1_a1.png){width="800"}
+
+## Assignments 1
+
+![](image/미시hw1_2.png){width="600"}
+
+### Answer
+
+Let $P_0=3.46$ and $Q_0^D=Q_0^S=2630$,
+
+Set $\frac{\Delta P_{(=P_1-P_0)}}{P_0}=0.01$, so $P_1=3.46+0.0346=3.4946$
+
+Then, $Q_1^D=3550-266P_1=2620.4364$ and $Q_1^S=1800+240P_1=2638.704$
+
+So, $\frac{\Delta Q^D}{Q_0^D}=\frac{-9.5636}{2630}\approx -0.36\%$ and $\frac{\Delta Q^S}{Q_0^S}=\frac{8.704}{2630}\approx 0.33\%$
+
+Finally, Price elasticity of Demand is $\frac{-0.36\%}{1\%}\approx -0.3636$.
+
+Price elasticity of Supply is $\frac{0.33\%}{1\%}\approx 0.3310$
