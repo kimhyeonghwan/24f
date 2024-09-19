@@ -275,6 +275,22 @@ $bias^2=(y_{real}-\bar{y})^2$, $variance=S.E^2$라고 할 수 있습니다.
 
 $y_{real}$을 QuantLib의 결과값이라고 가정하고, Up&Out call옵션을 통해 이들의 관계를 살펴보겠습니다.
 
+::: {.callout}
+실제 $S.E^2=\frac{\sigma^2}{N}=\frac{variance}{N}$으로, 둘은 다릅니다.
+
+CLT에 따라 $\bar{y}\sim N(y_{real},\frac{\sigma^2}{N})$이 되는데,
+
+여기에서 $\bar{y}$ 표준편차의 불편추정량이 $S.E$이므로 이 둘을 구분해야합니다.
+
+따라서, 실제로는 N 및 M을 설정하고, 이 MCS을 K(>30)회 반복하여 얻은 $\bar{y}_i$에 대해
+
+bias와 variace($var(\bar{y_i})$)를 계산하는 것이 정확한 방법일 것으로 보입니다.
+
+그러나 위 방법은 계산시간이 오래걸리고, 한번의 MCS로 얻은 본문의 결과값과 차이가 거의 없어
+
+실제로 코드 구현 및 계산은 제외하였습니다.
+:::
+
 ```{python}
 import time
 y_real = QL_UOCprice
@@ -296,8 +312,8 @@ print("When N :",N," and M :",M,"\n",
 "Calculation time :", cal_time, "second", "\n")
 ```
 
-N을 증가시킬수록 시뮬레이션의 분산은 감소하나 편의는 감소하지 않는 경향이 있습니다.
-
+**N을 증가시킬수록 시뮬레이션의 분산은 감소하나 편의는 감소하지 않는 경향이 있습니다.
+**
 ```{python}
 #| echo: false
 N = 50000; M = 250
@@ -355,8 +371,8 @@ print("When N :",N," and M :",M,"\n",
 "Calculation time :", cal_time, "second", "\n")
 ```
 
-M을 증가시킬수록 편의는 감소하나 분산은 유사한 경향이 있습니다.
-
+**M을 증가시킬수록 편의는 감소하나 분산은 유사한 경향이 있습니다.
+**
 ```{python}
 #| echo: false
 N = 10000; M = 250
@@ -433,4 +449,4 @@ print("When N :",N," and M :",M,"\n",
 "Calculation time :", cal_time, "second", "\n")
 ```
 
-N과 M을 증가시킬수록 계산시간도 증가하므로, 한정된 계산시간 하에 MSE를 최소화하도록 N과 M을 정해야할 필요가 있습니다.
+**N과 M을 증가시킬수록 계산시간도 증가**하므로, 한정된 계산시간 하에 MSE를 최소화하도록 N과 M을 정해야할 필요가 있습니다.

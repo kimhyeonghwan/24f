@@ -1,4 +1,4 @@
-# 딥러닝 1주차 {.unnumbered}
+# 딥러닝 Ch1 {.unnumbered}
 
 머신러닝 vs. 딥러닝?
 

@@ -26,6 +26,7 @@ book:
     - part : 딥러닝('24 가을)
       chapters: 
         - 딥러닝1.qmd     
+        - 딥러닝2.qmd
         - 딥러닝실습.ipynb
 
     - part : 시뮬레이션 방법론('24 가을)
