@@ -190,7 +190,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./머신러닝1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">머신러닝 1주차</span></a>
+ <span class="menu-text">머신러닝 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./머신러닝실습.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">머신러닝실습.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -210,6 +216,12 @@ window.Quarto = {
  <span class="menu-text">딥러닝 1주차</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./딥러닝실습.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">딥러닝 Ch1 실습</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -225,6 +237,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./시뮬레이션1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">시뮬레이션방법론 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">시뮬레이션 방법론 과제1 (베리어옵션)</span></a>
   </div>
 </li>
       </ul>
@@ -275,7 +293,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./리스크관리1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">금융시장 리스크관리 1주차</span></a>
+ <span class="menu-text">금융시장 리스크관리 1~2주차</span></a>
   </div>
 </li>
       </ul>
@@ -299,6 +317,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./미시hw1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Microanalysis of financial economics Assignment1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment2</span></a>
   </div>
 </li>
       </ul>
@@ -344,6 +368,14 @@ window.Quarto = {
   <li><a href="#유한차분을-이용한-도함수의-근사" id="toc-유한차분을-이용한-도함수의-근사" class="nav-link" data-scroll-target="#유한차분을-이용한-도함수의-근사">유한차분을 이용한 도함수의 근사</a></li>
   <li><a href="#총오차-및-최적의-h-산출" id="toc-총오차-및-최적의-h-산출" class="nav-link" data-scroll-target="#총오차-및-최적의-h-산출">총오차 및 최적의 h 산출</a></li>
   <li><a href="#유한차분을-이용한-도함수-근사-예시" id="toc-유한차분을-이용한-도함수-근사-예시" class="nav-link" data-scroll-target="#유한차분을-이용한-도함수-근사-예시">유한차분을 이용한 도함수 근사 예시</a></li>
+  </ul></li>
+  <li><a href="#수치적-불안정성과-악조건" id="toc-수치적-불안정성과-악조건" class="nav-link" data-scroll-target="#수치적-불안정성과-악조건">수치적 불안정성과 악조건</a>
+  <ul class="collapse">
+  <li><a href="#행렬의-조건수" id="toc-행렬의-조건수" class="nav-link" data-scroll-target="#행렬의-조건수">행렬의 조건수</a></li>
+  </ul></li>
+  <li><a href="#알고리즘의-계산-복잡도" id="toc-알고리즘의-계산-복잡도" class="nav-link" data-scroll-target="#알고리즘의-계산-복잡도">알고리즘의 계산 복잡도</a>
+  <ul class="collapse">
+  <li><a href="#알고리즘-복잡도" id="toc-알고리즘-복잡도" class="nav-link" data-scroll-target="#알고리즘-복잡도">알고리즘 복잡도</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -401,7 +433,7 @@ window.Quarto = {
 <li><p>Truncation error : 연속적인 수학적인 모델을 이산화하면서 발생하는 오차(e.g.&nbsp;미분계수)</p></li>
 <li><p>Rounding error : 컴퓨터 시스템상 실수(real number)를 정확히 표현할 수 없는 데에서 기인(2진법 vs.&nbsp;10진법)</p></li>
 </ol>
-<div id="164fd1d1" class="cell" data-execution_count="1">
+<div id="67113fa8" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> <span class="fl">0.1</span></span>
@@ -421,7 +453,7 @@ window.Quarto = {
 <section id="precision-of-floating-point-arithmetic" class="level4">
 <h4 class="anchored" data-anchor-id="precision-of-floating-point-arithmetic">Precision of floating point arithmetic</h4>
 <p>실수표현의 정밀도는 <span class="math inline">\(float(1+\epsilon_{math})&gt;1\)</span>이 되는 가장 작은 <span class="math inline">\(\epsilon_{math}\)</span>를 의미</p>
-<div id="0f127c0f" class="cell" data-execution_count="2">
+<div id="dc053bc1" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>e <span class="op">=</span> <span class="dv">1</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="dv">1</span> <span class="op">+</span> e <span class="op">&gt;</span> <span class="dv">1</span>:</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    e <span class="op">=</span> e<span class="op">/</span><span class="dv">2</span></span>
@@ -432,7 +464,7 @@ window.Quarto = {
 </div>
 </div>
 <p>내장함수 활용 가능. 파이썬에서는 기본적으로 64bit double타입을 사용함</p>
-<div id="45dafc56" class="cell" data-execution_count="3">
+<div id="b2a4bec7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np.finfo(np.double).eps,</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>      np.finfo(<span class="bu">float</span>).eps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -440,7 +472,7 @@ window.Quarto = {
 <pre><code>2.220446049250313e-16 2.220446049250313e-16</code></pre>
 </div>
 </div>
-<div id="108eb29f" class="cell" data-execution_count="4">
+<div id="25220265" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="dv">1</span><span class="op">+</span>e, <span class="dv">1</span><span class="op">+</span>e<span class="op">+</span>e, <span class="dv">1</span><span class="op">+</span><span class="dv">2</span><span class="op">*</span>e, <span class="dv">1</span><span class="op">+</span><span class="fl">1.0000001</span><span class="op">*</span>e)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>1.0 1.0 1.0000000000000002 1.0000000000000002</code></pre>
@@ -498,7 +530,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="유한차분을-이용한-도함수-근사-예시">유한차분을 이용한 도함수 근사 예시</h3>
 <p><span class="math inline">\(f(x)=cos(x^x)-sin(e^x)\)</span></p>
 <p><strong><em>함수 및 도함수(analytic form) 정의 및 도식화</em></strong></p>
-<div id="9940d63f" class="cell" data-execution_count="5">
+<div id="95bb6e42" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt </span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fun(x):</span>
@@ -519,7 +551,7 @@ window.Quarto = {
 </div>
 </div>
 <p><strong><em>미분계수 산출</em></strong></p>
-<div id="97bc42c6" class="cell" data-execution_count="6">
+<div id="9b1e3fb3" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> <span class="fl">1.5</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>d <span class="op">=</span> fprime(x)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"derivative = "</span>, d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -531,7 +563,7 @@ window.Quarto = {
 <p>trunc. error는 h가 작아질수록 감소하지만 특정구간 이후에는 rounding error가 발생하므로</p>
 <p>총오차는 항상 감소하지 않게 됨.</p>
 <p>최적 <span class="math inline">\(h^*\)</span>를 찾는 것이 매우 중요함</p>
-<div id="778135d7" class="cell" data-execution_count="7">
+<div id="6313f353" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p <span class="op">=</span> np.linspace(<span class="dv">1</span>,<span class="dv">16</span>,<span class="dv">151</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> <span class="dv">10</span><span class="op">**</span>(<span class="op">-</span>p)</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -612,6 +644,30 @@ central =  [-1.5635526  -1.52856423 -1.50592274 -1.49141188 -1.48216656 -1.47629
 </div>
 </div>
 </div>
+</section>
+</section>
+<section id="수치적-불안정성과-악조건" class="level2">
+<h2 class="anchored" data-anchor-id="수치적-불안정성과-악조건">수치적 불안정성과 악조건</h2>
+<p>수치적 불안정성 : 알고리즘이 rounding error를 증폭시켜 결과값이 크게 달라짐</p>
+<p>악조건 : input data의 작은 변동이 output solution에 큰 변화를 일으킴</p>
+<section id="행렬의-조건수" class="level3">
+<h3 class="anchored" data-anchor-id="행렬의-조건수">행렬의 조건수</h3>
+<p>문제 f(x)의 해가 x(input)에 얼마나 영향을 받는지 나타내는 값</p>
+<p>탄력성의 절대값 : <span class="math inline">\(cond(f(x))\approx\frac{|xf'(x)|}{|f(x)|}\)</span></p>
+<p>탄력성의 절대값이 크면 악조건임</p>
+<p>Linear system에서 행렬의 조건수 <span class="math inline">\(k(A)=||A^{-1}||\;||A||\)</span></p>
+<p><span class="math inline">\(조건수&gt;1/\sqrt{eps}\approx 6.7\times 10^7\)</span>이면 약조건 우려</p>
+</section>
+</section>
+<section id="알고리즘의-계산-복잡도" class="level2">
+<h2 class="anchored" data-anchor-id="알고리즘의-계산-복잡도">알고리즘의 계산 복잡도</h2>
+<p>실행시간을 많이 다룰거임.</p>
+<section id="알고리즘-복잡도" class="level3">
+<h3 class="anchored" data-anchor-id="알고리즘-복잡도">알고리즘 복잡도</h3>
+<p>order가 중요함</p>
+<p>big-O를 표현식으로 쓰는데, 계산효율성이나 오차크기를 나타낼때 씀</p>
+<p><span class="math inline">\(O(n^2)\)</span> : 데이터를 10배 늘리면 계산이 100배 늘어남</p>
+<p><span class="math inline">\(O(n^{-2})\)</span> : 데이터를 10배 늘리면 오차가 100배 감소함</p>
 
 
 <!-- -->
@@ -1087,8 +1143,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./리스크관리1.html" class="pagination-link" aria-label="금융시장 리스크관리 1주차">
-        <span class="nav-page-text">금융시장 리스크관리 1주차</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./리스크관리1.html" class="pagination-link" aria-label="금융시장 리스크관리 1~2주차">
+        <span class="nav-page-text">금융시장 리스크관리 1~2주차</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -1304,6 +1360,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb14-224"><a href="#cb14-224" aria-hidden="true" tabindex="-1"></a>plt.plot(p,fd_error, p, cd_error)</span>
 <span id="cb14-225"><a href="#cb14-225" aria-hidden="true" tabindex="-1"></a>plt.legend([<span class="st">'forward difference'</span>, <span class="st">'central difference'</span>])</span>
 <span id="cb14-226"><a href="#cb14-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb14-227"><a href="#cb14-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-228"><a href="#cb14-228" aria-hidden="true" tabindex="-1"></a><span class="fu">## 수치적 불안정성과 악조건</span></span>
+<span id="cb14-229"><a href="#cb14-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-230"><a href="#cb14-230" aria-hidden="true" tabindex="-1"></a>수치적 불안정성 : 알고리즘이 rounding error를 증폭시켜 결과값이 크게 달라짐</span>
+<span id="cb14-231"><a href="#cb14-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-232"><a href="#cb14-232" aria-hidden="true" tabindex="-1"></a>악조건 : input data의 작은 변동이 output solution에 큰 변화를 일으킴</span>
+<span id="cb14-233"><a href="#cb14-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-234"><a href="#cb14-234" aria-hidden="true" tabindex="-1"></a><span class="fu">### 행렬의 조건수</span></span>
+<span id="cb14-235"><a href="#cb14-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-236"><a href="#cb14-236" aria-hidden="true" tabindex="-1"></a>문제 f(x)의 해가 x(input)에 얼마나 영향을 받는지 나타내는 값</span>
+<span id="cb14-237"><a href="#cb14-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-238"><a href="#cb14-238" aria-hidden="true" tabindex="-1"></a>탄력성의 절대값 : $cond(f(x))\approx\frac{|xf'(x)|}{|f(x)|}$</span>
+<span id="cb14-239"><a href="#cb14-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-240"><a href="#cb14-240" aria-hidden="true" tabindex="-1"></a>탄력성의 절대값이 크면 악조건임</span>
+<span id="cb14-241"><a href="#cb14-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-242"><a href="#cb14-242" aria-hidden="true" tabindex="-1"></a>Linear system에서 행렬의 조건수 $k(A)=||A^{-1}||\;||A||$</span>
+<span id="cb14-243"><a href="#cb14-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-244"><a href="#cb14-244" aria-hidden="true" tabindex="-1"></a>$조건수&gt;1/\sqrt{eps}\approx 6.7\times 10^7$이면 약조건 우려</span>
+<span id="cb14-245"><a href="#cb14-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-246"><a href="#cb14-246" aria-hidden="true" tabindex="-1"></a><span class="fu">## 알고리즘의 계산 복잡도</span></span>
+<span id="cb14-247"><a href="#cb14-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-248"><a href="#cb14-248" aria-hidden="true" tabindex="-1"></a>실행시간을 많이 다룰거임.</span>
+<span id="cb14-249"><a href="#cb14-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-250"><a href="#cb14-250" aria-hidden="true" tabindex="-1"></a><span class="fu">### 알고리즘 복잡도</span></span>
+<span id="cb14-251"><a href="#cb14-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-252"><a href="#cb14-252" aria-hidden="true" tabindex="-1"></a>order가 중요함</span>
+<span id="cb14-253"><a href="#cb14-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-254"><a href="#cb14-254" aria-hidden="true" tabindex="-1"></a>big-O를 표현식으로 쓰는데, 계산효율성이나 오차크기를 나타낼때 씀</span>
+<span id="cb14-255"><a href="#cb14-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-256"><a href="#cb14-256" aria-hidden="true" tabindex="-1"></a>$O(n^2)$ : 데이터를 10배 늘리면 계산이 100배 늘어남</span>
+<span id="cb14-257"><a href="#cb14-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-258"><a href="#cb14-258" aria-hidden="true" tabindex="-1"></a>$O(n^{-2})$ : 데이터를 10배 늘리면 오차가 100배 감소함</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -211,3 +211,35 @@ plt.plot(p,fd_error, p, cd_error)
 plt.legend(['forward difference', 'central difference'])
 ```
 
+## 수치적 불안정성과 악조건
+
+수치적 불안정성 : 알고리즘이 rounding error를 증폭시켜 결과값이 크게 달라짐
+
+악조건 : input data의 작은 변동이 output solution에 큰 변화를 일으킴
+
+### 행렬의 조건수
+
+문제 f(x)의 해가 x(input)에 얼마나 영향을 받는지 나타내는 값
+
+탄력성의 절대값 : $cond(f(x))\approx\frac{|xf'(x)|}{|f(x)|}$
+
+탄력성의 절대값이 크면 악조건임
+
+Linear system에서 행렬의 조건수 $k(A)=||A^{-1}||\;||A||$
+
+$조건수>1/\sqrt{eps}\approx 6.7\times 10^7$이면 약조건 우려
+
+## 알고리즘의 계산 복잡도
+
+실행시간을 많이 다룰거임.
+
+### 알고리즘 복잡도
+
+order가 중요함
+
+big-O를 표현식으로 쓰는데, 계산효율성이나 오차크기를 나타낼때 씀
+
+$O(n^2)$ : 데이터를 10배 늘리면 계산이 100배 늘어남
+
+$O(n^{-2})$ : 데이터를 10배 늘리면 오차가 100배 감소함
+

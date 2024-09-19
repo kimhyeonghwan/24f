@@ -145,3 +145,29 @@ $\sigma^2$에 대해 미분을 통해, $\ln ML_{\sigma^2}=-\frac{n}{2\sigma^2}+\
 미분계수가 0인 점이 ML 함수를 극대화 시키는 점이므로, $-\frac{n}{2\sigma^2}+\frac{\sum u_i}{2(\sigma^2)^2}=0$
 
 $\Rightarrow\;n\sigma^2=\sum u_i,\;\therefore\;\sigma^2=\frac{\sum u_i}{n}$
+
+### Characteristics of Volatility
+
+상수는 아님
+
+근데 경향성이 있음 (persistence), 따라서 모아놓으면 군집화 경향이 있음 (Clustering)
+
+평균회귀 성향이 있음 (mean reverting)
+
+주가수익률과 음의 상관관계가 있음. (경기침체에 변동성 증가)
+
+근데 EWMA, GARCH는 이런 음의 상관관계를 반영하지는 않음
+
+### How Good is the Model?
+
+변동성 모델을 평가할 때, 일반적으로 $u_n\sim N(0,\sigma_n^2)$을 따르므로
+
+$\frac{u_n}{\sigma_n}\sim Z$를 통해서 검증함.
+
+이 의미는, 매일매일 자산수익률과 모델변동성을 통해 독립된 Z분포를 따르는 $z_n=\frac{u_n}{\sigma_n}$을 생성할 수 있고
+
+이 $z_n$은 서로 독립인지를 봄으로써 검증할 수 있음.
+
+이건 Ljung-Box Test로 널리 알려져 있음.
+
+$z_n$을 통해 autocorrelation=0(H0)임을 검증하는 테스트임.

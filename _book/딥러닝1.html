@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./시뮬레이션1.html" rel="next">
-<link href="./머신러닝1.html" rel="prev">
+<link href="./딥러닝실습.html" rel="next">
+<link href="./머신러닝실습.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -190,7 +190,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./머신러닝1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">머신러닝 1주차</span></a>
+ <span class="menu-text">머신러닝 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./머신러닝실습.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">머신러닝실습.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -210,6 +216,12 @@ window.Quarto = {
  <span class="menu-text">딥러닝 1주차</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./딥러닝실습.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">딥러닝 Ch1 실습</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -225,6 +237,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./시뮬레이션1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">시뮬레이션방법론 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">시뮬레이션 방법론 과제1 (베리어옵션)</span></a>
   </div>
 </li>
       </ul>
@@ -299,6 +317,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./미시hw1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Microanalysis of financial economics Assignment1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment2</span></a>
   </div>
 </li>
       </ul>
@@ -444,9 +468,34 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="모델의-평가를-위한-지표">모델의 평가를 위한 지표</h3>
 <section id="회귀모형-regression-model" class="level4">
 <h4 class="anchored" data-anchor-id="회귀모형-regression-model">회귀모형, Regression model</h4>
-<p>RMSE : <span class="math inline">\(\sqrt{MSE}\)</span></p>
-<p>MAE(mean absolute error) : <span class="math inline">\(\frac{1}{n}\sum_{i=1}^n|y_i-\hat{y}_i|\)</span></p>
-<p>R square(결정계수) : <span class="math inline">\(1-\frac{\sum_{i=1}^n(y_i-\hat{y}_i)^2}{\sum_{i=1}^n(y_i-\bar{y})^2}=1-\frac{SSE}{SST}(=\frac{SSR}{SST})\)</span></p>
+<p><strong>RMSE</strong> : <span class="math inline">\(\sqrt{MSE}\)</span></p>
+<p><strong>MAE</strong>(mean absolute error) : <span class="math inline">\(\frac{1}{n}\sum_{i=1}^n|y_i-\hat{y}_i|\)</span></p>
+<p><strong>R square</strong>(결정계수) : <span class="math inline">\(1-\frac{\sum_{i=1}^n(y_i-\hat{y}_i)^2}{\sum_{i=1}^n(y_i-\bar{y})^2}=1-\frac{SSE}{SST}(=\frac{SSR}{SST})\)</span></p>
+</section>
+<section id="분류모형" class="level4">
+<h4 class="anchored" data-anchor-id="분류모형">분류모형</h4>
+<p><strong>정오분류표</strong> : TN(true negative), TP(true positive), FN, FP</p>
+<p><strong>정확도, 정분류율</strong> (Accuracy) : <span class="math inline">\(\frac{TN+TP}{TN+TP+FN+FP}\)</span></p>
+<p><strong>오분류율</strong> : 1 - 정분류율</p>
+<p><strong>교차엔트로피 오차</strong>(Cross Entropy Error), Multiclass classification에 많이 씀</p>
+<p><span class="math display">\[-\frac{1}{n}\sum_{i=1}^n\sum_{k=1}^Ky_k^{(i)}log(\hat{p}_k^(i))\]</span></p>
+<p>y는 타깃확률, p는 예측확률, K는 범주의 개수</p>
+<p>K=2인 경우, 위의 교차엔트로피 손실함수를 로그손실함수라고 부르며, 많이 활용함.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>삼중분류문제의 경우,</p>
+<p>모델은 훈련자료를 기반으로 훈련 후 0,1,2에 각각 속할 확률을 계산하여 반환함.(<span class="math inline">\(p_0+p_1+p_2=1\)</span>)</p>
+<p>최종적으로 각 확률중 가장 큰 값을 <span class="math inline">\(\hat{y}\)</span>로 산출하게 됨.</p>
+<p>교차 엔트로피의 타깃 확률이란 1을 의미하며, 실제 y가 특정 범주 k에 속할 때 1이며, 아닐 때 0임.</p>
+<p>따라서, 교차엔트로피의 수식을 볼 때 타깃확률이 1이고 예측확률이 1에 가까울수록 오차는 0에 수렴하며</p>
+<p>예측확률이 1보다 작을수록 오차는 커지게 됨</p>
+</div>
+</div>
+</div>
 
 
 <!-- -->
@@ -918,13 +967,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./머신러닝1.html" class="pagination-link" aria-label="머신러닝 1주차">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">머신러닝 1주차</span>
+      <a href="./머신러닝실습.html" class="pagination-link" aria-label="머신러닝실습.html">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">머신러닝실습.html</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./시뮬레이션1.html" class="pagination-link" aria-label="시뮬레이션방법론 Ch1">
-        <span class="nav-page-text">시뮬레이션방법론 Ch1</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./딥러닝실습.html" class="pagination-link" aria-label="딥러닝 Ch1 실습">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">딥러닝 Ch1 실습</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
@@ -1036,11 +1085,41 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 회귀모형, Regression model</span></span>
 <span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>RMSE : $\sqrt{MSE}$</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>**RMSE** : $\sqrt{MSE}$</span>
 <span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>MAE(mean absolute error) : $\frac{1}{n}\sum_{i=1}^n|y_i-\hat{y}_i|$</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>**MAE**(mean absolute error) : $\frac{1}{n}\sum_{i=1}^n|y_i-\hat{y}_i|$</span>
 <span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>R square(결정계수) : $1-\frac{\sum_{i=1}^n(y_i-\hat{y}_i)^2}{\sum_{i=1}^n(y_i-\bar{y})^2}=1-\frac{SSE}{SST}(=\frac{SSR}{SST})$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>**R square**(결정계수) : $1-\frac{\sum_{i=1}^n(y_i-\hat{y}_i)^2}{\sum_{i=1}^n(y_i-\bar{y})^2}=1-\frac{SSE}{SST}(=\frac{SSR}{SST})$</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 분류모형</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>**정오분류표** : TN(true negative), TP(true positive), FN, FP</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>**정확도, 정분류율** (Accuracy) : $\frac{TN+TP}{TN+TP+FN+FP}$</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>**오분류율** : 1 - 정분류율</span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>**교차엔트로피 오차**(Cross Entropy Error), Multiclass classification에 많이 씀</span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>$$-\frac{1}{n}\sum_{i=1}^n\sum_{k=1}^Ky_k^{(i)}log(\hat{p}_k^(i))$$</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>y는 타깃확률, p는 예측확률, K는 범주의 개수</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>K=2인 경우, 위의 교차엔트로피 손실함수를 로그손실함수라고 부르며, 많이 활용함.</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>::: {.callout}</span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>삼중분류문제의 경우,</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>모델은 훈련자료를 기반으로 훈련 후 0,1,2에 각각 속할 확률을 계산하여 반환함.($p_0+p_1+p_2=1$)</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>최종적으로 각 확률중 가장 큰 값을 $\hat{y}$로 산출하게 됨.</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>교차 엔트로피의 타깃 확률이란 1을 의미하며, 실제 y가 특정 범주 k에 속할 때 1이며, 아닐 때 0임.</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>따라서, 교차엔트로피의 수식을 볼 때 타깃확률이 1이고 예측확률이 1에 가까울수록 오차는 0에 수렴하며</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>예측확률이 1보다 작을수록 오차는 커지게 됨</span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

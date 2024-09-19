@@ -73,3 +73,4 @@ when Other things equal(ceteris paribus)
 #### 2. Technology
 
 기술수준이 상승하면 생산단가가 감소함. 공급곡선 우측이동.
+

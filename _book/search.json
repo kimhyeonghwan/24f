@@ -12,45 +12,45 @@
   {
     "objectID": "머신러닝1.html",
     "href": "머신러닝1.html",
-    "title": "머신러닝 1주차",
+    "title": "머신러닝 Ch1",
     "section": "",
     "text": "하이퍼파라미터\n머신러닝에 이용할 모델에 대한 파리미터(\\(\\alpha,\\beta\\) 등)가 아닌,\n학습알고리즘의 파라미터(학습률 등)\n\\(\\hat{y}=\\beta_0+\\beta_1x_1+\\dotsm+\\beta_kx_k\\)\n여기서, \\(\\beta_n\\)은 파라미터이며 주어진 데이터를 학습하여 파라미터를 산출하는 것임.\n근데 만약에 모델 성능 향상을 위해 각 \\(\\beta\\)의 제약조건(constraint)를 정한다?\n해당 제약조건은 하이퍼파라미터(hyper-parameter, h-para)가 되는 것임\n이런 회귀분석을 릿지(Ridge regression)이라고 함.",
     "crumbs": [
       "머신러닝('24 가을)",
-      "머신러닝 1주차"
+      "머신러닝 Ch1"
     ]
   },
   {
     "objectID": "머신러닝1.html#모델의-평가와-검증",
     "href": "머신러닝1.html#모델의-평가와-검증",
-    "title": "머신러닝 1주차",
+    "title": "머신러닝 Ch1",
     "section": "모델의 평가와 검증",
     "text": "모델의 평가와 검증\n\n낮은 복잡도 = 선형회귀분석 or logistic 분류면 높은 복잡도 = 변수를 추가한 모델 (과대적합 케이스)\n훈련데이터(training sample)은 복잡도가 높아질수록 예측오차가 줄어듬 (우하향)\n평가데이터(text sample)은 복잡도가 높아지면 오차가 줄어들기는 하지만,\n너무 복잡도가 높아지면 평가데이터에서는 오차가 오히려 발생함\n즉, 일반화가 어렵고 과대적합(overfitting) 문제가 발생함",
     "crumbs": [
       "머신러닝('24 가을)",
-      "머신러닝 1주차"
+      "머신러닝 Ch1"
     ]
   },
   {
     "objectID": "머신러닝1.html#일반화-오차",
     "href": "머신러닝1.html#일반화-오차",
-    "title": "머신러닝 1주차",
+    "title": "머신러닝 Ch1",
     "section": "일반화 오차",
     "text": "일반화 오차\n평가데이터를 이용하였을 때 발생하는 오차를 일반화 오차라고 함\n(Generalization error, test error)\n\\[일반화 오차 = 편향^2+분산+오차\\]\n\n편향(Bias)\n모집단에서 크기 m의 (x,y) 순서쌍을 샘플링할 때,\n해당 샘플링을 n번 반복해서 모델링을 한다고 하면,\n각각의 \\(f_1,...,f_n\\)이 있을 것이고, \\(\\bar{f}=mean(f_m)\\)이면,\n실제 모집단을 나타내는 모델인 \\(f_{true}\\)와 \\(\\bar{f}\\)의 차이를 편향(bias)이라고 합니다.\n\n\n분산(Variance)\n한편, \\(f_1,...,f_n\\)의 추정모델간의 편차의 제곱합이 분산이 됩니다.\n\n\n관계\n즉, 모델이 단순할수록 실제로는 더 복잡한 모델을 잘 반영하기 어렵기때문에 편향이 큰 대신,\n추정모델간의 오차는 작아지므로 분산이 작습니다.\n하지만, 모델이 복잡할수록 추정모델을 평균하면 실제 모델과 유사해질 것 이므로 편향은 작고,\n추정모델간의 오차는 클 것이므로 분산이 큽니다.",
     "crumbs": [
       "머신러닝('24 가을)",
-      "머신러닝 1주차"
+      "머신러닝 Ch1"
     ]
   },
   {
     "objectID": "머신러닝1.html#데이터의-분할-방법",
     "href": "머신러닝1.html#데이터의-분할-방법",
-    "title": "머신러닝 1주차",
+    "title": "머신러닝 Ch1",
     "section": "데이터의 분할 방법",
     "text": "데이터의 분할 방법\n\nHold-out 방식\n주어진 자료를 목적에 따라 훈련/검증/평가 데이터로 나누어서 활용.\n(훈련, 검증이 8~90% / 평가가 1~20%)\n검증데이터는 h-para tuning에 주로 사용함.\n\n각 h-para별로 훈련데이터를 통해 모델 도출\n각 모델에 대해 검증데이터를 이용해 평가 (MSE 산출)\n성능이 가장 좋은 h-para를 채택\n해당 h-para 및 훈련+검증데이터를 통해 최종모델 도출\n평가데이터를 이용해 최종모델을 평가하여 성능 확인\n\n단점 : 전체 데이터에서 평가데이터는 따로 빼놔야해서 자료가 충분치 않으면 사용하기 애매함\n\n\nK-fold 교차검증(Cross-validation) 방식을 이용한 검증\n데이터가 그다지 많지 않을때 유용.\n모든 데이터가 훈련, 검증, 평가에 활용될 수 있음.\n주어진 자료를 K개로 분할하여 반복활용\n(3-fold cv 예시)\n\n주어진 자료를 3개로 분할 (1,2 훈련 + 3 검증 / 1,3 훈련 + 2 검증 / 2,3 훈련 + 1 검증)\n각 분할데이터로 특정 h-para에 대해 훈련 + 검증데이터로 성능 평가(MSE)\n3개의 분할데이터의 성능의 평균이 해당 h-para의 검증결과임\n모든 h-para에 대해 1~3 반복\nh-para의 검증결과 중 가장 성능이 좋은 h-para 채택\n다시 주어진 자료를 3개로 분할 (훈련+평가)\n각 분할데이터로 훈련 및 평가를 통해 성능 평가\n성능의 평균값이 우리의 모델의 성능임.\n\n방법론에 따라 한꺼번에 훈련시켜서 성능을 평가하기도 하고,\n이러한 분할(folding)을 수회~수백회 반복해서 모델의 성능을 추정하기도 함.\n(folding별 성능의 평균/표준편차 고려)\n::: {.callout, title=“Imbalanced data”} 머신러닝으로 분류문제를 해결하는 경우,\n실제 세상에서는 분류대상의 비율이 매우 적은 경우가 많음.\n이러한 샘플을 imbalanced data라고 하며,\nHold-out, K-fold cv 등을 할 때,\n원 자료의 분류대상의 비율을 유지한채로 주어진 자료를 분할해야 함. :::",
     "crumbs": [
       "머신러닝('24 가을)",
-      "머신러닝 1주차"
+      "머신러닝 Ch1"
     ]
   },
   {
@@ -91,10 +91,87 @@
     "href": "딥러닝1.html#모델-평가-및-검증",
     "title": "딥러닝 1주차",
     "section": "모델 평가 및 검증",
-    "text": "모델 평가 및 검증\nlow bias - high vol\nhigh bias - low vol\n제대로 못들어서 정리 필요\n\n자료의 구분\n일반적으로 전체 데이터를 임의로 3개로 나눔.\n훈련 데이터 / 검증 데이터 / 평가 데이터\ne.g. 훈련데이터로 여러 h-para에 대해 모델 돌림\n검증데이터를 이용해 각 h-para별 성능 평가\n제일 좋은 h-para로 모델을 구성하여 훈련+검증데이터로 다시 훈련\n최종 모델을 평가데이터를 이용하여 평가\n\n딥러닝에서는 검증데이터가 다른 의미로도 활용됨.\n경사하강법 같은걸 복잡한 모델에 사용할 때, 파라미터 튜닝 과정에서 손실함수가 더이상 감소하지 않는다면?\n불필요한 훈련이 될 수 있어 파라미터 자체가 학습이 잘 되고 있는지 모니터링을 해야 함.\n이러한 모니터링에 검증 데이터가 활용됨.\n\n\n모델의 평가를 위한 지표\n\n회귀모형, Regression model\nRMSE : \\(\\sqrt{MSE}\\)\nMAE(mean absolute error) : \\(\\frac{1}{n}\\sum_{i=1}^n|y_i-\\hat{y}_i|\\)\nR square(결정계수) : \\(1-\\frac{\\sum_{i=1}^n(y_i-\\hat{y}_i)^2}{\\sum_{i=1}^n(y_i-\\bar{y})^2}=1-\\frac{SSE}{SST}(=\\frac{SSR}{SST})\\)",
+    "text": "모델 평가 및 검증\nlow bias - high vol\nhigh bias - low vol\n제대로 못들어서 정리 필요\n\n자료의 구분\n일반적으로 전체 데이터를 임의로 3개로 나눔.\n훈련 데이터 / 검증 데이터 / 평가 데이터\ne.g. 훈련데이터로 여러 h-para에 대해 모델 돌림\n검증데이터를 이용해 각 h-para별 성능 평가\n제일 좋은 h-para로 모델을 구성하여 훈련+검증데이터로 다시 훈련\n최종 모델을 평가데이터를 이용하여 평가\n\n딥러닝에서는 검증데이터가 다른 의미로도 활용됨.\n경사하강법 같은걸 복잡한 모델에 사용할 때, 파라미터 튜닝 과정에서 손실함수가 더이상 감소하지 않는다면?\n불필요한 훈련이 될 수 있어 파라미터 자체가 학습이 잘 되고 있는지 모니터링을 해야 함.\n이러한 모니터링에 검증 데이터가 활용됨.\n\n\n모델의 평가를 위한 지표\n\n회귀모형, Regression model\nRMSE : \\(\\sqrt{MSE}\\)\nMAE(mean absolute error) : \\(\\frac{1}{n}\\sum_{i=1}^n|y_i-\\hat{y}_i|\\)\nR square(결정계수) : \\(1-\\frac{\\sum_{i=1}^n(y_i-\\hat{y}_i)^2}{\\sum_{i=1}^n(y_i-\\bar{y})^2}=1-\\frac{SSE}{SST}(=\\frac{SSR}{SST})\\)\n\n\n분류모형\n정오분류표 : TN(true negative), TP(true positive), FN, FP\n정확도, 정분류율 (Accuracy) : \\(\\frac{TN+TP}{TN+TP+FN+FP}\\)\n오분류율 : 1 - 정분류율\n교차엔트로피 오차(Cross Entropy Error), Multiclass classification에 많이 씀\n\\[-\\frac{1}{n}\\sum_{i=1}^n\\sum_{k=1}^Ky_k^{(i)}log(\\hat{p}_k^(i))\\]\ny는 타깃확률, p는 예측확률, K는 범주의 개수\nK=2인 경우, 위의 교차엔트로피 손실함수를 로그손실함수라고 부르며, 많이 활용함.\n\n\n\n\n\n\n삼중분류문제의 경우,\n모델은 훈련자료를 기반으로 훈련 후 0,1,2에 각각 속할 확률을 계산하여 반환함.(\\(p_0+p_1+p_2=1\\))\n최종적으로 각 확률중 가장 큰 값을 \\(\\hat{y}\\)로 산출하게 됨.\n교차 엔트로피의 타깃 확률이란 1을 의미하며, 실제 y가 특정 범주 k에 속할 때 1이며, 아닐 때 0임.\n따라서, 교차엔트로피의 수식을 볼 때 타깃확률이 1이고 예측확률이 1에 가까울수록 오차는 0에 수렴하며\n예측확률이 1보다 작을수록 오차는 커지게 됨",
     "crumbs": [
       "딥러닝('24 가을)",
       "딥러닝 1주차"
+    ]
+  },
+  {
+    "objectID": "딥러닝실습.html",
+    "href": "딥러닝실습.html",
+    "title": "2  딥러닝 Ch1 실습",
+    "section": "",
+    "text": "2.1 1. 텐서 데이터 만들기\nimport numpy as np\nimport tensorflow as tf\ntest = tf.constant( 123 ) # 텐서 상수. numpy array 같은 데이터타입임.\ntest\n\n&lt;tf.Tensor: shape=(), dtype=int32, numpy=123&gt;\nprint(test)\n\ntf.Tensor(123, shape=(), dtype=int32)\ntest.numpy()\n\n123\ntf.constant([1.2, 5, np.pi], dtype = tf.float32)\n\n&lt;tf.Tensor: shape=(3,), dtype=float32, numpy=array([1.2      , 5.       , 3.1415927], dtype=float32)&gt;\nndarr = np.array([[1,2,3], [4,5,6]])\nndarr\n\narray([[1, 2, 3],\n       [4, 5, 6]])\ntsarr = tf.convert_to_tensor( ndarr )\ntsarr\n\n&lt;tf.Tensor: shape=(2, 3), dtype=int64, numpy=\narray([[1, 2, 3],\n       [4, 5, 6]])&gt;\ntsones = tf.ones((2,3))\ntsones\n\n&lt;tf.Tensor: shape=(2, 3), dtype=float32, numpy=\narray([[1., 1., 1.],\n       [1., 1., 1.]], dtype=float32)&gt;",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>딥러닝 Ch1 실습</span>"
+    ]
+  },
+  {
+    "objectID": "딥러닝실습.html#텐서-데이터-타입-크기",
+    "href": "딥러닝실습.html#텐서-데이터-타입-크기",
+    "title": "2  딥러닝 Ch1 실습",
+    "section": "2.2 2. 텐서 데이터 타입, 크기",
+    "text": "2.2 2. 텐서 데이터 타입, 크기\n\ntsarr.shape\n\nTensorShape([2, 3])\n\n\n\ntsarr.ndim\n\n2\n\n\n\ntsarr.dtype\n\ntf.int64\n\n\n\ntf.cast( tsarr, dtype=tf.float64 )\n\n&lt;tf.Tensor: shape=(2, 3), dtype=float64, numpy=\narray([[1., 2., 3.],\n       [4., 5., 6.]])&gt;\n\n\n\ntsarr[0]\n\n&lt;tf.Tensor: shape=(3,), dtype=int64, numpy=array([1, 2, 3])&gt;\n\n\n\ntsarr[:1,:1]\n\n&lt;tf.Tensor: shape=(1, 1), dtype=int64, numpy=array([[1]])&gt;\n\n\n\ntsarr[0,0]\n\n&lt;tf.Tensor: shape=(), dtype=int64, numpy=1&gt;\n\n\n\nt = tf.random.uniform(shape=(3,4)) # shape 생략 가능\nt\n\n&lt;tf.Tensor: shape=(3, 4), dtype=float32, numpy=\narray([[0.36321807, 0.29708588, 0.04835212, 0.6580317 ],\n       [0.52478623, 0.81622696, 0.68001425, 0.35392594],\n       [0.60432065, 0.5515584 , 0.92308843, 0.2798295 ]], dtype=float32)&gt;\n\n\n\nt.numpy()\n\narray([[0.36321807, 0.29708588, 0.04835212, 0.6580317 ],\n       [0.52478623, 0.81622696, 0.68001425, 0.35392594],\n       [0.60432065, 0.5515584 , 0.92308843, 0.2798295 ]], dtype=float32)\n\n\n\ntnormal = tf.random.normal((3,4), mean = 0, stddev = 1)\ntnormal\n\n&lt;tf.Tensor: shape=(3, 4), dtype=float32, numpy=\narray([[ 1.2684143 ,  0.5634787 , -0.8527982 ,  0.15773794],\n       [ 0.9406849 ,  0.30044   ,  0.81672424,  1.6540827 ],\n       [-0.04494214, -1.9484011 , -0.03741917, -0.0658213 ]],\n      dtype=float32)&gt;\n\n\n\nt_tr = tf.transpose( t )\nt_tr\n\n&lt;tf.Tensor: shape=(4, 3), dtype=float32, numpy=\narray([[0.36321807, 0.52478623, 0.60432065],\n       [0.29708588, 0.81622696, 0.5515584 ],\n       [0.04835212, 0.68001425, 0.92308843],\n       [0.6580317 , 0.35392594, 0.2798295 ]], dtype=float32)&gt;\n\n\n\nt_sh = tf.reshape( t, shape = (6,2))\nt_sh\n\n&lt;tf.Tensor: shape=(6, 2), dtype=float32, numpy=\narray([[0.36321807, 0.29708588],\n       [0.04835212, 0.6580317 ],\n       [0.52478623, 0.81622696],\n       [0.68001425, 0.35392594],\n       [0.60432065, 0.5515584 ],\n       [0.92308843, 0.2798295 ]], dtype=float32)&gt;",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>딥러닝 Ch1 실습</span>"
+    ]
+  },
+  {
+    "objectID": "딥러닝실습.html#수학-연산의-적용",
+    "href": "딥러닝실습.html#수학-연산의-적용",
+    "title": "2  딥러닝 Ch1 실습",
+    "section": "2.3 3. 수학 연산의 적용",
+    "text": "2.3 3. 수학 연산의 적용\n\na = tf.constant(10)\nb = tf.constant(20)\nc = tf.constant(30)\n\n\nad = tf.add(a,b) # substract, multiply, divide 가능\nad.numpy()\n\n30\n\n\n\ntf.reduce_mean( [a,b,c] ).numpy()\n\n20\n\n\n\ntf.reduce_sum( [a,b,c] ).numpy()\n\n60\n\n\n\nM1 = tf.random.uniform( shape=(5,2), minval=-1.0, maxval=1.0 )\nM1\n\n&lt;tf.Tensor: shape=(5, 2), dtype=float32, numpy=\narray([[ 0.9962559 ,  0.7100415 ],\n       [ 0.06644487, -0.17041707],\n       [ 0.7292304 , -0.49121428],\n       [-0.9295962 , -0.6074953 ],\n       [ 0.43700218, -0.5817137 ]], dtype=float32)&gt;\n\n\n\nM2 = tf.random.normal( shape=(5,2), mean=0, stddev=1 )\nM2\n\n&lt;tf.Tensor: shape=(5, 2), dtype=float32, numpy=\narray([[ 0.3262252 , -1.6307284 ],\n       [ 1.0629762 , -0.9531726 ],\n       [ 1.3960881 , -0.96611947],\n       [ 0.5364423 ,  0.5114645 ],\n       [ 0.0176798 , -1.0373931 ]], dtype=float32)&gt;\n\n\n\ntf.reduce_mean( M1, axis=0 ).numpy()\n\narray([ 0.25986743, -0.22815976], dtype=float32)\n\n\n\ntf.reduce_mean( M1, axis=1 ).numpy()\n\narray([ 0.8531487 , -0.0519861 ,  0.11900806, -0.76854575, -0.07235575],\n      dtype=float32)\n\n\n\ntf.multiply( M1, M2 ).numpy\n\n&lt;bound method _EagerTensorBase.numpy of &lt;tf.Tensor: shape=(5, 2), dtype=float32, numpy=\narray([[ 0.32500377, -1.1578848 ],\n       [ 0.07062932,  0.16243689],\n       [ 1.0180699 ,  0.47457168],\n       [-0.4986747 , -0.31071228],\n       [ 0.00772611,  0.60346574]], dtype=float32)&gt;&gt;\n\n\n\ntf.matmul( M1, tf.transpose(M2) )\n\n&lt;tf.Tensor: shape=(5, 5), dtype=float32, numpy=\narray([[-0.8328811 ,  0.38220417,  0.7048761 ,  0.8975948 , -0.7189786 ],\n       [ 0.29957995,  0.2330662 ,  0.25740615, -0.05151844,  0.17796423],\n       [ 1.0389304 ,  1.2433666 ,  1.4926416 ,  0.13995136,  0.52247494],\n       [ 0.6874021 , -0.4090908 , -0.7108851 , -0.80938697,  0.6137764 ],\n       [ 1.091178  ,  1.0189965 ,  1.1720984 , -0.06309943,  0.61119187]],\n      dtype=float32)&gt;\n\n\n\ntf.matmul( tf.transpose(M1), M2 )\n\n&lt;tf.Tensor: shape=(2, 2), dtype=float32, numpy=\narray([[ 0.9227544 , -3.3212786 ],\n       [-0.97146505, -0.22812282]], dtype=float32)&gt;\n\n\n\ntf.transpose(M1) @ M2\n\n&lt;tf.Tensor: shape=(2, 2), dtype=float32, numpy=\narray([[ 0.9227544 , -3.3212786 ],\n       [-0.97146505, -0.22812282]], dtype=float32)&gt;\n\n\n\nnp.linalg.det( M1 @ tf.transpose(M2) )\n\n-1.7482287e-23\n\n\n\nnp.linalg.det( tf.transpose(M1) @ M2 )\n\n-3.4370074\n\n\n\nnp.linalg.inv( tf.transpose(M1) @ M2 )\n\narray([[ 0.06637251, -0.9663286 ],\n       [-0.28264853, -0.26847613]], dtype=float32)\n\n\n\nnp.linalg.eig(tf.transpose(M1) @ M2 )\n\nEigResult(eigenvalues=array([ 2.2334855, -1.5388538], dtype=float32), eigenvectors=array([[ 0.93018395,  0.803395  ],\n       [-0.36709383,  0.59544647]], dtype=float32))\n\n\n\ntf.norm( M1, ord=2, axis=1 ).numpy\n\n&lt;bound method _EagerTensorBase.numpy of &lt;tf.Tensor: shape=(5,), dtype=float32, numpy=\narray([1.2233907 , 0.18291228, 0.8792431 , 1.1104952 , 0.7275725 ],\n      dtype=float32)&gt;&gt;",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>딥러닝 Ch1 실습</span>"
+    ]
+  },
+  {
+    "objectID": "딥러닝실습.html#텐서-데이터의-분할-및-통합",
+    "href": "딥러닝실습.html#텐서-데이터의-분할-및-통합",
+    "title": "2  딥러닝 Ch1 실습",
+    "section": "2.4 4. 텐서 데이터의 분할 및 통합",
+    "text": "2.4 4. 텐서 데이터의 분할 및 통합\n\nt = tf.random.uniform((6,))\nt.numpy()\n\narray([0.02300322, 0.7006937 , 0.41715956, 0.25560915, 0.6631763 ,\n       0.41954446], dtype=float32)\n\n\n\nt_spl = tf.split( t, num_or_size_splits=3 )\n[ item.numpy() for item in t_spl ]\n\n[array([0.02300322, 0.7006937 ], dtype=float32),\n array([0.41715956, 0.25560915], dtype=float32),\n array([0.6631763 , 0.41954446], dtype=float32)]\n\n\n\nt_spl2 = tf.split( t, num_or_size_splits=[4,2])\n[ item.numpy() for item in t_spl2 ]\n\n[array([0.02300322, 0.7006937 , 0.41715956, 0.25560915], dtype=float32),\n array([0.6631763 , 0.41954446], dtype=float32)]\n\n\n\nt2 = tf.random.uniform((6,3))\nt2\n\n&lt;tf.Tensor: shape=(6, 3), dtype=float32, numpy=\narray([[0.20208406, 0.14229345, 0.24287081],\n       [0.28123713, 0.9822639 , 0.5934299 ],\n       [0.06746602, 0.44820297, 0.55084395],\n       [0.12668848, 0.9349866 , 0.27638876],\n       [0.7941842 , 0.49613452, 0.26152658],\n       [0.11516786, 0.5283252 , 0.17477489]], dtype=float32)&gt;\n\n\n\nt_spl3 = tf.split( t2, num_or_size_splits=[4,2], axis=0)\n[ item.numpy() for item in t_spl3 ]\n\n[array([[0.20208406, 0.14229345, 0.24287081],\n        [0.28123713, 0.9822639 , 0.5934299 ],\n        [0.06746602, 0.44820297, 0.55084395],\n        [0.12668848, 0.9349866 , 0.27638876]], dtype=float32),\n array([[0.7941842 , 0.49613452, 0.26152658],\n        [0.11516786, 0.5283252 , 0.17477489]], dtype=float32)]\n\n\n\nt_conc = tf.concat([t2, tf.reshape(t, (6,1))], axis=1)\nt_conc\n\n&lt;tf.Tensor: shape=(6, 4), dtype=float32, numpy=\narray([[0.20208406, 0.14229345, 0.24287081, 0.02300322],\n       [0.28123713, 0.9822639 , 0.5934299 , 0.7006937 ],\n       [0.06746602, 0.44820297, 0.55084395, 0.41715956],\n       [0.12668848, 0.9349866 , 0.27638876, 0.25560915],\n       [0.7941842 , 0.49613452, 0.26152658, 0.6631763 ],\n       [0.11516786, 0.5283252 , 0.17477489, 0.41954446]], dtype=float32)&gt;\n\n\n\ntf.concat([t_conc, tf.random.uniform((1,4))], axis=0)\n\n&lt;tf.Tensor: shape=(7, 4), dtype=float32, numpy=\narray([[0.20208406, 0.14229345, 0.24287081, 0.02300322],\n       [0.28123713, 0.9822639 , 0.5934299 , 0.7006937 ],\n       [0.06746602, 0.44820297, 0.55084395, 0.41715956],\n       [0.12668848, 0.9349866 , 0.27638876, 0.25560915],\n       [0.7941842 , 0.49613452, 0.26152658, 0.6631763 ],\n       [0.11516786, 0.5283252 , 0.17477489, 0.41954446],\n       [0.3500303 , 0.06093681, 0.0672853 , 0.09213388]], dtype=float32)&gt;",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>딥러닝 Ch1 실습</span>"
+    ]
+  },
+  {
+    "objectID": "딥러닝실습.html#tf.data를-활용한-데이터-전처리",
+    "href": "딥러닝실습.html#tf.data를-활용한-데이터-전처리",
+    "title": "2  딥러닝 Ch1 실습",
+    "section": "2.5 5. tf.data를 활용한 데이터 전처리",
+    "text": "2.5 5. tf.data를 활용한 데이터 전처리\n\narr1 = [ 1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7 ]\narr1\n\n[1.1, 2.2, 3.3, 4.4, 5.5, 6.6, 7.7]\n\n\n\nds1 = tf.data.Dataset.from_tensor_slices( arr1 )\nprint( ds1 )\n\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(), dtype=tf.float32, name=None)&gt;\n\n\n\nfor item in ds1:\n    print(item)\n\ntf.Tensor(1.1, shape=(), dtype=float32)\ntf.Tensor(2.2, shape=(), dtype=float32)\ntf.Tensor(3.3, shape=(), dtype=float32)\ntf.Tensor(4.4, shape=(), dtype=float32)\ntf.Tensor(5.5, shape=(), dtype=float32)\ntf.Tensor(6.6, shape=(), dtype=float32)\ntf.Tensor(7.7, shape=(), dtype=float32)\n\n\n2024-09-12 11:19:19.694220: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\nds1_batch = ds1.batch(3)\nfor item in ds1_batch: print( item )\n\ntf.Tensor([1.1 2.2 3.3], shape=(3,), dtype=float32)\ntf.Tensor([4.4 5.5 6.6], shape=(3,), dtype=float32)\ntf.Tensor([7.7], shape=(1,), dtype=float32)\n\n\n2024-09-12 11:19:19.707469: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\ntf.random.set_seed(1)\nX = tf.random.uniform( shape = (10,3), dtype = tf.float32 )\nY = tf.range(1, 11)\n\n\nX.numpy()\n\narray([[0.16513085, 0.9014813 , 0.6309742 ],\n       [0.4345461 , 0.29193902, 0.64250207],\n       [0.9757855 , 0.43509948, 0.6601019 ],\n       [0.60489583, 0.6366315 , 0.6144488 ],\n       [0.8893349 , 0.6277617 , 0.53197503],\n       [0.02597821, 0.44087505, 0.25267076],\n       [0.8862232 , 0.88729346, 0.78728163],\n       [0.05955195, 0.0710938 , 0.3084147 ],\n       [0.25118268, 0.9084705 , 0.47147965],\n       [0.24238515, 0.63300395, 0.5860311 ]], dtype=float32)\n\n\n\nY.numpy()\n\narray([ 1,  2,  3,  4,  5,  6,  7,  8,  9, 10], dtype=int32)\n\n\n\nds_X = tf.data.Dataset.from_tensor_slices( X )\nds_Y = tf.data.Dataset.from_tensor_slices( Y )\nds_joint = tf.data.Dataset.zip((ds_X, ds_Y))\nds_joint2 = tf.data.Dataset.from_tensor_slices((X, Y))\n\n\nfor item in ds_X: print(ds_X)\n\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(3,), dtype=tf.float32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(3,), dtype=tf.float32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(3,), dtype=tf.float32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(3,), dtype=tf.float32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(3,), dtype=tf.float32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(3,), dtype=tf.float32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(3,), dtype=tf.float32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(3,), dtype=tf.float32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(3,), dtype=tf.float32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(3,), dtype=tf.float32, name=None)&gt;\n\n\n2024-09-12 11:19:19.907884: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\nfor item in ds_Y: print(ds_Y)\n\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(), dtype=tf.int32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(), dtype=tf.int32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(), dtype=tf.int32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(), dtype=tf.int32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(), dtype=tf.int32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(), dtype=tf.int32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(), dtype=tf.int32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(), dtype=tf.int32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(), dtype=tf.int32, name=None)&gt;\n&lt;_TensorSliceDataset element_spec=TensorSpec(shape=(), dtype=tf.int32, name=None)&gt;\n\n\n2024-09-12 11:19:19.923096: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\nfor item in ds_joint:\n    print( item[0].numpy(),':',item[1].numpy() )\n\n[0.16513085 0.9014813  0.6309742 ] : 1\n[0.4345461  0.29193902 0.64250207] : 2\n[0.9757855  0.43509948 0.6601019 ] : 3\n[0.60489583 0.6366315  0.6144488 ] : 4\n[0.8893349  0.6277617  0.53197503] : 5\n[0.02597821 0.44087505 0.25267076] : 6\n[0.8862232  0.88729346 0.78728163] : 7\n[0.05955195 0.0710938  0.3084147 ] : 8\n[0.25118268 0.9084705  0.47147965] : 9\n[0.24238515 0.63300395 0.5860311 ] : 10\n\n\n2024-09-12 11:19:19.939704: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\n# 똑같음\nfor item in ds_joint2:\n    print( item[0].numpy(),':',item[1].numpy() )\n\n[0.16513085 0.9014813  0.6309742 ] : 1\n[0.4345461  0.29193902 0.64250207] : 2\n[0.9757855  0.43509948 0.6601019 ] : 3\n[0.60489583 0.6366315  0.6144488 ] : 4\n[0.8893349  0.6277617  0.53197503] : 5\n[0.02597821 0.44087505 0.25267076] : 6\n[0.8862232  0.88729346 0.78728163] : 7\n[0.05955195 0.0710938  0.3084147 ] : 8\n[0.25118268 0.9084705  0.47147965] : 9\n[0.24238515 0.63300395 0.5860311 ] : 10\n\n\n2024-09-12 11:19:19.952051: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\nds_trans = ds_joint.map( lambda x, y: (x*2-1, y/10))\nfor item in ds_trans:\n    print( item[0].numpy(),':',item[1].numpy() )\n\n[-0.6697383   0.80296254  0.26194835] : 0.1\n[-0.13090777 -0.41612196  0.28500414] : 0.2\n[ 0.951571   -0.12980103  0.32020378] : 0.3\n[0.20979166 0.27326298 0.22889757] : 0.4\n[0.77866983 0.25552344 0.06395006] : 0.5\n[-0.9480436  -0.11824989 -0.49465847] : 0.6\n[0.7724464  0.7745869  0.57456326] : 0.7\n[-0.8808961 -0.8578124 -0.3831706] : 0.8\n[-0.49763465  0.816941   -0.05704069] : 0.9\n[-0.5152297   0.2660079   0.17206216] : 1.0\n\n\n2024-09-12 11:19:47.889358: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\nds_trans2 = ds_joint.map( lambda x, y: ([x[0]+1,x[1]+2,x[2]+3], y/10))\nfor item in ds_trans2:\n    print( item[0].numpy(),':',item[1].numpy() )\n\n[1.1651309 2.9014812 3.6309743] : 0.1\n[1.4345461 2.291939  3.642502 ] : 0.2\n[1.9757855 2.4350996 3.660102 ] : 0.3\n[1.6048958 2.6366315 3.6144488] : 0.4\n[1.8893349 2.6277618 3.531975 ] : 0.5\n[1.0259782 2.440875  3.2526708] : 0.6\n[1.8862232 2.8872933 3.7872815] : 0.7\n[1.059552  2.0710938 3.3084147] : 0.8\n[1.2511827 2.9084706 3.4714797] : 0.9\n[1.2423851 2.633004  3.586031 ] : 1.0\n\n\n2024-09-12 11:19:50.254590: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\nds_shfl = ds_joint.shuffle( buffer_size = len( X ) )\nfor item in ds_shfl:\n  print( item[0].numpy(),':', item[1].numpy() )\n\n[0.60489583 0.6366315  0.6144488 ] : 4\n[0.25118268 0.9084705  0.47147965] : 9\n[0.16513085 0.9014813  0.6309742 ] : 1\n[0.24238515 0.63300395 0.5860311 ] : 10\n[0.4345461  0.29193902 0.64250207] : 2\n[0.8862232  0.88729346 0.78728163] : 7\n[0.05955195 0.0710938  0.3084147 ] : 8\n[0.02597821 0.44087505 0.25267076] : 6\n[0.9757855  0.43509948 0.6601019 ] : 3\n[0.8893349  0.6277617  0.53197503] : 5\n\n\n2024-09-12 11:19:50.712884: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\nds_batch = ds_joint.batch(3, drop_remainder = True )\nfor item in ds_batch :\n  print( item[0].numpy(),':', item[1].numpy() )\n\n[[0.16513085 0.9014813  0.6309742 ]\n [0.4345461  0.29193902 0.64250207]\n [0.9757855  0.43509948 0.6601019 ]] : [1 2 3]\n[[0.60489583 0.6366315  0.6144488 ]\n [0.8893349  0.6277617  0.53197503]\n [0.02597821 0.44087505 0.25267076]] : [4 5 6]\n[[0.8862232  0.88729346 0.78728163]\n [0.05955195 0.0710938  0.3084147 ]\n [0.25118268 0.9084705  0.47147965]] : [7 8 9]\n\n\n2024-09-12 11:19:51.035230: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\nds_rpt = ds_joint.batch(3, drop_remainder = True ).repeat( count = 2 )\nfor item in ds_rpt :\n  print( item[0].numpy(),':', item[1].numpy() )\n\n[[0.16513085 0.9014813  0.6309742 ]\n [0.4345461  0.29193902 0.64250207]\n [0.9757855  0.43509948 0.6601019 ]] : [1 2 3]\n[[0.60489583 0.6366315  0.6144488 ]\n [0.8893349  0.6277617  0.53197503]\n [0.02597821 0.44087505 0.25267076]] : [4 5 6]\n[[0.8862232  0.88729346 0.78728163]\n [0.05955195 0.0710938  0.3084147 ]\n [0.25118268 0.9084705  0.47147965]] : [7 8 9]\n[[0.16513085 0.9014813  0.6309742 ]\n [0.4345461  0.29193902 0.64250207]\n [0.9757855  0.43509948 0.6601019 ]] : [1 2 3]\n[[0.60489583 0.6366315  0.6144488 ]\n [0.8893349  0.6277617  0.53197503]\n [0.02597821 0.44087505 0.25267076]] : [4 5 6]\n[[0.8862232  0.88729346 0.78728163]\n [0.05955195 0.0710938  0.3084147 ]\n [0.25118268 0.9084705  0.47147965]] : [7 8 9]\n\n\n2024-09-12 11:19:51.341547: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\nds_rpt2 = ds_joint.repeat( count = 2 ).batch(3, drop_remainder = True )\nfor item in ds_rpt2 :\n  print( item[0].numpy(),':', item[1].numpy() )\n\n[[0.16513085 0.9014813  0.6309742 ]\n [0.4345461  0.29193902 0.64250207]\n [0.9757855  0.43509948 0.6601019 ]] : [1 2 3]\n[[0.60489583 0.6366315  0.6144488 ]\n [0.8893349  0.6277617  0.53197503]\n [0.02597821 0.44087505 0.25267076]] : [4 5 6]\n[[0.8862232  0.88729346 0.78728163]\n [0.05955195 0.0710938  0.3084147 ]\n [0.25118268 0.9084705  0.47147965]] : [7 8 9]\n[[0.24238515 0.63300395 0.5860311 ]\n [0.16513085 0.9014813  0.6309742 ]\n [0.4345461  0.29193902 0.64250207]] : [10  1  2]\n[[0.9757855  0.43509948 0.6601019 ]\n [0.60489583 0.6366315  0.6144488 ]\n [0.8893349  0.6277617  0.53197503]] : [3 4 5]\n[[0.02597821 0.44087505 0.25267076]\n [0.8862232  0.88729346 0.78728163]\n [0.05955195 0.0710938  0.3084147 ]] : [6 7 8]\n\n\n2024-09-12 11:19:51.662741: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\n# ppt 56번 제일 흔하게 씀\nds_all = ds_joint.shuffle( len(X) ).batch( 3 ).repeat( 2 )\nfor item in ds_all :\n  print( item[0].numpy(),':', item[1].numpy() )\n\n[[0.8893349  0.6277617  0.53197503]\n [0.16513085 0.9014813  0.6309742 ]\n [0.25118268 0.9084705  0.47147965]] : [5 1 9]\n[[0.05955195 0.0710938  0.3084147 ]\n [0.9757855  0.43509948 0.6601019 ]\n [0.8862232  0.88729346 0.78728163]] : [8 3 7]\n[[0.24238515 0.63300395 0.5860311 ]\n [0.4345461  0.29193902 0.64250207]\n [0.60489583 0.6366315  0.6144488 ]] : [10  2  4]\n[[0.02597821 0.44087505 0.25267076]] : [6]\n[[0.16513085 0.9014813  0.6309742 ]\n [0.02597821 0.44087505 0.25267076]\n [0.4345461  0.29193902 0.64250207]] : [1 6 2]\n[[0.24238515 0.63300395 0.5860311 ]\n [0.8862232  0.88729346 0.78728163]\n [0.8893349  0.6277617  0.53197503]] : [10  7  5]\n[[0.9757855  0.43509948 0.6601019 ]\n [0.05955195 0.0710938  0.3084147 ]\n [0.60489583 0.6366315  0.6144488 ]] : [3 8 4]\n[[0.25118268 0.9084705  0.47147965]] : [9]\n\n\n2024-09-12 11:19:52.244921: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>딥러닝 Ch1 실습</span>"
+    ]
+  },
+  {
+    "objectID": "딥러닝실습.html#선형회귀분석-low-lever-ver.",
+    "href": "딥러닝실습.html#선형회귀분석-low-lever-ver.",
+    "title": "2  딥러닝 Ch1 실습",
+    "section": "2.6 6. 선형회귀분석 (low-lever ver.)",
+    "text": "2.6 6. 선형회귀분석 (low-lever ver.)\n\n# alpha=0.8, beta=0.2, error term 일반적인 선형회귀식\nX = tf.random.uniform( minval=0, maxval=10, shape=(36,))\nY = 0.2 * X + 0.8 + tf.random.normal(mean=0, stddev=0.15, shape=(36, ))\n\n\nimport matplotlib.pyplot as plt\nplt.plot(X, Y, 'ro', label='Original Data')\n\n\n\n\n\n\n\n\n\n# 훈련데이터와 평가데이터로 구분\ntrainX, testX = tf.split( X, num_or_size_splits= [30, 6] )\ntrainY, testY = tf.split( Y, num_or_size_splits= [30, 6] )\n\n\nds_train = tf.data.Dataset.from_tensor_slices( ( trainX, trainY ) )\n\n\nW = tf.Variable( np.random.randn() )\nb = tf.Variable( np.random.randn() )\n\n\nprint( W.numpy(), b.numpy() )\n\n0.8828039 -0.736979\n\n\n\n# y^=wx=b\n# L = sum(y^-y)**2\ndef linear_regression( x ):\n  return tf.add( tf.multiply( W, x ), b )\n\ndef mean_square( ypred, y ):\n  return tf.reduce_mean( tf.square( y-ypred ) )\n\noptimizer = tf.optimizers.SGD( learning_rate= 0.01 )\n\n\nnum_epochs = 100\nlog_steps = 50\nbatch_size = 5\nsteps_per_epoch = int( np.ceil( len(ds_train)/ batch_size ) )\nL=[]\nds_train = ds_train.shuffle( buffer_size = len( ds_train ) ).batch( batch_size ).repeat( count=num_epochs )\nlen( ds_train )\n\n600\n\n\n\n# enumerate : index와 item을 동시에 반환함\nfor i, batch in enumerate( ds_train ):\n  bX, bY = batch\n  # pred, loss의 미니배치별 반복연산을 tape에 저장 (tf.GT함수)\n  with tf.GradientTape() as tape:\n    pred = linear_regression( bX )\n    loss = mean_square( pred, bY ) # 각 미치배치에 대한 MSE\n  \n  # 미분값 자동 계산하여 gradient 산출 (손실함수, [변수]) &gt; output은 gredient vector 형태\n  gradients = tape.gradient( loss, [W, b] )\n  # 위 gredient를 이용해서 W, b의 값 자체를 업데이트시킴\n  optimizer.apply_gradients( zip( gradients, [W, b] ) )\n  \n  if i % log_steps == 0 :\n    print( i, loss.numpy(), W.numpy(), b.numpy() )\n    L.append( loss.numpy() )\n\n0 7.52958 0.5514875 -0.78580034\n50 0.6072274 0.4242987 -0.52097505\n100 0.618061 0.36404002 -0.29201853\n150 0.15292463 0.36243728 -0.09439203\n200 0.21440308 0.30857712 0.060085576\n250 0.08130302 0.29104465 0.19385691\n300 0.07720743 0.28864947 0.30360907\n350 0.050805908 0.25714234 0.39301616\n400 0.02672484 0.25849962 0.47066927\n450 0.014631959 0.2344376 0.53165174\n500 0.07283725 0.23046146 0.5840433\n550 0.06650426 0.23649402 0.63017404\n\n\n2024-09-12 11:24:24.415082: W tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence\n\n\n\nimport matplotlib.pyplot as plt\nplt.plot(X, Y, 'ro', label='Original Data')\nplt.plot(X, np.array( W * X + b ), label='Fitted Line' )\nplt.legend()\n\n\n\n\n\n\n\n\n\nplt.plot(L, 'bo-')\nplt.ylabel('Train Loss')\nplt.xlabel('iter')\n\nText(0.5, 0, 'iter')\n\n\n\n\n\n\n\n\n\n\ntpred = linear_regression( testX )\ntest_mse = mean_square( tpred, testY )\ntest_mse.numpy()\n\n0.054581102",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>딥러닝 Ch1 실습</span>"
+    ]
+  },
+  {
+    "objectID": "딥러닝실습.html#선형회귀분석-tf.keras-ver.",
+    "href": "딥러닝실습.html#선형회귀분석-tf.keras-ver.",
+    "title": "2  딥러닝 Ch1 실습",
+    "section": "2.7 7. 선형회귀분석 (tf.keras ver.)",
+    "text": "2.7 7. 선형회귀분석 (tf.keras ver.)\n\nds_train2 = tf.data.Dataset.from_tensor_slices((trainX, trainY))\nds_train2 = ds_train2.shuffle(30).batch(5)\n\n\nmodel = tf.keras.models.Sequential()\nmodel.add( tf.keras.layers.Dense(1, input_dim = 1, activation='linear'))\nmodel.summary()\n\n/Users/hwan/.pyenv/versions/3.10.14/envs/hwan/lib/python3.10/site-packages/keras/src/layers/core/dense.py:87: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.\n  super().__init__(activity_regularizer=activity_regularizer, **kwargs)\n\n\nModel: \"sequential\"\n\n\n\n┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓\n┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃\n┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩\n│ dense (Dense)                   │ (None, 1)              │             2 │\n└─────────────────────────────────┴────────────────────────┴───────────────┘\n\n\n\n Total params: 2 (8.00 B)\n\n\n\n Trainable params: 2 (8.00 B)\n\n\n\n Non-trainable params: 0 (0.00 B)\n\n\n\n\nmodel.compile( loss='mse', optimizer = tf.keras.optimizers.SGD( learning_rate=0.01 ) )\nhistory = model.fit( ds_train2, epochs=100, verbose=1 )\n\nEpoch 1/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 9.2056   \nEpoch 2/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 754us/step - loss: 0.1788\nEpoch 3/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 830us/step - loss: 0.2041\nEpoch 4/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 629us/step - loss: 0.1412\nEpoch 5/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 722us/step - loss: 0.1873\nEpoch 6/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 712us/step - loss: 0.1623\nEpoch 7/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 911us/step - loss: 0.1415\nEpoch 8/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 647us/step - loss: 0.1558\nEpoch 9/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 0.1734\nEpoch 10/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 560us/step - loss: 0.1475\nEpoch 11/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 613us/step - loss: 0.1752\nEpoch 12/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 729us/step - loss: 0.1125\nEpoch 13/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 529us/step - loss: 0.1356\nEpoch 14/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 672us/step - loss: 0.1163\nEpoch 15/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 645us/step - loss: 0.0936\nEpoch 16/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 949us/step - loss: 0.1252\nEpoch 17/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 934us/step - loss: 0.1352\nEpoch 18/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 769us/step - loss: 0.0969\nEpoch 19/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 883us/step - loss: 0.0930\nEpoch 20/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 0.0873\nEpoch 21/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 849us/step - loss: 0.0812\nEpoch 22/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 632us/step - loss: 0.0802\nEpoch 23/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 567us/step - loss: 0.0840\nEpoch 24/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 650us/step - loss: 0.0755\nEpoch 25/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 0.0970\nEpoch 26/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 664us/step - loss: 0.0781\nEpoch 27/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 0.0698\nEpoch 28/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 676us/step - loss: 0.1052\nEpoch 29/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - loss: 0.0698\nEpoch 30/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 959us/step - loss: 0.0751\nEpoch 31/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 620us/step - loss: 0.0814\nEpoch 32/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 703us/step - loss: 0.0579\nEpoch 33/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 769us/step - loss: 0.0752\nEpoch 34/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 701us/step - loss: 0.0487\nEpoch 35/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 574us/step - loss: 0.0602\nEpoch 36/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 720us/step - loss: 0.0826\nEpoch 37/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 551us/step - loss: 0.0546\nEpoch 38/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 595us/step - loss: 0.0613\nEpoch 39/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 712us/step - loss: 0.0552\nEpoch 40/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 551us/step - loss: 0.0515\nEpoch 41/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 843us/step - loss: 0.0542\nEpoch 42/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 617us/step - loss: 0.0401\nEpoch 43/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 978us/step - loss: 0.0669\nEpoch 44/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 563us/step - loss: 0.0532\nEpoch 45/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 728us/step - loss: 0.0451\nEpoch 46/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 568us/step - loss: 0.0468\nEpoch 47/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 767us/step - loss: 0.0416\nEpoch 48/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 626us/step - loss: 0.0615\nEpoch 49/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 698us/step - loss: 0.0498\nEpoch 50/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 606us/step - loss: 0.0507\nEpoch 51/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 823us/step - loss: 0.0406\nEpoch 52/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 543us/step - loss: 0.0414\nEpoch 53/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 702us/step - loss: 0.0328\nEpoch 54/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 528us/step - loss: 0.0382\nEpoch 55/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 867us/step - loss: 0.0480\nEpoch 56/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 681us/step - loss: 0.0454\nEpoch 57/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 592us/step - loss: 0.0360\nEpoch 58/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 549us/step - loss: 0.0473\nEpoch 59/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 846us/step - loss: 0.0390\nEpoch 60/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 560us/step - loss: 0.0338\nEpoch 61/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 552us/step - loss: 0.0294\nEpoch 62/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 622us/step - loss: 0.0294\nEpoch 63/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 756us/step - loss: 0.0449\nEpoch 64/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 626us/step - loss: 0.0288\nEpoch 65/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 554us/step - loss: 0.0272\nEpoch 66/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 645us/step - loss: 0.0283\nEpoch 67/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 11ms/step - loss: 0.0394\nEpoch 68/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - loss: 0.0272\nEpoch 69/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 651us/step - loss: 0.0258\nEpoch 70/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 570us/step - loss: 0.0260\nEpoch 71/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 554us/step - loss: 0.0219\nEpoch 72/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 708us/step - loss: 0.0274\nEpoch 73/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 563us/step - loss: 0.0280\nEpoch 74/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 590us/step - loss: 0.0249\nEpoch 75/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 0.0451\nEpoch 76/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 843us/step - loss: 0.0315\nEpoch 77/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 665us/step - loss: 0.0271\nEpoch 78/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 604us/step - loss: 0.0217\nEpoch 79/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 1ms/step - loss: 0.0219 \nEpoch 80/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 601us/step - loss: 0.0285\nEpoch 81/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 525us/step - loss: 0.0224\nEpoch 82/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 685us/step - loss: 0.0315\nEpoch 83/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 588us/step - loss: 0.0224\nEpoch 84/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 860us/step - loss: 0.0208\nEpoch 85/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 494us/step - loss: 0.0243\nEpoch 86/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 617us/step - loss: 0.0307\nEpoch 87/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 623us/step - loss: 0.0206\nEpoch 88/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 668us/step - loss: 0.0332\nEpoch 89/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 514us/step - loss: 0.0222\nEpoch 90/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 525us/step - loss: 0.0257\nEpoch 91/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 754us/step - loss: 0.0249\nEpoch 92/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 746us/step - loss: 0.0270\nEpoch 93/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 511us/step - loss: 0.0190\nEpoch 94/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 664us/step - loss: 0.0302\nEpoch 95/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 674us/step - loss: 0.0335\nEpoch 96/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 649us/step - loss: 0.0241\nEpoch 97/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 499us/step - loss: 0.0279\nEpoch 98/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 953us/step - loss: 0.0254\nEpoch 99/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 777us/step - loss: 0.0289\nEpoch 100/100\n6/6 ━━━━━━━━━━━━━━━━━━━━ 0s 635us/step - loss: 0.0236\n\n\n\nmodel.weights\n\n[&lt;KerasVariable shape=(1, 1), dtype=float32, path=sequential/dense/kernel&gt;,\n &lt;KerasVariable shape=(1,), dtype=float32, path=sequential/dense/bias&gt;]\n\n\n\nW2 = model.weights[0][0][0]\nb2 = model.weights[1][0]\nprint( W2, b2 )\n\ntf.Tensor(0.21501322, shape=(), dtype=float32) tf.Tensor(0.7366244, shape=(), dtype=float32)\n\n\n\nplt.plot(X, Y, 'ro', label='Original Data')\nplt.plot(X, np.array( W2 * X + b2 ), label='Fitted Line' )\nplt.legend()\n\n\n\n\n\n\n\n\n\ntpred2 = model.predict( testX )\ntest_mse2 = mean_square( tpred2, testY )\ntest_mse2.numpy()\n\n1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 25ms/step\n\n\n0.70796406\n\n\n\nplt.plot(history.history['loss'])\nplt.ylabel('loss')\nplt.xlabel('Epoch')\n\nText(0.5, 0, 'Epoch')",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>딥러닝 Ch1 실습</span>"
     ]
   },
   {
@@ -164,6 +241,50 @@
     ]
   },
   {
+    "objectID": "시뮬레이션hw1.html",
+    "href": "시뮬레이션hw1.html",
+    "title": "시뮬레이션 방법론 과제1 (베리어옵션)",
+    "section": "",
+    "text": "Question",
+    "crumbs": [
+      "시뮬레이션 방법론('24 가을)",
+      "시뮬레이션 방법론 과제1 (베리어옵션)"
+    ]
+  },
+  {
+    "objectID": "시뮬레이션hw1.html#answer-1",
+    "href": "시뮬레이션hw1.html#answer-1",
+    "title": "시뮬레이션 방법론 과제1 (베리어옵션)",
+    "section": "Answer 1",
+    "text": "Answer 1\n\n파라미터 및 알고리즘\n먼저, MCS를 이용한 베리어옵션의 가격 계산에 필요한 파라미터는 아래와 같습니다.\ns : 기초자산의 가격\nk : 옵션의 행사가격\nt : 옵션의 만기(연)\nb : 옵션의 베리어\nr : 무위험 금리\nstd : 기초자산의 변동성(표준편차)\nUpDown : \"U\"이면 기초자산이 베리어보다 크면 knock, \"D\"이면 작으면 knock\nInOut : \"I\"이면 Knock-in, \"O\"이면 Knock-out\nCallPut : \"C\"이면 콜옵션, \"P\"이면 풋옵션\nn : 시뮬레이션의 반복 횟수\nm : 기초자산의 가격 관측 횟수\nseed(=0) : 난수 생성의 최초 시드값\n위 파라미터를 이용해 베리어옵션 가격 산출 함수를 구성할 계획이며, 알고리즘은 아래와 같습니다.\n\nGBM을 따르는 기초자산의 가격 경로를 이산오일러근사를 이용하여 구성\n이를 통해, 관측된 m개의 기초자산의 가격과 초기값 \\(S_0\\)까지 m+1개의 기초자산 기준값 생성\n기초자산 기준값과 베리어를 비교하여 옵션 pay-off 발생 여부 판단\n\nUp and Out : 모든 기준값이 베리어보다 작은 경우, pay-off 발생\nDown and Out : 모든 기준값이 베리어보다 큰 경우, pay-off 발생\nUp and In : 어느 기준값 중 하나라도 베리어보다 큰 경우, pay-off 발생\nDown and In : 어느 기준값 중 하나라도 베리어보다 작은 경우, pay-off 발생\n\npay-off가 없으면 옵션가치는 0, 있으면 Call/Put 종류에 따라 pay-off를 계산하고, 그 현재가치가 이번 시뮬레이션의 옵션의 가치\n1~5를 n번 반복후 모든 옵션가치를 평균하여 최종적으로 베리어옵션의 가격 산출\n\n이에 따른 Python 코드는 아래와 같습니다.\n\n\nPython 구현\n\nimport numpy as np\n\ndef GBM_path(s, r, std, t, m):\n    dt = t/m\n    z = np.random.standard_normal( m )\n    ratio_path = np.exp((r-0.5*(std**2))*dt+std*np.sqrt(dt)*z)\n    price_path = s*ratio_path.cumprod()\n    return price_path\n\ndef BarrierOptionsPrice(s, k, t, b, r, std, UpDown, InOut, CallPut, n=10000,m=250):\n    '''\n    s : underlying price at t=0\n    k : strike price\n    t : maturity (year)\n    b : barrier price\n    r : risk-free rate (annualization, 1%=0.01)\n    std : standard deviation of underlying return (annualization, 1%=0.01)\n    UpDown : Up is \"U\", Down is \"D\" (should be capital)\n    InOut : In is \"I\", Out is \"O\" (should be capital)\n    CallPut : Call is \"C\", Put is \"P\" (should be capital)\n    n : number of simulation\n    m : number of euler-discrete partition\n    '''\n    barrier_simulation = np.zeros(n)\n    for i in range(n):\n        underlying_path = GBM_path(s,r,std,t,m)\n\n        if UpDown==\"U\" and InOut==\"O\" :\n            payoff_logic = 1 if np.sum(underlying_path&gt;=b)==0 else 0\n        elif UpDown==\"U\" and InOut==\"I\" :\n            payoff_logic = 0 if np.sum(underlying_path&gt;=b)==0 else 1\n        elif UpDown==\"D\" and InOut==\"O\" :\n            payoff_logic = 1 if np.sum(underlying_path&lt;b)==0 else 0\n        elif UpDown==\"D\" and InOut==\"O\" :\n            payoff_logic = 0 if np.sum(underlying_path&lt;b)==0 else 1\n       \n        if CallPut==\"C\" :\n            plain_price = np.maximum(underlying_path[-1]-k,0)*np.exp(-r*t)\n        elif CallPut==\"P\" :\n            plain_price = np.maximum(k-underlying_path[-1],0)*np.exp(-r*t)\n\n        barrier_simulation[i] = plain_price*payoff_logic\n    \n    barrier_price = barrier_simulation.mean()\n\n    return barrier_price, barrier_simulation\n\n\n\n\n\n\n\n저는 한번의 시뮬레이션에 이용되는 이산-오일러 구간마다의 기초자산가격 m개를,\n먼저 m개의 z분포 변수를 생성하고, log-normal dist.에 따른 구간별 수익률로 변환 후,\n해당 수익률을 누적곱하여 path를 생성하였습니다.\n즉, 구간별 가격을 하나씩 생성하여 총 n*m번의 루프문을 작성하는 대신 n번의 루프문을 작성한 것 입니다.\n또한 이러한 방식 외에도, 한번에 nm개의 z분포 변수를 생성하고, mn matrix로 변환하여\n루프문 없이 한번의 행렬연산으로 MCS를 진행하는 방법도 생각해볼 수 있으나, (속도는 빠를 것으로 예상)\n시뮬레이션의 횟수 n이 100만번 혹은 그 이상 커질 경우 메모리부족 등이 우려되어 고려하지 않았습니다.\n\n\n\n\n\nAnalytic Solution과 비교\n해당 코드를 이용하여 베리어옵션 가격을 추정할 수 있으며, 이를 예재(QuantLib)의 결과값과 비교해보겠습니다.\n시뮬레이션 파라미터는 n=10000, m=250으로 설정하였습니다.\n\nimport QuantLib as ql\n\nS = 100; r = 0.03; vol = 0.2; T = 1; K = 100; B = 120; rebate = 0\nbarrierType = ql.Barrier.UpOut; optionType = ql.Option.Call\n\n#Barrier Option\ntoday = ql.Date().todaysDate(); maturity = today + ql.Period(T, ql.Years)\n\npayoff = ql.PlainVanillaPayoff(optionType, K)\neuExercise = ql.EuropeanExercise(maturity)\nbarrierOption = ql.BarrierOption(barrierType, B, rebate, payoff, euExercise)\n\n#Market\nspotHandle = ql.QuoteHandle(ql.SimpleQuote(S))\nflatRateTs = ql.YieldTermStructureHandle(ql.FlatForward(today, r, ql.Actual365Fixed()))\nflatVolTs = ql.BlackVolTermStructureHandle(ql.BlackConstantVol(today, ql.NullCalendar(), vol, ql.Actual365Fixed()))\nbsm = ql.BlackScholesProcess(spotHandle, flatRateTs, flatVolTs)\nanalyticBarrierEngine = ql.AnalyticBarrierEngine(bsm)\n\n#Pricing\nbarrierOption.setPricingEngine(analyticBarrierEngine)\nQL_UOCprice = barrierOption.NPV()\n\n# Hyeonghwan Pricing\nHH_UOCprice, HH_UOCmatrix = BarrierOptionsPrice(S, K, T, B, r, vol, \"U\", \"O\", \"C\")\n\nprint(\"Up & Out Call with S=100, K=100, B=120, T=1, Vol=0.2, r= 0.03\",\"\\n\",\n    \"QuantLib price :\", QL_UOCprice,\"\\n\",\n    \"Hyeonghwan price :\", HH_UOCprice,\"\\n\",\n    \"Difference is\", QL_UOCprice - HH_UOCprice)\n\nUp & Out Call with S=100, K=100, B=120, T=1, Vol=0.2, r= 0.03 \n QuantLib price : 1.155369999815115 \n Hyeonghwan price : 1.3167584584937844 \n Difference is -0.16138845867866936\n\n\n다음은 동일한 파라미터를 이용하여 Up and In Call Barrier Option price를 비교하였습니다.\n\n\nUp & In Call with S=100, K=100, B=120, T=1, Vol=0.2, r= 0.03 \n QuantLib price : 8.258033384037908 \n Hyeonghwan price : 8.184781674327045 \n Difference is 0.07325170971086337\n\n\n비교결과, 대체로 유사하였으나 오차가 상당수준 발생하였습니다.\nUp&Out에서는 MCS의 결과값이 크고 Up&In에서는 Analytic form의 결과값이 큰 경향이 있는데,\n이는 이산-오일러 근사을 통해 Continuous 구간을 m개(discrete)로 나누면서 발생한 것으로 추정됩니다.\n(모형 이산화 오류(Model Discretization Error)로 인해 편의(Bias) 발생)\n즉, 실제 베리어 Knock 여부는 기초자산의 연속적인 가격흐름을 모두 관측하여 판단해야하지만,\n이산화 과정에서 m번만 관측(m=250은 1일에 1번꼴)하게 되면서 그 사이의 가격을 관측할 수 없게 됩니다.\n이로 인해 Knock-out 방식의 옵션은 고평가되고, Knock-in 방식의 옵션은 저평가되는 결과가 나타납니다.\n이러한 편의는 m이 커질수록 작아져서 0으로 수렴하게 되며, 이에 대해서는 Answer3에서 다루겠습니다.",
+    "crumbs": [
+      "시뮬레이션 방법론('24 가을)",
+      "시뮬레이션 방법론 과제1 (베리어옵션)"
+    ]
+  },
+  {
+    "objectID": "시뮬레이션hw1.html#answer-2",
+    "href": "시뮬레이션hw1.html#answer-2",
+    "title": "시뮬레이션 방법론 과제1 (베리어옵션)",
+    "section": "Answer 2",
+    "text": "Answer 2\n\nIn-Out parity 정의\n베리어옵션의 In-Out parity란, 특정 상황에서 베리어옵션과 plain vanilla option의 가격 사이에 성립하는 등식을 말합니다.\n구체적으로 plain vanilla call option이 \\(c_{plain}=f(S,K,T,r,\\sigma,d)\\)로 주어져있고,\n베리어 B를 Knock할 때, 위 옵션과 동일한 pay-off를 제공하는 베리어옵션을 \\(c_{In}\\), \\(c_{Out}\\)라고 한다면,\n이들 옵션 사이에는 아래와 같은 등식이 성립하게 됩니다.\n\\[c_{In}+c_{Out}=c_{plain}\\]\n이는 풋옵션에서도 동일하게 성립되며, 일반적인 유로피안 옵션은 Knock-In + Knock-Out 배리어옵션으로 분해할 수 있다는 의미가 됩니다.\n\n\n증명\n예시를 통해 In-Out parity가 성립함을 쉽게 알 수 있습니다.\n배리어가 B로 동일한 Knock-In & Out 옵션을 각각 I와 O라고 하겠습니다.\nI는 lookback period동안 기초자산의 가격이 B를 한번이라도 Knock하는 경우 payoff가 발생합니다. (Up & Down 포괄)\nO는 lookback period동안 기초자산의 가격이 B를 한번이라도 Knock하지 않는 경우 payoff가 발생합니다.\n따라서, 기간동안 Knock가 발생하면 I는 payoff가 발생하고 O는 payoff가 0이 되며,\nKnock가 발생하지 않으면 I는 payoff가 0이 되고 O는 payoff가 발생합니다.\n즉, I+O로 구성된 배리어옵션 포트폴리오를 생각하면 모든 기초자산의 가격범위에 대하여 payoff가 한번 발생하고\n해당 payoff는 plain vanilla 옵션의 payoff와 동일하므로 In-Out parity가 성립하게 됩니다.\n이를 수식으로 표현하면 아래와 같습니다.\n\\(c_{In}+c_{Out}=E^Q[e^{-rT}(S_T-K)^+\\mathbb{I}_{(\\exists S_t\\geq B)}]+E^Q[e^{-rT}(S_T-K)^+\\mathbb{I}_{(\\forall S_t&lt; B)}]\\)\n\\(\\;\\;\\;\\;\\;\\;\\;\\;\\;\\;\\;=E^Q[e^{-rT}(S_T-K)^+](\\mathbb{I}_{(\\exists S_t\\geq B)}+\\mathbb{I}_{(\\forall S_t&lt;B)})=E^Q[e^{-rT}(S_T-K)^+]\\)\n\\(\\;\\;\\;\\;\\;\\;\\;\\;\\;\\;\\;=c_{plain}\\;where\\;\\mathbb{I}_A=1\\;if\\;A\\;is\\;true\\;else\\;0\\)\n이는 MCS방식으로 베리어옵션을 가치평가를 할 때에도 쉽게 알 수 있는데,\n위 python코드에서 베리어옵션의 종류에 따라 payoff 발생여부를 판별할 때 사용한 if문에서\nIn, Out의 차이는 동전던지기의 앞뒷면처럼 상호배타적(mutually exclusive)임을 알 수 있습니다.\n\n\nMCS에서의 활용\n한종류의 베리어옵션과 plain 옵션의 가격을 알고 있다면 다른 한 종류의 베리어옵션의 가격이 결정되므로,\nMCS를 이용하여 베리어옵션의 가격을 계산할 때 두번의 시뮬레이션을 한번으로 축소할 수 있을 것으로 생각해볼 수 있습니다.\n그러나, 이는 현재 위 코드가 사전에 In, Out을 지정하고 한 경우에 대해서 return값을 반환하기 때문인데\n이를 수정하여 Input으로 In, Out을 지정하지 않고 함수 내에서 In, Out 결과값을 각각 반환하게 한다면\n시뮬레이션의 축소효과는 사라지게 됩니다.\n더 나아가, 한번의 GBM경로를 생성하는 것에서 plain vanilla call&put, 배리어 In&Out, Up&Down옵션의 가격을\n모두 산출할 수 있으므로 parity를 이용하여 시뮬레이션 시간을 극적으로 단축하기는 어려울 것 같습니다.\n이외에도 산출된 결과값들끼리 parity를 이용해 적정성 여부를 검증하는 용도로는 활용성이 있을 것 같습니다.\n이때에도, parity가 성립하려면 bsm fomula를 통한 plain vanilla옵션이 아닌,\n베리어옵션과 동일한 이산오일러근사를 사용한 plain vanilla옵션의 가격을 사용해야 합니다.",
+    "crumbs": [
+      "시뮬레이션 방법론('24 가을)",
+      "시뮬레이션 방법론 과제1 (베리어옵션)"
+    ]
+  },
+  {
+    "objectID": "시뮬레이션hw1.html#answer-3",
+    "href": "시뮬레이션hw1.html#answer-3",
+    "title": "시뮬레이션 방법론 과제1 (베리어옵션)",
+    "section": "Answer 3",
+    "text": "Answer 3\n베리어옵션의 실제 가격을 \\(y_{real}\\),\n각 옵션가치의 평균인 MCS가격을 \\(\\bar{y}\\)라고 하면,\n\\(bias^2=(y_{real}-\\bar{y})^2\\), \\(variance=S.E^2\\)라고 할 수 있습니다.\n\\(y_{real}\\)을 QuantLib의 결과값이라고 가정하고, Up&Out call옵션을 통해 이들의 관계를 살펴보겠습니다.\n\nimport time\ny_real = QL_UOCprice\n\nN = 10000; M = 250\n\nstart = time.time()\ny_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, \"U\", \"O\", \"C\", n=N, m=M)\nend = time.time()\n\nbias = (y_real - y_mean)**2\nvariance = y.std(ddof = 1) / np.sqrt(N)\ncal_time = end-start\n\nprint(\"When N :\",N,\" and M :\",M,\"\\n\",\n\"Bias^2 :\",bias,\"\\n\",\n\"Variance :\", variance, \"\\n\",\n\"MSE :\", bias+variance, \"\\n\",\n\"Calculation time :\", cal_time, \"second\", \"\\n\")\n\nWhen N : 10000  and M : 250 \n Bias^2 : 0.004735564892121882 \n Variance : 0.033045689710265246 \n MSE : 0.037781254602387127 \n Calculation time : 0.18940114974975586 second \n\n\n\nN을 증가시킬수록 시뮬레이션의 분산은 감소하나 편의는 감소하지 않는 경향이 있습니다.\n\n\nWhen N : 50000  and M : 250 \n Bias^2 : 0.02556392770947923 \n Variance : 0.015291454337551347 \n MSE : 0.040855382047030576 \n Calculation time : 0.9537122249603271 second \n\n\n\n\n\nWhen N : 100000  and M : 250 \n Bias^2 : 0.02042157902281846 \n Variance : 0.010775055072765018 \n MSE : 0.03119663409558348 \n Calculation time : 1.9024550914764404 second \n\n\n\n\n\nWhen N : 500000  and M : 250 \n Bias^2 : 0.022326758269940412 \n Variance : 0.004815294466110417 \n MSE : 0.02714205273605083 \n Calculation time : 9.6889967918396 second \n\n\n\nM을 증가시킬수록 편의는 감소하나 분산은 유사한 경향이 있습니다.\n\n\nWhen N : 10000  and M : 250 \n Bias^2 : 0.02252876825744421 \n Variance : 0.03408000131210354 \n MSE : 0.05660876956954775 \n Calculation time : 0.19436216354370117 second \n\n\n\n\n\nWhen N : 10000  and M : 1000 \n Bias^2 : 0.004332355279791986 \n Variance : 0.032794591374410965 \n MSE : 0.03712694665420295 \n Calculation time : 0.434345006942749 second \n\n\n\n\n\nWhen N : 10000  and M : 5000 \n Bias^2 : 0.005071061035771543 \n Variance : 0.032695894399324556 \n MSE : 0.037766955435096096 \n Calculation time : 1.7383990287780762 second \n\n\n\n\n\nWhen N : 10000  and M : 10000 \n Bias^2 : 0.0025154930437261617 \n Variance : 0.03240624563881079 \n MSE : 0.03492173868253695 \n Calculation time : 3.2284748554229736 second \n\n\n\nN과 M을 증가시킬수록 계산시간도 증가하므로, 한정된 계산시간 하에 MSE를 최소화하도록 N과 M을 정해야할 필요가 있습니다.",
+    "crumbs": [
+      "시뮬레이션 방법론('24 가을)",
+      "시뮬레이션 방법론 과제1 (베리어옵션)"
+    ]
+  },
+  {
     "objectID": "수치해석1.html",
     "href": "수치해석1.html",
     "title": "수치해석학 Ch1",
@@ -208,6 +329,28 @@
     ]
   },
   {
+    "objectID": "수치해석1.html#수치적-불안정성과-악조건",
+    "href": "수치해석1.html#수치적-불안정성과-악조건",
+    "title": "수치해석학 Ch1",
+    "section": "수치적 불안정성과 악조건",
+    "text": "수치적 불안정성과 악조건\n수치적 불안정성 : 알고리즘이 rounding error를 증폭시켜 결과값이 크게 달라짐\n악조건 : input data의 작은 변동이 output solution에 큰 변화를 일으킴\n\n행렬의 조건수\n문제 f(x)의 해가 x(input)에 얼마나 영향을 받는지 나타내는 값\n탄력성의 절대값 : \\(cond(f(x))\\approx\\frac{|xf'(x)|}{|f(x)|}\\)\n탄력성의 절대값이 크면 악조건임\nLinear system에서 행렬의 조건수 \\(k(A)=||A^{-1}||\\;||A||\\)\n\\(조건수&gt;1/\\sqrt{eps}\\approx 6.7\\times 10^7\\)이면 약조건 우려",
+    "crumbs": [
+      "수치해석학('24 가을)",
+      "수치해석학 Ch1"
+    ]
+  },
+  {
+    "objectID": "수치해석1.html#알고리즘의-계산-복잡도",
+    "href": "수치해석1.html#알고리즘의-계산-복잡도",
+    "title": "수치해석학 Ch1",
+    "section": "알고리즘의 계산 복잡도",
+    "text": "알고리즘의 계산 복잡도\n실행시간을 많이 다룰거임.\n\n알고리즘 복잡도\norder가 중요함\nbig-O를 표현식으로 쓰는데, 계산효율성이나 오차크기를 나타낼때 씀\n\\(O(n^2)\\) : 데이터를 10배 늘리면 계산이 100배 늘어남\n\\(O(n^{-2})\\) : 데이터를 10배 늘리면 오차가 100배 감소함",
+    "crumbs": [
+      "수치해석학('24 가을)",
+      "수치해석학 Ch1"
+    ]
+  },
+  {
     "objectID": "리스크관리1.html",
     "href": "리스크관리1.html",
     "title": "금융시장 리스크관리 1~2주차",
@@ -224,6 +367,17 @@
     "title": "금융시장 리스크관리 1~2주차",
     "section": "",
     "text": "Delta hedging\n\\(\\Delta=\\frac{\\partial P}{\\partial S}\\)\n가장 기본적인 헷징방법으로, 파생상품과 같은 금융상품으로 구성된 포트폴리오에 대해\n기초자산의 가격변동에 대한 민감도인 델타를 계산하여 이를 0으로 만듦으로써\n기초자산의 가격변화로 인한 포트폴리오의 가치변화를 0으로 만드는 방법.\n포트폴리오의 payoff가 선형이라면, 한번의 헷징만으로 완전헷지(perfect hedge)가 가능\n이를 Hedge and forget이라고 함.\n그러나 비선형이라면, 기초자산의 가격변동에 따라 델타도 변하게 됨.\n\n\n\n\n\n\n델타헷지 예시\n\n\n\n은행이 특정 주식 10만주에 대한 콜옵션을 30만불에 매도할 수 있음.\n블랙숄즈공식에 따른 이 옵션의 가치는 24만불 (\\(S_0=49,K=50,r=0.05,\\sigma=0.2,T=20w\\))\n어떻게 6만불의 차익거래를 실현시킬지?\n\n풋콜페리티 또는 시장에서 동일한 옵션을 24만불에 매수하여 실현\n그러나, 옵션매수가 불가능한 경우 기초자산 주식을 이용한 델타헷징을 반복\n\n즉, 옵션 매도포지션의 델타만큼 주식을 매수하고 매주 리밸런싱\n20주 후 주식 매도수를 반복하여 구축한 델타헷징은 약 26만불의 비용이 발생하였음\n-&gt; 약 4만불의 차익거래를 실현함\n2만불은 어디로 증발함? : 델타헷징에 드는 비용 (거래비용 등)\n헷지를 자주할수록, 거래비용이 적을수록, 기초자산의 가격변동이 작을수록 차익은 6만불로 수렴\n\n\n기초자산을 이용한 델타헷징은 비용이 발생할수밖에 없음.\n콜옵션을 기준으로 할 때, 기초자산의 가격이 상승하면 콜옵션의 머니니스가 증가하면서 델타가 증가함.\n콜옵션 매도를 델타헷징하다보면, 주가 상승 -&gt; 델타 상승 -&gt; 주식 매수\n반대로, 주가 하락 -&gt; 델타 감소 -&gt; 주식 매도\n즉, 주식이 오르면 팔고 내리면 팔아야함 (Sell low, Buy high Strategy)\n\n\n기타 그릭스\nGamma (\\(\\Gamma=\\frac{\\partial\\Delta}{\\partial S}=\\frac{\\partial^2P}{\\partial S^2}\\))\n베가 로 그런거는 대충넘어갔음\n\n\nTaylor Series Expansion\n테일러 전개는 다항전개식의 일종으로, 복잡한 함수를 다항함수를 이용하여 간단히 전개할 수 있어 근사식에 많이 활용\n\\[f(x)=f(x_0)+f'(x_0)(x-x_0)+\\frac{1}{2}f''(x_0)(x-x_0)^2+\\dotsm\\]\n금융시장에서 이를 적용한다면? \\(f(x)\\)는 포트폴리오의 가격함수이며, \\(x\\)는 기초자산가격으로 대입 가능\n\\(\\Rightarrow f(x)-f(x_0)=f'(x_0)(x-x_0)+\\frac{1}{2}f''(x_0)(x-x_0)^2\\)\n\\(\\Rightarrow \\Delta f(x)=f'(x_0)\\Delta x+\\frac{1}{2}f''(x_0)\\Delta x^2\\)\n기초자산의 변화(\\(\\Delta x\\))에 따른 포트폴리오 가치변화(\\(\\Delta f\\))는 델타(듀레이션) 및 감마(컨벡시티)로 근사 가능\n포트폴리오 \\(P\\)를 기초자산의 가격 및 시간에 따른 함수 \\(P(S,t)\\)라고 한다면, (변동성은 상수로 가정)\n\\[\\Delta P=\\frac{\\partial P}{\\partial S}\\Delta S+\\frac{\\partial P}{\\partial t}\\Delta t+\\frac{1}{2}\\frac{\\partial^2P}{\\partial S^2}\\Delta S^2+\\frac{1}{2}\\frac{\\partial^2P}{\\partial t^2}\\Delta t^2+\\frac{\\partial^2P}{\\partial S\\partial t}\\Delta S\\Delta t+\\dotsm\\]\n일반적으로 \\(\\Delta t^2=0, \\Delta S\\Delta t=0\\)으로 가정하므로,\n\\[\\Rightarrow \\Delta P\\approx \\frac{\\partial P}{\\partial S}\\Delta S+\\frac{\\partial P}{\\partial t}\\Delta t+\\frac{1}{2}\\frac{\\partial^2P}{\\partial S^2}\\Delta S^2\\]\n즉, 포트폴리오의 가치변화는 델타, 세타, 감마로 표현되며 델타중립 포트폴리오를 구성했다면,\n\\[\\Delta P=\\Theta \\Delta t+\\frac{1}{2}\\Gamma \\Delta S^2\\]\n\n\n\n\n\n\nNote\n\n\n\n아래로 볼록한 형태인 옵션 매수는 positive gamma,\n위로 볼록한 형태인 옵션 매도는 negative gamma (관리 어려움)\n\n\n만약 변동성이 변수라면?\n\\(\\Delta P=\\delta \\Delta S+Vega\\Delta\\sigma+\\Theta\\Delta t+\\frac{1}{2}\\Gamma\\Delta S^2\\)\n\n\nHedging in practice\n델타헷징은 보통 매일하고, 감마나 베가는 영향이 매우 크지는 않아서 모니터링하다가,\n일정 임계치를 넘어가면 헷지 시작(헷지도 어렵고 비용도 보다 많이 듬)\n특히, 만기가 임박한 ATM옵션은 감마와 베가가 매우 크므로, 주로 관리하게됨",
+    "crumbs": [
+      "금융시장 리스크관리('24 가을)",
+      "금융시장 리스크관리 1~2주차"
+    ]
+  },
+  {
+    "objectID": "리스크관리1.html#lecture3-volatility",
+    "href": "리스크관리1.html#lecture3-volatility",
+    "title": "금융시장 리스크관리 1~2주차",
+    "section": "Lecture3 : Volatility",
+    "text": "Lecture3 : Volatility\nStandard approach to estimating Volatility\n\\(\\sigma_n^2=\\frac{1}{m-1}\\sum_{i=1}^m(u_{n-i}-\\bar{n})^2\\;for\\;u_i=\\ln(\\frac{S_i}{S_{i-1}})\\)\nSimplify, \\(\\sigma_n^2=\\frac{1}{m}\\sum_{i=1}^mu_{n-i}^2\\;for\\;u_i=\\frac{S_i-S_{i-1}}{S_{i-1}},\\bar{u}=0\\)\n\nWeighting Schemes\n$\\(\\sigma_n^2=\\sum_{i=1}^m\\alpha_iu_{n-i}^2\\;for\\;\\sum_i\\alpha_i=1\\)\nEWMA(Exponentially Weighted Moving Average) : \\(\\alpha_{i+1}=\\lambda\\alpha_i\\;where\\;0&lt;\\lambda&lt;1\\)\nARCH, GARCH 등등 많음\n\n\n최대우도법, Maximum Likelihood Method\n최대우도법이란, 우리에게 주어진 데이터가 있고, 이 데이터가 어떠한 분포를 따르는지 추정하기 위함.\n\n주어진 데이터가 있고\n어떤 분포를 따르는지 사전에 설정함\n분포에 따라 추정이 필요한 파라미터 \\(\\theta_n\\)이 생길 때,\n주어진 데이터에 대한 확률밀도함수의 곱(독립된 결합밀도함수)을 최대화시키는 \\(\\theta\\)를 찾는 것이 목표\n즉, 확률을 최대화시키는 파라미터를 추정하여 추정분포를 결정함\n\n주가수익률의 관측치 \\(u_i\\)가 평균이 0인 정규분포를 따른다고 가정한다면?\n변동성 \\(\\sigma\\)를 추정하기 위해 최대우도법을 사용할 수 있음.\nMaximize : \\(ML=\\Pi_{i=1}^n[\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{\\frac{-u_i^2}{2\\sigma}}]\\)\n\\(y=x\\)와 \\(y=\\ln x\\)는 일대일대응관계가 성립하므로, log transform을 통해\nSame to maximize : \\(\\ln ML=\\sum_{i=1}^n[\\ln(\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{\\frac{-u_i^2}{2\\sigma^2}})]=n\\ln(\\frac{1}{\\sqrt{2\\pi\\sigma^2}})-\\frac{1}{2\\sigma^2}\\sum_{i=1}^nu_i^2\\)\n위 식을 \\(\\sigma\\)에 대해 다시 정리하면, \\(n\\ln(\\frac{1}{\\sqrt{2\\pi}})-\\frac{n}{2}\\ln(\\sigma^2)-\\sum u_i^2\\frac{1}{2\\sigma^2}\\)\n\\(\\sigma^2\\)에 대해 미분을 통해, \\(\\ln ML_{\\sigma^2}=-\\frac{n}{2\\sigma^2}+\\frac{\\sum u_i}{2(\\sigma^2)^2}\\)\n미분계수가 0인 점이 ML 함수를 극대화 시키는 점이므로, \\(-\\frac{n}{2\\sigma^2}+\\frac{\\sum u_i}{2(\\sigma^2)^2}=0\\)\n\\(\\Rightarrow\\;n\\sigma^2=\\sum u_i,\\;\\therefore\\;\\sigma^2=\\frac{\\sum u_i}{n}\\)\n\n\nCharacteristics of Volatility\n상수는 아님\n근데 경향성이 있음 (persistence), 따라서 모아놓으면 군집화 경향이 있음 (Clustering)\n평균회귀 성향이 있음 (mean reverting)\n주가수익률과 음의 상관관계가 있음. (경기침체에 변동성 증가)\n근데 EWMA, GARCH는 이런 음의 상관관계를 반영하지는 않음\n\n\nHow Good is the Model?\n변동성 모델을 평가할 때, 일반적으로 \\(u_n\\sim N(0,\\sigma_n^2)\\)을 따르므로\n\\(\\frac{u_n}{\\sigma_n}\\sim Z\\)를 통해서 검증함.\n이 의미는, 매일매일 자산수익률과 모델변동성을 통해 독립된 Z분포를 따르는 \\(z_n=\\frac{u_n}{\\sigma_n}\\)을 생성할 수 있고\n이 \\(z_n\\)은 서로 독립인지를 봄으로써 검증할 수 있음.\n이건 Ljung-Box Test로 널리 알려져 있음.\n\\(z_n\\)을 통해 autocorrelation=0(H0)임을 검증하는 테스트임.",
     "crumbs": [
       "금융시장 리스크관리('24 가을)",
       "금융시장 리스크관리 1~2주차"
@@ -289,21 +443,87 @@
     "href": "미시hw1.html#assignments-1",
     "title": "Microanalysis of financial economics Assignment1",
     "section": "Assignments 1",
-    "text": "Assignments 1\n\n\nAnswer\nLet \\(P_0=3.46\\) and \\(Q_0^D=Q_0^S=2630\\),\nSet \\(\\frac{\\Delta P_{(=P_1-P_0)}}{P_0}=0.01\\), so \\(P_1=3.46+0.0346=3.4946\\)\nThen, \\(Q_1^D=3550-266P_1=2620.4364\\) and \\(Q_1^S=1800+240P_1=2638.704\\)\nSo, \\(\\frac{\\Delta Q^D}{Q_0^D}=\\frac{-9.5636}{2630}\\approx -0.36\\%\\) and \\(\\frac{\\Delta Q^S}{Q_0^S}=\\frac{8.704}{2630}\\approx 0.33\\%\\)\nFinally, Price elasticity of Demand is \\(\\frac{-0.36\\%}{1\\%}\\approx -0.3636\\).\nPrice elasticity of Supply is \\(\\frac{0.33\\%}{1\\%}\\approx 0.3310\\)",
+    "text": "Assignments 1\n\n\nAnswer\nWe can say that price elasticity, \\(E_p=\\frac{\\frac{\\Delta Q}{Q}}{\\frac{\\Delta P}{P}}=\\frac{P}{Q}\\frac{\\Delta Q}{\\Delta P}\\)\nSince \\(P_0=3.46,\\;Q_0^D=Q_0^S=2630\\) and \\(\\frac{\\Delta Q^D}{\\Delta P^D}=-266,\\;\\frac{\\Delta Q^S}{\\Delta P^S}=240\\),\nPrice elasticity of Demand is \\(\\frac{3.46}{2630}\\times -266\\approx -0.35\\).\nPrice elasticity of Supply is \\(\\frac{3.46}{2630}\\times 240\\approx 0.32\\)",
     "crumbs": [
       "미시경제학('24 가을)",
       "Microanalysis of financial economics Assignment1"
     ]
   },
   {
-    "objectID": "리스크관리1.html#lecture3-volatility",
-    "href": "리스크관리1.html#lecture3-volatility",
-    "title": "금융시장 리스크관리 1~2주차",
-    "section": "Lecture3 : Volatility",
-    "text": "Lecture3 : Volatility\nStandard approach to estimating Volatility\n\\(\\sigma_n^2=\\frac{1}{m-1}\\sum_{i=1}^m(u_{n-i}-\\bar{n})^2\\;for\\;u_i=\\ln(\\frac{S_i}{S_{i-1}})\\)\nSimplify, \\(\\sigma_n^2=\\frac{1}{m}\\sum_{i=1}^mu_{n-i}^2\\;for\\;u_i=\\frac{S_i-S_{i-1}}{S_{i-1}},\\bar{u}=0\\)\n\nWeighting Schemes\n$\\(\\sigma_n^2=\\sum_{i=1}^m\\alpha_iu_{n-i}^2\\;for\\;\\sum_i\\alpha_i=1\\)\nEWMA(Exponentially Weighted Moving Average) : \\(\\alpha_{i+1}=\\lambda\\alpha_i\\;where\\;0&lt;\\lambda&lt;1\\)\nARCH, GARCH 등등 많음\n\n\n최대우도법, Maximum Likelihood Method\n최대우도법이란, 우리에게 주어진 데이터가 있고, 이 데이터가 어떠한 분포를 따르는지 추정하기 위함.\n\n주어진 데이터가 있고\n어떤 분포를 따르는지 사전에 설정함\n분포에 따라 추정이 필요한 파라미터 \\(\\theta_n\\)이 생길 때,\n주어진 데이터에 대한 확률밀도함수의 곱(독립된 결합밀도함수)을 최대화시키는 \\(\\theta\\)를 찾는 것이 목표\n즉, 확률을 최대화시키는 파라미터를 추정하여 추정분포를 결정함\n\n주가수익률의 관측치 \\(u_i\\)가 평균이 0인 정규분포를 따른다고 가정한다면?\n변동성 \\(\\sigma\\)를 추정하기 위해 최대우도법을 사용할 수 있음.\nMaximize : \\(ML=\\Pi_{i=1}^n[\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{\\frac{-u_i^2}{2\\sigma}}]\\)\n\\(y=x\\)와 \\(y=\\ln x\\)는 일대일대응관계가 성립하므로, log transform을 통해\nSame to maximize : \\(\\ln ML=\\sum_{i=1}^n[\\ln(\\frac{1}{\\sqrt{2\\pi\\sigma^2}}e^{\\frac{-u_i^2}{2\\sigma^2}})]=n\\ln(\\frac{1}{\\sqrt{2\\pi\\sigma^2}})-\\frac{1}{2\\sigma^2}\\sum_{i=1}^nu_i^2\\)\n위 식을 \\(\\sigma\\)에 대해 다시 정리하면, \\(n\\ln(\\frac{1}{\\sqrt{2\\pi}})-\\frac{n}{2}\\ln(\\sigma^2)-\\sum u_i^2\\frac{1}{2\\sigma^2}\\)\n\\(\\sigma^2\\)에 대해 미분을 통해, \\(\\ln ML_{\\sigma^2}=-\\frac{n}{2\\sigma^2}+\\frac{\\sum u_i}{2(\\sigma^2)^2}\\)\n미분계수가 0인 점이 ML 함수를 극대화 시키는 점이므로, \\(-\\frac{n}{2\\sigma^2}+\\frac{\\sum u_i}{2(\\sigma^2)^2}=0\\)\n\\(\\Rightarrow\\;n\\sigma^2=\\sum u_i,\\;\\therefore\\;\\sigma^2=\\frac{\\sum u_i}{n}\\)",
+    "objectID": "미시hw2.html",
+    "href": "미시hw2.html",
+    "title": "Microanalysis of financial economics Assignment2",
+    "section": "",
+    "text": "Question 1",
     "crumbs": [
-      "금융시장 리스크관리('24 가을)",
-      "금융시장 리스크관리 1~2주차"
+      "미시경제학('24 가을)",
+      "Microanalysis of financial economics Assignment2"
+    ]
+  },
+  {
+    "objectID": "미시hw2.html#question-1",
+    "href": "미시hw2.html#question-1",
+    "title": "Microanalysis of financial economics Assignment2",
+    "section": "",
+    "text": "Answer1",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "Microanalysis of financial economics Assignment2"
+    ]
+  },
+  {
+    "objectID": "미시hw2.html#question-2",
+    "href": "미시hw2.html#question-2",
+    "title": "Microanalysis of financial economics Assignment2",
+    "section": "Question 2",
+    "text": "Question 2\n\n\nAnswer2\n1. Increase\nBecause of hurricane, input price of coffee bean will increase, supply curve of coffee bean shift to the left.\nSo, price of coffee beans will increase.\n2. Both increase\nSince price of coffee beans increases, input price of cups of coffee will increase, supply curve of coffee shift to the left.\nso, price of cups of coffee will increase and quantity will decrease.\nBy the question, cups of coffee have inelastic demand.\nso, \\(P\\times Q&lt;(P+\\Delta P)(Q-\\Delta Q)\\). Total revenue increases.\n3. Both decrease\nSince cups of coffe and donuts are complements, increase of price of cups of coffee causes decrease of demand of donuts.\nSo, demand curve of donuts shift to the left, price and quantity will decrease.\nTherefore, Total revenue of donuts decrease.",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "Microanalysis of financial economics Assignment2"
+    ]
+  },
+  {
+    "objectID": "미시hw2.html#question-3",
+    "href": "미시hw2.html#question-3",
+    "title": "Microanalysis of financial economics Assignment2",
+    "section": "Question 3",
+    "text": "Question 3\n\n\nAnswer 3\n\nsellers bear more burden of the tax than buyers.\nbuyers bear more burden of the tax than sellers.\nboth participants bear same burden of the tax.",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "Microanalysis of financial economics Assignment2"
+    ]
+  },
+  {
+    "objectID": "미시hw2.html#question-4",
+    "href": "미시hw2.html#question-4",
+    "title": "Microanalysis of financial economics Assignment2",
+    "section": "Question 4",
+    "text": "Question 4\n\n\nAnswer 4\n1. P=100, Q=200\n\\(Q^S=Q^D\\;\\;\\Rightarrow\\;\\;2P=300-P\\;\\;\\therefore P=100,Q=200\\)\n2. Yes. \\(P=90\\;Q^S=180,\\;Q^D=210,\\;Shortage=30\\)\n3. No. \\(P=100,\\;Q^S=Q^D=200\\)\n4. No. \\(P^*=120,\\;Q^{S^*}=Q^{D^*}=180\\)",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "Microanalysis of financial economics Assignment2"
+    ]
+  },
+  {
+    "objectID": "미시hw2.html#question-5",
+    "href": "미시hw2.html#question-5",
+    "title": "Microanalysis of financial economics Assignment2",
+    "section": "Question 5",
+    "text": "Question 5\n\n\nAnswer 5\nIt depends on elasticity of labor market and ratio of using extra revenues.\nIf all of extra revenues can be used for workers, it will make workers better. (when demand of labor is not perfect elatic.)\nBut if just part of extra can be used for workers and demand is more elastic than supply in labor market, it will be different.\nWorkers bear more burden than firm when tax paid by firms raises,\nso it can make workers poor.",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "Microanalysis of financial economics Assignment2"
+    ]
+  },
+  {
+    "objectID": "미시hw2.html#question-6",
+    "href": "미시hw2.html#question-6",
+    "title": "Microanalysis of financial economics Assignment2",
+    "section": "Question 6",
+    "text": "Question 6\n\n1. Less than 2%\n2% tax-cut of workers makes supply curve shifting to the right in labor market.\nSo, price of labor(wage) will decrease and its magnitude depends on elasticity of demand curve.\nIt will be less than 2% when demand curve is not zero elasticity.\nIf demand is zero elastic, it is exactly 2%.\nSince tax-cut makes workers take-home pay rises 2%,\nTotal change of workers’ take-home pay will be less than 2%.\n\nMore elastic take less benefit.\n\nBy explain (1), it depends on elasticity in labor market.\nMore elastic bear less burden of tax.\nIt means more elastic take less benefit of tax-cut.",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "Microanalysis of financial economics Assignment2"
     ]
   }
 ]

@@ -190,7 +190,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./머신러닝1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">머신러닝 1주차</span></a>
+ <span class="menu-text">머신러닝 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./머신러닝실습.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">머신러닝실습.html</span></span></a>
   </div>
 </li>
       </ul>
@@ -210,6 +216,12 @@ window.Quarto = {
  <span class="menu-text">딥러닝 1주차</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./딥러닝실습.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">딥러닝 Ch1 실습</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -225,6 +237,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./시뮬레이션1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">시뮬레이션방법론 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">시뮬레이션 방법론 과제1 (베리어옵션)</span></a>
   </div>
 </li>
       </ul>
@@ -301,6 +319,12 @@ window.Quarto = {
  <span class="menu-text">Microanalysis of financial economics Assignment1</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment2</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -341,6 +365,8 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#weighting-schemes" id="toc-weighting-schemes" class="nav-link" data-scroll-target="#weighting-schemes">Weighting Schemes</a></li>
   <li><a href="#최대우도법-maximum-likelihood-method" id="toc-최대우도법-maximum-likelihood-method" class="nav-link" data-scroll-target="#최대우도법-maximum-likelihood-method">최대우도법, Maximum Likelihood Method</a></li>
+  <li><a href="#characteristics-of-volatility" id="toc-characteristics-of-volatility" class="nav-link" data-scroll-target="#characteristics-of-volatility">Characteristics of Volatility</a></li>
+  <li><a href="#how-good-is-the-model" id="toc-how-good-is-the-model" class="nav-link" data-scroll-target="#how-good-is-the-model">How Good is the Model?</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -482,6 +508,23 @@ Note
 <p><span class="math inline">\(\sigma^2\)</span>에 대해 미분을 통해, <span class="math inline">\(\ln ML_{\sigma^2}=-\frac{n}{2\sigma^2}+\frac{\sum u_i}{2(\sigma^2)^2}\)</span></p>
 <p>미분계수가 0인 점이 ML 함수를 극대화 시키는 점이므로, <span class="math inline">\(-\frac{n}{2\sigma^2}+\frac{\sum u_i}{2(\sigma^2)^2}=0\)</span></p>
 <p><span class="math inline">\(\Rightarrow\;n\sigma^2=\sum u_i,\;\therefore\;\sigma^2=\frac{\sum u_i}{n}\)</span></p>
+</section>
+<section id="characteristics-of-volatility" class="level3">
+<h3 class="anchored" data-anchor-id="characteristics-of-volatility">Characteristics of Volatility</h3>
+<p>상수는 아님</p>
+<p>근데 경향성이 있음 (persistence), 따라서 모아놓으면 군집화 경향이 있음 (Clustering)</p>
+<p>평균회귀 성향이 있음 (mean reverting)</p>
+<p>주가수익률과 음의 상관관계가 있음. (경기침체에 변동성 증가)</p>
+<p>근데 EWMA, GARCH는 이런 음의 상관관계를 반영하지는 않음</p>
+</section>
+<section id="how-good-is-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="how-good-is-the-model">How Good is the Model?</h3>
+<p>변동성 모델을 평가할 때, 일반적으로 <span class="math inline">\(u_n\sim N(0,\sigma_n^2)\)</span>을 따르므로</p>
+<p><span class="math inline">\(\frac{u_n}{\sigma_n}\sim Z\)</span>를 통해서 검증함.</p>
+<p>이 의미는, 매일매일 자산수익률과 모델변동성을 통해 독립된 Z분포를 따르는 <span class="math inline">\(z_n=\frac{u_n}{\sigma_n}\)</span>을 생성할 수 있고</p>
+<p>이 <span class="math inline">\(z_n\)</span>은 서로 독립인지를 봄으로써 검증할 수 있음.</p>
+<p>이건 Ljung-Box Test로 널리 알려져 있음.</p>
+<p><span class="math inline">\(z_n\)</span>을 통해 autocorrelation=0(H0)임을 검증하는 테스트임.</p>
 
 
 <!-- -->
@@ -1108,7 +1151,33 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>미분계수가 0인 점이 ML 함수를 극대화 시키는 점이므로, $-\frac{n}{2\sigma^2}+\frac{\sum u_i}{2(\sigma^2)^2}=0$</span>
 <span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>$\Rightarrow\;n\sigma^2=\sum u_i,\;\therefore\;\sigma^2=\frac{\sum u_i}{n}$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>$\Rightarrow\;n\sigma^2=\sum u_i,\;\therefore\;\sigma^2=\frac{\sum u_i}{n}$</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a><span class="fu">### Characteristics of Volatility</span></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>상수는 아님</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>근데 경향성이 있음 (persistence), 따라서 모아놓으면 군집화 경향이 있음 (Clustering)</span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>평균회귀 성향이 있음 (mean reverting)</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>주가수익률과 음의 상관관계가 있음. (경기침체에 변동성 증가)</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>근데 EWMA, GARCH는 이런 음의 상관관계를 반영하지는 않음</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="fu">### How Good is the Model?</span></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>변동성 모델을 평가할 때, 일반적으로 $u_n\sim N(0,\sigma_n^2)$을 따르므로</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>$\frac{u_n}{\sigma_n}\sim Z$를 통해서 검증함.</span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>이 의미는, 매일매일 자산수익률과 모델변동성을 통해 독립된 Z분포를 따르는 $z_n=\frac{u_n}{\sigma_n}$을 생성할 수 있고</span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>이 $z_n$은 서로 독립인지를 봄으로써 검증할 수 있음.</span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>이건 Ljung-Box Test로 널리 알려져 있음.</span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>$z_n$을 통해 autocorrelation=0(H0)임을 검증하는 테스트임.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

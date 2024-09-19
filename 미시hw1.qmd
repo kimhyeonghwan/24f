@@ -36,14 +36,10 @@ so NEW equilibrium point also shift to the left side.
 
 ### Answer
 
-Let $P_0=3.46$ and $Q_0^D=Q_0^S=2630$,
+We can say that price elasticity, $E_p=\frac{\frac{\Delta Q}{Q}}{\frac{\Delta P}{P}}=\frac{P}{Q}\frac{\Delta Q}{\Delta P}$
 
-Set $\frac{\Delta P_{(=P_1-P_0)}}{P_0}=0.01$, so $P_1=3.46+0.0346=3.4946$
+Since $P_0=3.46,\;Q_0^D=Q_0^S=2630$ and $\frac{\Delta Q^D}{\Delta P^D}=-266,\;\frac{\Delta Q^S}{\Delta P^S}=240$,
 
-Then, $Q_1^D=3550-266P_1=2620.4364$ and $Q_1^S=1800+240P_1=2638.704$
+Price elasticity of Demand is $\frac{3.46}{2630}\times -266\approx -0.35$.
 
-So, $\frac{\Delta Q^D}{Q_0^D}=\frac{-9.5636}{2630}\approx -0.36\%$ and $\frac{\Delta Q^S}{Q_0^S}=\frac{8.704}{2630}\approx 0.33\%$
-
-Finally, Price elasticity of Demand is $\frac{-0.36\%}{1\%}\approx -0.3636$.
-
-Price elasticity of Supply is $\frac{0.33\%}{1\%}\approx 0.3310$
+Price elasticity of Supply is $\frac{3.46}{2630}\times 240\approx 0.32$

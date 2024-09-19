@@ -106,14 +106,38 @@ e.g. 훈련데이터로 여러 h-para에 대해 모델 돌림
 
 #### 회귀모형, Regression model
 
-RMSE : $\sqrt{MSE}$
+**RMSE** : $\sqrt{MSE}$
 
-MAE(mean absolute error) : $\frac{1}{n}\sum_{i=1}^n|y_i-\hat{y}_i|$
+**MAE**(mean absolute error) : $\frac{1}{n}\sum_{i=1}^n|y_i-\hat{y}_i|$
 
-R square(결정계수) : $1-\frac{\sum_{i=1}^n(y_i-\hat{y}_i)^2}{\sum_{i=1}^n(y_i-\bar{y})^2}=1-\frac{SSE}{SST}(=\frac{SSR}{SST})$
+**R square**(결정계수) : $1-\frac{\sum_{i=1}^n(y_i-\hat{y}_i)^2}{\sum_{i=1}^n(y_i-\bar{y})^2}=1-\frac{SSE}{SST}(=\frac{SSR}{SST})$
 
 #### 분류모형
 
-정오분류표 : TN(true negative), TP(true positive), FN, FP
+**정오분류표** : TN(true negative), TP(true positive), FN, FP
 
-정확도, 정분류율 (Accuracy) : $\frac{TN+TP}{TN+TP+FN+FP}$
+**정확도, 정분류율** (Accuracy) : $\frac{TN+TP}{TN+TP+FN+FP}$
+
+**오분류율** : 1 - 정분류율
+
+**교차엔트로피 오차**(Cross Entropy Error), Multiclass classification에 많이 씀
+
+$$-\frac{1}{n}\sum_{i=1}^n\sum_{k=1}^Ky_k^{(i)}log(\hat{p}_k^(i))$$
+
+y는 타깃확률, p는 예측확률, K는 범주의 개수
+
+K=2인 경우, 위의 교차엔트로피 손실함수를 로그손실함수라고 부르며, 많이 활용함.
+
+::: {.callout}
+삼중분류문제의 경우,
+
+모델은 훈련자료를 기반으로 훈련 후 0,1,2에 각각 속할 확률을 계산하여 반환함.($p_0+p_1+p_2=1$)
+
+최종적으로 각 확률중 가장 큰 값을 $\hat{y}$로 산출하게 됨.
+
+교차 엔트로피의 타깃 확률이란 1을 의미하며, 실제 y가 특정 범주 k에 속할 때 1이며, 아닐 때 0임.
+
+따라서, 교차엔트로피의 수식을 볼 때 타깃확률이 1이고 예측확률이 1에 가까울수록 오차는 0에 수렴하며
+
+예측확률이 1보다 작을수록 오차는 커지게 됨
+:::

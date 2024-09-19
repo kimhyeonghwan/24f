@@ -1,0 +1,111 @@
+# Microanalysis of financial economics Assignment2 {.unnumbered}
+
+20249132 Kim Hyeonghwan (김형환)
+
+## Question 1
+
+![](image/미시hw2_1.png)
+
+### Answer1
+
+![](image/미시hw2_a1.png)
+
+## Question 2
+
+![](image/미시hw2_2.png)
+
+### Answer2
+
+**1. Increase**
+
+Because of hurricane, input price of coffee bean will increase, supply curve of coffee bean shift to the left.
+
+So, price of coffee beans will increase.
+
+**2. Both increase**
+
+Since price of coffee beans increases, input price of cups of coffee will increase, supply curve of coffee shift to the left.
+
+so, price of cups of coffee will increase and quantity will decrease.
+
+By the question, cups of coffee have inelastic demand.
+
+so, $P\times Q<(P+\Delta P)(Q-\Delta Q)$. Total revenue increases.
+
+**3. Both decrease**
+
+Since cups of coffe and donuts are complements, increase of price of cups of coffee causes decrease of demand of donuts.
+
+So, demand curve of donuts shift to the left, price and quantity will decrease.
+
+Therefore, Total revenue of donuts decrease.
+
+## Question 3
+
+![](image/미시hw2_3.png)
+
+### Answer 3
+
+1. sellers bear more burden of the tax than buyers.
+
+2. buyers bear more burden of the tax than sellers.
+
+3. both participants bear same burden of the tax.
+
+## Question 4
+
+![](image/미시hw2_4.png)
+
+### Answer 4
+
+**1. P=100, Q=200**
+
+$Q^S=Q^D\;\;\Rightarrow\;\;2P=300-P\;\;\therefore P=100,Q=200$
+
+**2. Yes. $P=90\;Q^S=180,\;Q^D=210,\;Shortage=30$**
+
+**3. No. $P=100,\;Q^S=Q^D=200$**
+
+**4. No. $P^*=120,\;Q^{S^*}=Q^{D^*}=180$**
+
+## Question 5
+
+![](image/미시hw2_5.png)
+
+### Answer 5
+
+It depends on elasticity of labor market and ratio of using extra revenues.
+
+If all of extra revenues can be used for workers, it will make workers better. (when demand of labor is not perfect elatic.)
+
+But if just part of extra can be used for workers and demand is more elastic than supply in labor market, it will be different.
+
+Workers bear more burden than firm when tax paid by firms raises,
+
+so it can make workers poor.
+
+## Question 6
+
+![](image/미시hw2_6.png)
+
+**1. Less than 2%**
+
+2% tax-cut of workers makes supply curve shifting to the right in labor market.
+
+So, price of labor(wage) will decrease and its magnitude depends on elasticity of demand curve.
+
+It will be less than 2% when demand curve is not zero elasticity.
+
+If demand is zero elastic, it is exactly 2%.
+
+Since tax-cut makes workers take-home pay rises 2%,
+
+Total change of workers' take-home pay will be less than 2%.
+
+2. More elastic take less benefit.
+
+By explain (1), it depends on elasticity in labor market.
+
+More elastic bear less burden of tax.
+
+It means more elastic take less benefit of tax-cut.

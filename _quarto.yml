@@ -21,14 +21,17 @@ book:
     - part : 머신러닝('24 가을)
       chapters: 
         - 머신러닝1.qmd
+        - 머신러닝실습.ipynb
 
     - part : 딥러닝('24 가을)
       chapters: 
-        - 딥러닝1.qmd      
+        - 딥러닝1.qmd     
+        - 딥러닝실습.ipynb
 
     - part : 시뮬레이션 방법론('24 가을)
       chapters: 
         - 시뮬레이션1.qmd
+        - 시뮬레이션hw1.qmd
 
     - part : 이자율파생상품('24 가을)
       chapters: 
@@ -45,7 +48,8 @@ book:
     - part : 미시경제학('24 가을)
       chapters: 
         - 미시1.qmd
-        - 미시hw1.qmd-\frac{n}{2\sigma^2}+\frac{\sum u_i}{2(\sigma^2)^2}
+        - 미시hw1.qmd
+        - 미시hw2.qmd
 
     - part : 글로벌 지속가능회계('24 가을)
       chapters: 

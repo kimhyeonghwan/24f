@@ -1,0 +1,21 @@
+# 수치해석학 Ch2 {.unnumbered}
+
+선형방정식 및 최소자승법
+
+PLU분해 예시
+```{python}
+import numpy as np
+from numpy.linalg import cholesky
+from scipy.linalg import lu
+
+A = np.arange(1,10)
+A = A.reshape(3,3)
+print(A)
+```
+
+```{python}
+P,L,U = lu(A)
+
+P@L@U
+```
+
