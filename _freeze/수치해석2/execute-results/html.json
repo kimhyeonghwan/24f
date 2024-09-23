@@ -1,0 +1,12 @@
+{
+  "hash": "62da6890a07c714b541faf3aeaa04ef9",
+  "result": {
+    "engine": "jupyter",
+    "markdown": "# 수치해석학 Ch2 {.unnumbered}\n\n선형방정식 및 최소자승법\n\nPLU분해 예시\n\n::: {#24dcf978 .cell execution_count=1}\n``` {.python .cell-code}\nimport numpy as np\nfrom numpy.linalg import cholesky\nfrom scipy.linalg import lu\n\nA = np.arange(1,10)\nA = A.reshape(3,3)\nprint(A)\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n[[1 2 3]\n [4 5 6]\n [7 8 9]]\n```\n:::\n:::\n\n\n::: {#52f1350e .cell execution_count=2}\n``` {.python .cell-code}\nP,L,U = lu(A)\n\nP@L@U\n```\n\n::: {.cell-output .cell-output-display execution_count=2}\n```\narray([[1., 2., 3.],\n       [4., 5., 6.],\n       [7., 8., 9.]])\n```\n:::\n:::\n\n\n## Cholesky factorization\n\n춀레스키 분해\n\n$Ax=b$에서, A가 대칭이고 positive-definite인 경우 적용 가능.\n\nPLU보다 연산량이 적음.\n\n다변량 정규분포 난수를 생성할 때, 공분산행렬에 춀레스키 분해를 적용하면 쉽게 생성 가능.\n\n## QR 분해\n\n",
+    "supporting": [
+      "수치해석2_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

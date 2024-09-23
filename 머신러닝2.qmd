@@ -1,3 +1,15 @@
 # 머신러닝 Ch2 {.unnumbered}
 
 선형회귀모형
+
+비용함수 : $J(\theta)=\frac{1}{2m}\sum_{i=1}^m(\theta^Tx^{(i)}-y^{(i)})^2$
+
+$\theta^*=\theta-\alpha\,\triangledown_\theta J(\theta)$
+
+$\triangledown_\theta J(\theta)=\frac{1}{m}X^T(X\theta-y)$
+
+배치 / 확률적 / 미니배치
+
+정규방정식에서 $\hat{\theta}=(X^TX)^{-1}X^Ty$의 closed form 존재.
+
+역행렬 계산에 많은 시간이 소요되는 경우에는 사용이 곤란

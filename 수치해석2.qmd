@@ -19,3 +19,15 @@ P,L,U = lu(A)
 P@L@U
 ```
 
+## Cholesky factorization
+
+춀레스키 분해
+
+$Ax=b$에서, A가 대칭이고 positive-definite인 경우 적용 가능.
+
+PLU보다 연산량이 적음.
+
+다변량 정규분포 난수를 생성할 때, 공분산행렬에 춀레스키 분해를 적용하면 쉽게 생성 가능.
+
+## QR 분해
+

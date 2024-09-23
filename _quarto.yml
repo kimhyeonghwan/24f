@@ -32,6 +32,7 @@ book:
     - part : 시뮬레이션 방법론('24 가을)
       chapters: 
         - 시뮬레이션1.qmd
+        - 시뮬레이션실습.ipynb
         - 시뮬레이션hw1.qmd
 
     - part : 이자율파생상품('24 가을)
@@ -41,16 +42,20 @@ book:
     - part : 수치해석학('24 가을)
       chapters: 
         - 수치해석1.qmd
+        - 수치해석2.qmd
+        - 수치해석실습.ipynb
 
     - part : 금융시장 리스크관리('24 가을)
       chapters: 
         - 리스크관리1.qmd
+        - 리스크관리hw1.qmd
 
     - part : 미시경제학('24 가을)
       chapters: 
         - 미시1.qmd
         - 미시hw1.qmd
         - 미시hw2.qmd
+        - 미시hw3.qmd
 
     - part : 글로벌 지속가능회계('24 가을)
       chapters: 
@@ -72,8 +77,8 @@ format:
     documentclass: scrreprt
     include-in-header: header.tex
     papersize: A4
-    margin-bottom: 30mm
-    margin-top: 30mm
+    margin-bottom: 20mm
+    margin-top: 15mm
     margin-left: 15mm
     margin-right: 15mm
     monofontoptions: 

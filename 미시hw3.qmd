@@ -1,0 +1,15 @@
+# Microanalysis of financial economics Assignment3 {.unnumbered}
+
+20249132 Kim Hyeonghwan (김형환)
+
+## Question
+
+![](image/micro_hw3_1.png)
+
+### Answer : (a) $200
+
+At equilibrium(p=70), consumer surplus is 800($20\times 80\times 0.5$) and supplier surplus is 400.($20\times 40\times 0.5$) so total surplus is 1200.
+
+If there exists a price floor of $110, quantity decrease to 10 and price is $110. so consumer surplus will be 200 ($10\times 40 \times 0.5$) and suplier surplus will be 700($10\times 60+10\times 20\times 0.5$).
+
+Now, total surplus decrease to 900 and deadweight loss occur 300.

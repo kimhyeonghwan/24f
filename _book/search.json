@@ -47,10 +47,21 @@
     "href": "머신러닝1.html#데이터의-분할-방법",
     "title": "머신러닝 Ch1",
     "section": "데이터의 분할 방법",
-    "text": "데이터의 분할 방법\n\nHold-out 방식\n주어진 자료를 목적에 따라 훈련/검증/평가 데이터로 나누어서 활용.\n(훈련, 검증이 8~90% / 평가가 1~20%)\n검증데이터는 h-para tuning에 주로 사용함.\n\n각 h-para별로 훈련데이터를 통해 모델 도출\n각 모델에 대해 검증데이터를 이용해 평가 (MSE 산출)\n성능이 가장 좋은 h-para를 채택\n해당 h-para 및 훈련+검증데이터를 통해 최종모델 도출\n평가데이터를 이용해 최종모델을 평가하여 성능 확인\n\n단점 : 전체 데이터에서 평가데이터는 따로 빼놔야해서 자료가 충분치 않으면 사용하기 애매함\n\n\nK-fold 교차검증(Cross-validation) 방식을 이용한 검증\n데이터가 그다지 많지 않을때 유용.\n모든 데이터가 훈련, 검증, 평가에 활용될 수 있음.\n주어진 자료를 K개로 분할하여 반복활용\n(3-fold cv 예시)\n\n주어진 자료를 3개로 분할 (1,2 훈련 + 3 검증 / 1,3 훈련 + 2 검증 / 2,3 훈련 + 1 검증)\n각 분할데이터로 특정 h-para에 대해 훈련 + 검증데이터로 성능 평가(MSE)\n3개의 분할데이터의 성능의 평균이 해당 h-para의 검증결과임\n모든 h-para에 대해 1~3 반복\nh-para의 검증결과 중 가장 성능이 좋은 h-para 채택\n다시 주어진 자료를 3개로 분할 (훈련+평가)\n각 분할데이터로 훈련 및 평가를 통해 성능 평가\n성능의 평균값이 우리의 모델의 성능임.\n\n방법론에 따라 한꺼번에 훈련시켜서 성능을 평가하기도 하고,\n이러한 분할(folding)을 수회~수백회 반복해서 모델의 성능을 추정하기도 함.\n(folding별 성능의 평균/표준편차 고려)\n::: {.callout, title=“Imbalanced data”} 머신러닝으로 분류문제를 해결하는 경우,\n실제 세상에서는 분류대상의 비율이 매우 적은 경우가 많음.\n이러한 샘플을 imbalanced data라고 하며,\nHold-out, K-fold cv 등을 할 때,\n원 자료의 분류대상의 비율을 유지한채로 주어진 자료를 분할해야 함. :::",
+    "text": "데이터의 분할 방법\n\nHold-out 방식\n주어진 자료를 목적에 따라 훈련/검증/평가 데이터로 나누어서 활용.\n(훈련, 검증이 8~90% / 평가가 1~20%)\n검증데이터는 h-para tuning에 주로 사용함.\n\n각 h-para별로 훈련데이터를 통해 모델 도출\n각 모델에 대해 검증데이터를 이용해 평가 (MSE 산출)\n성능이 가장 좋은 h-para를 채택\n해당 h-para 및 훈련+검증데이터를 통해 최종모델 도출\n평가데이터를 이용해 최종모델을 평가하여 성능 확인\n\n단점 : 전체 데이터에서 평가데이터는 따로 빼놔야해서 자료가 충분치 않으면 사용하기 애매함\n\n\nK-fold 교차검증(Cross-validation) 방식을 이용한 검증\n데이터가 그다지 많지 않을때 유용.\n모든 데이터가 훈련, 검증, 평가에 활용될 수 있음.\n주어진 자료를 K개로 분할하여 반복활용\n(3-fold cv 예시)\n\n주어진 자료를 3개로 분할 (1,2 훈련 + 3 검증 / 1,3 훈련 + 2 검증 / 2,3 훈련 + 1 검증)\n각 분할데이터로 특정 h-para에 대해 훈련 + 검증데이터로 성능 평가(MSE)\n3개의 분할데이터의 성능의 평균이 해당 h-para의 검증결과임\n모든 h-para에 대해 1~3 반복\nh-para의 검증결과 중 가장 성능이 좋은 h-para 채택\n다시 주어진 자료를 3개로 분할 (훈련+평가)\n각 분할데이터로 훈련 및 평가를 통해 성능 평가\n성능의 평균값이 우리의 모델의 성능임.\n\n방법론에 따라 한꺼번에 훈련시켜서 성능을 평가하기도 하고,\n이러한 분할(folding)을 수회~수백회 반복해서 모델의 성능을 추정하기도 함.\n(folding별 성능의 평균/표준편차 고려)\n\n\n\n\n\n\n머신러닝으로 분류문제를 해결하는 경우,\n실제 세상에서는 분류대상의 비율이 매우 적은 경우가 많음.\n이러한 샘플을 imbalanced data라고 하며,\nHold-out, K-fold cv 등을 할 때,\n원 자료의 분류대상의 비율을 유지한채로 주어진 자료를 분할해야 함.",
     "crumbs": [
       "머신러닝('24 가을)",
       "머신러닝 Ch1"
+    ]
+  },
+  {
+    "objectID": "머신러닝실습.html",
+    "href": "머신러닝실습.html",
+    "title": "1  머신러닝 실습",
+    "section": "",
+    "text": "1.1 Ch2. Linear regression\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport pandas as pd\nfrom sklearn.datasets import load_diabetes\nfrom sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import mean_squared_error, r2_score\ndiabetes = load_diabetes()\ndiabetes_DF = pd.DataFrame( diabetes['data'], columns=diabetes['feature_names'])\ndiabetes_DF['Y']=diabetes['target']\ndiabetes_DF.head(5)\n\n\n\n\n\n\n\n\n\nage\nsex\nbmi\nbp\ns1\ns2\ns3\ns4\ns5\ns6\nY\n\n\n\n\n0\n0.038076\n0.050680\n0.061696\n0.021872\n-0.044223\n-0.034821\n-0.043401\n-0.002592\n0.019907\n-0.017646\n151.0\n\n\n1\n-0.001882\n-0.044642\n-0.051474\n-0.026328\n-0.008449\n-0.019163\n0.074412\n-0.039493\n-0.068332\n-0.092204\n75.0\n\n\n2\n0.085299\n0.050680\n0.044451\n-0.005670\n-0.045599\n-0.034194\n-0.032356\n-0.002592\n0.002861\n-0.025930\n141.0\n\n\n3\n-0.089063\n-0.044642\n-0.011595\n-0.036656\n0.012191\n0.024991\n-0.036038\n0.034309\n0.022688\n-0.009362\n206.0\n\n\n4\n0.005383\n-0.044642\n-0.036385\n0.021872\n0.003935\n0.015596\n0.008142\n-0.002592\n-0.031988\n-0.046641\n135.0\ndiabetes_DF.info()\n\n&lt;class 'pandas.core.frame.DataFrame'&gt;\nRangeIndex: 442 entries, 0 to 441\nData columns (total 11 columns):\n #   Column  Non-Null Count  Dtype  \n---  ------  --------------  -----  \n 0   age     442 non-null    float64\n 1   sex     442 non-null    float64\n 2   bmi     442 non-null    float64\n 3   bp      442 non-null    float64\n 4   s1      442 non-null    float64\n 5   s2      442 non-null    float64\n 6   s3      442 non-null    float64\n 7   s4      442 non-null    float64\n 8   s5      442 non-null    float64\n 9   s6      442 non-null    float64\n 10  Y       442 non-null    float64\ndtypes: float64(11)\nmemory usage: 38.1 KB\ny_target = diabetes_DF['Y']\nX_data = diabetes_DF.drop(['Y'], axis=1, inplace=False)\nX_train, X_test, y_train, y_test = train_test_split(\nX_data, y_target, test_size=0.4, random_state=123 )\nlr = LinearRegression()\nlr.fit ( X_train, y_train )\n\nLinearRegression()In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.  LinearRegression?Documentation for LinearRegressioniFittedLinearRegression()\nlr.intercept_\n\n151.71551041484278\nnp.round( lr.coef_, decimals=1)\n\narray([ -11.1, -291.1,  553.8,  296.6, -915. ,  528.4,  210.2,  339.6,\n        640.6,  115.7])\ncoeff = pd.Series( data= np.round( lr.coef_, decimals=1), index=X_data.columns )\ncoeff.sort_values(ascending=False)\n\ns5     640.6\nbmi    553.8\ns2     528.4\ns4     339.6\nbp     296.6\ns3     210.2\ns6     115.7\nage    -11.1\nsex   -291.1\ns1    -915.0\ndtype: float64\ny_preds = lr.predict( X_test )\nmse = mean_squared_error( y_test, y_preds )\nrmse = np.sqrt( mse )\nrmse\n\n55.09404732888505\nr2 = r2_score( y_test, y_preds )\nr2\n\n0.4933408690435077\ny_train_preds = lr.predict( X_train )\nmse_train = mean_squared_error( y_train, y_train_preds )\nrmse_train = np.sqrt( mse_train )\nrmse_train\n\n52.9486429330168\nr2_train = r2_score( y_train, y_train_preds )\nr2_train\n\n0.5237974491641986\nfrom sklearn.model_selection import KFold\nkf = KFold(n_splits=5, shuffle=True )\nkfid = kf.split(X_data)\nkf_mse = []\nfor train_i, test_i in kfid:\n    X_trn, X_tst = X_data.iloc[train_i], X_data.iloc[test_i]\n    y_trn, y_tst = y_target.iloc[train_i], y_target.iloc[test_i]\n    lr = LinearRegression()\n    lr.fit ( X_trn, y_trn )\n    y_preds = lr.predict( X_tst )\n    mse = mean_squared_error( y_tst, y_preds )\n    kf_mse.append(mse)\nkf_mse\n\n[2473.5516319387098,\n 3233.267125885358,\n 3553.038452271323,\n 2979.5920996281343,\n 2621.972092449679]\nkf_rmse = np.sqrt(kf_mse)\nnp.mean(kf_rmse)\n\n54.398968609104465\nfrom sklearn.model_selection import cross_val_score\nneg_mse_scores= cross_val_score(lr, X_data, y_target,\n                                scoring='neg_mean_squared_error', cv=5)\nrmse_scores = np.sqrt( -1 * neg_mse_scores )\nrmse_scores\n\narray([52.72497937, 55.03486476, 56.90068179, 54.85204179, 53.94638716])\nnp.mean( rmse_scores )\n\n54.69179097275793\nfrom sklearn.preprocessing import StandardScaler\nscaler = StandardScaler()\ndX=diabetes['data']\ndy=diabetes['target']\nscaler.fit( dX )\ndiabetes_X_scaled = scaler.transform( dX )\nnp.round( diabetes_X_scaled[:3], decimals=2 )\n\narray([[ 0.8 ,  1.07,  1.3 ,  0.46, -0.93, -0.73, -0.91, -0.05,  0.42,\n        -0.37],\n       [-0.04, -0.94, -1.08, -0.55, -0.18, -0.4 ,  1.56, -0.83, -1.44,\n        -1.94],\n       [ 1.79,  1.07,  0.93, -0.12, -0.96, -0.72, -0.68, -0.05,  0.06,\n        -0.55]])\nfrom sklearn.linear_model import SGDRegressor\nsgd_reg = SGDRegressor ( max_iter=50, penalty=None, eta0=0.1 )\nsgd_reg.fit( diabetes_X_scaled, dy )\nprint(sgd_reg.intercept_, np.round( sgd_reg.coef_, decimals=1), sep=\"\\n\")\n\n[153.41928257]\n[ -0.2 -12.2  23.5  14.  -26.7  14.2   2.1   5.7  38.2   2.7]",
+    "crumbs": [
+      "머신러닝('24 가을)",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>머신러닝 실습</span>"
     ]
   },
   {
@@ -95,6 +106,39 @@
     "crumbs": [
       "딥러닝('24 가을)",
       "딥러닝 Ch1"
+    ]
+  },
+  {
+    "objectID": "딥러닝2.html",
+    "href": "딥러닝2.html",
+    "title": "딥러닝 Ch2",
+    "section": "",
+    "text": "퍼셉트론 (Perceptron)\n하나의 인공뉴런으로 구성된 신경망. 가장 기본적인 구조.\n주어진 데이터로 분류면을 찾는 것이 목표",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "딥러닝 Ch2"
+    ]
+  },
+  {
+    "objectID": "딥러닝2.html#퍼셉트론-perceptron",
+    "href": "딥러닝2.html#퍼셉트론-perceptron",
+    "title": "딥러닝 Ch2",
+    "section": "",
+    "text": "로젠블랜의 퍼셉트론 (Simple perceptron)\n활성화함수 \\(f(.)\\)를 1 또는 -1를 가지는 임계함수로 구성.\ny = 1인데 f=-1인 경우, \\(w_i^*=w_i+x_i\\)\ny = -1인데 f=1인 경우, \\(w_i^*=w_i-x_i\\)\n즉, 실제는 1인데 \\(s=\\sum w_ix_i&lt;0\\)이 되어 임계가 -1로 출력되는 경우,\n\\(\\sum (w_i^*x_i+b^*_{(w^*_0x_0)})=\\sum (w_ix_i+x_i^2+b)\\)이 되어 s가 증가하는 방향으로 움직이게 됨.\n\n\n선형 퍼셉트론 (Linear perceptron)\n활성화함수로 선형함수를 사용함 \\(f(s)=s\\)\n파라미터 학습시 델타규칙(delta rule)을 사용하는데, 경사하강법(GDM)으로 보면 됨\nN개의 훈련자료 \\(D_N=\\{(x^{(d),y^{(d)}})\\}_{d=1}^N\\)에 대해 \\(f^{(d)}=\\sum_i w_ix_i^{(d)}\\)가 되며,\n학습오차 \\(E_d=\\frac{1}{2}(y^{(d)}-f(s)^{(d)})^2\\) 및 \\(E_N=\\sum E_d\\)\n(N으로 나누던 안나누던 파라미터 업데이트 결정에는 영향 없음)\n여기에 SGD(Stochastic Gredient Descent)를 적용하여 파라미터 업데이트\n\\(w_i\\leftarrow w_i+\\Delta w_i=w_i-\\eta \\frac{\\partial E_d}{\\partial w_i}=w_i+\\eta(y^{(d)}-f^{(d)})x_i\\)\n\n\n\n\n\n\n초기 델타규칙의 파라미터 업데이트는 경사하강법의 표현법이 아니였음.\n\\(w_i\\leftarrow w_i+\\eta ex_i\\;,\\;e=y-x_i\\) 방식으로 업데이트.\n결국 목적함수를 미분하면 해당 꼴이 나타나므로 경사하강법과 동일한 논리임.\n\n\n\n\n\n시그모이드 퍼셉트론 (Sigmoid perceptron)\n머신러닝의 logistic regression과 거의 유사함. (비용함수만 조금 다름)\n활성함수를 시그모이드 함수 \\(f=\\frac{1}{1+e^{-s}}\\in (0,1)\\)로 사용함.\n즉, y가 이진분류 문제일 때 y=1일 확률값을 예측해주는 모델임.\n어차피 퍼셉트론에서는 확률=0.5를 기준으로 분류하므로 선형분류면을 제공하지만,\n네트워크를 구성하면 비선형 경계면을 구성할 수도 있음.\n\\(f^{(d)}=\\sigma(s^{(d)})=\\frac{1}{1+e^{-s^{(d)}}}=\\frac{1}{1+e^{-\\sum w_ix^{(d)}_i}}\\)\n\\(E_d=\\frac{1}{2}(y^{(d)}-\\sigma(s^{(d)}))^2\\)\n\\(\\frac{\\partial E_d}{\\partial w_i}=(y^{(d)}-\\sigma^{(d)})\\sigma^{(s)}(1-\\sigma^{(s)})(-x_i^{(d)})\\)\n\\(\\therefore w_i^*\\;\\leftarrow\\;w_i+\\eta (y^{(d)}-f^{(d)})\\,f^{(s)}\\,(1-f^{(s)})x_i^{(d)}\\)\n\\(w_i\\)의 업데이트는 동시에 이루어져야함에 유의\n\n\n\n\n\n\n시그모이드 함수 미분\n\\(\\frac{d\\sigma(s)}{ds}=\\frac{+e^{-s}}{(1+e^{-s})^2}=\\sigma(s)(1-\\sigma(s))\\)",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "딥러닝 Ch2"
+    ]
+  },
+  {
+    "objectID": "딥러닝2.html#다층-퍼셉트론-multi-layer-perceptron",
+    "href": "딥러닝2.html#다층-퍼셉트론-multi-layer-perceptron",
+    "title": "딥러닝 Ch2",
+    "section": "다층 퍼셉트론 (Multi-layer perceptron)",
+    "text": "다층 퍼셉트론 (Multi-layer perceptron)\nXOR문제 : \\((x_1,x_2,y)=(1,0,1),\\;(0,1,1),\\;(0,0,0),\\;(1,1,0)\\)\n기존 퍼셉트론은 이 간단한 XOR문제도 해결할 수 없음.\n여러개의 퍼셉트론을 여러 층으로 쌓는다면 이를 해결 가능함.\n선을 두개를 그어서 \\(z_1,z_2\\)를 구성하고, \\(f=z_1\\times z_2\\)를 최종 모델로 결정하면 문제 해결 가능.",
+    "crumbs": [
+      "딥러닝('24 가을)",
+      "딥러닝 Ch2"
     ]
   },
   {
@@ -241,6 +285,28 @@
     ]
   },
   {
+    "objectID": "시뮬레이션실습.html",
+    "href": "시뮬레이션실습.html",
+    "title": "3  시뮬레이션방법론 실습",
+    "section": "",
+    "text": "3.1 Ch2. 난수 생성 방법",
+    "crumbs": [
+      "시뮬레이션 방법론('24 가을)",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>시뮬레이션방법론 실습</span>"
+    ]
+  },
+  {
+    "objectID": "시뮬레이션실습.html#ch2.-난수-생성-방법",
+    "href": "시뮬레이션실습.html#ch2.-난수-생성-방법",
+    "title": "3  시뮬레이션방법론 실습",
+    "section": "",
+    "text": "3.1.1 Acceptance-rejection method\n\nimport numpy as np\nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nf = lambda x: 2/np.sqrt(2*np.pi)*np.exp(-x**2/2)\ng = lambda x: np.exp(-x)\nGinv = lambda x: -np.log(1-x)\nx = np.linspace(0,5,501)\nc = np.sqrt(2/np.pi)*np.exp(0.5)\n\n#c = 1\nplt.plot(x,f(x)/(c*g(x)))\nplt.show()\n\n\n\n\n\n\n\n\n\nplt.plot(x,f(x))\nplt.plot(x,c*g(x))\nplt.show()\n\n\n\n\n\n\n\n\n\n#random sampling from Exponential dist.\nn = 100000\ne = np.random.rand(n)\nx = Ginv(e)\nplt.hist(x, bins=50)\nplt.show()\n\n\n\n\n\n\n\n\n\n#acceptance-rejection\nu = np.random.rand(n)\nidx = u &lt; (f(x) / (c*g(x)))\ny = x[idx]\n\n#signx\ns = np.random.rand(len(y))\nsign = (+1)*(s&gt;0.5) + (-1)*(s&lt;=0.5)\nz  = y * sign\n\nfig, ax = plt.subplots(2,1,figsize=(5,10))\nax[0].hist(z, bins=50)\nstats.probplot(z, dist=\"norm\", plot=ax[1])\nplt.show()\n\n\n\n\n\n\n\n\n\n# accept된 갯수, 통계량\nz = pd.Series(z)\nprint(\"Size = \", len(z))\nprint(\"Mean = \", z.mean())\nprint(\"Std = \", z.std())\nprint(\"Skewness = \", z.skew())\nprint(\"Kurtosis = \", z.kurt())\n\nSize =  76242\nMean =  0.004399928352169691\nStd =  0.9994359934475461\nSkewness =  -0.0035700194262359955\nKurtosis =  -0.020022846863712473\n\n\n\nimport numpy as np \nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\n\nu1 = np.random.rand(10000)\nu2 = np.random.rand(10000)\n\nz1 = np.sqrt(-2*np.log(u1))*np.cos(2*np.pi*u2)\nz2 = np.sqrt(-2*np.log(u1))*np.sin(2*np.pi*u2)\n\nfig, ax = plt.subplots(2,2,figsize=(10,10))\nax[0,0].plot(u1,u2,'.')\nax[0,0].set_xlabel(\"u1\")\nax[0,0].set_ylabel(\"u2\")\nax[0,1].plot(z1,z2,'.')\nax[0,1].set_xlabel(\"z1\")\nax[0,1].set_ylabel(\"z2\")\n\nz = np.concatenate([z1,z2])\nax[1,0].hist(z, bins=50)\nstats.probplot(z, dist=\"norm\", plot=ax[1,1])\n\nz = pd.Series(z)\nprint(\"Mean = \", z.mean())\nprint(\"Std = \", z.std())\nprint(\"Skewness = \", z.skew())\nprint(\"Kurtosis = \", z.kurt())\n\nMean =  0.005319050470821333\nStd =  1.0041333833693569\nSkewness =  0.007870653875667408\nKurtosis =  0.026864384771177363\n\n\n\n\n\n\n\n\n\n\n\n3.1.2 Box-muller method\n\n3.1.2.1 u1과 u2를 극좌표 변환(길이,각도)하여 표준정규난수를 생성\n\nimport numpy as np \nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\n\nu1 = np.random.rand(1000)\n# u1 = np.array(np.repeat(0.2,1000))\n\nu2 = np.random.rand(1000)\n# u2 = np.repeat(0.3,1000)\n\nz1 = np.sqrt(-2*np.log(u1))*np.cos(2*np.pi*u2)\nz2 = np.sqrt(-2*np.log(u1))*np.sin(2*np.pi*u2)\n\nfig, ax = plt.subplots(2,2,figsize=(10,10))\nax[0,0].plot(u1,u2,'.')\nax[0,0].set_xlabel(\"u1\")\nax[0,0].set_ylabel(\"u2\")\nax[0,1].plot(z1,z2,'.')\nax[0,1].set_xlabel(\"z1\")\nax[0,1].set_ylabel(\"z2\")\n\nz = np.concatenate([z1,z2])\nax[1,0].hist(z, bins=50)\nstats.probplot(z, dist=\"norm\", plot=ax[1,1])\n\n((array([-3.39232293, -3.14126578, -3.00201262, ...,  3.00201262,\n          3.14126578,  3.39232293]),\n  array([-3.08879653, -2.96225972, -2.93767351, ...,  2.89101449,\n          2.92098679,  3.03513649])),\n (0.9735473709334279, 0.01518582487043528, 0.9993181942933621))\n\n\n\n\n\n\n\n\n\n\nz = pd.Series(z)\nprint(\"Mean = \", z.mean())\nprint(\"Std = \", z.std())\nprint(\"Skewness = \", z.skew())\nprint(\"Kurtosis = \", z.kurt())\n\nMean =  0.015185824870435093\nStd =  0.9729848649387326\nSkewness =  0.026318252305075517\nKurtosis =  0.10017595589855377\n\n\n\n\n\n3.1.3 Marsaglia’s polar method\n\nimport numpy as np \nimport pandas as pd\nimport matplotlib.pyplot as plt\nimport scipy.stats as stats\n\nu1 = 2*np.random.rand(10000) - 1\nu2 = 2*np.random.rand(10000) - 1\nidx = u1**2+u2**2&lt;1\nu1 = u1[idx]\nu2 = u2[idx]\nr = np.sqrt(u1**2 + u2**2)\nz1 = u1*np.sqrt(-2*np.log(r)/(r**2))\nz2 = u2*np.sqrt(-2*np.log(r)/(r**2))\n\nfig, ax = plt.subplots(2,2,figsize=(10,10))\nax[0,0].plot(u1,u2,'.')\nax[0,0].set_xlabel(\"u1\")\nax[0,0].set_ylabel(\"u2\")\nax[0,1].plot(z1,z2,'.')\nax[0,1].set_xlabel(\"z1\")\nax[0,1].set_ylabel(\"z2\")\n\nz = np.concatenate([z1,z2])\nax[1,0].hist(z, bins=50)\nstats.probplot(z, dist=\"norm\", plot=ax[1,1])\n\n((array([-3.92200263, -3.70288844, -3.58286194, ...,  3.58286194,\n          3.70288844,  3.92200263]),\n  array([-2.75062726, -2.54667074, -2.3831233 , ...,  2.54073674,\n          2.5642353 ,  2.63545236])),\n (0.7004291238850505, 0.009082295652274254, 0.9999096754512135))\n\n\n\n\n\n\n\n\n\n\n# 표준편차 이상함\nz = pd.Series(z)\nprint(\"Mean = \", z.mean())\nprint(\"Std = \", z.std())\nprint(\"Skewness = \", z.skew())\nprint(\"Kurtosis = \", z.kurt())\n\nMean =  0.005214667686108389\nStd =  0.7034156408834322\nSkewness =  -0.010790249902950888\nKurtosis =  -0.022110372173252735\n\n\n\n\n3.1.4 Correlated random\n\nimport numpy as np \nimport pandas as pd\nimport matplotlib.pyplot as plt\n\ncorr = np.array([[1,0.3,0.5],[0.3,1,0.6],[0.5,0.6,1]])\npos_def = np.all(np.linalg.eigvals(corr) &gt; 0)\nprint(corr)\nprint(pos_def)\n\n#%%\n#Cholesky Decomposition\nc = np.linalg.cholesky(corr)\nx = np.random.randn(10000,3)\ny = x @ c.T\n\ny = pd.DataFrame(y, columns=['z1','z2','z3'])\nprint(\"Mean\")\nprint(y.apply(['mean','std']))\nprint()\n\nprint(\"Correlation\")\nprint(y.corr())\n\n[[1.  0.3 0.5]\n [0.3 1.  0.6]\n [0.5 0.6 1. ]]\nTrue\nMean\n            z1        z2        z3\nmean  0.005413  0.014955  0.002848\nstd   0.994726  0.999791  0.999323\n\nCorrelation\n          z1        z2        z3\nz1  1.000000  0.293904  0.482619\nz2  0.293904  1.000000  0.601780\nz3  0.482619  0.601780  1.000000\n\n\n\n#Positive Definite 하지 않은 상관계수 행렬 생성\npos_def = True\nwhile pos_def:\n    x = np.random.randn(1000, 2)\n    x = np.concatenate([x[:,0:1], x[:,0:1]+x[:,1:2], x[:,0:1]-2*x[:,1:2]], axis=1)\n    corr = pd.DataFrame(x).corr()\n    pos_def = np.all(np.linalg.eigvals(corr) &gt; 0)\n\nprint(corr)\nprint(pos_def)\n\n          0         1         2\n0  1.000000  0.716544  0.460920\n1  0.716544  1.000000 -0.288758\n2  0.460920 -0.288758  1.000000\nFalse\n\n\n\n#cholesky: error\n#c = np.linalg.cholesky(corr)\n\n#Eigenvalue Decomposition\nvalues, vectors = np.linalg.eig(corr)\nvalues = np.maximum(0, values)\nB = vectors @ np.diag(np.sqrt(values))\nprint(B)\nprint()\nprint(B @ B.T)\nprint()\n\n[[ 0.          0.98180222  0.18990632]\n [ 0.          0.83597193 -0.54877221]\n [ 0.          0.28400185  0.95882373]]\n\n[[ 1.          0.71654378  0.46092033]\n [ 0.71654378  1.         -0.28875824]\n [ 0.46092033 -0.28875824  1.        ]]\n\n\n\n\nz = np.random.randn(10000,3)\ny = z @ B.T\n\ny = pd.DataFrame(y, columns=['z1','z2','z3'])\nprint(\"Mean\")\nprint(y.apply(['mean','std']))\nprint()\nprint(\"Correlation\")\nprint(y.corr())\n\nMean\n            z1        z2        z3\nmean  0.011488  0.003370  0.011480\nstd   1.001032  1.010722  0.994734\n\nCorrelation\n          z1        z2        z3\nz1  1.000000  0.722161  0.447696\nz2  0.722161  1.000000 -0.295222\nz3  0.447696 -0.295222  1.000000\n\n\n\n#Singular value decomposition\nprint(\"=== original data ===\")\nprint(pd.DataFrame(x).apply(['mean','std']))\nprint(pd.DataFrame(x).corr())\nprint()\n\nU, S, Vh = np.linalg.svd(x)\nnp.allclose(U[:,:3] @ np.diag(S) @ Vh, x)\n\nB = Vh.T @ np.diag(S) / np.sqrt(len(x))\nz = np.random.randn(10000,3)\ny = z @ B.T\n\nprint(\"=== simulation data ===\")\ny = pd.DataFrame(y, columns=['z1','z2','z3'])\nprint(\"Mean\")\nprint(y.apply(['mean','std']))\nprint()\nprint(\"Correlation\")\nprint(y.corr())\n\n=== original data ===\n             0         1         2\nmean -0.031273 -0.024253 -0.045312\nstd   1.025723  1.426155  2.241957\n          0         1         2\n0  1.000000  0.716544  0.460920\n1  0.716544  1.000000 -0.288758\n2  0.460920 -0.288758  1.000000\n\n=== simulation data ===\nMean\n            z1        z2        z3\nmean -0.006377 -0.013568  0.008004\nstd   1.027312  1.432960  2.227500\n\nCorrelation\n          z1        z2        z3\nz1  1.000000  0.721764  0.454958\nz2  0.721764  1.000000 -0.287987\nz3  0.454958 -0.287987  1.000000",
+    "crumbs": [
+      "시뮬레이션 방법론('24 가을)",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>시뮬레이션방법론 실습</span>"
+    ]
+  },
+  {
     "objectID": "시뮬레이션hw1.html",
     "href": "시뮬레이션hw1.html",
     "title": "시뮬레이션 방법론 과제1 (베리어옵션)",
@@ -351,6 +417,39 @@
     ]
   },
   {
+    "objectID": "수치해석2.html",
+    "href": "수치해석2.html",
+    "title": "수치해석학 Ch2",
+    "section": "",
+    "text": "Cholesky factorization\n춀레스키 분해\n\\(Ax=b\\)에서, A가 대칭이고 positive-definite인 경우 적용 가능.\nPLU보다 연산량이 적음.\n다변량 정규분포 난수를 생성할 때, 공분산행렬에 춀레스키 분해를 적용하면 쉽게 생성 가능.",
+    "crumbs": [
+      "수치해석학('24 가을)",
+      "수치해석학 Ch2"
+    ]
+  },
+  {
+    "objectID": "수치해석2.html#qr-분해",
+    "href": "수치해석2.html#qr-분해",
+    "title": "수치해석학 Ch2",
+    "section": "QR 분해",
+    "text": "QR 분해",
+    "crumbs": [
+      "수치해석학('24 가을)",
+      "수치해석학 Ch2"
+    ]
+  },
+  {
+    "objectID": "수치해석실습.html",
+    "href": "수치해석실습.html",
+    "title": "4  수치해석기법 실습",
+    "section": "",
+    "text": "4.1 Linear system of equation",
+    "crumbs": [
+      "수치해석학('24 가을)",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>수치해석기법 실습</span>"
+    ]
+  },
+  {
     "objectID": "리스크관리1.html",
     "href": "리스크관리1.html",
     "title": "금융시장 리스크관리 1~2주차",
@@ -381,6 +480,61 @@
     "crumbs": [
       "금융시장 리스크관리('24 가을)",
       "금융시장 리스크관리 1~2주차"
+    ]
+  },
+  {
+    "objectID": "리스크관리hw1.html",
+    "href": "리스크관리hw1.html",
+    "title": "금융시장 리스크관리 과제1",
+    "section": "",
+    "text": "Question 1-3",
+    "crumbs": [
+      "금융시장 리스크관리('24 가을)",
+      "금융시장 리스크관리 과제1"
+    ]
+  },
+  {
+    "objectID": "리스크관리hw1.html#question-1-3",
+    "href": "리스크관리hw1.html#question-1-3",
+    "title": "금융시장 리스크관리 과제1",
+    "section": "",
+    "text": "Answer\n주어진 기간의 코스피지수에 대한 GARCH(1,1) 모델의 파라미터는 아래와 같습니다.\n\\(\\omega=0.00000363,\\;\\alpha=0.115,\\;\\beta=0.844\\)\n이 모델을 이용하여 추정한 2020년 8월 3일 장 종료 후 코스피지수의 연환산 변동성은 약 13.4%입니다.\n위 내용의 산출과정은 아래와 같습니다.\n\n주어진 코스피 지수의 일별 값(Sheet1)을 C열에 채운다. (vlookup 사용)\n코스피 지수의 일별 산술수익률을 D열에 채운다. (\\(r_i=\\frac{p_i-p_{i-1}}{p_{i-1}}\\))\nGARCH(1,1) 모델의 파라미터 초기값을 이용하여 당일 장 종료 시점의 추정 분산을 산출하고, E열에 채운다. (\\(\\sigma_i^2=\\omega+\\alpha r_i^2+\\beta \\sigma_{i-1}^2\\))\n일별 추정분산을 이용하여 일별 로그우도값(\\(LH=-\\ln \\sigma^2_i-\\frac{r_i^2}{\\sigma^2}\\))을 계산하여 F열에 채우고, 이를 모두 더하여 전체 우도값을 산출한다.\n전체 우도값을 최대화시키는 파라미터를 solver 기능을 이용하여 추정한다.\n적정 파라미터를 추정하였으면, 8/3일의 분산값을 통해 연환산 변동성을 산출한다. (\\(\\sigma_{annual}=\\sqrt{252}\\sigma_{8.3}\\))",
+    "crumbs": [
+      "금융시장 리스크관리('24 가을)",
+      "금융시장 리스크관리 과제1"
+    ]
+  },
+  {
+    "objectID": "리스크관리hw1.html#question-4-6",
+    "href": "리스크관리hw1.html#question-4-6",
+    "title": "금융시장 리스크관리 과제1",
+    "section": "Question 4-6",
+    "text": "Question 4-6\n\n\nAnswer 4-5\n주어진 기간의 코스피지수에 대한 EWMA 모델의 파라미터 \\(\\lambda=0.934\\)입니다.\n이 모델을 이용하여 추정한 2020년 8월 3일 장 종료 후 코스피지수의 연환산 변동성은 약 17.6%입니다.\n위 내용의 산출 과정은 아래와 같습니다.\n\n주어진 코스피 지수의 일별 값(Sheet1)을 C열에 채운다. (vlookup 사용)\n코스피 지수의 일별 산술수익률을 D열에 채운다. (\\(r_i=\\frac{p_i-p_{i-1}}{p_{i-1}}\\))\nEWMA 모델의 람다 초기값을 이용하여 당일 장 종료 시점의 추정 분산을 산출하고, E열에 채운다. (\\(\\sigma_i^2=\\lambda \\sigma_{i-1}^2+(1-\\lambda)r_i^2\\))\n일별 추정분산을 이용하여 일별 로그우도값(\\(LH=-\\ln \\sigma^2_i-\\frac{r_i^2}{\\sigma^2}\\))을 계산하여 F열에 채우고, 이를 모두 더하여 전체 우도값을 산출한다.\n전체 우도값을 최대화시키는 람다를 solver 기능을 이용하여 추정한다.\n적정 파라미터를 추정하였으면, 8/3일의 분산값을 통해 연환산 변동성을 산출한다. (\\(\\sigma_{annual}=\\sqrt{252}\\sigma_{8.3}\\))\n\n\n\nAnswer 6\n\n2018년 ~ 2020년 8월 4일까지 코스피 지수(회식 면) 및 GARCH(적색), EWMA(청색)을 도식화하였습니다.\n먼저, 전체적인 추세를 볼 때 GARCH(1,1) 모형과 EWMA 모형이 추정한 일 변동성은 크게 다르지 않습니다. 근본적으로 GARCH(1,1) 모형에서 장기변동성을 제외한 모형이 EWMA이며, GARCH(1,1)의 세 파라미터 중 장기변동성의 가중치가 가장 낮기 때문입니다.\n두 번째로는, 코스피 지수(회색 면)의 하락폭이 클 때 모델의 추정변동성이 급등하는 경향이 있습니다. 이러한 경향은 2020년 3월경 코로나19 펜데믹으로 인해 주가가 매우 큰 폭으로 급락하였을 때 잘 나타납니다. 주가는 상승할 때는 완만히 상승하다가 하락할 때는 급락하는 경향이 있는데, 두 모델이 이러한 특성을 잘 반영하여 하락시 변동성이 급등하는 현상을 잘 표현하는 것으로 보입니다.\n모델의 식을 생각해보면, 우리가 사용한 모델에서 GARCH(1,1)은 약 11.5%(\\(\\alpha\\)), EWMA는 약 6.6%(\\(1-\\lambda\\))만큼 당일 수익률의 제곱을 추정변동성에 반영하고 있습니다. 따라서, 주가가 오늘 급등락하였다면 해당 비율만큼 추정변동성에 영향을 주게되고, 그 급등락이 클수록 추정변동성이 급등하게 되는 것 입니다.\n한편, 두 모델의 차이는 이러한 변동성 급등 및 평균회귀(mean reverting) 과정에서 잘 나타납니다. 먼저, 급등시에는 당일 주가수익률의 반영비율이 큰 GARCH(1,1) 모형의 추정변동성이 더 급등하는 패턴을 관측할 수 있습니다.(적색&gt;청색)\n다음으로, 변동성이 급등하고나서 시간이 지남에 따라 반영비율이 희석되면서 변동성이 평균 수준으로 회귀하게 되는데, 이때에도 당일 주가수익률의 반영비율이 큰, 직전 추정변동성의 반영비율이 상대적으로 낮은 GARCH(1,1) 모형의 회귀 속도가 빠르게 됩니다. 이러한 패턴은 20년 3월 변동성 급등 이후 20년 6월경까지 변동성이 하락할 때 잘 관측됩니다.\n추가적으로, GARCH(1,1) 모형은 그 반영비율이 낮기는 하지만 장기변동성을 포함하여 변동성을 추정하기 때문에, 역시 EWMA보다 평균회귀가 빠른 이점을 가지게 됩니다. 따라서, 일시적인 주가 급등락으로 변동성이 급등하는 경우에는 GARCH(1,1) 모형이 정상수준으로 잘 회귀한다는 점에서 EWMA보다 적합한 모형인 것으로 보입니다.",
+    "crumbs": [
+      "금융시장 리스크관리('24 가을)",
+      "금융시장 리스크관리 과제1"
+    ]
+  },
+  {
+    "objectID": "리스크관리hw1.html#question-7-8",
+    "href": "리스크관리hw1.html#question-7-8",
+    "title": "금융시장 리스크관리 과제1",
+    "section": "Question 7-8",
+    "text": "Question 7-8\n\n\nAnswer 7\nEWMA의 \\(\\lambda\\)가 증가한다는 의미는, 변동성을 추정할 때 최신 데이터의 반영비율을 늘린다는 의미입니다.\nEWMA는 \\(\\sigma_i^2=\\sum_k \\lambda r_{i-k}^2\\)의 방식으로 변동성을 추정하는데, 여기에서 람다값이 증가하면 가장 최근에 형성된 수익률이 보다 많이 반영되게 됩니다.\n따라서, 최근 주가흐름이 추정변동성에 미치는 영향이 커지게 되므로, 급등락장이 이어졌다면 추정 변동성이 보다 빠르게 급등할 것이고, 보합장이 이어졌다면 추정변동성이 빠르게 감소할 것으로 보입니다.\n\n\nAnswer 8\n주어진 파라미터와 현재 일 변동성이 1%임을 활용하여 30일 변동성을 산출하겠습니다.\n이 때 이용하는 수식은 \\(E[\\sigma^2_{n+30}|I_{n-1}]=V_L+(\\alpha+\\beta)^{30}(\\sigma^2_n-V_L)\\) 입니다.\n먼저, 장기변동성 \\(V_L=\\frac{\\omega}{1-\\alpha-\\beta}=0.0002045\\)입니다.\n이에 따라 현재까지의 정보를 이용하여 30일 뒤의 일변동성을 추정하면 약 1.09%가 됩니다.\n\\[E[\\sigma^2_{n+30}|I_{n-1}]=0.0002045+0.9934^{30}(0.01^2-0.0002045)=0.0001188\\]\n\\[E[\\sigma_{n+30}|I_{n-1}]=\\sqrt{E[\\sigma^2_{n+30}|I_{n-1}]}=\\sqrt{0.0001188}=1.09\\%\\]",
+    "crumbs": [
+      "금융시장 리스크관리('24 가을)",
+      "금융시장 리스크관리 과제1"
+    ]
+  },
+  {
+    "objectID": "리스크관리hw1.html#question-9",
+    "href": "리스크관리hw1.html#question-9",
+    "title": "금융시장 리스크관리 과제1",
+    "section": "Question 9",
+    "text": "Question 9\n\n\n\n\n\n\n\nAnswer\n먼저, 목표는 1% 이하의 확률로 발생할 수 있는 포트폴리오의 손실액을 찾는 것입니다. 이는 포트폴리오의 확률분포를 통해 알 수 있으며, CDF에서 하위 1% 임계값을 통해 계산할 수 있습니다. 이 의미는, 향후 시장상황에 따라 약 1%의 확률로 해당 임계값보다 큰 손실이 발생할 수 있다는 뜻이며, 이를 VaR(Value at Risk)라고 부릅니다.\n이제 문제에서 주어진 정보를 이용하여 이 임계값을 계산해보겠습니다.\n문제에서 \\(PC_1,PC_2\\)는 각각 평균이 0인 정규분포를 따르므로, 각각의 표준편차를 \\(\\sigma_1,\\sigma_2\\)라고 하겠습니다.\n이에 따라 포트폴리오의 가격변동 \\(\\Delta P=0.05PC_1-3.88PC_2\\)는 두 정규분포의 선형결합이므로 joint normal distribution이 되고, 각 \\(PC\\)는 평균이 0, 독립임을 이용하여 \\(\\Delta P\\)의 평균과 표준편차 \\(\\sigma\\)는 아래와 같이 계산할 수 있습니다.\n\\(1.\\;E[\\Delta P]=0.05E[PC_1]-3.88E[PC_2]=0\\)\n\\(2.\\;\\sigma^2=E[\\Delta P^2]-(E[\\Delta P])^2=0.05^2\\sigma_1^2+3.88^2\\sigma_2^2\\)\n\n\n\n\n\n\n정규분포이고 독립인 두 확률변수 \\(X,Y\\)에 대해 \\(E[XY]=E[X]E[Y]\\)가 성립합니다.\n따라서, \\(E[\\Delta P^2]=E[0.05^2PC_1^2-2\\times 0.05\\times 3.88 PC_1PC_2+3.88^2PC_2^2]\\)\n\\(\\;\\;\\;\\;\\;\\;\\;\\;=0.05^2E[PC_1^2]+3.88^2E[PC_2^2]=0.05^2\\sigma_1^2+3.88^2\\sigma_2^2\\)\n\n\n\n즉, \\(\\Delta P\\sim N(0,\\;0.05^2\\sigma_1^2+3.88^2\\sigma_2^2)\\)이므로 각 \\(PC\\)의 표준편차를 알면 1% 임계값을 알 수 있습니다. Table2를 이용해 이를 계산하면,\n\\(\\sigma^2=0.05^2\\sigma_1^2+3.88^2\\sigma_2^2=144.39,\\;\\;\\therefore\\sigma=12.02\\)\n\\(z_{0.01}=-2.33\\)임이 잘 알려져 있으므로, 1% 임계값은 \\(-2.33\\sigma\\approx -28\\)입니다.\n따라서, 약 1% 확률로 발생할 수 있는 포트폴리오의 예상손실액은 최소 28 million $ 입니다.",
+    "crumbs": [
+      "금융시장 리스크관리('24 가을)",
+      "금융시장 리스크관리 과제1"
     ]
   },
   {
@@ -524,6 +678,28 @@
     "crumbs": [
       "미시경제학('24 가을)",
       "Microanalysis of financial economics Assignment2"
+    ]
+  },
+  {
+    "objectID": "미시hw3.html",
+    "href": "미시hw3.html",
+    "title": "Microanalysis of financial economics Assignment3",
+    "section": "",
+    "text": "Question",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "Microanalysis of financial economics Assignment3"
+    ]
+  },
+  {
+    "objectID": "미시hw3.html#question",
+    "href": "미시hw3.html#question",
+    "title": "Microanalysis of financial economics Assignment3",
+    "section": "",
+    "text": "Answer : (a) $200\nAt equilibrium(p=70), consumer surplus is 800(\\(20\\times 80\\times 0.5\\)) and supplier surplus is 400.(\\(20\\times 40\\times 0.5\\)) so total surplus is 1200.\nIf there exists a price floor of $110, quantity decrease to 10 and price is $110. so consumer surplus will be 200 (\\(10\\times 40 \\times 0.5\\)) and suplier surplus will be 700(\\(10\\times 60+10\\times 20\\times 0.5\\)).\nNow, total surplus decrease to 900 and deadweight loss occur 300.",
+    "crumbs": [
+      "미시경제학('24 가을)",
+      "Microanalysis of financial economics Assignment3"
     ]
   }
 ]

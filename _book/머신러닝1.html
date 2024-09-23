@@ -218,6 +218,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./딥러닝2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">딥러닝 Ch2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./딥러닝실습.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">딥러닝 Ch1 실습</span></span></a>
   </div>
@@ -237,6 +243,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./시뮬레이션1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">시뮬레이션방법론 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션실습.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">시뮬레이션방법론 실습</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -279,6 +291,18 @@ window.Quarto = {
  <span class="menu-text">수치해석학 Ch1</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./수치해석2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">수치해석학 Ch2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./수치해석실습.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">수치해석기법 실습</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -294,6 +318,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./리스크관리1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">금융시장 리스크관리 1~2주차</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./리스크관리hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">금융시장 리스크관리 과제1</span></a>
   </div>
 </li>
       </ul>
@@ -323,6 +353,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./미시hw2.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Microanalysis of financial economics Assignment2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment3</span></a>
   </div>
 </li>
       </ul>
@@ -405,7 +441,7 @@ window.Quarto = {
 </section>
 <section id="모델의-평가와-검증" class="level2">
 <h2 class="anchored" data-anchor-id="모델의-평가와-검증">모델의 평가와 검증</h2>
-<p><img src="model complexity.png" class="img-fluid"></p>
+<p><img src="image/model complexity.png" class="img-fluid"></p>
 <p>낮은 복잡도 = 선형회귀분석 or logistic 분류면 높은 복잡도 = 변수를 추가한 모델 (과대적합 케이스)</p>
 <p>훈련데이터(training sample)은 복잡도가 높아질수록 예측오차가 줄어듬 (우하향)</p>
 <p>평가데이터(text sample)은 복잡도가 높아지면 오차가 줄어들기는 하지만,</p>
@@ -471,11 +507,20 @@ window.Quarto = {
 <p>방법론에 따라 한꺼번에 훈련시켜서 성능을 평가하기도 하고,</p>
 <p>이러한 분할(folding)을 수회~수백회 반복해서 모델의 성능을 추정하기도 함.</p>
 <p>(folding별 성능의 평균/표준편차 고려)</p>
-<p>::: {.callout, title=“Imbalanced data”} 머신러닝으로 분류문제를 해결하는 경우,</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>머신러닝으로 분류문제를 해결하는 경우,</p>
 <p>실제 세상에서는 분류대상의 비율이 매우 적은 경우가 많음.</p>
 <p>이러한 샘플을 imbalanced data라고 하며,</p>
 <p>Hold-out, K-fold cv 등을 할 때,</p>
-<p>원 자료의 분류대상의 비율을 유지한채로 주어진 자료를 분할해야 함. :::</p>
+<p>원 자료의 분류대상의 비율을 유지한채로 주어진 자료를 분할해야 함.</p>
+</div>
+</div>
+</div>
 
 
 <!-- -->
@@ -978,7 +1023,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## 모델의 평가와 검증</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="al">![](model%20complexity.png)</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="al">![](image/model complexity.png)</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>낮은 복잡도 = 선형회귀분석 or logistic 분류면</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>높은 복잡도 = 변수를 추가한 모델 (과대적합 케이스)</span>
@@ -1067,7 +1112,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>(folding별 성능의 평균/표준편차 고려)</span>
 <span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>::: {.callout, title="Imbalanced data"}</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>::: {.callout}</span>
 <span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>머신러닝으로 분류문제를 해결하는 경우,</span>
 <span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>실제 세상에서는 분류대상의 비율이 매우 적은 경우가 많음.</span>

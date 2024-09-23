@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>quarto-input13566774</title>
+<title>quarto-input95497c33</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,16 +23,16 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="딥러닝2_files/libs/clipboard/clipboard.min.js"></script>
-<script src="딥러닝2_files/libs/quarto-html/quarto.js"></script>
-<script src="딥러닝2_files/libs/quarto-html/popper.min.js"></script>
-<script src="딥러닝2_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="딥러닝2_files/libs/quarto-html/anchor.min.js"></script>
-<link href="딥러닝2_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="딥러닝2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="딥러닝2_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="딥러닝2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="딥러닝2_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="머신러닝2_files/libs/clipboard/clipboard.min.js"></script>
+<script src="머신러닝2_files/libs/quarto-html/quarto.js"></script>
+<script src="머신러닝2_files/libs/quarto-html/popper.min.js"></script>
+<script src="머신러닝2_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="머신러닝2_files/libs/quarto-html/anchor.min.js"></script>
+<link href="머신러닝2_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="머신러닝2_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="머신러닝2_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="머신러닝2_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="머신러닝2_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -75,76 +75,15 @@ window.Quarto = {
 
 
 
-<section id="딥러닝-ch2" class="level1 unnumbered">
-<h1 class="unnumbered">딥러닝 Ch2</h1>
-<p>인공 신경망 모형 (Neural Network)</p>
-<section id="퍼셉트론-perceptron" class="level2">
-<h2 class="anchored" data-anchor-id="퍼셉트론-perceptron">퍼셉트론 (Perceptron)</h2>
-<p>하나의 인공뉴런으로 구성된 신경망. 가장 기본적인 구조.</p>
-<p>주어진 데이터로 분류면을 찾는 것이 목표</p>
-<section id="로젠블랜의-퍼셉트론-simple-perceptron" class="level3">
-<h3 class="anchored" data-anchor-id="로젠블랜의-퍼셉트론-simple-perceptron">로젠블랜의 퍼셉트론 (Simple perceptron)</h3>
-<p>활성화함수 <span class="math inline">\(f(.)\)</span>를 1 또는 -1를 가지는 임계함수로 구성.</p>
-<p>y = 1인데 f=-1인 경우, <span class="math inline">\(w_i^*=w_i+x_i\)</span></p>
-<p>y = -1인데 f=1인 경우, <span class="math inline">\(w_i^*=w_i-x_i\)</span></p>
-<p>즉, 실제는 1인데 <span class="math inline">\(s=\sum w_ix_i&lt;0\)</span>이 되어 임계가 -1로 출력되는 경우,</p>
-<p><span class="math inline">\(\sum (w_i^*x_i+b^*_{(w^*_0x_0)})=\sum (w_ix_i+x_i^2+b)\)</span>이 되어 s가 증가하는 방향으로 움직이게 됨.</p>
-</section>
-<section id="선형-퍼셉트론-linear-perceptron" class="level3">
-<h3 class="anchored" data-anchor-id="선형-퍼셉트론-linear-perceptron">선형 퍼셉트론 (Linear perceptron)</h3>
-<p>활성화함수로 선형함수를 사용함 <span class="math inline">\(f(s)=s\)</span></p>
-<p>파라미터 학습시 델타규칙(delta rule)을 사용하는데, 경사하강법(GDM)으로 보면 됨</p>
-<p>N개의 훈련자료 <span class="math inline">\(D_N=\{(x^{(d),y^{(d)}})\}_{d=1}^N\)</span>에 대해 <span class="math inline">\(f^{(d)}=\sum_i w_ix_i^{(d)}\)</span>가 되며,</p>
-<p>학습오차 <span class="math inline">\(E_d=\frac{1}{2}(y^{(d)}-f(s)^{(d)})^2\)</span> 및 <span class="math inline">\(E_N=\sum E_d\)</span></p>
-<p>(N으로 나누던 안나누던 파라미터 업데이트 결정에는 영향 없음)</p>
-<p>여기에 SGD(Stochastic Gredient Descent)를 적용하여 파라미터 업데이트</p>
-<p><span class="math inline">\(w_i\leftarrow w_i+\Delta w_i=w_i-\eta \frac{\partial E_d}{\partial w_i}=w_i+\eta(y^{(d)}-f^{(d)})x_i\)</span></p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>초기 델타규칙의 파라미터 업데이트는 경사하강법의 표현법이 아니였음.</p>
-<p><span class="math inline">\(w_i\leftarrow w_i+\eta ex_i\;,\;e=y-x_i\)</span> 방식으로 업데이트.</p>
-<p>결국 목적함수를 미분하면 해당 꼴이 나타나므로 경사하강법과 동일한 논리임.</p>
-</div>
-</div>
-</div>
-</section>
-<section id="시그모이드-퍼셉트론-sigmoid-perceptron" class="level3">
-<h3 class="anchored" data-anchor-id="시그모이드-퍼셉트론-sigmoid-perceptron">시그모이드 퍼셉트론 (Sigmoid perceptron)</h3>
-<p>머신러닝의 logistic regression과 거의 유사함. (비용함수만 조금 다름)</p>
-<p>활성함수를 시그모이드 함수 <span class="math inline">\(f=\frac{1}{1+e^{-s}}\in (0,1)\)</span>로 사용함.</p>
-<p>즉, y가 이진분류 문제일 때 y=1일 확률값을 예측해주는 모델임.</p>
-<p>어차피 퍼셉트론에서는 확률=0.5를 기준으로 분류하므로 선형분류면을 제공하지만,</p>
-<p>네트워크를 구성하면 비선형 경계면을 구성할 수도 있음.</p>
-<p><span class="math inline">\(f^{(d)}=\sigma(s^{(d)})=\frac{1}{1+e^{-s^{(d)}}}=\frac{1}{1+e^{-\sum w_ix^{(d)}_i}}\)</span></p>
-<p><span class="math inline">\(E_d=\frac{1}{2}(y^{(d)}-\sigma(s^{(d)}))^2\)</span></p>
-<p><span class="math inline">\(\frac{\partial E_d}{\partial w_i}=(y^{(d)}-\sigma^{(d)})\sigma^{(s)}(1-\sigma^{(s)})(-x_i^{(d)})\)</span></p>
-<p><span class="math inline">\(\therefore w_i^*\;\leftarrow\;w_i+\eta (y^{(d)}-f^{(d)})\,f^{(s)}\,(1-f^{(s)})x_i^{(d)}\)</span></p>
-<p><span class="math inline">\(w_i\)</span>의 업데이트는 동시에 이루어져야함에 유의</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
-<p>시그모이드 함수 미분</p>
-<p><span class="math inline">\(\frac{d\sigma(s)}{ds}=\frac{+e^{-s}}{(1+e^{-s})^2}=\sigma(s)(1-\sigma(s))\)</span></p>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="다층-퍼셉트론-multi-layer-perceptron" class="level2">
-<h2 class="anchored" data-anchor-id="다층-퍼셉트론-multi-layer-perceptron">다층 퍼셉트론 (Multi-layer perceptron)</h2>
-<p>XOR문제 : <span class="math inline">\((x_1,x_2,y)=(1,0,1),\;(0,1,1),\;(0,0,0),\;(1,1,0)\)</span></p>
-<p>기존 퍼셉트론은 이 간단한 XOR문제도 해결할 수 없음.</p>
-<p>여러개의 퍼셉트론을 여러 층으로 쌓는다면 이를 해결 가능함.</p>
-<p>선을 두개를 그어서 <span class="math inline">\(z_1,z_2\)</span>를 구성하고, <span class="math inline">\(f=z_1\times z_2\)</span>를 최종 모델로 결정하면,</p>
-<p>XOR문제를 해결할 수 있음.</p>
-</section>
+<section id="머신러닝-ch2" class="level1 unnumbered">
+<h1 class="unnumbered">머신러닝 Ch2</h1>
+<p>선형회귀모형</p>
+<p>비용함수 : <span class="math inline">\(J(\theta)=\frac{1}{2m}\sum_{i=1}^m(\theta^Tx^{(i)}-y^{(i)})^2\)</span></p>
+<p><span class="math inline">\(\theta^*=\theta-\alpha\,\triangledown_\theta J(\theta)\)</span></p>
+<p><span class="math inline">\(\triangledown_\theta J(\theta)=\frac{1}{m}X^T(X\theta-y)\)</span></p>
+<p>배치 / 확률적 / 미니배치</p>
+<p>정규방정식에서 <span class="math inline">\(\hat{\theta}=(X^TX)^{-1}X^Ty\)</span>의 closed form 존재.</p>
+<p>역행렬 계산에 많은 시간이 소요되는 경우에는 사용이 곤란</p>
 </section>
 
 </main>

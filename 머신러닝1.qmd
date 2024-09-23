@@ -20,7 +20,7 @@ $\hat{y}=\beta_0+\beta_1x_1+\dotsm+\beta_kx_k$
 
 ## 모델의 평가와 검증
 
-![](model%20complexity.png)
+![](image/model complexity.png)
 
 낮은 복잡도 = 선형회귀분석 or logistic 분류면
 높은 복잡도 = 변수를 추가한 모델 (과대적합 케이스)
