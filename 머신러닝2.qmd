@@ -1,4 +1,4 @@
-# 머신러닝 Ch2 {.unnumbered}
+# 머신러닝 Ch2-3 {.unnumbered}
 
 선형회귀모형
 
@@ -13,3 +13,48 @@ $\triangledown_\theta J(\theta)=\frac{1}{m}X^T(X\theta-y)$
 정규방정식에서 $\hat{\theta}=(X^TX)^{-1}X^Ty$의 closed form 존재.
 
 역행렬 계산에 많은 시간이 소요되는 경우에는 사용이 곤란
+
+## 규제가 있는 선형회귀
+
+### 릿지회귀모형
+
+L2 규제를 사용하여 파라미터의 범위를 제약
+
+비용함수 : $J(\theta)=\frac{1}{2m}(\sum_{i=1}^m(\theta^Tx^{(i)}-y^{(i)})^2+\lambda\sum_{j=1}^n\theta_j^2)$
+
+파라미터 추정치는, $\hat\theta^R=arg\min_\theta J(\theta)$
+
+행렬식 : $\hat\theta^R=arg\min_\theta\{\frac{1}{2m}(X\theta-y)^T(X\theta-y)+\lambda\theta_1^T\theta_1\}$
+
+Alter : $\hat\theta^R=arg\min_\theta\{\frac{1}{2m}(X\theta-y)^T(X\theta-y)\}\;subject\;to\;\sum_{j=1}^n\theta_j^2\leq t$
+
+즉, 파라미터 제곱합에 일정 상한을 정해놓는 방식으로 보면 됨.
+
+람다가 커지면? 파라미터 제약이 커지면서 편향이 증가함
+
+#### 파라미터 추정치 계산
+
+정규방정식 : $\hat\theta^R=(X^TX+\lambda I)^{-1}X^Ty$
+
+일반 회귀모형에서는 $X^TX$가 singular이면 해가 없었으나, 릿지제약 하에서는 이를 해결할 수 있음.
+
+또한, 다중공선성(multicolinearity)도 해결할 수 있다는 것이 알려져 있음.
+
+경사하강법 : $\theta_{new}=\theta_{old}-\alpha\,\triangledown J(\theta)=(1-\alpha\frac{\lambda}{m})\theta_{old}-\alpha\,\triangledown J^U(\theta)$
+
+마지막 식은, 일반선형회귀의 그레디언트를 이용해서 표현한 것이며, 직전 $\theta_{old}$의 영향을 상수배로 줄여주는 것으로 해석할 수 있음.
+
+### 라쏘회귀모형
+
+L1 규제를 이용. Least Absolute Shrinkage & Selection Operator
+
+모델로 널리 이용되지는 않지면, feature가 너무 많은 경우 적절한 변수만 선택할 때 많이 이용됨.
+
+비용함수 : $J(\theta)=\frac{1}{2m}(\sum_{i=1}^m(\theta^Tx^{(i)}-y^{(i)})^2+\lambda\sum_{j=1}^n|\theta_j|)$
+
+파라미터 추정치는, $\hat\theta^L=arg\min_\theta J(\theta)$
+
+행렬식 : $\hat\theta^L=arg\min_\theta\{\frac{1}{2m}(X\theta-y)^T(X\theta-y)+\lambda 1^T|\theta_1|\}$
+
+Alter : $\hat\theta^L=arg\min_\theta\{\frac{1}{2m}(X\theta-y)^T(X\theta-y)\}\;subject\;to\;\sum_{j=1}^n|\theta_j|\leq t$
+

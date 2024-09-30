@@ -1,0 +1,13 @@
+# 시뮬레이션방법론 Ch3-4 {.unnumbered}
+
+샘플 경로 생성법, Variance Reduction Techniques
+
+## Brownian bridge
+
+GBM에 따라 결정된 t시점의 값이 있을 때, 0과 t 사이의 시점 s에 대한 분포를 어떻게 구하지?
+
+Brownina bridge를 이용해 베리어옵션 평가
+
+먼저, T시점의 값을 생성하고, ITM일 때만 bridge를 생성해서 베리어옵션 평가!
+
+## 

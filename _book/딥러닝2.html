@@ -195,6 +195,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./머신러닝2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">머신러닝 Ch2-3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./머신러닝실습.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">머신러닝 실습</span></span></a>
   </div>
@@ -247,6 +253,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">시뮬레이션방법론 Ch3-4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./시뮬레이션실습.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">시뮬레이션방법론 실습</span></span></a>
   </div>
@@ -254,7 +266,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./시뮬레이션hw1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">시뮬레이션 방법론 과제1 (베리어옵션)</span></a>
+ <span class="menu-text">시뮬레이션 과제1 (베리어옵션)</span></a>
   </div>
 </li>
       </ul>
@@ -270,8 +282,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./이자율1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">이자율파생상품 1주차</span></a>
+  <a href="./이자율hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">이자율파생상품 과제1</span></a>
   </div>
 </li>
       </ul>
@@ -317,7 +329,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./리스크관리1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">금융시장 리스크관리 1~2주차</span></a>
+ <span class="menu-text">금융시장 리스크관리</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -361,6 +373,18 @@ window.Quarto = {
  <span class="menu-text">Microanalysis of financial economics Assignment3</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment5</span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
@@ -396,7 +420,11 @@ window.Quarto = {
   <li><a href="#선형-퍼셉트론-linear-perceptron" id="toc-선형-퍼셉트론-linear-perceptron" class="nav-link" data-scroll-target="#선형-퍼셉트론-linear-perceptron">선형 퍼셉트론 (Linear perceptron)</a></li>
   <li><a href="#시그모이드-퍼셉트론-sigmoid-perceptron" id="toc-시그모이드-퍼셉트론-sigmoid-perceptron" class="nav-link" data-scroll-target="#시그모이드-퍼셉트론-sigmoid-perceptron">시그모이드 퍼셉트론 (Sigmoid perceptron)</a></li>
   </ul></li>
-  <li><a href="#다층-퍼셉트론-multi-layer-perceptron" id="toc-다층-퍼셉트론-multi-layer-perceptron" class="nav-link" data-scroll-target="#다층-퍼셉트론-multi-layer-perceptron">다층 퍼셉트론 (Multi-layer perceptron)</a></li>
+  <li><a href="#다층-퍼셉트론-multi-layer-perceptron" id="toc-다층-퍼셉트론-multi-layer-perceptron" class="nav-link" data-scroll-target="#다층-퍼셉트론-multi-layer-perceptron">다층 퍼셉트론 (Multi-layer perceptron)</a>
+  <ul class="collapse">
+  <li><a href="#다층-퍼셉트론의-구조" id="toc-다층-퍼셉트론의-구조" class="nav-link" data-scroll-target="#다층-퍼셉트론의-구조">다층 퍼셉트론의 구조</a></li>
+  <li><a href="#다층-퍼셉트론의-학습" id="toc-다층-퍼셉트론의-학습" class="nav-link" data-scroll-target="#다층-퍼셉트론의-학습">다층 퍼셉트론의 학습</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -488,10 +516,46 @@ window.Quarto = {
 <p>기존 퍼셉트론은 이 간단한 XOR문제도 해결할 수 없음.</p>
 <p>여러개의 퍼셉트론을 여러 층으로 쌓는다면 이를 해결 가능함.</p>
 <p>선을 두개를 그어서 <span class="math inline">\(z_1,z_2\)</span>를 구성하고, <span class="math inline">\(f=z_1\times z_2\)</span>를 최종 모델로 결정하면 문제 해결 가능.</p>
+<section id="다층-퍼셉트론의-구조" class="level3">
+<h3 class="anchored" data-anchor-id="다층-퍼셉트론의-구조">다층 퍼셉트론의 구조</h3>
+<p>여러 개의 퍼셉트론 뉴런을 여러 층으로 쌓은 구조이며, 층 내에서 뉴런간 교류는 없음.</p>
+<p>입력 - 은닉 - 출력 다층퍼셉트론이 대표적인 구조. (I-H-K 다층퍼셉트론)</p>
+<p>입력층, 은닉층을 거쳐 출력층의 연산을 통해 최종적으로 값을 출력</p>
+<p>파라미터 학습은 각 층마다 가중치로 존재하므로, 실질적으로 층이 2개인 MLP라고 하기도 함.</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>e.g.&nbsp;10-3-1 MLP는?</p>
+<p>10개의 입력층(+1 bias항), 3개의 은닉층(+1 bias항), 1개의 출력층</p>
+<p>총 11개의 입력층과 3개의 은닉층이 모두 연결되어 총 33개의 연결이 생기고,</p>
+<p>4개의 은닉층과 1개의 출력층이 연결되어 4개의 연결이 생김. 전체 37개의 연결.</p>
+</div>
+</div>
+</div>
+<p>층의 개수나 뉴런의 개수를 모두 돌려봐서 최적의 모델을 찾으면 좋지 않나?</p>
+<p>그러나, 딥러닝 모델은 하나의 학습에 많은 시간이 걸려서 그런식으로 하지 않고, 유사 사례를 참고하는 등 적정 모델을 초기부터 잘 설정해야할 필요가 있음.</p>
+</section>
+<section id="다층-퍼셉트론의-학습" class="level3">
+<h3 class="anchored" data-anchor-id="다층-퍼셉트론의-학습">다층 퍼셉트론의 학습</h3>
+<section id="전향계산-forward-calculation" class="level4">
+<h4 class="anchored" data-anchor-id="전향계산-forward-calculation">전향계산 Forward Calculation</h4>
+<p>각 층간에는 퍼셉트론과 동일한 연산이 적용되며, 따라서 층이 많아질수록 계산이 기하급수적으로 증가.</p>
+<p><img src="image/deeplearning_MLP.png" class="img-fluid"></p>
+<p>I-H-K MLP에서, I개의 입력층과 H개의 은닉층 사이에 <span class="math inline">\(H\times (I+1)\)</span>개의 가중치가 필요하며,</p>
+<p>은닉층과 출력층 사이에 <span class="math inline">\(K\times (H+1)\)</span>개의 가중치가 필요.</p>
+<p>이러한 가중치를 학습할 때 어떻게하는지? 오류역전파 알고리즘 사용</p>
+</section>
+<section id="오류역전파-알고리즘-error-back-propagation" class="level4">
+<h4 class="anchored" data-anchor-id="오류역전파-알고리즘-error-back-propagation">오류역전파 알고리즘 Error back-propagation</h4>
 
 
 <!-- -->
 
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -1049,7 +1113,47 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>여러개의 퍼셉트론을 여러 층으로 쌓는다면 이를 해결 가능함.</span>
 <span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>선을 두개를 그어서 $z_1,z_2$를 구성하고, $f=z_1\times z_2$를 최종 모델로 결정하면 문제 해결 가능.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>선을 두개를 그어서 $z_1,z_2$를 구성하고, $f=z_1\times z_2$를 최종 모델로 결정하면 문제 해결 가능.</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="fu">### 다층 퍼셉트론의 구조</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>여러 개의 퍼셉트론 뉴런을 여러 층으로 쌓은 구조이며, 층 내에서 뉴런간 교류는 없음.</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>입력 - 은닉 - 출력 다층퍼셉트론이 대표적인 구조. (I-H-K 다층퍼셉트론)</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>입력층, 은닉층을 거쳐 출력층의 연산을 통해 최종적으로 값을 출력</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>파라미터 학습은 각 층마다 가중치로 존재하므로, 실질적으로 층이 2개인 MLP라고 하기도 함.</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>::: {.callout}</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>e.g. 10-3-1 MLP는?</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>10개의 입력층(+1 bias항), 3개의 은닉층(+1 bias항), 1개의 출력층</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>총 11개의 입력층과 3개의 은닉층이 모두 연결되어 총 33개의 연결이 생기고,</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>4개의 은닉층과 1개의 출력층이 연결되어 4개의 연결이 생김. 전체 37개의 연결.</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>층의 개수나 뉴런의 개수를 모두 돌려봐서 최적의 모델을 찾으면 좋지 않나?</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>그러나, 딥러닝 모델은 하나의 학습에 많은 시간이 걸려서 그런식으로 하지 않고, 유사 사례를 참고하는 등 적정 모델을 초기부터 잘 설정해야할 필요가 있음.</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="fu">### 다층 퍼셉트론의 학습</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 전향계산 Forward Calculation</span></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>각 층간에는 퍼셉트론과 동일한 연산이 적용되며, 따라서 층이 많아질수록 계산이 기하급수적으로 증가.</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="al">![](image/deeplearning_MLP.png)</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>I-H-K MLP에서, I개의 입력층과 H개의 은닉층 사이에 $H\times (I+1)$개의 가중치가 필요하며,</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>은닉층과 출력층 사이에 $K\times (H+1)$개의 가중치가 필요.</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>이러한 가중치를 학습할 때 어떻게하는지? 오류역전파 알고리즘 사용</span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 오류역전파 알고리즘 Error back-propagation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

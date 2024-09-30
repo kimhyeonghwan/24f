@@ -1,0 +1,107 @@
+# 이자율파생상품 과제1 {.unnumbered}
+
+20249132 김형환
+
+## Question 1
+
+![](image/interest_hw1_1.png)
+
+### Answer 1 : 0.631%
+
+(ㄱ)은행은 문제의 채권발행으로 인해 향후 3년간 연 4%의 고정금리 이자를 지급해야하는 상황이며,
+
+이 고정금리 이자지급을 변동금리로 바꾸는 것이 목표입니다.
+
+스왑딜러와 IRS를 체결함으로써 이를 해결할 수 있고, (ㄱ)은행은 4% fixed receiver가 됩니다.
+
+4%만큼 fixed rate를 지급하고, (변동금리+x)만큼 Float rate를 지급하게 되는데, 계약체결시점에서 (ㄱ)은행의 NPV가 0이 되도록 하는 스프레드(x)를 산출하면 됩니다.
+
+한편, swap rate를 이용하여 IRS를 체결하면 체결시점의 NPV는 0입니다. (swap rate vs. float rate)
+
+따라서, 4%-annual swap rate를 통해 간단히 스프레드 x를 계산할 수 있습니다.
+
+6개월 스왑금리를 annal로 바꾸면 $(1+\frac{0.03341}{2})^2=1+r,\;r=0.03369$이므로, $x=0.03369-0.04=-0.00631$입니다.
+
+즉, **(ㄱ)은행과 스왑딜러가 (4% vs. float rate + 0.631%)의 IRS를 체결하면 됩니다..**
+
+## Question 2
+
+![](image/interest_hw1_2.png)
+
+### Answer 2 : 최소 5.01%
+
+고객은 은행으로부터 USD SOFR를 받고, EUR fixed를 지급하므로,
+
+은행은 EUR fixed를 받고, USD SOFR를 지급해야합니다.
+
+따라서, 은행은 고객과의 계약헤지를 위해 USD SOFR를 받고, EUR fixed를 지급하는 cashflow를 만들어야 합니다.
+
+이를 위해 두가지 계약을 사용합니다.
+
+1.  EUR 금리스왑, fixed payer
+2.  베이시스 통화스왑 EUR ESTR payer / USD SOFR receiver
+
+1번 계약에서 은행은 5.05% 고정금리를 지급하고 EUR ESTR을 수취합니다.
+
+2번 계약에서 은행은 EUR ESTR - 4bp를 지급하고, USD SOFR를 수취합니다.
+
+두 계약을 결합하면, 은행은 5.01% 고정금리를 지급하고 USD SOFR를 수취하게 됩니다.
+
+**따라서, 고객과의 계약에서 은행은 최소 5.01%의 EUR fixed를 받아야합니다.**
+
+## Question 3
+
+![](image/interest_hw1_3.png) ![](image/interest_hw1_4.png)
+
+### Answer 3
+
+트레이더는 현재 두가지 위험에 직면해있습니다.
+
+1.  현재(6월)부터 9.16일까지의 금리하락으로 initial level SOFR가 하락할 위험
+2.  11.6-7 FOMC 결과에 따라 target rate SOFR가 하락할 위험
+
+이 두가지 위험을 주어진 hedging instrument를 통해 관리하려면, 1개월 10월 SOFR선물을 매도하면 됩니다.
+
+**1개월 10월 SOFR선물은 10.16일 initial level과 11월 FOMC target rate에 영향**을 받는 상품입니다.
+
+문제의 가정처럼 오직 두가지의 요소에 의해 선물가격이 영향을 받는다면, 9.16\~11.6까지 및 11.7\~12월 만기까지의 SOFR의 변화가 없다는 의미입니다.
+
+따라서 현재시점에 1개월 10월 SOFR선물을 매도한다면, 9.16일 initial level의 변동위험은 10.16일 initial level 변동위험과 정확하게 상쇄되며 11월 FOMC target rate 리스크도 정확히 상쇄될 것 입니다.
+
+**즉, 9.16부터 10.16까지 SOFR의 변동이 없고, 11월 선물만기일 이후 12월 선물만기일까지 SOFR의 변동이 없다면 1개월 10월선물은 완전헷지가 가능한 hedge instrument가 됩니다.**
+
+한편, **1개월 11월 SOFR선물**의 경우 11.16일 initial level에 영향을 받으며 이후 FOMC가 없으므로 **오직 initial level에 따라서 가격이 결정**되는 상품이 됩니다.
+
+하지만 **11월 initial level은 현재시점부터 9월까지의 initial level 변동과 그 이후의 금리변동, 11월 FOMC target rate 변동이 모두 반영**되어있는 금리입니다.
+
+따라서 간접적으로 트레이더의 위험을 모두 내포하고 있는 상품이며, 이를 **현재시점에 매도한다면 헷지가 가능**하게 됩니다.
+
+다만, 1개월 11월 선물을 이용하는 경우, 기존 포지션의 **모든 가격변동분이 11.16일에 일시반영되므로 그 사이에 FOMC 급락으로 일일정산 손실이 누적되는 등 유동성 위험에 직면**할 수 있습니다.
+
+또한, **실제 시장에서는 SOFR금리가 일일단위로 변동하며 3개월 선물과 1개월 선물의 compounding 기간이 달라 이러한 완전헷지는 불가능**할 것으로 보입니다.
+
+## Question 4
+
+![](image/interest_hw1_5.png)
+
+### Answer 4 : -0.1980
+
+![](image/interest_hw1_a1.png){width="250"}
+
+Market price of risk $\lambda=\frac{e^{-r_0t}E[P_1(2)]-P_0(2)}{P_{1,0}-P_{1,1}}$입니다.
+
+위 그림처럼 이를 각각 계산하면, $\lambda=-0.1980$입니다.
+
+## Question 5
+
+![](image/interest_hw1_6.png)
+
+### Answer 5 : 0.2974
+
+![](image/interest_hw1_a2.png){width="390"}
+
+포트폴리오 복제 및 위험중립가치평가를 통해 옵션가격을 계산할 수 있습니다.
+
+위험중립가치평가를 이용할 때, 위험중립확률은 $p^*=\frac{e^{r_0/2}P_0(2)-P_{1,1}}{P_{1,0}-P_{1,1}}=0.7000$이므로,
+
+$c=e^{-r_0t}(p^*(P_{1,0}-K)^++(1-p^*)(P_{1,1}-K)^+)=0.2974$

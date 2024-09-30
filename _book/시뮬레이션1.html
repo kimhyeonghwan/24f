@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./시뮬레이션실습.html" rel="next">
+<link href="./시뮬레이션2.html" rel="next">
 <link href="./딥러닝실습.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -195,6 +195,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./머신러닝2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">머신러닝 Ch2-3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./머신러닝실습.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">머신러닝 실습</span></span></a>
   </div>
@@ -247,6 +253,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">시뮬레이션방법론 Ch3-4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./시뮬레이션실습.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">시뮬레이션방법론 실습</span></span></a>
   </div>
@@ -254,7 +266,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./시뮬레이션hw1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">시뮬레이션 방법론 과제1 (베리어옵션)</span></a>
+ <span class="menu-text">시뮬레이션 과제1 (베리어옵션)</span></a>
   </div>
 </li>
       </ul>
@@ -270,8 +282,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./이자율1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">이자율파생상품 1주차</span></a>
+  <a href="./이자율hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">이자율파생상품 과제1</span></a>
   </div>
 </li>
       </ul>
@@ -317,7 +329,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./리스크관리1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">금융시장 리스크관리 1~2주차</span></a>
+ <span class="menu-text">금융시장 리스크관리</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -359,6 +371,18 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./미시hw3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Microanalysis of financial economics Assignment3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment5</span></a>
   </div>
 </li>
       </ul>
@@ -478,7 +502,7 @@ window.Quarto = {
 <p><span class="math display">\[Pr(x\in B)=E(\int_A 1_B)=\Pi/4\]</span></p>
 <section id="확률기대값-및-원주율-계산-예시" class="level3">
 <h3 class="anchored" data-anchor-id="확률기대값-및-원주율-계산-예시">확률기대값 및 원주율 계산 예시</h3>
-<div id="e9b8a060" class="cell" data-execution_count="1">
+<div id="d93dcf86" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>n <span class="op">=</span> <span class="dv">10000</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.random.rand(n) <span class="co"># uniform random number in (0,1)</span></span>
@@ -493,29 +517,29 @@ window.Quarto = {
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(prob,pi,sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.7773
-3.1092</code></pre>
+<pre><code>0.7924
+3.1696</code></pre>
 </div>
 </div>
 </section>
 <section id="표본표준편차-계산-numpy는-n으로-나누고-pandas는-n-1로-나누는-것이-기본" class="level3">
 <h3 class="anchored" data-anchor-id="표본표준편차-계산-numpy는-n으로-나누고-pandas는-n-1로-나누는-것이-기본">표본표준편차 계산 : numpy는 n으로 나누고, pandas는 n-1로 나누는 것이 기본</h3>
-<div id="292b61f7" class="cell" data-execution_count="2">
+<div id="090d913f" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>np_s <span class="op">=</span> i.std()</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pd_s <span class="op">=</span> pd.Series(i).std()</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>np_s_df1 <span class="op">=</span> i.std(ddof<span class="op">=</span><span class="dv">1</span>)</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(np_s, pd_s, np_s_df1, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.41605854155395006
-0.41607934604137736
-0.41607934604137736</code></pre>
+<pre><code>0.4055887572406316
+0.4056090381995782
+0.4056090381995782</code></pre>
 </div>
 </div>
 </section>
 <section id="표준오차-계산-및-95-신뢰구간-계산" class="level3">
 <h3 class="anchored" data-anchor-id="표준오차-계산-및-95-신뢰구간-계산">표준오차 계산 및 95% 신뢰구간 계산</h3>
-<div id="e2e785ed" class="cell" data-execution_count="3">
+<div id="5ab4d57a" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>se <span class="op">=</span> pd_s <span class="op">/</span> np.sqrt(n)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>prob_95lb <span class="op">=</span> prob <span class="op">-</span> <span class="dv">2</span><span class="op">*</span>se</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>prob_95ub <span class="op">=</span> prob <span class="op">+</span> <span class="dv">2</span><span class="op">*</span>se</span>
@@ -523,9 +547,9 @@ window.Quarto = {
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>pi_95ub <span class="op">=</span> prob_95ub<span class="op">*</span><span class="dv">4</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(se, pi_95lb, pi_95ub, sep<span class="op">=</span><span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.004160793460413773
-3.07591365231669
-3.14248634768331</code></pre>
+<pre><code>0.004056090381995782
+3.1371512769440337
+3.202048723055966</code></pre>
 </div>
 </div>
 </section>
@@ -1073,8 +1097,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./시뮬레이션실습.html" class="pagination-link" aria-label="시뮬레이션방법론 실습">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">시뮬레이션방법론 실습</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./시뮬레이션2.html" class="pagination-link" aria-label="시뮬레이션방법론 Ch3-4">
+        <span class="nav-page-text">시뮬레이션방법론 Ch3-4</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

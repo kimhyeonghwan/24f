@@ -1,4 +1,4 @@
-# 금융시장 리스크관리 1~2주차 {.unnumbered}
+# 금융시장 리스크관리 {.unnumbered}
 
 ## Lecture2 : How Traders Manage Their Risks?
 
@@ -171,3 +171,22 @@ $\frac{u_n}{\sigma_n}\sim Z$를 통해서 검증함.
 이건 Ljung-Box Test로 널리 알려져 있음.
 
 $z_n$을 통해 autocorrelation=0(H0)임을 검증하는 테스트임.
+
+## Lecture6 : Value at Risk and Expected Shortfall
+
+VaR : 임계값
+
+Expected Shortfall : $E[loss\;|\;loss>VaR]$
+
+### Properties of Coherent Risk Measures
+
+1. Monotonicity : if $X\leq Y$ then $\eta(X)\geq\eta(Y)$
+2. Translation invariance : For $K>0,\;\eta(X+K)=\eta(X)-K$
+3. Positive homogeneity : For $I>0,\;\eta(IX)=I\times\eta(X)$
+4. Subadditivity : $\eta(X+Y)\leq\eta(X)+\eta(Y)$
+
+### VaR vs. ES
+
+VaR은 Subadditivity 만족하지 않음.
+
+ES는 다 만족함.

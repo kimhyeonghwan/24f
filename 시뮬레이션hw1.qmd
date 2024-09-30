@@ -1,4 +1,4 @@
-# 시뮬레이션 방법론 과제1 (베리어옵션) {.unnumbered}
+# 시뮬레이션 과제1 (베리어옵션) {.unnumbered}
 
 20249132 김형환
 
@@ -267,186 +267,230 @@ MCS를 이용하여 베리어옵션의 가격을 계산할 때 두번의 시뮬�
 
 ## Answer 3
 
-베리어옵션의 실제 가격을 $y_{real}$,
+N, M에 따른 bias와 variance의 변화를 살펴보겠습니다.
 
-각 옵션가치의 평균인 MCS가격을 $\bar{y}$라고 하면,
+이를 살펴보기 위해 시뮬레이션 결과값인 베리어옵션가격. 즉, 표본평균 $\bar y$의 분포를 이용하겠습니다.
 
-$bias^2=(y_{real}-\bar{y})^2$, $variance=S.E^2$라고 할 수 있습니다.
+CLT에 따라 베리어옵션가격의 분포는 $\bar y\sim N(y_{real}, \frac{\sigma^2}{N})$를 따르게 됩니다.
 
-$y_{real}$을 QuantLib의 결과값이라고 가정하고, Up&Out call옵션을 통해 이들의 관계를 살펴보겠습니다.
+$Bias^2=(E[\bar y]-y_{real})^2$, $Variance=E[(\bar y-E[\bar y])^2]$이므로,
+
+주어진 N, M의 값에 대하여 K(>30)번 시뮬레이션을 반복하여 $\bar y_k$를 얻은 후 이를 계산해보겠습니다.
+
+$y_{real}$은 QuantLib의 결과값이라고 가정하고, Up&Out call옵션을 예시로 살펴보았습니다.
 
 ::: {.callout}
-실제 $S.E^2=\frac{\sigma^2}{N}=\frac{variance}{N}$으로, 둘은 다릅니다.
+N값이 충분히 크다면 $\bar y$의 분산이 충분히 작아지므로, 한번의 시뮬레이션으로 이 근사값을 계산할 수 있습니다.
 
-CLT에 따라 $\bar{y}\sim N(y_{real},\frac{\sigma^2}{N})$이 되는데,
+$Bias^2\approx (\bar y-y_{real})^2$
 
-여기에서 $\bar{y}$ 표준편차의 불편추정량이 $S.E$이므로 이 둘을 구분해야합니다.
-
-따라서, 실제로는 N 및 M을 설정하고, 이 MCS을 K(>30)회 반복하여 얻은 $\bar{y}_i$에 대해
-
-bias와 variace($var(\bar{y_i})$)를 계산하는 것이 정확한 방법일 것으로 보입니다.
-
-그러나 위 방법은 계산시간이 오래걸리고, 한번의 MCS로 얻은 본문의 결과값과 차이가 거의 없어
-
-실제로 코드 구현 및 계산은 제외하였습니다.
+$Variance=Var[\bar y]=\frac{\sigma^2}{N}\approx \frac{s^2}{N}=S.E^2$
 :::
 
 ```{python}
 import time
 y_real = QL_UOCprice
 
-N = 10000; M = 250
+N = 1000; M = 250
+y_k, se_k = np.zeros(30), np.zeros(30)
 
 start = time.time()
-y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+for i in range(30):
+    y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+    se = y.std(ddof = 1) / np.sqrt(N)
+    y_k[i], se_k[i] = y_mean, se
 end = time.time()
 
-bias = (y_real - y_mean)**2
-variance = y.std(ddof = 1) / np.sqrt(N)
-cal_time = end-start
+bias = (y_k.mean()-y_real)**2
+variance = y_k.var(ddof = 1)
+stan_error = se_k.mean()**2
+cal_time = (end-start)/30
 
 print("When N :",N," and M :",M,"\n",
 "Bias^2 :",bias,"\n",
 "Variance :", variance, "\n",
+"S.E^2 :", stan_error, "\n",
 "MSE :", bias+variance, "\n",
-"Calculation time :", cal_time, "second", "\n")
+"Time for 1 simulation:", cal_time, "second", "\n")
 ```
 
 **N을 증가시킬수록 시뮬레이션의 분산은 감소하나 편의는 감소하지 않는 경향이 있습니다.
 **
 ```{python}
 #| echo: false
-N = 50000; M = 250
+N = 3000; M = 250
+y_k, se_k = np.zeros(30), np.zeros(30)
 
 start = time.time()
-y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+for i in range(30):
+    y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+    se = y.std(ddof = 1) / np.sqrt(N)
+    y_k[i], se_k[i] = y_mean, se
 end = time.time()
 
-bias = (y_real - y_mean)**2
-variance = y.std(ddof = 1) / np.sqrt(N)
-cal_time = end-start
+bias = (y_k.mean()-y_real)**2
+variance = y_k.var(ddof = 1)
+stan_error = se_k.mean()**2
+cal_time = (end-start)/30
 
 print("When N :",N," and M :",M,"\n",
 "Bias^2 :",bias,"\n",
 "Variance :", variance, "\n",
+"S.E^2 :", stan_error, "\n",
 "MSE :", bias+variance, "\n",
-"Calculation time :", cal_time, "second", "\n")
+"Time for 1 simulation:", cal_time, "second", "\n")
 ```
 
 ```{python}
 #| echo: false
-N = 100000; M = 250
+N = 5000; M = 250
+y_k, se_k = np.zeros(30), np.zeros(30)
 
 start = time.time()
-y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+for i in range(30):
+    y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+    se = y.std(ddof = 1) / np.sqrt(N)
+    y_k[i], se_k[i] = y_mean, se
 end = time.time()
 
-bias = (y_real - y_mean)**2
-variance = y.std(ddof = 1) / np.sqrt(N)
-cal_time = end-start
+bias = (y_k.mean()-y_real)**2
+variance = y_k.var(ddof = 1)
+stan_error = se_k.mean()**2
+cal_time = (end-start)/30
 
 print("When N :",N," and M :",M,"\n",
 "Bias^2 :",bias,"\n",
 "Variance :", variance, "\n",
+"S.E^2 :", stan_error, "\n",
 "MSE :", bias+variance, "\n",
-"Calculation time :", cal_time, "second", "\n")
+"Time for 1 simulation:", cal_time, "second", "\n")
 ```
 
 ```{python}
 #| echo: false
-N = 500000; M = 250
+N = 10000; M = 250
+y_k, se_k = np.zeros(30), np.zeros(30)
 
 start = time.time()
-y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+for i in range(30):
+    y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+    se = y.std(ddof = 1) / np.sqrt(N)
+    y_k[i], se_k[i] = y_mean, se
 end = time.time()
 
-bias = (y_real - y_mean)**2
-variance = y.std(ddof = 1) / np.sqrt(N)
-cal_time = end-start
+bias = (y_k.mean()-y_real)**2
+variance = y_k.var(ddof = 1)
+stan_error = se_k.mean()**2
+cal_time = (end-start)/30
 
 print("When N :",N," and M :",M,"\n",
 "Bias^2 :",bias,"\n",
 "Variance :", variance, "\n",
+"S.E^2 :", stan_error, "\n",
 "MSE :", bias+variance, "\n",
-"Calculation time :", cal_time, "second", "\n")
+"Time for 1 simulation:", cal_time, "second", "\n")
 ```
 
 **M을 증가시킬수록 편의는 감소하나 분산은 유사한 경향이 있습니다.
 **
 ```{python}
 #| echo: false
-N = 10000; M = 250
+N = 3000; M = 100
+y_k, se_k = np.zeros(30), np.zeros(30)
 
 start = time.time()
-y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+for i in range(30):
+    y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+    se = y.std(ddof = 1) / np.sqrt(N)
+    y_k[i], se_k[i] = y_mean, se
 end = time.time()
 
-bias = (y_real - y_mean)**2
-variance = y.std(ddof = 1) / np.sqrt(N)
-cal_time = end-start
+bias = (y_k.mean()-y_real)**2
+variance = y_k.var(ddof = 1)
+stan_error = se_k.mean()**2
+cal_time = (end-start)/30
 
 print("When N :",N," and M :",M,"\n",
 "Bias^2 :",bias,"\n",
 "Variance :", variance, "\n",
+"S.E^2 :", stan_error, "\n",
 "MSE :", bias+variance, "\n",
-"Calculation time :", cal_time, "second", "\n")
+"Time for 1 simulation:", cal_time, "second", "\n")
 ```
 
 ```{python}
 #| echo: false
-N = 10000; M = 1000
+N = 3000; M = 250
+y_k, se_k = np.zeros(30), np.zeros(30)
 
 start = time.time()
-y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+for i in range(30):
+    y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+    se = y.std(ddof = 1) / np.sqrt(N)
+    y_k[i], se_k[i] = y_mean, se
 end = time.time()
 
-bias = (y_real - y_mean)**2
-variance = y.std(ddof = 1) / np.sqrt(N)
-cal_time = end-start
+bias = (y_k.mean()-y_real)**2
+variance = y_k.var(ddof = 1)
+stan_error = se_k.mean()**2
+cal_time = (end-start)/30
 
 print("When N :",N," and M :",M,"\n",
 "Bias^2 :",bias,"\n",
 "Variance :", variance, "\n",
+"S.E^2 :", stan_error, "\n",
 "MSE :", bias+variance, "\n",
-"Calculation time :", cal_time, "second", "\n")
+"Time for 1 simulation:", cal_time, "second", "\n")
 ```
 
 ```{python}
 #| echo: false
-N = 10000; M = 5000
+N = 3000; M = 500
+y_k, se_k = np.zeros(30), np.zeros(30)
 
 start = time.time()
-y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+for i in range(30):
+    y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+    se = y.std(ddof = 1) / np.sqrt(N)
+    y_k[i], se_k[i] = y_mean, se
 end = time.time()
 
-bias = (y_real - y_mean)**2
-variance = y.std(ddof = 1) / np.sqrt(N)
-cal_time = end-start
+bias = (y_k.mean()-y_real)**2
+variance = y_k.var(ddof = 1)
+stan_error = se_k.mean()**2
+cal_time = (end-start)/30
 
 print("When N :",N," and M :",M,"\n",
 "Bias^2 :",bias,"\n",
 "Variance :", variance, "\n",
+"S.E^2 :", stan_error, "\n",
 "MSE :", bias+variance, "\n",
-"Calculation time :", cal_time, "second", "\n")
+"Time for 1 simulation:", cal_time, "second", "\n")
 ```
 
 ```{python}
 #| echo: false
-N = 10000; M = 10000
+N = 3000; M = 1000
+y_k, se_k = np.zeros(30), np.zeros(30)
 
 start = time.time()
-y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+for i in range(30):
+    y_mean, y = BarrierOptionsPrice(S, K, T, B, r, vol, "U", "O", "C", n=N, m=M)
+    se = y.std(ddof = 1) / np.sqrt(N)
+    y_k[i], se_k[i] = y_mean, se
 end = time.time()
 
-bias = (y_real - y_mean)**2
-variance = y.std(ddof = 1) / np.sqrt(N)
-cal_time = end-start
+bias = (y_k.mean()-y_real)**2
+variance = y_k.var(ddof = 1)
+stan_error = se_k.mean()**2
+cal_time = (end-start)/30
 
 print("When N :",N," and M :",M,"\n",
 "Bias^2 :",bias,"\n",
 "Variance :", variance, "\n",
+"S.E^2 :", stan_error, "\n",
 "MSE :", bias+variance, "\n",
-"Calculation time :", cal_time, "second", "\n")
+"Time for 1 simulation:", cal_time, "second", "\n")
 ```
 
 **N과 M을 증가시킬수록 계산시간도 증가**하므로, 한정된 계산시간 하에 MSE를 최소화하도록 N과 M을 정해야할 필요가 있습니다.

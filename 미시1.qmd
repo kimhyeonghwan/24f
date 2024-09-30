@@ -74,3 +74,17 @@ when Other things equal(ceteris paribus)
 
 기술수준이 상승하면 생산단가가 감소함. 공급곡선 우측이동.
 
+a+b
+a+b+c+f+g
+c+f+g
+
+c+d
+c+d+b+e
+b+e
+
+subsidy expenditure 
+b+c+e+f+g+h
+
+b+c+e+f+g
+-b-c-e-f-g-h
+-h : dead weight loss

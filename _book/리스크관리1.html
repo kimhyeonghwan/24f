@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>KAIST MFE, 2024 Fall - 금융시장 리스크관리 1~2주차</title>
+<title>KAIST MFE, 2024 Fall - 금융시장 리스크관리</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -144,7 +144,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./리스크관리1.html">금융시장 리스크관리(’24 가을)</a></li><li class="breadcrumb-item"><a href="./리스크관리1.html">금융시장 리스크관리 1~2주차</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./리스크관리1.html">금융시장 리스크관리(’24 가을)</a></li><li class="breadcrumb-item"><a href="./리스크관리1.html">금융시장 리스크관리</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -191,6 +191,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./머신러닝1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">머신러닝 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./머신러닝2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">머신러닝 Ch2-3</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -247,6 +253,12 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">시뮬레이션방법론 Ch3-4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="./시뮬레이션실습.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">시뮬레이션방법론 실습</span></span></a>
   </div>
@@ -254,7 +266,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./시뮬레이션hw1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">시뮬레이션 방법론 과제1 (베리어옵션)</span></a>
+ <span class="menu-text">시뮬레이션 과제1 (베리어옵션)</span></a>
   </div>
 </li>
       </ul>
@@ -270,8 +282,8 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./이자율1.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">이자율파생상품 1주차</span></a>
+  <a href="./이자율hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">이자율파생상품 과제1</span></a>
   </div>
 </li>
       </ul>
@@ -317,7 +329,7 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./리스크관리1.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">금융시장 리스크관리 1~2주차</span></a>
+ <span class="menu-text">금융시장 리스크관리</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -359,6 +371,18 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./미시hw3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Microanalysis of financial economics Assignment3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment5</span></a>
   </div>
 </li>
       </ul>
@@ -404,15 +428,20 @@ window.Quarto = {
   <li><a href="#characteristics-of-volatility" id="toc-characteristics-of-volatility" class="nav-link" data-scroll-target="#characteristics-of-volatility">Characteristics of Volatility</a></li>
   <li><a href="#how-good-is-the-model" id="toc-how-good-is-the-model" class="nav-link" data-scroll-target="#how-good-is-the-model">How Good is the Model?</a></li>
   </ul></li>
+  <li><a href="#lecture6-value-at-risk-and-expected-shortfall" id="toc-lecture6-value-at-risk-and-expected-shortfall" class="nav-link" data-scroll-target="#lecture6-value-at-risk-and-expected-shortfall">Lecture6 : Value at Risk and Expected Shortfall</a>
+  <ul class="collapse">
+  <li><a href="#properties-of-coherent-risk-measures" id="toc-properties-of-coherent-risk-measures" class="nav-link" data-scroll-target="#properties-of-coherent-risk-measures">Properties of Coherent Risk Measures</a></li>
+  <li><a href="#var-vs.-es" id="toc-var-vs.-es" class="nav-link" data-scroll-target="#var-vs.-es">VaR vs.&nbsp;ES</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./리스크관리1.html">금융시장 리스크관리(’24 가을)</a></li><li class="breadcrumb-item"><a href="./리스크관리1.html">금융시장 리스크관리 1~2주차</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./리스크관리1.html">금융시장 리스크관리(’24 가을)</a></li><li class="breadcrumb-item"><a href="./리스크관리1.html">금융시장 리스크관리</a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">금융시장 리스크관리 1~2주차</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">금융시장 리스크관리</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -561,6 +590,25 @@ Note
 <p>이 <span class="math inline">\(z_n\)</span>은 서로 독립인지를 봄으로써 검증할 수 있음.</p>
 <p>이건 Ljung-Box Test로 널리 알려져 있음.</p>
 <p><span class="math inline">\(z_n\)</span>을 통해 autocorrelation=0(H0)임을 검증하는 테스트임.</p>
+</section>
+</section>
+<section id="lecture6-value-at-risk-and-expected-shortfall" class="level2">
+<h2 class="anchored" data-anchor-id="lecture6-value-at-risk-and-expected-shortfall">Lecture6 : Value at Risk and Expected Shortfall</h2>
+<p>VaR : 임계값</p>
+<p>Expected Shortfall : <span class="math inline">\(E[loss\;|\;loss&gt;VaR]\)</span></p>
+<section id="properties-of-coherent-risk-measures" class="level3">
+<h3 class="anchored" data-anchor-id="properties-of-coherent-risk-measures">Properties of Coherent Risk Measures</h3>
+<ol type="1">
+<li>Monotonicity : if <span class="math inline">\(X\leq Y\)</span> then <span class="math inline">\(\eta(X)\geq\eta(Y)\)</span></li>
+<li>Translation invariance : For <span class="math inline">\(K&gt;0,\;\eta(X+K)=\eta(X)-K\)</span></li>
+<li>Positive homogeneity : For <span class="math inline">\(I&gt;0,\;\eta(IX)=I\times\eta(X)\)</span></li>
+<li>Subadditivity : <span class="math inline">\(\eta(X+Y)\leq\eta(X)+\eta(Y)\)</span></li>
+</ol>
+</section>
+<section id="var-vs.-es" class="level3">
+<h3 class="anchored" data-anchor-id="var-vs.-es">VaR vs.&nbsp;ES</h3>
+<p>VaR은 Subadditivity 만족하지 않음.</p>
+<p>ES는 다 만족함.</p>
 
 
 <!-- -->
@@ -1041,7 +1089,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 금융시장 리스크관리 1~2주차 {.unnumbered}</span></span>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 금융시장 리스크관리 {.unnumbered}</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lecture2 : How Traders Manage Their Risks?</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -1213,7 +1261,26 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>이건 Ljung-Box Test로 널리 알려져 있음.</span>
 <span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>$z_n$을 통해 autocorrelation=0(H0)임을 검증하는 테스트임.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>$z_n$을 통해 autocorrelation=0(H0)임을 검증하는 테스트임.</span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lecture6 : Value at Risk and Expected Shortfall</span></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>VaR : 임계값</span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>Expected Shortfall : $E<span class="co">[</span><span class="ot">loss\;|\;loss&gt;VaR</span><span class="co">]</span>$</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a><span class="fu">### Properties of Coherent Risk Measures</span></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Monotonicity : if $X\leq Y$ then $\eta(X)\geq\eta(Y)$</span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Translation invariance : For $K&gt;0,\;\eta(X+K)=\eta(X)-K$</span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Positive homogeneity : For $I&gt;0,\;\eta(IX)=I\times\eta(X)$</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>Subadditivity : $\eta(X+Y)\leq\eta(X)+\eta(Y)$</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a><span class="fu">### VaR vs. ES</span></span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>VaR은 Subadditivity 만족하지 않음.</span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>ES는 다 만족함.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
