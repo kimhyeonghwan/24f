@@ -40,6 +40,7 @@ book:
     - part : 이자율파생상품('24 가을)
       chapters: 
         - 이자율hw1.qmd
+        - 이자율hw2.qmd
 
     - part : 수치해석학('24 가을)
       chapters: 
