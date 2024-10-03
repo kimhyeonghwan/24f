@@ -2,10 +2,30 @@
 
 20249132 Kim Hyeonghwan (김형환)
 
-## Question
+## Question 1
 
 ![](image/micro_hw5_1.png)
 
+### Answer
+
+a. $Q_S=Q_D\;\Rightarrow\;2P=300-P\;\Rightarrow\;P^*=100,Q^*=200$
+
+b. $300-P-T=2P\;\Rightarrow\;P^T=100-T/3,Q^T=200-2T/3$
+
+c. $T\times Q^T=200T-2T^2/3$
+
+d. $T\times (Q^*-Q^T)\div 2=T^2/3$
+
+e. if $T=200$, $P^T=Q^T=200/3$ and DWL occurs the amount of $40000/3$. Since the supply curve is elastic and the demand curve's slope is 1, any policy about price control should be bad for market. Because quantity change very fast, it causes many DWL.
+
+## Question 2
+
 ![](image/micro_hw5_2.png)
 
-![](image/micro_hw5_3.png)
+### Answer
+
+a. In U.S., china's industry expands makes U.S. cloth importing supply curve shift to the right. Price goes down and quantity goes up. CS and TS should increase, but PS depends on demand curve's elasticity. If elastic, PS will increase. 
+
+b. In export nations, demand curve shifts to the left. Both price and quantity go down. CS, PS, TS should decrease.
+
+c. Importing sides, it is good for total surplus. But exporting sides, it should be bad.

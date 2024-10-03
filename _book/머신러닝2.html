@@ -418,6 +418,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#릿지회귀모형" id="toc-릿지회귀모형" class="nav-link" data-scroll-target="#릿지회귀모형">릿지회귀모형</a></li>
   <li><a href="#라쏘회귀모형" id="toc-라쏘회귀모형" class="nav-link" data-scroll-target="#라쏘회귀모형">라쏘회귀모형</a></li>
+  <li><a href="#비교" id="toc-비교" class="nav-link" data-scroll-target="#비교">비교</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -479,6 +480,18 @@ window.Quarto = {
 <p>파라미터 추정치는, <span class="math inline">\(\hat\theta^L=arg\min_\theta J(\theta)\)</span></p>
 <p>행렬식 : <span class="math inline">\(\hat\theta^L=arg\min_\theta\{\frac{1}{2m}(X\theta-y)^T(X\theta-y)+\lambda 1^T|\theta_1|\}\)</span></p>
 <p>Alter : <span class="math inline">\(\hat\theta^L=arg\min_\theta\{\frac{1}{2m}(X\theta-y)^T(X\theta-y)\}\;subject\;to\;\sum_{j=1}^n|\theta_j|\leq t\)</span></p>
+<p>함수꼴에서 보듯, 미분불가능하므로 closed form solution이 존재하지 않음.</p>
+<p>다만, <span class="math inline">\(\theta\)</span>의 부호에 따라 절대값의 미분값은 -1 또는 1이므로 첨값의 미분값이 0이라고 가정하면 다음과 같이 표현가능함.</p>
+<p><span class="math inline">\(\theta_{new}\leftarrow \theta_{old}-\alpha\,\triangledown J(\theta_{old})=\theta_{old}-\alpha\bigl(\triangledown J^U(\theta_{old})-\lambda_{(=\frac{\lambda}{2m})}\;sign(\theta_{old})\bigr)\)</span></p>
+<p><span class="math inline">\(for\;sign(\theta)=\frac{|\theta|}{\theta}\;or\;0\;where\;\theta=0\)</span></p>
+<p>즉, 원점을 향해 일정부분() 계속 보정이 들어가는 형태.</p>
+</section>
+<section id="비교" class="level3">
+<h3 class="anchored" data-anchor-id="비교">비교</h3>
+<p>릿지회귀모형 vs.&nbsp;라쏘회귀모형</p>
+<pre><code>해석력 : 라쏘
+예측력 : 기본적으로, 규제가 생기면 예측력이 증가하긴 함. 어떤 모형이 예측력이 뛰어난지는 데이터에 따라 달려있음</code></pre>
+<p>만약 feature의 수가 샘플의 수보다 작으면, 라쏘를 쓰면 안됌</p>
 
 
 <!-- -->
@@ -959,65 +972,84 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 머신러닝 Ch2-3 {.unnumbered}</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>선형회귀모형</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>비용함수 : $J(\theta)=\frac{1}{2m}\sum_{i=1}^m(\theta^Tx^{(i)}-y^{(i)})^2$</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>$\theta^*=\theta-\alpha\,\triangledown_\theta J(\theta)$</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>$\triangledown_\theta J(\theta)=\frac{1}{m}X^T(X\theta-y)$</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>배치 / 확률적 / 미니배치</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>정규방정식에서 $\hat{\theta}=(X^TX)^{-1}X^Ty$의 closed form 존재.</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>역행렬 계산에 많은 시간이 소요되는 경우에는 사용이 곤란</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 규제가 있는 선형회귀</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### 릿지회귀모형</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>L2 규제를 사용하여 파라미터의 범위를 제약</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>비용함수 : $J(\theta)=\frac{1}{2m}(\sum_{i=1}^m(\theta^Tx^{(i)}-y^{(i)})^2+\lambda\sum_{j=1}^n\theta_j^2)$</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>파라미터 추정치는, $\hat\theta^R=arg\min_\theta J(\theta)$</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>행렬식 : $\hat\theta^R=arg\min_\theta<span class="sc">\{</span>\frac{1}{2m}(X\theta-y)^T(X\theta-y)+\lambda\theta_1^T\theta_1<span class="sc">\}</span>$</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>Alter : $\hat\theta^R=arg\min_\theta<span class="sc">\{</span>\frac{1}{2m}(X\theta-y)^T(X\theta-y)<span class="sc">\}</span>\;subject\;to\;\sum_{j=1}^n\theta_j^2\leq t$</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>즉, 파라미터 제곱합에 일정 상한을 정해놓는 방식으로 보면 됨.</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>람다가 커지면? 파라미터 제약이 커지면서 편향이 증가함</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 파라미터 추정치 계산</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>정규방정식 : $\hat\theta^R=(X^TX+\lambda I)^{-1}X^Ty$</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>일반 회귀모형에서는 $X^TX$가 singular이면 해가 없었으나, 릿지제약 하에서는 이를 해결할 수 있음.</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>또한, 다중공선성(multicolinearity)도 해결할 수 있다는 것이 알려져 있음.</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>경사하강법 : $\theta_{new}=\theta_{old}-\alpha\,\triangledown J(\theta)=(1-\alpha\frac{\lambda}{m})\theta_{old}-\alpha\,\triangledown J^U(\theta)$</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>마지막 식은, 일반선형회귀의 그레디언트를 이용해서 표현한 것이며, 직전 $\theta_{old}$의 영향을 상수배로 줄여주는 것으로 해석할 수 있음.</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="fu">### 라쏘회귀모형</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>L1 규제를 이용. Least Absolute Shrinkage &amp; Selection Operator</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>모델로 널리 이용되지는 않지면, feature가 너무 많은 경우 적절한 변수만 선택할 때 많이 이용됨.</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>비용함수 : $J(\theta)=\frac{1}{2m}(\sum_{i=1}^m(\theta^Tx^{(i)}-y^{(i)})^2+\lambda\sum_{j=1}^n|\theta_j|)$</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>파라미터 추정치는, $\hat\theta^L=arg\min_\theta J(\theta)$</span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>행렬식 : $\hat\theta^L=arg\min_\theta<span class="sc">\{</span>\frac{1}{2m}(X\theta-y)^T(X\theta-y)+\lambda 1^T|\theta_1|<span class="sc">\}</span>$</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>Alter : $\hat\theta^L=arg\min_\theta<span class="sc">\{</span>\frac{1}{2m}(X\theta-y)^T(X\theta-y)<span class="sc">\}</span>\;subject\;to\;\sum_{j=1}^n|\theta_j|\leq t$</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 머신러닝 Ch2-3 {.unnumbered}</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>선형회귀모형</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>비용함수 : $J(\theta)=\frac{1}{2m}\sum_{i=1}^m(\theta^Tx^{(i)}-y^{(i)})^2$</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>$\theta^*=\theta-\alpha\,\triangledown_\theta J(\theta)$</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>$\triangledown_\theta J(\theta)=\frac{1}{m}X^T(X\theta-y)$</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>배치 / 확률적 / 미니배치</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>정규방정식에서 $\hat{\theta}=(X^TX)^{-1}X^Ty$의 closed form 존재.</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>역행렬 계산에 많은 시간이 소요되는 경우에는 사용이 곤란</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="fu">## 규제가 있는 선형회귀</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### 릿지회귀모형</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>L2 규제를 사용하여 파라미터의 범위를 제약</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>비용함수 : $J(\theta)=\frac{1}{2m}(\sum_{i=1}^m(\theta^Tx^{(i)}-y^{(i)})^2+\lambda\sum_{j=1}^n\theta_j^2)$</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>파라미터 추정치는, $\hat\theta^R=arg\min_\theta J(\theta)$</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>행렬식 : $\hat\theta^R=arg\min_\theta<span class="sc">\{</span>\frac{1}{2m}(X\theta-y)^T(X\theta-y)+\lambda\theta_1^T\theta_1<span class="sc">\}</span>$</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>Alter : $\hat\theta^R=arg\min_\theta<span class="sc">\{</span>\frac{1}{2m}(X\theta-y)^T(X\theta-y)<span class="sc">\}</span>\;subject\;to\;\sum_{j=1}^n\theta_j^2\leq t$</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>즉, 파라미터 제곱합에 일정 상한을 정해놓는 방식으로 보면 됨.</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>람다가 커지면? 파라미터 제약이 커지면서 편향이 증가함</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="fu">#### 파라미터 추정치 계산</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>정규방정식 : $\hat\theta^R=(X^TX+\lambda I)^{-1}X^Ty$</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>일반 회귀모형에서는 $X^TX$가 singular이면 해가 없었으나, 릿지제약 하에서는 이를 해결할 수 있음.</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>또한, 다중공선성(multicolinearity)도 해결할 수 있다는 것이 알려져 있음.</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>경사하강법 : $\theta_{new}=\theta_{old}-\alpha\,\triangledown J(\theta)=(1-\alpha\frac{\lambda}{m})\theta_{old}-\alpha\,\triangledown J^U(\theta)$</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>마지막 식은, 일반선형회귀의 그레디언트를 이용해서 표현한 것이며, 직전 $\theta_{old}$의 영향을 상수배로 줄여주는 것으로 해석할 수 있음.</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="fu">### 라쏘회귀모형</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>L1 규제를 이용. Least Absolute Shrinkage &amp; Selection Operator</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>모델로 널리 이용되지는 않지면, feature가 너무 많은 경우 적절한 변수만 선택할 때 많이 이용됨.</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>비용함수 : $J(\theta)=\frac{1}{2m}(\sum_{i=1}^m(\theta^Tx^{(i)}-y^{(i)})^2+\lambda\sum_{j=1}^n|\theta_j|)$</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>파라미터 추정치는, $\hat\theta^L=arg\min_\theta J(\theta)$</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>행렬식 : $\hat\theta^L=arg\min_\theta<span class="sc">\{</span>\frac{1}{2m}(X\theta-y)^T(X\theta-y)+\lambda 1^T|\theta_1|<span class="sc">\}</span>$</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>Alter : $\hat\theta^L=arg\min_\theta<span class="sc">\{</span>\frac{1}{2m}(X\theta-y)^T(X\theta-y)<span class="sc">\}</span>\;subject\;to\;\sum_{j=1}^n|\theta_j|\leq t$</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>함수꼴에서 보듯, 미분불가능하므로 closed form solution이 존재하지 않음.</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>다만, $\theta$의 부호에 따라 절대값의 미분값은 -1 또는 1이므로 첨값의 미분값이 0이라고 가정하면 다음과 같이 표현가능함.</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>$\theta_{new}\leftarrow \theta_{old}-\alpha\,\triangledown J(\theta_{old})=\theta_{old}-\alpha\bigl(\triangledown J^U(\theta_{old})-\lambda_{(=\frac{\lambda}{2m})}\;sign(\theta_{old})\bigr)$</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>$for\;sign(\theta)=\frac{|\theta|}{\theta}\;or\;0\;where\;\theta=0$</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>즉, 원점을 향해 일정부분(\theta) 계속 보정이 들어가는 형태.</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a><span class="fu">### 비교</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>릿지회귀모형 vs. 라쏘회귀모형</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="in">    해석력 : 라쏘</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a><span class="in">    예측력 : 기본적으로, 규제가 생기면 예측력이 증가하긴 함. 어떤 모형이 예측력이 뛰어난지는 데이터에 따라 달려있음</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>만약 feature의 수가 샘플의 수보다 작으면, 라쏘를 쓰면 안됌</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

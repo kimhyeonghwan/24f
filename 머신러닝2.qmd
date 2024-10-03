@@ -58,3 +58,21 @@ L1 규제를 이용. Least Absolute Shrinkage & Selection Operator
 
 Alter : $\hat\theta^L=arg\min_\theta\{\frac{1}{2m}(X\theta-y)^T(X\theta-y)\}\;subject\;to\;\sum_{j=1}^n|\theta_j|\leq t$
 
+함수꼴에서 보듯, 미분불가능하므로 closed form solution이 존재하지 않음.
+
+다만, $\theta$의 부호에 따라 절대값의 미분값은 -1 또는 1이므로 첨값의 미분값이 0이라고 가정하면 다음과 같이 표현가능함.
+
+$\theta_{new}\leftarrow \theta_{old}-\alpha\,\triangledown J(\theta_{old})=\theta_{old}-\alpha\bigl(\triangledown J^U(\theta_{old})-\lambda_{(=\frac{\lambda}{2m})}\;sign(\theta_{old})\bigr)$
+
+$for\;sign(\theta)=\frac{|\theta|}{\theta}\;or\;0\;where\;\theta=0$
+
+즉, 원점을 향해 일정부분(\theta) 계속 보정이 들어가는 형태.
+
+### 비교
+
+릿지회귀모형 vs. 라쏘회귀모형
+
+    해석력 : 라쏘
+    예측력 : 기본적으로, 규제가 생기면 예측력이 증가하긴 함. 어떤 모형이 예측력이 뛰어난지는 데이터에 따라 달려있음
+
+만약 feature의 수가 샘플의 수보다 작으면, 라쏘를 쓰면 안됌

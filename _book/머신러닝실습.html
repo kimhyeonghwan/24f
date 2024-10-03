@@ -389,6 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#ch2.-linear-regression" id="toc-ch2.-linear-regression" class="nav-link active" data-scroll-target="#ch2.-linear-regression"><span class="header-section-number">1.1</span> Ch2. Linear regression</a></li>
+  <li><a href="#ch3.-restricted-linear-regression" id="toc-ch3.-restricted-linear-regression" class="nav-link" data-scroll-target="#ch3.-restricted-linear-regression"><span class="header-section-number">1.2</span> Ch3. Restricted linear regression</a></li>
   </ul>
 </nav>
     </div>
@@ -1106,6 +1107,517 @@ dtype: float64</code></pre>
 <div class="cell-output cell-output-stdout">
 <pre><code>[153.41928257]
 [ -0.2 -12.2  23.5  14.  -26.7  14.2   2.1   5.7  38.2   2.7]</code></pre>
+</div>
+</div>
+</section>
+<section id="ch3.-restricted-linear-regression" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="ch3.-restricted-linear-regression"><span class="header-section-number">1.2</span> Ch3. Restricted linear regression</h2>
+<div id="cell-22" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> load_diabetes</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>diabetes <span class="op">=</span> load_diabetes()</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a>y_target <span class="op">=</span> diabetes[<span class="st">'target'</span>]</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a>X_data <span class="op">=</span> diabetes[<span class="st">'data'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-23" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 데이터 분리</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>X_data, y_target, test_size<span class="op">=</span><span class="fl">0.4</span>, random_state<span class="op">=</span><span class="dv">123</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-24" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 규제 선형회귀에서는 반드시 표준화를 해야함</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>scaler <span class="op">=</span> StandardScaler()</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>scaler.fit( X_train )</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> scaler.transform( X_train )</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> scaler.transform( X_test )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>전체 데이터로 표준화하고 데이터를 분리하는 방법이 있고,</p>
+<p>데이터를 분리하고 훈련데이터로 표준화하는 방법이 있음. (교수님 선호)</p>
+<p>표준화하고 데이터를 분리하면 훈련 및 평가 각각에 대해서는 정확히 표준화는 안됌.</p>
+<p>데이터를 분리하고 표준화하는 경우, 훈련데이터는 정확히 평균 0 표준편차 1이 되지만, 평가데이터는 이를 만족하지 않게 됨.</p>
+<p>두 방식에 정답은 없으나, 훈련과 평가데이터를 각각 표준화하는 방법은 피해야 함.</p>
+</div>
+</div>
+</div>
+<div id="cell-26" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hyperparameter (람다) 튜닝</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Cross validation, 5-fold</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Ridge</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_score</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>alphas <span class="op">=</span> [<span class="dv">0</span>, <span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">5</span>]</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> al <span class="kw">in</span> alphas:</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    ridge <span class="op">=</span> Ridge(alpha<span class="op">=</span>al)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    neg_mse_scores <span class="op">=</span> cross_val_score(ridge, X_train, y_train,</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>                                     scoring<span class="op">=</span><span class="st">'neg_mean_squared_error'</span>, cv<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>    avg_rmse <span class="op">=</span> np.mean(np.sqrt(<span class="op">-</span><span class="dv">1</span><span class="op">*</span>neg_mse_scores))</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'alpha=</span><span class="sc">{}</span><span class="st"> -&gt; RMSE=</span><span class="sc">{}</span><span class="st">'</span>.<span class="bu">format</span>(al, np.around(avg_rmse, decimals<span class="op">=</span><span class="dv">3</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>alpha=0 -&gt; RMSE=55.733
+alpha=0.01 -&gt; RMSE=55.733
+alpha=0.05 -&gt; RMSE=55.732
+alpha=0.1 -&gt; RMSE=55.731
+alpha=0.5 -&gt; RMSE=55.733
+alpha=1 -&gt; RMSE=55.745
+alpha=5 -&gt; RMSE=55.812</code></pre>
+</div>
+</div>
+<div id="cell-27" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>ridge <span class="op">=</span> Ridge(alpha<span class="op">=</span><span class="fl">0.1</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>ridge.fit( X_train, y_train )</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ridge.coef_)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ridge.intercept_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[ -0.49870018 -13.84726064  27.2454048   14.23003902 -42.90654351
+  24.39457638   9.53842023  16.72293446  30.53624211   5.88303717]
+152.9811320754717</code></pre>
+</div>
+</div>
+<div id="cell-28" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 일반화 성능 평가</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>y_preds <span class="op">=</span> ridge.predict( X_test )</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> mean_squared_error</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>np.sqrt( mean_squared_error(y_test, y_preds) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="13">
+<pre><code>55.089852137313954</code></pre>
+</div>
+</div>
+<div id="cell-29" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">18</span>,<span class="dv">6</span>), nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="bu">len</span>(alphas))</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>coeff_df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pos, al <span class="kw">in</span> <span class="bu">enumerate</span>(alphas):</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>    ridge <span class="op">=</span> Ridge(alpha<span class="op">=</span>al)</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>    ridge.fit ( X_train, y_train)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>    coeff <span class="op">=</span> pd.Series(data<span class="op">=</span>ridge.coef_, index<span class="op">=</span>diabetes[<span class="st">'feature_names'</span>])</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>    coeff <span class="op">=</span> coeff.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>    colname <span class="op">=</span> <span class="st">'alpha:'</span><span class="op">+</span><span class="bu">str</span>(al)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>    axs[pos].set_title(colname)</span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>    axs[pos].set_xlim(<span class="op">-</span><span class="dv">50</span>,<span class="dv">50</span>)</span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>    sns.barplot( x<span class="op">=</span>coeff.values, y<span class="op">=</span>coeff.index, ax<span class="op">=</span>axs[pos])</span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>    coeff_df[colname]<span class="op">=</span>coeff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="머신러닝실습_files/figure-html/cell-27-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-30" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>coeff_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="15">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">alpha:0</th>
+<th data-quarto-table-cell-role="th">alpha:0.01</th>
+<th data-quarto-table-cell-role="th">alpha:0.05</th>
+<th data-quarto-table-cell-role="th">alpha:0.1</th>
+<th data-quarto-table-cell-role="th">alpha:0.5</th>
+<th data-quarto-table-cell-role="th">alpha:1</th>
+<th data-quarto-table-cell-role="th">alpha:5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">s5</td>
+<td>31.138611</td>
+<td>31.076226</td>
+<td>30.831553</td>
+<td>30.536242</td>
+<td>28.526648</td>
+<td>26.658856</td>
+<td>20.679753</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">bmi</td>
+<td>27.225471</td>
+<td>27.227572</td>
+<td>27.235733</td>
+<td>27.245405</td>
+<td>27.305084</td>
+<td>27.347486</td>
+<td>27.247605</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">s2</td>
+<td>25.651076</td>
+<td>25.520922</td>
+<td>25.010508</td>
+<td>24.394576</td>
+<td>20.207359</td>
+<td>16.324820</td>
+<td>4.084076</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">s4</td>
+<td>16.927558</td>
+<td>16.906456</td>
+<td>16.823497</td>
+<td>16.722934</td>
+<td>16.023963</td>
+<td>15.344355</td>
+<td>12.722315</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">bp</td>
+<td>14.248636</td>
+<td>14.246725</td>
+<td>14.239197</td>
+<td>14.230039</td>
+<td>14.165214</td>
+<td>14.099670</td>
+<td>13.796797</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">s3</td>
+<td>10.239273</td>
+<td>10.166744</td>
+<td>9.882164</td>
+<td>9.538420</td>
+<td>7.190375</td>
+<td>4.990229</td>
+<td>-2.289360</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">s6</td>
+<td>5.880362</td>
+<td>5.880633</td>
+<td>5.881709</td>
+<td>5.883037</td>
+<td>5.893123</td>
+<td>5.904725</td>
+<td>5.981982</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">age</td>
+<td>-0.508127</td>
+<td>-0.507153</td>
+<td>-0.503328</td>
+<td>-0.498700</td>
+<td>-0.466811</td>
+<td>-0.436305</td>
+<td>-0.321278</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">sex</td>
+<td>-13.873897</td>
+<td>-13.871166</td>
+<td>-13.860395</td>
+<td>-13.847261</td>
+<td>-13.753227</td>
+<td>-13.655907</td>
+<td>-13.164133</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">s1</td>
+<td>-44.504536</td>
+<td>-44.339080</td>
+<td>-43.690071</td>
+<td>-42.906544</td>
+<td>-37.568138</td>
+<td>-32.593582</td>
+<td>-16.514538</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-31" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 하이퍼파라미터 튜닝을 자동으로 해주는 함수임</span></span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co"># score를 array로 제공하는것 뿐만 아니라, fold별 평균/분산 계산 및 model selection까지 완수</span></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> GridSearchCV</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>parameters<span class="op">=</span>{<span class="st">'alpha'</span>: [<span class="dv">0</span>, <span class="fl">0.01</span>, <span class="fl">0.05</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">5</span>]}</span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a>ridge <span class="op">=</span> Ridge( )</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a>grid_ridge <span class="op">=</span> GridSearchCV ( ridge, param_grid<span class="op">=</span>parameters, cv<span class="op">=</span><span class="dv">5</span>,</span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>scoring<span class="op">=</span><span class="st">'neg_mean_squared_error'</span>,refit<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a>grid_ridge.fit( X_train, y_train )</span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a>scores_df <span class="op">=</span> pd.DataFrame( grid_ridge.cv_results_)</span>
+<span id="cb45-10"><a href="#cb45-10" aria-hidden="true" tabindex="-1"></a>scores_df.iloc [:, <span class="dv">5</span>:]</span>
+<span id="cb45-11"><a href="#cb45-11" aria-hidden="true" tabindex="-1"></a><span class="co"># test score는 validation data로 평가한 score(-mse)임</span></span>
+<span id="cb45-12"><a href="#cb45-12" aria-hidden="true" tabindex="-1"></a><span class="co"># std는 split별 score의 표준편차</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">params</th>
+<th data-quarto-table-cell-role="th">split0_test_score</th>
+<th data-quarto-table-cell-role="th">split1_test_score</th>
+<th data-quarto-table-cell-role="th">split2_test_score</th>
+<th data-quarto-table-cell-role="th">split3_test_score</th>
+<th data-quarto-table-cell-role="th">split4_test_score</th>
+<th data-quarto-table-cell-role="th">mean_test_score</th>
+<th data-quarto-table-cell-role="th">std_test_score</th>
+<th data-quarto-table-cell-role="th">rank_test_score</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>{'alpha': 0}</td>
+<td>-3464.061113</td>
+<td>-3073.496800</td>
+<td>-2249.443435</td>
+<td>-3714.684946</td>
+<td>-3135.462679</td>
+<td>-3127.429794</td>
+<td>496.391499</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>{'alpha': 0.01}</td>
+<td>-3463.952339</td>
+<td>-3072.933041</td>
+<td>-2249.812087</td>
+<td>-3714.461827</td>
+<td>-3135.734131</td>
+<td>-3127.378685</td>
+<td>496.206755</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>{'alpha': 0.05}</td>
+<td>-3463.536751</td>
+<td>-3070.771202</td>
+<td>-2251.269676</td>
+<td>-3713.589310</td>
+<td>-3136.808917</td>
+<td>-3127.195171</td>
+<td>495.480636</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>{'alpha': 0.1}</td>
+<td>-3463.057920</td>
+<td>-3068.263953</td>
+<td>-2253.053928</td>
+<td>-3712.540867</td>
+<td>-3138.126372</td>
+<td>-3127.008608</td>
+<td>494.600544</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>{'alpha': 0.5}</td>
+<td>-3460.381708</td>
+<td>-3053.879193</td>
+<td>-2265.950063</td>
+<td>-3705.435057</td>
+<td>-3147.526552</td>
+<td>-3126.634515</td>
+<td>488.447499</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>{'alpha': 1}</td>
+<td>-3458.580847</td>
+<td>-3044.029474</td>
+<td>-2279.280902</td>
+<td>-3698.531771</td>
+<td>-3156.575986</td>
+<td>-3127.399796</td>
+<td>482.282104</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>{'alpha': 5}</td>
+<td>-3451.286784</td>
+<td>-3025.938931</td>
+<td>-2341.662894</td>
+<td>-3662.319607</td>
+<td>-3180.549641</td>
+<td>-3132.351571</td>
+<td>451.978114</td>
+<td>7</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+<div id="cell-32" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Random split 후에 튜닝하므로 위와 최적파라미터가 달라질 수 있음.</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_ridge.best_params_)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grid_ridge.best_score_)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'alpha': 0.5}
+-3126.6345147986067</code></pre>
+</div>
+</div>
+<div id="cell-33" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>ridge_update <span class="op">=</span> grid_ridge.best_estimator_</span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>ridge_update.coef_</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>array([ -0.46681102, -13.75322724,  27.30508411,  14.16521425,
+       -37.56813822,  20.20735883,   7.19037502,  16.02396254,
+        28.52664799,   5.89312283])</code></pre>
+</div>
+</div>
+<div id="cell-34" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>y_pred <span class="op">=</span> ridge_update.predict( X_test )</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>np.sqrt( mean_squared_error(y_test, y_preds) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>55.089852137313954</code></pre>
+</div>
+</div>
+<div id="cell-35" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> Lasso</span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>alphas <span class="op">=</span> [<span class="fl">0.01</span>, <span class="fl">0.1</span>, <span class="fl">0.5</span>, <span class="dv">1</span>, <span class="dv">5</span>]</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>fig, axs <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">18</span>,<span class="dv">6</span>), nrows<span class="op">=</span><span class="dv">1</span>, ncols<span class="op">=</span><span class="bu">len</span>(alphas))</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a>coeff_df <span class="op">=</span> pd.DataFrame()</span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> pos, al <span class="kw">in</span> <span class="bu">enumerate</span>(alphas):</span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a>    lasso <span class="op">=</span> Lasso( alpha<span class="op">=</span>al, max_iter<span class="op">=</span><span class="dv">1000</span> )</span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a>    lasso.fit ( X_train, y_train)</span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a>    coeff <span class="op">=</span> pd.Series(data<span class="op">=</span>lasso.coef_, index<span class="op">=</span>diabetes[<span class="st">'feature_names'</span>])</span>
+<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a>    coeff <span class="op">=</span> coeff.sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a>    colname <span class="op">=</span> <span class="st">'alpha:'</span><span class="op">+</span><span class="bu">str</span>(al)</span>
+<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a>    axs[pos].set_title(colname)</span>
+<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a>    axs[pos].set_xlim(<span class="op">-</span><span class="dv">50</span>,<span class="dv">50</span>)</span>
+<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a>    sns.barplot( x<span class="op">=</span>coeff.values, y<span class="op">=</span>coeff.index, ax<span class="op">=</span>axs[pos])</span>
+<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a>    coeff_df[colname]<span class="op">=</span>coeff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="머신러닝실습_files/figure-html/cell-33-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-36" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>coeff_df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<div>
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">alpha:0.01</th>
+<th data-quarto-table-cell-role="th">alpha:0.1</th>
+<th data-quarto-table-cell-role="th">alpha:0.5</th>
+<th data-quarto-table-cell-role="th">alpha:1</th>
+<th data-quarto-table-cell-role="th">alpha:5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">s5</td>
+<td>30.609704</td>
+<td>25.856091</td>
+<td>18.926493</td>
+<td>18.536744</td>
+<td>16.632402</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">bmi</td>
+<td>27.241961</td>
+<td>27.390066</td>
+<td>27.770736</td>
+<td>27.646424</td>
+<td>27.100696</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">s2</td>
+<td>24.527593</td>
+<td>14.429899</td>
+<td>0.000000</td>
+<td>-0.000000</td>
+<td>-0.000000</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">s4</td>
+<td>16.680089</td>
+<td>14.454782</td>
+<td>12.209271</td>
+<td>8.424945</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">bp</td>
+<td>14.221648</td>
+<td>13.978915</td>
+<td>13.382554</td>
+<td>12.793145</td>
+<td>8.933273</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">s3</td>
+<td>9.557877</td>
+<td>3.432768</td>
+<td>-3.656929</td>
+<td>-6.063158</td>
+<td>-7.745877</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">s6</td>
+<td>5.870014</td>
+<td>5.776940</td>
+<td>5.495434</td>
+<td>5.087787</td>
+<td>2.467916</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">age</td>
+<td>-0.486420</td>
+<td>-0.291130</td>
+<td>-0.000000</td>
+<td>-0.000000</td>
+<td>0.000000</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">sex</td>
+<td>-13.844396</td>
+<td>-13.579080</td>
+<td>-12.450801</td>
+<td>-11.420067</td>
+<td>-3.496842</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">s1</td>
+<td>-43.043735</td>
+<td>-29.913885</td>
+<td>-11.357006</td>
+<td>-8.203584</td>
+<td>-0.000000</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
 </div>
 </div>
 
