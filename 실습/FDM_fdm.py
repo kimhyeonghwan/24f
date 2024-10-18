@@ -67,9 +67,16 @@ def fdm_vanilla_option(s0, k, r, q, t, vol, optionType, maxS, N, M, theta=1):
         temp += (1-theta)*B @ v[[0,-1]]
         # In tri-diagonal matrix, efficient solution "solve_banded"
         v[1:-1] = solve_banded((1,1), ab, temp)
+        if j==1:
+            f = interpld(s,v)
+            p1 = f(s0)
 
     f = interp1d(s,v)
-    return pd.DataFrame({"S":s,"V":v}), f(s0)
+    price = f(s0)
+    #delta = f
+    #gamma = 
+    #theta_1day = 
+    return pd.DataFrame({"S":s,"V":v}), price#, delta, gamma, theta_1day
 
 
 #%%

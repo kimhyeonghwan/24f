@@ -1,4 +1,4 @@
-# 이자율파생상품 과제1 {.unnumbered}
+# 이자율파생상품 과제2 {.unnumbered}
 
 20249132 김형환
 
@@ -6,10 +6,49 @@
 
 ![](image/interest_hw2_1.png)
 
+### Answer
+
+![](image/interest_hw2_a1.png)
+
+1. 주어진 swap rate를 이용하여 discount factor를 계산(초록색)
+2. short rate, vol, theta=0.001인 상황에서 Ho-lee 모형의 tree를 전개
+3. state price를 통해 Ho-lee 모형의 zero coupon bond price를 산출
+4. discount factor와 이를 비교하여 SSE를 산출하고, 이를 최소화시키는 theta의 조합을 추정
+
+## Question 2-3
+
 ![](image/interest_hw2_2.png)
 
 ![](image/interest_hw2_4.png)
 
+### Answer
+
+![](image/interest_hw2_a2.png)
+
+Cap의 가격은 1.2115이며, 2X3 swaption의 가격은 4.4513.
+
+## Question 4
+
 ![](image/interest_hw2_3.png)
 
+### Answer
+
+![](image/interest_hw2_a3.png)
+
+문제1과 유사한 방식으로 calibration을 진행하였으며,
+
+최적해 추정시 2년 cap가격까지 이용하여 전체 SSE(discount factors + 2-y cap)를 구한 다음
+
+theta와 sigma를 대상으로 최적화를 1회 실시하였음.
+
+## Question 5
+
 ![](image/interest_hw2_5.png)
+
+### Answer
+
+![](image/interest_hw2_a4.png)
+
+4% 쿠폰 채권의 가격은 100.91, 수의상환부 콜옵션의 가치는 3.05입니다.
+
+따라서, 수의상환채의 가격은 약 97.86 입니다.

@@ -1,0 +1,21 @@
+# 금융수치해석기법 과제1 {.unnumbered}
+
+20249132 김형환
+
+## Question 1
+
+![](image/numerical_hw1_1.png)
+
+### Answer
+
+## Question 2
+
+![](image/numerical_hw1_2.png)
+
+### Answer
+
+## Question 3
+
+![](image/numerical_hw1_3.png)
+
+### Answer

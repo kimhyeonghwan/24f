@@ -23,6 +23,7 @@ book:
         - 머신러닝1.qmd
         - 머신러닝2.qmd
         - 머신러닝실습.ipynb
+        - 머신러닝hw1.qmd
 
     - part : 딥러닝('24 가을)
       chapters: 
@@ -36,7 +37,8 @@ book:
         - 시뮬레이션2.qmd
         - 시뮬레이션실습.ipynb
         - 시뮬레이션hw1.qmd
-
+        - 시뮬레이션hw1_revised.qmd
+        
     - part : 이자율파생상품('24 가을)
       chapters: 
         - 이자율hw1.qmd
@@ -52,6 +54,7 @@ book:
       chapters: 
         - 리스크관리1.qmd
         - 리스크관리hw1.qmd
+        - 리스크관리hw2.qmd
 
     - part : 미시경제학('24 가을)
       chapters: 

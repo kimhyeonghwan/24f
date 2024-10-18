@@ -1,0 +1,142 @@
+# 시뮬레이션방법론 최종 과제 {.unnumbered}
+
+20249132 김형환
+
+```{python}
+import numpy as np
+import pandas as pd
+import QuantLib as ql
+import 시뮬레이션연습2 as sim
+
+S = 100; r = 0.03; vol = 0.2; T = 1; K =102; B = 10101010; rebate = 0
+barrierType = ql.Barrier.UpOut; optionType = ql.Option.Call
+
+#Barrier Option
+today = ql.Date().todaysDate(); maturity = today + ql.Period(T, ql.Years)
+
+payoff = ql.PlainVanillaPayoff(optionType, K)
+euExercise = ql.EuropeanExercise(maturity)
+barrierOption = ql.BarrierOption(barrierType, B, rebate, payoff, euExercise)
+
+#Market
+spotHandle = ql.QuoteHandle(ql.SimpleQuote(S))
+flatRateTs = ql.YieldTermStructureHandle(ql.FlatForward(today, r, ql.Actual365Fixed()))
+flatVolTs = ql.BlackVolTermStructureHandle(ql.BlackConstantVol(today, ql.NullCalendar(), vol, ql.Actual365Fixed()))
+bsm = ql.BlackScholesProcess(spotHandle, flatRateTs, flatVolTs)
+analyticBarrierEngine = ql.AnalyticBarrierEngine(bsm)
+
+#Pricing
+barrierOption.setPricingEngine(analyticBarrierEngine)
+QL_UOCprice = barrierOption.NPV()
+
+# N*M = Tau 제약 하에서 N에 따른 Bias, Variance, MSE 변화 추이
+
+L = 100 # 산출 신뢰도 향상을 위해 각 N,M 별로 시뮬레이션 L번 반복 예정
+tau = 2**16  # 예산제약, 계산시간이 N, M과 정비례한다고 가정
+Ns, Ms = np.zeros(10), np.zeros(10)
+bias, var = np.zeros(10), np.zeros(10)
+bias2, var2 = np.zeros(10), np.zeros(10)
+biasCV, biasCV2, time1, time2 = np.zeros(10), np.zeros(10), np.zeros(10), np.zeros(10)
+
+for i in range(10):
+    N = 2**(i+4)
+    M = int(np.round(tau / N, 0))
+    y, y2, ycv, ycv2, tm1, tm2 = np.zeros(L),np.zeros(L),np.zeros(L),np.zeros(L),np.zeros(L),np.zeros(L)
+    for j in range(L):
+        y[j], ycv[j], tm1[j] = sim.mc_barrier_price2(S, K, r, 0, T, vol, 'call', N, B, 'up-out', M)[::2]
+        y2[j], ycv2[j], tm2[j] = sim.mc_barrier_price4(S, K, r, 0, T, vol, 'call', N, B, 'up-out', M)[::2]
+    Ns[i], Ms[i] = N, M
+    bias[i] = (np.mean(y) - QL_UOCprice)**2
+    bias2[i] = (np.mean(y2) - QL_UOCprice)**2
+    var[i] = np.var(y,ddof = 1)
+    var2[i] = np.var(y2,ddof = 1)
+    biasCV[i] = (np.mean(ycv) - QL_UOCprice)**2
+    biasCV2[i] = (np.mean(ycv2) - QL_UOCprice)**2
+    time1[i] = tm1.mean()
+    time2[i] = tm2.mean()
+
+result = pd.DataFrame({"log2(N)":np.log2(Ns), "N":Ns, "M":Ms,
+                       'Bias':bias, 'Var':var, 'MSE':bias+var,
+                       'Bias2':bias2, 'Var2':var2, 'MSE2':bias2+var2,
+                       'Bias_CV':biasCV, 'Bias2_CV':biasCV2, "Time1":time1, 'Time2':time2})
+print(result.iloc[:,1:10])
+result.plot(x='log2(N)',y=['Var', 'Bias', 'MSE', 'Var2', 'Bias2','MSE2'])
+print(result.iloc[:,10:])
+result.plot(x='log2(N)',y=['Bias', 'Bias_CV', 'Bias2', 'Bias2_CV'])
+result.plot(x='log2(N)',y=['Time1','Time2'])
+```
+
+
+```{python}
+import numpy as np
+import pandas as pd
+import QuantLib as ql
+import 시뮬레이션연습 as sim
+
+options = 'call'
+barriers = 'down-out'
+
+S = 100; r = 0.03; vol = 0.2; T = 1; K = 100; B = 80; rebate = 0
+barrierType = ql.Barrier.DownOut; optionType = ql.Option.Call
+
+#Barrier Option
+today = ql.Date().todaysDate(); maturity = today + ql.Period(T, ql.Years)
+
+payoff = ql.PlainVanillaPayoff(optionType, K)
+euExercise = ql.EuropeanExercise(maturity)
+barrierOption = ql.BarrierOption(barrierType, B, rebate, payoff, euExercise)
+
+#Market
+spotHandle = ql.QuoteHandle(ql.SimpleQuote(S))
+flatRateTs = ql.YieldTermStructureHandle(ql.FlatForward(today, r, ql.Actual365Fixed()))
+flatVolTs = ql.BlackVolTermStructureHandle(ql.BlackConstantVol(today, ql.NullCalendar(), vol, ql.Actual365Fixed()))
+bsm = ql.BlackScholesProcess(spotHandle, flatRateTs, flatVolTs)
+analyticBarrierEngine = ql.AnalyticBarrierEngine(bsm)
+
+#Pricing
+barrierOption.setPricingEngine(analyticBarrierEngine)
+QL_price = barrierOption.NPV()
+QL_price
+```
+
+
+```{python}
+N, M, L = 1000, 250, 100
+sims = {}
+for i in range(8):
+    sims[f'mcs{i}'] = pd.DataFrame(np.zeros(L*3).reshape(L,3),columns=['price','priceCV','time'])
+
+for i in range(L):
+    sims[f'mcs{0}'].iloc[i,:] = sim.mc_barrier_price(S, K, r, 0, T, vol, options, N, B, barriers, M)
+    sims[f'mcs{1}'].iloc[i,:] = sim.mc_barrier_price_lhs(S, K, r, 0, T, vol, options, N, B, barriers, M)
+    sims[f'mcs{2}'].iloc[i,:] = sim.mc_barrier_price_anti(S, K, r, 0, T, vol, options, N, B, barriers, M)
+    sims[f'mcs{3}'].iloc[i,:] = sim.mc_barrier_price_moment(S, K, r, 0, T, vol, options, N, B, barriers, M)
+    sims[f'mcs{4}'].iloc[i,:] = sim.mc_barrier_price_lhs_anti(S, K, r, 0, T, vol, options, N, B, barriers, M)
+    sims[f'mcs{5}'].iloc[i,:] = sim.mc_barrier_price_lhs_moment(S, K, r, 0, T, vol, options, N, B, barriers, M)
+    sims[f'mcs{6}'].iloc[i,:] = sim.mc_barrier_price_anti_moment(S, K, r, 0, T, vol, options, N, B, barriers, M)
+    sims[f'mcs{7}'].iloc[i,:] = sim.mc_barrier_price_total(S, K, r, 0, T, vol, options, N, B, barriers, M)
+
+for i in range(8):
+    print('----- ',f'mcs{i}',' -----',np.array(sims[f'mcs{i}'].sum()).round(2)[2])
+    print('bias : ',np.array((sims[f'mcs{i}'].mean()-QL_price)**2).round(4)[0:2]*100)
+    print('var : ',np.array(sims[f'mcs{i}'].var()).round(4)[0:2]*100)
+```
+
+
+```{python}
+N, M, L = 1000, 250, 100
+sims = {}
+for i in range(3):
+    sims[f'mcs{i}'] = pd.DataFrame(np.zeros(L*3).reshape(L,3),columns=['price','priceCV','time'])
+
+for i in range(L):
+    sims[f'mcs{0}'].iloc[i,:] = sim.mc_barrier_price(S, K, r, 0, T, vol, options, N, B, barriers, M)
+    sims[f'mcs{1}'].iloc[i,:] = sim.mc_barrier_price_is1(S, K, r, 0, T, vol, options, N, B, barriers, M)
+    sims[f'mcs{2}'].iloc[i,:] = sim.mc_barrier_price_is2(S, K, r, 0, T, vol, options, N, B, barriers, M)
+
+for i in range(3):
+    print('----- ',f'mcs{i}',' -----',np.array(sims[f'mcs{i}'].sum()).round(2)[2])
+    print('bias : ',np.array((sims[f'mcs{i}'].mean()-QL_price)**2).round(4)[0:2]*100)
+    print('var : ',np.array(sims[f'mcs{i}'].var()).round(4)[0:2]*100)
+```
+
