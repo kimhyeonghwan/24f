@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.553">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>KAIST MFE, 2024 Fall - 시뮬레이션방법론 최종 과제</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./이자율hw1.html" rel="next">
+<link href="./시뮬레이션hw1_revised.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./시뮬레이션1.html">시뮬레이션 방법론(’24 가을)</a></li><li class="breadcrumb-item"><a href="./시뮬레이션final.html">시뮬레이션방법론 최종 과제</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">KAIST MFE, 2024 Fall</a> 
+        <div class="sidebar-tools-main">
+    <a href="./KAIST-MFE,-2024-Fall.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome!</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">머신러닝(’24 가을)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./머신러닝1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">머신러닝 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./머신러닝2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">머신러닝 Ch2-3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./머신러닝실습.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">머신러닝 실습</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./머신러닝hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">인공지능 및 기계학습 과제1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./머신러닝hw2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">인공지능 및 기계학습 과제2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">딥러닝(’24 가을)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./딥러닝1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">딥러닝 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./딥러닝2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">딥러닝 Ch2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./딥러닝실습.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">딥러닝 실습</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./딥러닝_중간고사.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">전산금융 Mid-term</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">시뮬레이션 방법론(’24 가을)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">시뮬레이션방법론 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">시뮬레이션방법론 Ch3-4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션실습.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">시뮬레이션방법론 실습</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">시뮬레이션 과제1 (베리어옵션)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션hw1_revised.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">시뮬레이션 과제1 수정 (베리어옵션)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./시뮬레이션final.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">시뮬레이션방법론 최종 과제</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">이자율파생상품(’24 가을)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./이자율hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">이자율파생상품 과제1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./이자율hw2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">이자율파생상품 과제2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./이자율hw3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">이자율파생상품 과제3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">수치해석학(’24 가을)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./수치해석1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">수치해석학 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./수치해석2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">수치해석학 Ch2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./수치해석실습.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">수치해석기법 실습</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./수치해석hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">금융수치해석기법 과제1</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">금융시장 리스크관리(’24 가을)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./리스크관리1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">금융시장 리스크관리</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./리스크관리hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">금융시장 리스크관리 과제1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./리스크관리hw2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">금융시장 리스크관리 과제2</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true">
+ <span class="menu-text">미시경제학(’24 가을)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-7" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-7" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">미시경제학 Ch1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./미시hw5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Microanalysis of financial economics Assignment5</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true">
+ <span class="menu-text">글로벌 지속가능회계(’24 가을)</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-8" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-8" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./글로벌회계1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">글로벌 지속가능회계 1주차</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#question" id="toc-question" class="nav-link active" data-scroll-target="#question">Question</a></li>
+  <li><a href="#answer" id="toc-answer" class="nav-link" data-scroll-target="#answer">Answer</a>
+  <ul class="collapse">
+  <li><a href="#산출-알고리즘-및-코드-구현" id="toc-산출-알고리즘-및-코드-구현" class="nav-link" data-scroll-target="#산출-알고리즘-및-코드-구현">산출 알고리즘 및 코드 구현</a></li>
+  <li><a href="#분산감소기법" id="toc-분산감소기법" class="nav-link" data-scroll-target="#분산감소기법">분산감소기법</a></li>
+  <li><a href="#분산감소-등-효과-예시" id="toc-분산감소-등-효과-예시" class="nav-link" data-scroll-target="#분산감소-등-효과-예시">분산감소 등 효과 예시</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./시뮬레이션1.html">시뮬레이션 방법론(’24 가을)</a></li><li class="breadcrumb-item"><a href="./시뮬레이션final.html">시뮬레이션방법론 최종 과제</a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">시뮬레이션방법론 최종 과제</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>20249132 김형환</p>
+<section id="question" class="level2">
+<h2 class="anchored" data-anchor-id="question">Question</h2>
+<p>베리어 옵션을 평가하는 몬테카를로 시뮬레이션 함수를 파이썬 코드로 작성하고, 함수에서 사용된 분산감소기법에 대해서 설명하는 보고서와 함께 제출하십시오.</p>
+</section>
+<section id="answer" class="level2">
+<h2 class="anchored" data-anchor-id="answer">Answer</h2>
+<section id="산출-알고리즘-및-코드-구현" class="level3">
+<h3 class="anchored" data-anchor-id="산출-알고리즘-및-코드-구현">산출 알고리즘 및 코드 구현</h3>
+<p>먼저, 제가 작성한 베리어 옵션 평가방법을 간단히 서술한 다음, 코드와 함께 사용한 분산감소기법을 서술하겠습니다.</p>
+<ol type="1">
+<li>주어진 input parameter에 따라서 베리어옵션 평가에 필요한 variable 정의
+<ul>
+<li><span class="math inline">\(dt = t/m\)</span>, 베리어 형태 / 옵션 종류 / 머니니스에 따른 논리인자 등</li>
+</ul></li>
+<li><strong><em>(1) Stratified sampling</em></strong>을 적용하여 만기 t시점의 기초자산가격 생성할 표준정규분포난수 n개를 생성
+<ul>
+<li>이후, <strong><em>(2) Moment matching</em></strong>을 적용하여 생성한 표준정규난수를 표준화</li>
+</ul></li>
+<li>Knock 여부 판단을 위해 path별 m개의 관찰지점을 생성할 표준정규난수 n X m개 생성
+<ul>
+<li>만기시점과 path의 모든 난수에 대해 <strong><em>(3) Antithetic Variates</em></strong>를 적용하여 대치변수 생성</li>
+</ul></li>
+<li>만기 시점의 난수에 <strong><em>(4) Importance sampling</em></strong>을 적용하여 평균을 B 또는 K 인근으로 변환</li>
+<li>GBM에 따른 만기 가격을 계산하고, brownian bridge로 path 생성(Terminal stratification)</li>
+<li>path별로 barrier knock 여부, 만기 가격에 따른 plain vanilla option payoff 계산
+<ul>
+<li>이 때, importance sampling의 likelihood ratio를 곱하여 발생확률을 보정</li>
+</ul></li>
+<li>knock 여부와 plain payoff를 통해 barrier option payoff를 계산</li>
+<li>마지막으로, plain vanilla를 제어변수로 <strong><em>(5) Controal variates</em></strong>를 적용하고 최종 가격 산출.</li>
+</ol>
+<p>이를 구현한 python 코드는 아래와 같습니다.</p>
+<div id="9de79fc9" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> sst</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mc_barrier_price(s, k, r, q, t, sigma, option_flag, n, b, barrier_flag, m):</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set parameters</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> t<span class="op">/</span>m</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    dts <span class="op">=</span> np.arange(dt, t<span class="op">+</span>dt, dt)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    barrier_up, barrier_out <span class="op">=</span> barrier_flag.startswith(<span class="st">'up'</span>), barrier_flag.endswith(<span class="st">'out'</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    option_call <span class="op">=</span> option_flag.lower() <span class="op">==</span> <span class="st">'call'</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    option_type <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> option_call <span class="cf">else</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    moneyness_otm <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> option_type <span class="op">*</span> (k <span class="op">-</span> (<span class="dv">1</span> <span class="op">+</span> option_type <span class="op">*</span> <span class="fl">0.2</span> <span class="op">*</span> np.sqrt(t) <span class="op">*</span> sigma) <span class="op">*</span> s) <span class="op">&gt;=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (1) Stratified sampling, z_t makes price at T &amp; z makes brownian bridge</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    z_t <span class="op">=</span> sst.norm.ppf((np.arange(n) <span class="op">+</span> np.random.uniform(<span class="dv">0</span>,<span class="dv">1</span>,n)) <span class="op">/</span> n)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> np.random.randn(n,m)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (2) Moment matching in z_t</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    z_t <span class="op">=</span> np.where(n<span class="op">&gt;=</span><span class="dv">100</span>, (z_t <span class="op">-</span> z_t.mean()) <span class="op">/</span> z_t.std(ddof<span class="op">=</span><span class="dv">1</span>), z_t <span class="op">-</span> z_t.mean())</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (3) Antithetic variate</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    z_t, z <span class="op">=</span> np.concatenate([z_t, <span class="op">-</span>z_t], axis<span class="op">=</span><span class="dv">0</span>), np.concatenate([z, <span class="op">-</span>z], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (4) Importance sampling at z_t</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> barrier_out:</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> moneyness_otm: mu <span class="op">=</span> (np.log(k<span class="op">/</span>s) <span class="op">-</span> (r<span class="op">-</span>q<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>t) <span class="op">/</span> (sigma<span class="op">*</span>np.sqrt(t))</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: mu <span class="op">=</span> <span class="dv">0</span> <span class="co"># Knock-out &amp; ATM, OTM then importance sampling is not applied.</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> barrier_up <span class="op">+</span> option_call <span class="op">==</span> <span class="dv">1</span>: mu <span class="op">=</span> <span class="dv">0</span> <span class="co"># Down-In call &amp; Up-In put are not applied.</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: mu <span class="op">=</span> (np.log(b<span class="op">/</span>s) <span class="op">-</span> (r<span class="op">-</span>q<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>t) <span class="op">/</span> (sigma<span class="op">*</span>np.sqrt(t))</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    z_t <span class="op">=</span> z_t <span class="op">+</span> mu</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    likelihood_ratio <span class="op">=</span> np.exp(<span class="op">-</span>mu<span class="op">*</span>z_t <span class="op">+</span> <span class="fl">0.5</span><span class="op">*</span>mu<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate underlying paths using brownian bridge</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    w_t, w <span class="op">=</span> z_t <span class="op">*</span> np.sqrt(t), z.cumsum(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">*</span> np.sqrt(dt) <span class="co"># winner process</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    bridge <span class="op">=</span> dts <span class="op">*</span> ((w_t<span class="op">-</span> w[:,<span class="op">-</span><span class="dv">1</span>]).reshape(<span class="bu">len</span>(w),<span class="dv">1</span>) <span class="op">+</span> w <span class="op">/</span> dts) <span class="co"># brownian bridge</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    paths <span class="op">=</span> s<span class="op">*</span>np.exp((r<span class="op">-</span>q<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>dts <span class="op">+</span> sigma<span class="op">*</span>bridge) <span class="co"># underlying price path</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determine whether barrier touch or not (exists payoff or not)</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> barrier_up: knock <span class="op">=</span> paths.<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">&gt;=</span> b</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: knock <span class="op">=</span> paths.<span class="bu">min</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">&lt;=</span> b</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> barrier_out: knock <span class="op">=</span> <span class="op">~</span>knock</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Caculate options payoff</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    plain_npv <span class="op">=</span> np.maximum(option_type<span class="op">*</span>(paths[:,<span class="op">-</span><span class="dv">1</span>]<span class="op">-</span>k), <span class="dv">0</span>) <span class="op">*</span> np.exp(<span class="op">-</span>r<span class="op">*</span>t) <span class="op">*</span> likelihood_ratio</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>    barrier_npv <span class="op">=</span> knock <span class="op">*</span> plain_npv</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (5) Control variate using plain vanilla options</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    d1 <span class="op">=</span> (np.log(s<span class="op">/</span>k) <span class="op">+</span> (r <span class="op">-</span> q <span class="op">+</span> <span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>t) <span class="op">/</span> (sigma<span class="op">*</span>np.sqrt(t))</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    d2 <span class="op">=</span> d1 <span class="op">-</span> sigma<span class="op">*</span>np.sqrt(t)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    nd1, nd2 <span class="op">=</span> sst.norm.cdf(option_type<span class="op">*</span>d1), sst.norm.cdf(option_type<span class="op">*</span>d2)</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>    plain_bsprice <span class="op">=</span> option_type<span class="op">*</span>(s<span class="op">*</span>np.exp(<span class="op">-</span>q<span class="op">*</span>t)<span class="op">*</span>nd1 <span class="op">-</span> k<span class="op">*</span>np.exp(<span class="op">-</span>r<span class="op">*</span>t)<span class="op">*</span>nd2)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    cov_npv <span class="op">=</span> np.cov(barrier_npv,plain_npv,ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    beta <span class="op">=</span> np.where(cov_npv[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">==</span><span class="dv">0</span>,<span class="dv">0</span>,cov_npv[<span class="dv">0</span>,<span class="dv">1</span>] <span class="op">/</span> cov_npv[<span class="dv">1</span>,<span class="dv">1</span>])</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    barrier_CVnpv <span class="op">=</span> barrier_npv <span class="op">-</span> beta <span class="op">*</span> (plain_npv <span class="op">-</span> plain_bsprice)</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    barrier_price <span class="op">=</span> barrier_CVnpv.mean()</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> barrier_price</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="분산감소기법" class="level3">
+<h3 class="anchored" data-anchor-id="분산감소기법">분산감소기법</h3>
+<section id="stratified-sampling" class="level4">
+<h4 class="anchored" data-anchor-id="stratified-sampling"><strong>(1) Stratified sampling</strong></h4>
+<p>먼저, 가장 먼저 사용한 분산감소기법은 Stratified sampling입니다. 이는 특정분포를 따르는 난수를 생성할 때, 확률밀도함수의 형태와 유사하도록 계층을 나누어서 각 구간마다 난수를 생성하는 기법입니다.</p>
+<p>저는 만기 시점의 기초자산가격에 대해서만 Stratified sampling을 적용하였는데, 이는 옵션의 가격결정이 만기 가격에 따라서 결정되므로 균질한 분포일수록 정확도가 높아 분산감소효과가 뛰어나기 때문입니다.</p>
+<p>만기 이전의 path에 대해서도 계층화를 적용할 수 있으나, 이 path는 barrier knock 여부를 판단할 때에만 이용되어 계층화의 효과가 다소 떨어지며, 관찰 횟수 m이 작거나 베리어의 수준에 따라 오히려 편차(bias)를 증가시킬 수 있어 만기 가격에만 적용하였습니다.</p>
+<p>먼저 균등분포를 따르는 난수를 생성한 다음, 각 구간(<span class="math inline">\(\frac{1}{n})\)</span>에 속하도록 변환하고 표준정규분포 CDF의 역함수를 통해 표준정규난수로 만들었습니다. 이후 현재시점부터 만기까지의 가격경로는 Brownian bridge를 통해 구현하였습니다.(Terminal stratification)</p>
+</section>
+<section id="moment-matching" class="level4">
+<h4 class="anchored" data-anchor-id="moment-matching"><strong>(2) Moment matching</strong></h4>
+<p>이렇게 생성한 만기 시점의 표준정규난수에 대해서 moment matching을 적용하였습니다. 난수 표준화를 통해 한번 더 확률밀도함수의 형태와 유사하도록 정해주는 방법입니다.</p>
+<p>저는 <span class="math inline">\(z_t^*=\frac{z_t-\bar z_t}{s_{z_t}}\)</span>를 이용하여 평균은 0, 표준편차는 1이 되도록 하였으며, 시뮬레이션 횟수가 100회 미만인 경우에는 <span class="math inline">\(z_t^*=z_t-\bar z_t\)</span>만 적용하여 평균만 보정하였습니다. 이는 시뮬레이션 횟수가 적은 경우, 표본표준편차가 크거나 작게 산출될 수 있어 난수가 오염되고, 결과적으로 편향(bias)이 커질 수 있기 때문입니다.</p>
+<p>전반적으로 moment matching의 분산감소의 효과가 크지는 않지만, 계산시간에도 큰 영향을 주지않아 활용하였습니다.</p>
+</section>
+<section id="antithetic-variate" class="level4">
+<h4 class="anchored" data-anchor-id="antithetic-variate"><strong>(3) Antithetic variate</strong></h4>
+<p>다음으로, 생성한 난수에 대해 음의 값을 가지는 대칭난수를 생성하여 분산을 줄이는 기법입니다. 구현이 매우 간단하고 난수와 베리어옵션의 payoff의 선형관계가 강할 수록 분산감소효과가 크게 됩니다.</p>
+<p>다양한 케이스에 따라 달라지기는 하지만, 기본적으로 옵션의 payoff는 기초자산의 가격에 비례하여 증가 또는 감소하므로 쉽고 효과적인 기법이 됩니다. 또한, python의 행렬연산 특성상 음의 난수를 복제하는 것은 난수를 2배로 생성하는 것보다 적은 시간이 소요되므로, 거의 모든 경우에 분산감소효과가 있어 적용하게 되었습니다.</p>
+<p>만기시점의 가격과 path의 난수에 대해서 모두 적용하는데, 한가지 주의사항은 moment matching 보다 antithetic variates를 나중에 적용해야한다는 것 입니다. 먼저 적용하게 되면 moment matching의 평균 보정효과는 사라지고 음의 난수를 포함하여 표준편차를 계산할 때, 과대계상되면서 전체 난수가 오염되어 분산감소효과가 사라질 수 있습니다.</p>
+</section>
+<section id="importance-sampling" class="level4">
+<h4 class="anchored" data-anchor-id="importance-sampling"><strong>(4) Importance sampling</strong></h4>
+<p>모든 기법 중에 가장 섬세하게 적용해야하는 중요도 샘플링(importance sampling)입니다. 이는 발생확률이 낮은 특정 사건이 목적함수에 크게 영향을 주는 경우, 기존 확률분포의 measure change를 통해 발생확률이 낮은 사건이 자주 sampling되게 만드는 기법입니다. 확률이 낮으나 영향이 큰 사건이 자주 sampling되므로, 시뮬레이션 횟수를 높이는 효과가 있어 편향(bias)를 크게 줄일 수 있습니다.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Importance Sampling의 유의사항">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Importance Sampling의 유의사항
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>주의해야 할 점은 동일한 목적함수더라도 경우에 따라 분산을 증가시킬 수 있다는 점입니다. 예를 들어, plain vanilla 에 만기 가격의 평균이 K가 되도록 변환하면, OTM에서는 효과적이지만 ITM은 오히려 분산을 증가시키게 됩니다.</p>
+<p>현재 moneyness가 ITM이면 옵션의 내재가치가 일정 이상이므로, 기초자산의 가격이 K까지 변할 때 내재가치가 0이 될지 여부는 옵션가격에 큰 영향을 미치지 않습니다. 오히려 현재 내재가치의 변동이 목적함수에 더 큰 영향을 주기 때문입니다.(<span class="math inline">\(\Delta\approx 1\)</span>)</p>
+<p>반면, OTM에서는 내재가치가 0이기 때문에 향후 기초자산의 가격이 K까지 변하는지 여부가 목적함수에 큰 영향을 줍니다. 따라서 K에 대한 중요도 샘플링이 매우 효과적입니다. 따라서 중요도 샘플링을 적용할 때에는 기초자산의 분포, 목적함수의 형태, 현재 기초자산의 수준 등을 종합적으로 고려해야 합니다.</p>
+</div>
+</div>
+<p>이제, 베리어옵션에 이를 적용해보겠습니다. plain vanilla와 달리 베리어옵션은 B와 K에 따라 payoff가 결정됩니다. 이 구조는 B라는 행사가격을 가진 lookback옵션과 asset(options with strike K)-or-nothing binary옵션이 결합된 상품으로 이해할 수 있습니다. 즉, 먼저 B의 행사가격을 가진 옵션에 따라 payoff가 발생하는지 판단하고, 발생한다면 만기시점의 가격과 K를 비교하여 payoff가 결정됩니다,.</p>
+<p>따라서, 저는 중요도 샘플링을 적용할 때 Barrier price, B를 먼저 고려하였습니다. OTM인 경우에만 효과가 나타나므로, Knock-In일 때 만기 가격의 평균이 B가 되도록 변환하였습니다. 다음으로 Knock-Out이면 일정 OTM수준 미만의 moneyness에만 만기 가격이 K가 되도록 변환했습니다. 이외의 경우는 적용하지 않았습니다.</p>
+<p>또한, Knock-In일지라도 Up-In Put / Down-In Call은 중요도 샘플링을 적용하지 않았습니다. 두 경우는 Knock이 되더라도 그 반대로 주가가 크게 움직여야 payoff가 발생하게 되어 가격이 매우 낮은 케이스인데, 이 때에는 B로 평균을 변환하는 것이 적절하다고 보기 어렵기 때문입니다.</p>
+<p>정규분포와 같은 Bell-shape은 이러한 양 극단으로 움직여야하는 분포를 모델링하기 어려우므로, 양 극단을 잘 나타내는 다른 분포로 변환하는 등의 방법을 고려해야 합니다.. 다만, 계산이 매우 복잡하고 분산감소효과를 담보할 수 없어 이러한 경우에는 중요도 샘플링을 배제하였습니다.</p>
+<p><img src="image/simulation_final_a1.png" style="width:15cm;height:10cm"></p>
+</section>
+<section id="control-variates" class="level4">
+<h4 class="anchored" data-anchor-id="control-variates"><strong>(5) Control variates</strong></h4>
+<p>가장 분산감소효과가 뛰어났던 제어변수(contral variates) 기법입니다. 이는 목적함수와 상관관계가 높은 다른 변수중에서, 그 변수의 기대값이 이미 알려져 있는 경우 사용할 수 있는 기법입니다. 목적함수와 변수의 민감도 <span class="math inline">\(\beta\)</span>와 알려진 변수의 기대값을 통해 시뮬레이션의 편차를 간접적으로 줄여서 성능을 개선하는 방식을 말합니다.</p>
+<p>산출알고리즘에서, 베리어옵션의 가격은 plain vanilla의 payoff와 barrier knock 여부를 통해 계산됩니다. 이 식에서 plain과 베리어 간에 양의 상관관계가 있음을 알 수 있습니다. 또한 barrier in-out parity(<span class="math inline">\(options = options_{in}+options_{out}\)</span>)를 통해 plain옵션이 베리어 옵션 상관관계가 있음을 유추할 수 있습니다.</p>
+<p>따라서, plain option을 제어변수로 활용하였고, 그 기대값으로는 BSM formula(<span class="math inline">\(S_0N(d_1)-Ke^{-rT}N(d_2)\)</span>)를 이용해 control variates를 적용하였습니다. Out옵션에서는 베리어가 멀수록, In옵션에서는 베리어가 가까울수록 상관관계가 커져 제어변수가 매우 효율적이였으며, 반대일수록 효과가 떨어졌으나 계산시간에 비해 효과가 뛰어나 항상 적용하였습니다.</p>
+</section>
+</section>
+<section id="분산감소-등-효과-예시" class="level3">
+<h3 class="anchored" data-anchor-id="분산감소-등-효과-예시">분산감소 등 효과 예시</h3>
+<p>이에 따라 일반적은 MCS방법과 기법을 적용한 위 함수의 효과를 간단히 비교한 결과는 아래와 같습니다.</p>
+<div id="533ace56" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-stdout">
+<pre><code>---------- Up-In Call options, S=100, K=110, B=120 ----------
+(Calculation time) Improved MCS : 0.023, Normal MCS: 0.012
+         N       M          Bias       Var       MSE     Bias2      Var2  \
+0     64.0  1024.0  4.041357e-07  0.007233  0.007234  0.014606  2.602447   
+1    128.0   512.0  1.623339e-04  0.004279  0.004441  0.018272  1.659111   
+2    256.0   256.0  5.885280e-04  0.001430  0.002018  0.006704  0.823746   
+3    512.0   128.0  4.498964e-04  0.000773  0.001223  0.000162  0.425432   
+4   1024.0    64.0  1.183251e-03  0.000378  0.001562  0.003306  0.185168   
+5   2048.0    32.0  1.770690e-03  0.000208  0.001978  0.000011  0.092179   
+6   4096.0    16.0  3.023580e-03  0.000058  0.003081  0.001185  0.060652   
+7   8192.0     8.0  4.550640e-03  0.000026  0.004576  0.002847  0.027776   
+8  16384.0     4.0  6.234626e-03  0.000006  0.006241  0.004339  0.010220   
+9  32768.0     2.0  7.339769e-03  0.000002  0.007342  0.008010  0.007100   
+
+       MSE2  
+0  2.617053  
+1  1.677383  
+2  0.830450  
+3  0.425594  
+4  0.188474  
+5  0.092190  
+6  0.061837  
+7  0.030623  
+8  0.014559  
+9  0.015111  </code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="시뮬레이션final_files/figure-html/cell-3-output-2.png" width="745" height="356" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>계산시간은 약 2배 증가하였으나 이를 고려하더라도 편향, 분산, MSE에서 전반적으로 개선된 성능을 보여주었습니다.</p>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./시뮬레이션hw1_revised.html" class="pagination-link" aria-label="시뮬레이션 과제1 수정 (베리어옵션)">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">시뮬레이션 과제1 수정 (베리어옵션)</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./이자율hw1.html" class="pagination-link" aria-label="이자율파생상품 과제1">
+        <span class="nav-page-text">이자율파생상품 과제1</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># 시뮬레이션방법론 최종 과제 {.unnumbered}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>20249132 김형환</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Question</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>베리어 옵션을 평가하는 몬테카를로 시뮬레이션 함수를 파이썬 코드로 작성하고, 함수에서 사용된 분산감소기법에 대해서 설명하는 보고서와 함께 제출하십시오.</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">## Answer</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">### 산출 알고리즘 및 코드 구현</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>먼저, 제가 작성한 베리어 옵션 평가방법을 간단히 서술한 다음, 코드와 함께 사용한 분산감소기법을 서술하겠습니다.</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="ss">1.  </span>주어진 input parameter에 따라서 베리어옵션 평가에 필요한 variable 정의</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>$dt = t/m$, 베리어 형태 / 옵션 종류 / 머니니스에 따른 논리인자 등</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ss">2.  </span>***(1) Stratified sampling***을 적용하여 만기 t시점의 기초자산가격 생성할 표준정규분포난수 n개를 생성</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>이후, ***(2) Moment matching***을 적용하여 생성한 표준정규난수를 표준화</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ss">3.  </span>Knock 여부 판단을 위해 path별 m개의 관찰지점을 생성할 표준정규난수 n X m개 생성</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>만기시점과 path의 모든 난수에 대해 ***(3) Antithetic Variates***를 적용하여 대치변수 생성</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="ss">4.  </span>만기 시점의 난수에 ***(4) Importance sampling***을 적용하여 평균을 B 또는 K 인근으로 변환</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="ss">5.  </span>GBM에 따른 만기 가격을 계산하고, brownian bridge로 path 생성(Terminal stratification)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="ss">6.  </span>path별로 barrier knock 여부, 만기 가격에 따른 plain vanilla option payoff 계산</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="ss">    -   </span>이 때, importance sampling의 likelihood ratio를 곱하여 발생확률을 보정</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="ss">7.  </span>knock 여부와 plain payoff를 통해 barrier option payoff를 계산</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="ss">8.  </span>마지막으로, plain vanilla를 제어변수로 ***(5) Controal variates***를 적용하고 최종 가격 산출.</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>이를 구현한 python 코드는 아래와 같습니다.</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> sst</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> mc_barrier_price(s, k, r, q, t, sigma, option_flag, n, b, barrier_flag, m):</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Set parameters</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    dt <span class="op">=</span> t<span class="op">/</span>m</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    dts <span class="op">=</span> np.arange(dt, t<span class="op">+</span>dt, dt)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    barrier_up, barrier_out <span class="op">=</span> barrier_flag.startswith(<span class="st">'up'</span>), barrier_flag.endswith(<span class="st">'out'</span>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    option_call <span class="op">=</span> option_flag.lower() <span class="op">==</span> <span class="st">'call'</span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    option_type <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> option_call <span class="cf">else</span> <span class="op">-</span><span class="dv">1</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    moneyness_otm <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> option_type <span class="op">*</span> (k <span class="op">-</span> (<span class="dv">1</span> <span class="op">+</span> option_type <span class="op">*</span> <span class="fl">0.2</span> <span class="op">*</span> np.sqrt(t) <span class="op">*</span> sigma) <span class="op">*</span> s) <span class="op">&gt;=</span> <span class="dv">0</span> <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (1) Stratified sampling, z_t makes price at T &amp; z makes brownian bridge</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    z_t <span class="op">=</span> sst.norm.ppf((np.arange(n) <span class="op">+</span> np.random.uniform(<span class="dv">0</span>,<span class="dv">1</span>,n)) <span class="op">/</span> n)</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    z <span class="op">=</span> np.random.randn(n,m)</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (2) Moment matching in z_t</span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    z_t <span class="op">=</span> np.where(n<span class="op">&gt;=</span><span class="dv">100</span>, (z_t <span class="op">-</span> z_t.mean()) <span class="op">/</span> z_t.std(ddof<span class="op">=</span><span class="dv">1</span>), z_t <span class="op">-</span> z_t.mean())</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (3) Antithetic variate</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    z_t, z <span class="op">=</span> np.concatenate([z_t, <span class="op">-</span>z_t], axis<span class="op">=</span><span class="dv">0</span>), np.concatenate([z, <span class="op">-</span>z], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (4) Importance sampling at z_t</span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> barrier_out:</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> moneyness_otm: mu <span class="op">=</span> (np.log(k<span class="op">/</span>s) <span class="op">-</span> (r<span class="op">-</span>q<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>t) <span class="op">/</span> (sigma<span class="op">*</span>np.sqrt(t))</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: mu <span class="op">=</span> <span class="dv">0</span> <span class="co"># Knock-out &amp; ATM, OTM then importance sampling is not applied.</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> barrier_up <span class="op">+</span> option_call <span class="op">==</span> <span class="dv">1</span>: mu <span class="op">=</span> <span class="dv">0</span> <span class="co"># Down-In call &amp; Up-In put are not applied.</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>: mu <span class="op">=</span> (np.log(b<span class="op">/</span>s) <span class="op">-</span> (r<span class="op">-</span>q<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>t) <span class="op">/</span> (sigma<span class="op">*</span>np.sqrt(t))</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    z_t <span class="op">=</span> z_t <span class="op">+</span> mu</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>    likelihood_ratio <span class="op">=</span> np.exp(<span class="op">-</span>mu<span class="op">*</span>z_t <span class="op">+</span> <span class="fl">0.5</span><span class="op">*</span>mu<span class="op">**</span><span class="dv">2</span>)</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate underlying paths using brownian bridge</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>    w_t, w <span class="op">=</span> z_t <span class="op">*</span> np.sqrt(t), z.cumsum(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">*</span> np.sqrt(dt) <span class="co"># winner process</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>    bridge <span class="op">=</span> dts <span class="op">*</span> ((w_t<span class="op">-</span> w[:,<span class="op">-</span><span class="dv">1</span>]).reshape(<span class="bu">len</span>(w),<span class="dv">1</span>) <span class="op">+</span> w <span class="op">/</span> dts) <span class="co"># brownian bridge</span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    paths <span class="op">=</span> s<span class="op">*</span>np.exp((r<span class="op">-</span>q<span class="op">-</span><span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>dts <span class="op">+</span> sigma<span class="op">*</span>bridge) <span class="co"># underlying price path</span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Determine whether barrier touch or not (exists payoff or not)</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> barrier_up: knock <span class="op">=</span> paths.<span class="bu">max</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">&gt;=</span> b</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>: knock <span class="op">=</span> paths.<span class="bu">min</span>(axis<span class="op">=</span><span class="dv">1</span>) <span class="op">&lt;=</span> b</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> barrier_out: knock <span class="op">=</span> <span class="op">~</span>knock</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Caculate options payoff</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    plain_npv <span class="op">=</span> np.maximum(option_type<span class="op">*</span>(paths[:,<span class="op">-</span><span class="dv">1</span>]<span class="op">-</span>k), <span class="dv">0</span>) <span class="op">*</span> np.exp(<span class="op">-</span>r<span class="op">*</span>t) <span class="op">*</span> likelihood_ratio</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>    barrier_npv <span class="op">=</span> knock <span class="op">*</span> plain_npv</span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (5) Control variate using plain vanilla options</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>    d1 <span class="op">=</span> (np.log(s<span class="op">/</span>k) <span class="op">+</span> (r <span class="op">-</span> q <span class="op">+</span> <span class="fl">0.5</span><span class="op">*</span>sigma<span class="op">**</span><span class="dv">2</span>)<span class="op">*</span>t) <span class="op">/</span> (sigma<span class="op">*</span>np.sqrt(t))</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>    d2 <span class="op">=</span> d1 <span class="op">-</span> sigma<span class="op">*</span>np.sqrt(t)</span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>    nd1, nd2 <span class="op">=</span> sst.norm.cdf(option_type<span class="op">*</span>d1), sst.norm.cdf(option_type<span class="op">*</span>d2)</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>    plain_bsprice <span class="op">=</span> option_type<span class="op">*</span>(s<span class="op">*</span>np.exp(<span class="op">-</span>q<span class="op">*</span>t)<span class="op">*</span>nd1 <span class="op">-</span> k<span class="op">*</span>np.exp(<span class="op">-</span>r<span class="op">*</span>t)<span class="op">*</span>nd2)</span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    cov_npv <span class="op">=</span> np.cov(barrier_npv,plain_npv,ddof<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    beta <span class="op">=</span> np.where(cov_npv[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">==</span><span class="dv">0</span>,<span class="dv">0</span>,cov_npv[<span class="dv">0</span>,<span class="dv">1</span>] <span class="op">/</span> cov_npv[<span class="dv">1</span>,<span class="dv">1</span>])</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    barrier_CVnpv <span class="op">=</span> barrier_npv <span class="op">-</span> beta <span class="op">*</span> (plain_npv <span class="op">-</span> plain_bsprice)</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    barrier_price <span class="op">=</span> barrier_CVnpv.mean()</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> barrier_price</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="fu">### 분산감소기법</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **(1) Stratified sampling**</span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>먼저, 가장 먼저 사용한 분산감소기법은 Stratified sampling입니다. 이는 특정분포를 따르는 난수를 생성할 때, 확률밀도함수의 형태와 유사하도록 계층을 나누어서 각 구간마다 난수를 생성하는 기법입니다.</span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>저는 만기 시점의 기초자산가격에 대해서만 Stratified sampling을 적용하였는데, 이는 옵션의 가격결정이 만기 가격에 따라서 결정되므로 균질한 분포일수록 정확도가 높아 분산감소효과가 뛰어나기 때문입니다.</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>만기 이전의 path에 대해서도 계층화를 적용할 수 있으나, 이 path는 barrier knock 여부를 판단할 때에만 이용되어 계층화의 효과가 다소 떨어지며, 관찰 횟수 m이 작거나 베리어의 수준에 따라 오히려 편차(bias)를 증가시킬 수 있어 만기 가격에만 적용하였습니다.</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>먼저 균등분포를 따르는 난수를 생성한 다음, 각 구간($\frac{1}{n})$에 속하도록 변환하고 표준정규분포 CDF의 역함수를 통해 표준정규난수로 만들었습니다. 이후 현재시점부터 만기까지의 가격경로는 Brownian bridge를 통해 구현하였습니다.(Terminal stratification)</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **(2) Moment matching**</span></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>이렇게 생성한 만기 시점의 표준정규난수에 대해서 moment matching을 적용하였습니다. 난수 표준화를 통해 한번 더 확률밀도함수의 형태와 유사하도록 정해주는 방법입니다.</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>저는 $z_t^*=\frac{z_t-\bar z_t}{s_{z_t}}$를 이용하여 평균은 0, 표준편차는 1이 되도록 하였으며, 시뮬레이션 횟수가 100회 미만인 경우에는 $z_t^*=z_t-\bar z_t$만 적용하여 평균만 보정하였습니다. 이는 시뮬레이션 횟수가 적은 경우, 표본표준편차가 크거나 작게 산출될 수 있어 난수가 오염되고, 결과적으로 편향(bias)이 커질 수 있기 때문입니다.</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>전반적으로 moment matching의 분산감소의 효과가 크지는 않지만, 계산시간에도 큰 영향을 주지않아 활용하였습니다.</span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **(3) Antithetic variate**</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>다음으로, 생성한 난수에 대해 음의 값을 가지는 대칭난수를 생성하여 분산을 줄이는 기법입니다. 구현이 매우 간단하고 난수와 베리어옵션의 payoff의 선형관계가 강할 수록 분산감소효과가 크게 됩니다.</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>다양한 케이스에 따라 달라지기는 하지만, 기본적으로 옵션의 payoff는 기초자산의 가격에 비례하여 증가 또는 감소하므로 쉽고 효과적인 기법이 됩니다. 또한, python의 행렬연산 특성상 음의 난수를 복제하는 것은 난수를 2배로 생성하는 것보다 적은 시간이 소요되므로, 거의 모든 경우에 분산감소효과가 있어 적용하게 되었습니다.</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>만기시점의 가격과 path의 난수에 대해서 모두 적용하는데, 한가지 주의사항은 moment matching 보다 antithetic variates를 나중에 적용해야한다는 것 입니다. 먼저 적용하게 되면 moment matching의 평균 보정효과는 사라지고 음의 난수를 포함하여 표준편차를 계산할 때, 과대계상되면서 전체 난수가 오염되어 분산감소효과가 사라질 수 있습니다.</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **(4) Importance sampling**</span></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>모든 기법 중에 가장 섬세하게 적용해야하는 중요도 샘플링(importance sampling)입니다. 이는 발생확률이 낮은 특정 사건이 목적함수에 크게 영향을 주는 경우, 기존 확률분포의 measure change를 통해 발생확률이 낮은 사건이 자주 sampling되게 만드는 기법입니다. 확률이 낮으나 영향이 큰 사건이 자주 sampling되므로, 시뮬레이션 횟수를 높이는 효과가 있어 편향(bias)를 크게 줄일 수 있습니다.</span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Importance Sampling의 유의사항"}</span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>주의해야 할 점은 동일한 목적함수더라도 경우에 따라 분산을 증가시킬 수 있다는 점입니다. 예를 들어, plain vanilla 에 만기 가격의 평균이 K가 되도록 변환하면, OTM에서는 효과적이지만 ITM은 오히려 분산을 증가시키게 됩니다.</span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>현재 moneyness가 ITM이면 옵션의 내재가치가 일정 이상이므로, 기초자산의 가격이 K까지 변할 때 내재가치가 0이 될지 여부는 옵션가격에 큰 영향을 미치지 않습니다. 오히려 현재 내재가치의 변동이 목적함수에 더 큰 영향을 주기 때문입니다.($\Delta\approx 1$)</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>반면, OTM에서는 내재가치가 0이기 때문에 향후 기초자산의 가격이 K까지 변하는지 여부가 목적함수에 큰 영향을 줍니다. 따라서 K에 대한 중요도 샘플링이 매우 효과적입니다. 따라서 중요도 샘플링을 적용할 때에는 기초자산의 분포, 목적함수의 형태, 현재 기초자산의 수준 등을 종합적으로 고려해야 합니다.</span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>이제, 베리어옵션에 이를 적용해보겠습니다. plain vanilla와 달리 베리어옵션은 B와 K에 따라 payoff가 결정됩니다. 이 구조는 B라는 행사가격을 가진 lookback옵션과 asset(options with strike K)-or-nothing binary옵션이 결합된 상품으로 이해할 수 있습니다. 즉, 먼저 B의 행사가격을 가진 옵션에 따라 payoff가 발생하는지 판단하고, 발생한다면 만기시점의 가격과 K를 비교하여 payoff가 결정됩니다,.</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>따라서, 저는 중요도 샘플링을 적용할 때 Barrier price, B를 먼저 고려하였습니다. OTM인 경우에만 효과가 나타나므로, Knock-In일 때 만기 가격의 평균이 B가 되도록 변환하였습니다. 다음으로 Knock-Out이면 일정 OTM수준 미만의 moneyness에만 만기 가격이 K가 되도록 변환했습니다. 이외의 경우는 적용하지 않았습니다.</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>또한, Knock-In일지라도 Up-In Put / Down-In Call은 중요도 샘플링을 적용하지 않았습니다. 두 경우는 Knock이 되더라도 그 반대로 주가가 크게 움직여야 payoff가 발생하게 되어 가격이 매우 낮은 케이스인데, 이 때에는 B로 평균을 변환하는 것이 적절하다고 보기 어렵기 때문입니다.</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>정규분포와 같은 Bell-shape은 이러한 양 극단으로 움직여야하는 분포를 모델링하기 어려우므로, 양 극단을 잘 나타내는 다른 분포로 변환하는 등의 방법을 고려해야 합니다.. 다만, 계산이 매우 복잡하고 분산감소효과를 담보할 수 없어 이러한 경우에는 중요도 샘플링을 배제하였습니다.</span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="al">![](image/simulation_final_a1.png)</span>{width="15cm" height="10cm"}</span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **(5) Control variates**</span></span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>가장 분산감소효과가 뛰어났던 제어변수(contral variates) 기법입니다. 이는 목적함수와 상관관계가 높은 다른 변수중에서, 그 변수의 기대값이 이미 알려져 있는 경우 사용할 수 있는 기법입니다. 목적함수와 변수의 민감도 $\beta$와 알려진 변수의 기대값을 통해 시뮬레이션의 편차를 간접적으로 줄여서 성능을 개선하는 방식을 말합니다.</span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>산출알고리즘에서, 베리어옵션의 가격은 plain vanilla의 payoff와 barrier knock 여부를 통해 계산됩니다. 이 식에서 plain과 베리어 간에 양의 상관관계가 있음을 알 수 있습니다. 또한 barrier in-out parity($options = options_{in}+options_{out}$)를 통해 plain옵션이 베리어 옵션 상관관계가 있음을 유추할 수 있습니다.</span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>따라서, plain option을 제어변수로 활용하였고, 그 기대값으로는 BSM formula($S_0N(d_1)-Ke^{-rT}N(d_2)$)를 이용해 control variates를 적용하였습니다. Out옵션에서는 베리어가 멀수록, In옵션에서는 베리어가 가까울수록 상관관계가 커져 제어변수가 매우 효율적이였으며, 반대일수록 효과가 떨어졌으나 계산시간에 비해 효과가 뛰어나 항상 적용하였습니다.</span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a><span class="fu">### 분산감소 등 효과 예시</span></span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>이에 따라 일반적은 MCS방법과 기법을 적용한 위 함수의 효과를 간단히 비교한 결과는 아래와 같습니다.</span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> QuantLib <span class="im">as</span> ql</span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> mc_barrier_option_sample <span class="im">as</span> sim_sample</span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> time <span class="im">as</span> time</span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>S <span class="op">=</span> <span class="dv">100</span><span class="op">;</span> r <span class="op">=</span> <span class="fl">0.03</span><span class="op">;</span> vol <span class="op">=</span> <span class="fl">0.2</span><span class="op">;</span> T <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> K <span class="op">=</span><span class="dv">100</span><span class="op">;</span> B <span class="op">=</span> <span class="dv">80</span><span class="op">;</span> rebate <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>barrierType <span class="op">=</span> ql.Barrier.DownOut<span class="op">;</span> optionType <span class="op">=</span> ql.Option.Call</span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="co">#Barrier Option</span></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a>today <span class="op">=</span> ql.Date().todaysDate()<span class="op">;</span> maturity <span class="op">=</span> today <span class="op">+</span> ql.Period(T, ql.Years)</span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a>payoff <span class="op">=</span> ql.PlainVanillaPayoff(optionType, K)</span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a>euExercise <span class="op">=</span> ql.EuropeanExercise(maturity)</span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>barrierOption <span class="op">=</span> ql.BarrierOption(barrierType, B, rebate, payoff, euExercise)</span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="co">#Market</span></span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a>spotHandle <span class="op">=</span> ql.QuoteHandle(ql.SimpleQuote(S))</span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a>flatRateTs <span class="op">=</span> ql.YieldTermStructureHandle(ql.FlatForward(today, r, ql.Actual365Fixed()))</span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a>flatVolTs <span class="op">=</span> ql.BlackVolTermStructureHandle(ql.BlackConstantVol(today, ql.NullCalendar(), vol, ql.Actual365Fixed()))</span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a>bsm <span class="op">=</span> ql.BlackScholesProcess(spotHandle, flatRateTs, flatVolTs)</span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a>analyticBarrierEngine <span class="op">=</span> ql.AnalyticBarrierEngine(bsm)</span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="co">#Pricing</span></span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a>barrierOption.setPricingEngine(analyticBarrierEngine)</span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a>analytic_price <span class="op">=</span> barrierOption.NPV()</span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="co"># N*M = Tau 제약 하에서 N에 따른 Bias, Variance, MSE 변화 추이</span></span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a>L <span class="op">=</span> <span class="dv">100</span> <span class="co"># 산출 신뢰도 향상을 위해 각 N,M 별로 시뮬레이션 L번 반복 예정</span></span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a>tau <span class="op">=</span> <span class="dv">2</span><span class="op">**</span><span class="dv">16</span>  <span class="co"># 예산제약, 계산시간이 N, M과 정비례한다고 가정</span></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a>Ns, Ms <span class="op">=</span> np.zeros(<span class="dv">10</span>), np.zeros(<span class="dv">10</span>)</span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a>bias, var <span class="op">=</span> np.zeros(<span class="dv">10</span>), np.zeros(<span class="dv">10</span>)</span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a>bias2, var2 <span class="op">=</span> np.zeros(<span class="dv">10</span>), np.zeros(<span class="dv">10</span>)</span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a>time1, time2 <span class="op">=</span> np.zeros(<span class="dv">10</span>), np.zeros(<span class="dv">10</span>)</span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a>barrier_type <span class="op">=</span> <span class="st">'down-out'</span></span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a>    N <span class="op">=</span> <span class="dv">2</span><span class="op">**</span>(i<span class="op">+</span><span class="dv">6</span>)</span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a>    M <span class="op">=</span> <span class="bu">int</span>(np.<span class="bu">round</span>(tau <span class="op">/</span> N, <span class="dv">0</span>))</span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>    y, y2 <span class="op">=</span> np.zeros(L),np.zeros(L)</span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a>    t1, t2, t3 <span class="op">=</span> np.zeros(L),np.zeros(L),np.zeros(L)</span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(L):</span>
+<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a>        t1[j] <span class="op">=</span> time.time()</span>
+<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a>        y[j] <span class="op">=</span> mc_barrier_price(S, K, r, <span class="dv">0</span>, T, vol, <span class="st">'call'</span>, N, B, barrier_type, M)</span>
+<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a>        t2[j] <span class="op">=</span> time.time()</span>
+<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a>        y2[j] <span class="op">=</span> sim_sample.mc_barrier_price(S, K, r, <span class="dv">0</span>, T, vol, <span class="st">'call'</span>, N, B, barrier_type, M)[<span class="dv">0</span>]</span>
+<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a>        t3[j] <span class="op">=</span> time.time()</span>
+<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a>    Ns[i], Ms[i] <span class="op">=</span> N, M</span>
+<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a>    bias[i] <span class="op">=</span> (np.mean(y) <span class="op">-</span> analytic_price)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a>    bias2[i] <span class="op">=</span> (np.mean(y2) <span class="op">-</span> analytic_price)<span class="op">**</span><span class="dv">2</span></span>
+<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a>    var[i] <span class="op">=</span> np.var(y,ddof <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a>    var2[i] <span class="op">=</span> np.var(y2,ddof <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a>    time1[i] <span class="op">=</span> np.mean(t2<span class="op">-</span>t1)</span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a>    time2[i] <span class="op">=</span> np.mean(t3<span class="op">-</span>t2)</span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> pd.DataFrame({<span class="st">"log2(N)"</span>:np.log2(Ns), <span class="st">"N"</span>:Ns, <span class="st">"M"</span>:Ms,</span>
+<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'Bias'</span>:bias, <span class="st">'Var'</span>:var, <span class="st">'MSE'</span>:bias<span class="op">+</span>var,</span>
+<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a>                       <span class="st">'Bias2'</span>:bias2, <span class="st">'Var2'</span>:var2, <span class="st">'MSE2'</span>:bias2<span class="op">+</span>var2})                  </span>
+<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'---------- Up-In Call options, S=100, K=110, B=120 ----------'</span>)</span>
+<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'(Calculation time) Improved MCS : </span><span class="sc">{:.3f}</span><span class="st">, Normal MCS: </span><span class="sc">{:.3f}</span><span class="st">'</span>.<span class="bu">format</span>(time1.<span class="bu">sum</span>(),time2.<span class="bu">sum</span>()))</span>
+<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(result.iloc[:,<span class="dv">1</span>:])</span>
+<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>,<span class="dv">4</span>))</span>
+<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a>result.plot(x<span class="op">=</span><span class="st">'log2(N)'</span>,y<span class="op">=</span>[<span class="st">'Bias'</span>,<span class="st">'Bias2'</span>], ax<span class="op">=</span>plt.subplot(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a>result.plot(x<span class="op">=</span><span class="st">'log2(N)'</span>,y<span class="op">=</span>[<span class="st">'Var'</span>,<span class="st">'Var2'</span>], ax<span class="op">=</span>plt.subplot(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a>계산시간은 약 2배 증가하였으나 이를 고려하더라도 편향, 분산, MSE에서 전반적으로 개선된 성능을 보여주었습니다.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
